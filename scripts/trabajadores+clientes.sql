@@ -32,4 +32,24 @@ INSERT INTO taw12.Trabajador (nombre, email, contrasenya, tipo, imagenPerfil)
 VALUES 	('Elena Martínez', 'elena.martinez@example.com', 'contraseña7', 'ENTRENADOR CROSSTRAINNING', NULL),
 		('Mario Gómez', 'mario.gomez@example.com', 'contraseña8', 'ENTRENADOR CROSSTRAINNING', NULL),
 		('Sara Fernández', 'sara.fernandez@example.com', 'contraseña9', 'ENTRENADOR CROSSTRAINNING', NULL);
-
+        
+-- Relaciones Cliente-Entrenador
+INSERT INTO taw12.cliente_trabajador (idcliente, idtrabajador)
+VALUES
+    -- Cliente Juan Pérez (idCliente = 1) con varios tipos de trabajadores
+	(1, 1),  -- Juan Pérez con María González (Dietista)
+    (1, 4),  -- Juan Pérez con Juan López (Entrenador de Fuerza)
+    
+    -- Cliente María García (idCliente = 2) con un trabajador
+    (2, 4),  -- María García con Juan López (Entrenador de Fuerza)
+    
+    -- Cliente Pedro Martínez (idCliente = 3) con todos tipos de trabajadores
+    (3, 2),  -- Pedro Martínez con Pedro Sánchez (Dietista)
+    (3, 5),  -- Pedro Martínez con Ana Rodríguez (Entrenador de Fuerza)
+    (3, 7),  -- Pedro Martínez con Elena Martínez (Entrenador Crosstraining)
+    
+    -- Cliente Laura Rodríguez (idCliente = 4) con un trabajador
+    (4, 2),  -- Laura Rodríguez con Pedro Sánchez (Dietista)
+    
+    -- Cliente Ana López (idCliente = 5) con un trabajador
+    (5, 6); -- Ana López con Carlos Pérez (Entrenador de Fuerza)

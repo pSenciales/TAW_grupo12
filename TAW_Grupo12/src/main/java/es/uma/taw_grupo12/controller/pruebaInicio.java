@@ -8,7 +8,7 @@ public class pruebaInicio {
 
     @GetMapping("/")
     public String doInicio() {
-        return "oculto";
+        return "Cliente/pagPersonalCliente";
     }
 
 }

@@ -5,7 +5,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 
 -- Platos
-INSERT INTO `mydb`.`plato` (`nombre`, `alergenos`, `video`, `descripcion`) 
+INSERT INTO `taw12`.`plato` (`nombre`, `alergenos`, `video`, `descripcion`) 
 VALUES	('Salmón al Horno', 'Pescado', NULL, 'Filete de salmón fresco horneado con una mezcla de hierbas aromáticas. Acompañado de verduras al vapor.'),
 		('Ensalada César', 'Lácteos, Gluten', NULL, 'Mezcla de lechugas frescas, pollo a la parrilla, crutones de pan y aderezo César. Contiene queso parmesano rallado.'),
 		('Risotto de Champiñones', 'Lácteos', NULL, 'Arroz cremoso cocido a fuego lento con champiñones frescos, caldo de vegetales y un toque de queso parmesano.'),

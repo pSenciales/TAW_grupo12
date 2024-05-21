@@ -5,7 +5,10 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import es.uma.taw_grupo12.dto.RutinaDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -115,5 +118,19 @@ public class Rutina implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.Rutina[ idrutina=" + idrutina + " ]";
     }
-    
+
+    public RutinaDTO toDTO() {
+        RutinaDTO rutina = new RutinaDTO();
+        List<Integer> list = new ArrayList<>();
+
+        for(EjercicioRutina re : this.ejercicioRutinaList)
+            list.add(re.getEjercicioRutinaPK().getIdejerciciorutina());
+
+        rutina.setEjercicioRutinaList(list);
+        rutina.setIdcliente(this.idcliente.getIdcliente());
+        rutina.setNombre(this.nombre);
+        rutina.setIdrutina(this.idrutina);
+
+        return rutina;
+    }
 }

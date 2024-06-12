@@ -24,11 +24,12 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 
 /**
  *
- * @author guzman
+ * @author María Victoria Huesca
  */
 @Entity
 @Table(name = "Administrador")
@@ -107,4 +108,11 @@ public class Administrador implements DTO<Administrador> {
         return "es.taw12.app.entity.Administrador[ idadminitrador=" + idadministrador + " ]";
     }
 
+    @Override
+    public Administrador toDTO() {
+        Administrador admnistrador = new Administrador();
+        admnistrador.setEmail(this.email);
+        admnistrador.setContrasenya(this.contrasenya);
+        return admnistrador;
+    }
 }

@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class pruebaInicio {
 
+    /*
     @GetMapping("/")
     public String doInicio() {
         //FUNCIONA COMMIT?????
         return "Cliente/pagPersonalCliente";
     }
+    */
 
 }

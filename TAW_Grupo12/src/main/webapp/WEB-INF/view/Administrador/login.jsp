@@ -6,16 +6,19 @@
 </head>
 <body>
 
-<form:form method="post" action="/login/iniciarsesion">
+<form:form method="post" action="/login/iniciarsesion" modelAttribute="usuario">
     <label for="email">Email: </label>
     <form:input id="email" path="email" type="email" size="100" maxlength="100" />
     <label for="contrasenya"></label>
-    <form:input id="contrasenya" type="password"/>
+    <form:input id="contrasenya" path="contrasenya" type="password"/>
     <form:button>Iniciar Sesión</form:button>
 </form:form>
-
-<form:form method="post" action="/login/registro">
+<br>
+<div border="1"></div>
+<p>¿No tienes cuenta?</p>
+<form:form method="post" action="/registro">
     <form:button>Crear Cuenta</form:button>
 </form:form>
+
 </body>
 </html>

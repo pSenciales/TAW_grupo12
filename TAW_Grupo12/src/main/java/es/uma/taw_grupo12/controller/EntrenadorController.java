@@ -35,10 +35,4 @@ public class EntrenadorController {
         return "/Entrenador/tableRutinas";
 
     }
-
-
-
-
-
-
 }

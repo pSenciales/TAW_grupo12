@@ -7,8 +7,8 @@
 </head>
 <body>
 
-<form:form method="post" action="/iniciarsesion" modelAttribute="usuario">
-    ${error}
+<form:form method="post" action="/autenticar" modelAttribute="usuario">
+    ${errorLogin}
     <label for="email">Email: </label>
     <form:input id="email" path="email" type="email" size="60" maxlength="45" />
     <br>
@@ -20,7 +20,7 @@
 <br>
 <div border="1"></div>
 <p>¿No tienes cuenta?</p>
-<form method="post" action="/registro">
+<form method="post" action="/elegirRegistro">
     <input type="submit" value="Crear Cuenta"></input>
 </form>
 

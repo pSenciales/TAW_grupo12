@@ -33,7 +33,7 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
  */
 @Entity
 @Table(name = "Administrador")
-public class Administrador implements DTO<Administrador> {
+public class Administrador implements DTO<AdministradorDTO> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -109,8 +109,8 @@ public class Administrador implements DTO<Administrador> {
     }
 
     @Override
-    public Administrador toDTO() {
-        Administrador admnistrador = new Administrador();
+    public AdministradorDTO toDTO() {
+        AdministradorDTO admnistrador = new AdministradorDTO();
         admnistrador.setEmail(this.email);
         admnistrador.setContrasenya(this.contrasenya);
         return admnistrador;

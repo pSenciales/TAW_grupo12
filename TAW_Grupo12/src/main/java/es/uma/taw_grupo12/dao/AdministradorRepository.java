@@ -10,4 +10,6 @@ public interface AdministradorRepository extends JpaRepository<Administrador, In
     @Query("select a from Administrador a where a.email = :email and a.contrasenya = :contrasenya")
     public Optional<Administrador> findByEmailAndContrasenya (@Param("email") String email, @Param("contrasenya")String contrasenya);
 
+    @Query("select a from Administrador a where a.email = :email")
+    public Optional<Administrador> findByEmail (@Param("email") String email);
 }

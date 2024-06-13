@@ -9,4 +9,7 @@ import java.util.Optional;
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     @Query("SELECT c FROM Cliente c WHERE c.email = :email AND c.contrasenya = :contrasenya")
     public Optional<Cliente> findByEmailAndContrasenya(@Param("email")String email, @Param("contrasenya") String contrasenya);
+
+    @Query("SELECT c FROM Cliente c WHERE c.email = :email")
+    public Optional<Cliente> findByEmail(@Param("email")String email);
 }

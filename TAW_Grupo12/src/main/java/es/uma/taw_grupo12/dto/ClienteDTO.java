@@ -2,7 +2,7 @@ package es.uma.taw_grupo12.dto;
 
 
 import lombok.Data;
-
+import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Data
@@ -15,6 +15,7 @@ public class ClienteDTO {
     private Double peso;
     private Double altura;
     private String alergias;
+    private MultipartFile imagenperfilFile;
     private List<Integer> trabajadorList;
     private List<Integer> dietaList;
     private List<Integer> rutinaList;

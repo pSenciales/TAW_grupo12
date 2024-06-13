@@ -6,6 +6,9 @@ package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
+import es.uma.taw_grupo12.dto.DTO;
+import es.uma.taw_grupo12.dto.TrabajadorDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +34,7 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "Trabajador.findByEmail", query = "SELECT t FROM Trabajador t WHERE t.email = :email"),
     @NamedQuery(name = "Trabajador.findByContrasenya", query = "SELECT t FROM Trabajador t WHERE t.contrasenya = :contrasenya"),
     @NamedQuery(name = "Trabajador.findByTipo", query = "SELECT t FROM Trabajador t WHERE t.tipo = :tipo")})
-public class Trabajador implements Serializable {
+public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -152,5 +155,16 @@ public class Trabajador implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.Trabajador[ idtrabajador=" + idtrabajador + " ]";
     }
-    
+
+    @Override
+    public TrabajadorDTO toDTO() {
+        TrabajadorDTO trabajador = new TrabajadorDTO();
+        trabajador.setIdtrabajador(this.idtrabajador);
+        trabajador.setNombre(this.nombre);
+        trabajador.setEmail(this.email);
+        trabajador.setContrasenya(this.contrasenya);
+        trabajador.setTipo(this.tipo);
+        trabajador.setImagenperfil(this.imagenperfil);
+        return trabajador;
+    }
 }

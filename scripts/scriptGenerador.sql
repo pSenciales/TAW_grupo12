@@ -24,15 +24,15 @@ CREATE TABLE IF NOT EXISTS `taw12`.`Cliente` (
   `nombre` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `contrasenya` VARCHAR(45) NOT NULL,
-  `imagenperfil` BLOB NULL DEFAULT NULL,
+  `imagenperfil` LONGBLOB NULL DEFAULT NULL,
   `peso` DOUBLE NULL DEFAULT NULL,
   `altura` DOUBLE NULL DEFAULT NULL,
   `alergias` VARCHAR(150) NULL DEFAULT NULL,
   PRIMARY KEY (`idcliente`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
-
 
 -- -----------------------------------------------------
 -- Table `taw12`.`Dieta`
@@ -53,7 +53,6 @@ CREATE TABLE IF NOT EXISTS `taw12`.`Dieta` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
-
 -- -----------------------------------------------------
 -- Table `taw12`.`Ejercicio`
 -- -----------------------------------------------------
@@ -63,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `taw12`.`Ejercicio` (
   `idejercicio` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `tipo` ENUM('FUERZA', 'RESISTENCIA', 'CAPACIDAD AEROBICA', 'VELOCIDAD', 'POTENCIA', 'ESTABILIDAD', 'MOVILIDAD') NOT NULL,
-  `video` BLOB NULL DEFAULT NULL,
+  `video` LONGBLOB NULL DEFAULT NULL,
   `descripcion` VARCHAR(150) NULL DEFAULT NULL,
   PRIMARY KEY (`idejercicio`),
   UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
@@ -80,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `taw12`.`Plato` (
   `idplato` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `alergenos` VARCHAR(150) NULL DEFAULT NULL,
-  `video` BLOB NULL DEFAULT NULL,
+  `video` LONGBLOB NULL DEFAULT NULL,
   `descripcion` VARCHAR(150) NULL DEFAULT NULL,
   PRIMARY KEY (`idplato`),
   UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
@@ -230,12 +229,16 @@ CREATE TABLE IF NOT EXISTS `taw12`.`Trabajador` (
   `email` VARCHAR(45) NOT NULL,
   `contrasenya` VARCHAR(45) NOT NULL,
   `tipo` ENUM('ENTRENADOR FUERZA', 'ENTRENADOR CROSSTRAINNING', 'DIETISTA') NOT NULL,
-  `imagenperfil` BLOB NULL DEFAULT NULL,
+  `imagenperfil` LONGBLOB NULL DEFAULT NULL,
   PRIMARY KEY (`idtrabajador`),
   UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
+
+
+
 
 
 -- -----------------------------------------------------
@@ -261,6 +264,17 @@ CREATE TABLE IF NOT EXISTS `taw12`.`cliente_trabajador` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `taw12`.`administrador`
+-- -----------------------------------------------------
+create table if not exists administrador
+(
+    idadministrador int auto_increment
+        primary key,
+    email           varchar(45) not null,
+    contrasenya     varchar(45) not null
+);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

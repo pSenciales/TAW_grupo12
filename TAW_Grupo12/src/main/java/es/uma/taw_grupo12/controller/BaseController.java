@@ -1,3 +1,7 @@
+/**
+ * @author María Victoria Huesca Peláez
+ */
+
 package es.uma.taw_grupo12.controller;
 
 import jakarta.servlet.http.HttpSession;

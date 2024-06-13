@@ -8,8 +8,9 @@ import java.util.List;
 
 public interface EjercicioRepository extends JpaRepository<Ejercicio, Integer> {
 
-
+    //@Pablo
     @Query("select e from Ejercicio e where e.tipo = 'FUERZA'")
     List<Ejercicio> getFuerza();
+    //@Pablo
 
 }

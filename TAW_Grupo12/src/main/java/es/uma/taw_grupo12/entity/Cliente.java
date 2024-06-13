@@ -205,6 +205,7 @@ public class Cliente implements Serializable, DTO<ClienteDTO> {
         return "es.taw12.app.entity.Cliente[ idcliente=" + idcliente + " ]";
     }
 
+    //@Victoria
     @Override
     public ClienteDTO toDTO() {
         ClienteDTO cliente = new ClienteDTO();
@@ -218,4 +219,5 @@ public class Cliente implements Serializable, DTO<ClienteDTO> {
         cliente.setAlergias(this.alergias);
         return cliente;
     }
+    //@Victoria
 }

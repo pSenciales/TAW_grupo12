@@ -1,5 +1,5 @@
 /**
- * @author María Victoria Huesca
+ * @author María Victoria Huesca Peláez
  */
 
 package es.uma.taw_grupo12.service;
@@ -10,25 +10,20 @@ import es.uma.taw_grupo12.dao.TrabajadorRepository;
 import es.uma.taw_grupo12.dto.AdministradorDTO;
 import es.uma.taw_grupo12.dto.ClienteDTO;
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
-import es.uma.taw_grupo12.dto.UsuarioDTO;
 import es.uma.taw_grupo12.entity.Administrador;
-
 import es.uma.taw_grupo12.entity.Cliente;
 import es.uma.taw_grupo12.entity.Trabajador;
-import jakarta.servlet.http.HttpSession;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.nio.file.Files;
 import java.io.IOException;
 import java.util.List;
 
 @Service
 public class AdministradorService {
-
+    //@Victoria
     @Autowired
     protected AdministradorRepository administradorRepository;
 
@@ -139,5 +134,6 @@ public class AdministradorService {
     public List<String> getTiposTrabajador() {
         return this.trabajadorRepository.findTipos();
     }
+    //@Victoria
 }
 

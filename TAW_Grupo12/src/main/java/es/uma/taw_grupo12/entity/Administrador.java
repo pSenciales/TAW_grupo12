@@ -107,6 +107,7 @@ public class Administrador implements DTO<AdministradorDTO> {
         return "es.taw12.app.entity.Administrador[ idadminitrador=" + idadministrador + " ]";
     }
 
+    //@Victoria
     @Override
     public AdministradorDTO toDTO() {
         AdministradorDTO admnistrador = new AdministradorDTO();
@@ -114,4 +115,5 @@ public class Administrador implements DTO<AdministradorDTO> {
         admnistrador.setContrasenya(this.contrasenya);
         return admnistrador;
     }
+    //@Victoria
 }

@@ -156,6 +156,7 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
         return "es.taw12.app.entity.Trabajador[ idtrabajador=" + idtrabajador + " ]";
     }
 
+    //@Victoria
     @Override
     public TrabajadorDTO toDTO() {
         TrabajadorDTO trabajador = new TrabajadorDTO();
@@ -167,4 +168,5 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
         trabajador.setImagenperfil(this.imagenperfil);
         return trabajador;
     }
+    //@Victoria
 }

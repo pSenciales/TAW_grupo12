@@ -7,10 +7,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
+
+    //@Victoria
     @Query("SELECT c FROM Cliente c WHERE c.email = :email AND c.contrasenya = :contrasenya")
     public Optional<Cliente> findByEmailAndContrasenya(@Param("email")String email, @Param("contrasenya") String contrasenya);
 
     @Query("SELECT c FROM Cliente c WHERE c.email = :email OR c.nombre = :nombre")
     public Optional<Cliente> findByEmailorNombre(@Param("email")String email, @Param("nombre") String nombre);
-
+    //@Victoria
 }

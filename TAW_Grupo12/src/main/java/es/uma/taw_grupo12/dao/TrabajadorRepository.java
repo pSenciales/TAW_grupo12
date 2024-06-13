@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>{
+
+    //@Victoria
     @Query("SELECT c FROM Trabajador c WHERE c.email = :email AND c.contrasenya = :contrasenya")
     public Optional<Trabajador> findByEmailAndContrasenya(@Param("email")String email, @Param("contrasenya") String contrasenya);
 
@@ -18,4 +20,5 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>
 
     @Query("SELECT c FROM Trabajador c WHERE c.email = :email or c.nombre = :nombre")
     Optional<Trabajador> findByEmailorNombre(@Param("email") String email, @Param("nombre") String nombre);
+    //@Victoria
 }

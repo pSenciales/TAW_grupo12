@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/Administrador")
+@RequestMapping("/administrador")
 public class AdministradorController extends BaseController{
 
     @GetMapping("/inicio")

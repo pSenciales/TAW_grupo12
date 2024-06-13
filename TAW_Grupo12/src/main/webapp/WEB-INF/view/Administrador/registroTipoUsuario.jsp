@@ -8,7 +8,7 @@
 
 <p>Seleccione el tipo de usuario que desea crear: </p>
 
-<form action="/registro" method="post">
+<form action="/registro" method="get">
 
     <input type="radio" value="cliente" id="cliente" name="tipo"/>
     <label for="cliente">Cliente</label>

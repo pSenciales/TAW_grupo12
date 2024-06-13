@@ -8,14 +8,16 @@
 <body>
 <h1>REGISTRO ADMINISTRADOR</h1>
 <form:form modelAttribute="administrador" action="/guardarAdministrador" method="post">
-    ${errorRegistro}
+    <% if (request.getAttribute("errorRegistro") != null && !request.getAttribute("errorRegistro").equals("")) { %>
+        <div class="error"><%= request.getAttribute("errorRegistro") %></div>
+    <% } %>
     <br>
     <label for="email" type="email">Email</label>
-    <form:file id="email" path="email" type="email" size="60" maxlength="45" required="true"/>
+    <form:input id="email" path="email" type="email" size="60" maxlength="45" required="true"/>
     <br>
 
     <label for="contrasenya">Contraseña</label>
-    <form:input id="contrasenya" type="password" path="contrasenya" size="60" maxlength="45" required="true"/>
+    <form:password id="contrasenya" path="contrasenya" size="60" maxlength="45" required="true"/>
     <br>
 
     <form:button>Aceptar</form:button>

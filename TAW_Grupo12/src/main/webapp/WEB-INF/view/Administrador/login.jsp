@@ -8,7 +8,11 @@
 <body>
 
 <form:form method="post" action="/autenticar" modelAttribute="usuario">
-    ${errorLogin}
+    <% if (request.getAttribute("errorLogin") != null && !request.getAttribute("errorLogin").equals("")) { %>
+        <div class="error"><%= request.getAttribute("errorLogin") %></div>
+        <br>
+    <% } %>
+
     <label for="email">Email: </label>
     <form:input id="email" path="email" type="email" size="60" maxlength="45" />
     <br>

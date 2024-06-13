@@ -7,8 +7,10 @@
 </head>
 <body>
 <h1>REGISTRO CLIENTE</h1>
-<form:form modelAttribute="cliente" action="/guardarCliente" method="post">
-    ${errorRegistro}
+<form:form modelAttribute="cliente" action="/guardarCliente" method="post" enctype="multipart/form-data">
+    <% if (request.getAttribute("errorRegistro") != null && !request.getAttribute("errorRegistro").equals("")) { %>
+        <div class="error"><%= request.getAttribute("errorRegistro") %></div>
+    <% } %>
     <br>
     <label for="nombre">Nombre</label>
     <form:input id="nombre" type="text" path="nombre" size="60" maxlength="45" required="true"/>
@@ -27,11 +29,11 @@
     <br>
 
     <label for="peso">Peso</label>
-    <form:input id="peso" type="number" path="peso" />
+    <form:input id="peso" type="number" path="peso" />Kg
     <br>
 
     <label for="altura">Altura</label>
-    <form:input id="altura" type="number" path="altura" />
+    <form:input id="altura" type="number" path="altura" />cm
     <br>
 
     <label for="alergias">Alergias</label>

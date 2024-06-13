@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
@@ -29,7 +30,8 @@ public class LoginController extends BaseController {
         String strTo = "/Administrador/login";
         if (estaAutenticado(session)) {
             String tipoUsuario = (String) session.getAttribute("tipo");
-            strTo = "redirect:/" + tipoUsuario + "/inicio";
+            //strTo = "redirect:/" + tipoUsuario + "/inicio";
+            strTo = "redirect:/administrador/inicio";
         } else {
             model.addAttribute("usuario", new UsuarioDTO());
         }
@@ -38,7 +40,7 @@ public class LoginController extends BaseController {
 
     @PostMapping("/autenticar")
     public String doAutenticar(@ModelAttribute("usuario") UsuarioDTO usuario,
-                               Model model,
+                               RedirectAttributes redirectAttributes,
                                HttpSession session) {
 
         ClienteDTO cliente = this.administradorService.autenticarCliente(usuario.getEmail(), usuario.getContrasenya());
@@ -48,25 +50,28 @@ public class LoginController extends BaseController {
         String strTo = "redirect:/";
 
         if(cliente == null && administrador == null && trabajador == null) {
-            model.addAttribute("errorLogin", "Usuario o contraseña incorrectos");
-            strTo = this.doLogin(session, model);
+            redirectAttributes.addFlashAttribute("errorLogin", "Email o contraseña incorrectos");
+            return "redirect:/";
 
         } else {
 
             if(cliente != null) {
                 session.setAttribute("usuario", cliente);
                 session.setAttribute("tipo", "cliente");
-                strTo =  "redirect:/Cliente/inicio";
+                //strTo = "redirect:/cliente/inicio";          DESCOMENTAR CUANDO ESTE IMPLEMENTADO EL INICIO DE CLIENTE
+                strTo =  "redirect:/administrador/inicio";
 
             } else if(trabajador != null) {
                 session.setAttribute("usuario", trabajador);
                 session.setAttribute("tipo", trabajador.getTipo());
-                strTo = "redirect:/Trabajador/inicio";
+                //strTo = "redirect:/" + trabajador.getTipo() + "/inicio";          DESCOMENTAR CUANDO ESTE IMPLEMENTADO EL INICIO DE TRABAJADOR
+                strTo = "redirect:/administrador/inicio";
 
             } else {
                 session.setAttribute("usuario", administrador);
                 session.setAttribute("tipo", "administrador");
-                return "redirect:/Administrador/inicio";
+
+                return "redirect:/administrador/inicio";
             }
         }
         return strTo;
@@ -78,10 +83,9 @@ public class LoginController extends BaseController {
         return "/Administrador/registroTipoUsuario";
     }
 
-    @PostMapping("/registro")
-    public String doRegistro(@RequestParam("tipo") String tipo,
-                             Model model) {
-
+    //ESte getMapping es para la redirección de la página de registro
+    @GetMapping("/registro")
+    public String mostrarRegistro(@RequestParam("tipo") String tipo, Model model) {
         String strTo = "";
 
         if(tipo.equals("administrador")) {
@@ -103,17 +107,17 @@ public class LoginController extends BaseController {
     @PostMapping("/guardarAdministrador")
     public String doRegistroAdministrador(@ModelAttribute("administrador") AdministradorDTO administrador,
                                           HttpSession session,
-                                          Model model) {
+                                          RedirectAttributes redirectAttributes) throws IOException {
 
         AdministradorDTO administradorDTO = this.administradorService.registrarAdministrador(administrador);
         String strTo = "";
         if(administradorDTO != null) {
             session.setAttribute("usuario", administradorDTO);
             session.setAttribute("tipo", "administrador");
-            strTo = "redirect:/Administrador/inicio";
+            strTo = "redirect:/administrador/inicio";
         } else {
-            model.addAttribute("errorRegistro", "Ya existe un administrador con ese email");
-            strTo = "/Administrador/registroAdministrador";
+            redirectAttributes.addFlashAttribute("errorRegistro", "Ya existe un administrador con ese email");
+            return "redirect:/registro?tipo=administrador";
         }
         return strTo;
     }
@@ -121,20 +125,23 @@ public class LoginController extends BaseController {
     @PostMapping("/guardarCliente")
     public String doRegistroCliente(@ModelAttribute("cliente") ClienteDTO cliente,
                                           HttpSession session,
-                                          Model model) throws IOException {
+                                          Model model,
+                                    RedirectAttributes redirectAttributes) throws IOException {
 
         ClienteDTO clienteDTO = this.administradorService.registrarCliente(cliente);
         String strTo = "";
         if(clienteDTO != null) {
             session.setAttribute("usuario", clienteDTO);
             session.setAttribute("tipo", "cliente");
-            strTo = "redirect:/Administrador/inicio";
+            //strTo = "redirect:/Cliente/inicio";
+            strTo = "redirect:/administrador/inicio";
         } else {
-            model.addAttribute("errorRegistro", "Ya existe un cliente con ese email");
-            strTo = this.doRegistro("cliente", model);
+            redirectAttributes.addFlashAttribute("errorRegistro", "Ya existe un cliente con ese email");
+            return "redirect:/registro?tipo=cliente";
         }
         return strTo;
     }
+
 
     @GetMapping("/cerrarSesion")
     public String doCerrarSesion (HttpSession session) {

@@ -33,44 +33,6 @@ public class AdministradorService {
     @Autowired
     protected ClienteRepository clienteRepository;
 
-    /*
-    public String autenticarUsuario(UsuarioDTO usuario, HttpSession session, Model model) {
-
-        String email = usuario.getEmail();
-        String contrasenya = usuario.getContrasenya();
-        Cliente cliente = this.clienteRepository.findByEmailAndContrasenya(email, contrasenya).orElse(null);
-        Trabajador trabajador = this.trabajadorRepository.findByEmailAndContrasenya(email, contrasenya).orElse(null);
-        Administrador administrador = this.administradorRepository.findByEmailAndContrasenya(email, contrasenya).orElse(null);
-
-        String strTo = "redirect:/";
-        if (cliente == null && trabajador == null && administrador == null) {
-            //OPCIÓN: MOSTRAR MENSAJES DIFERENTES
-            model.addAttribute("errorLogin", "Usuario o contraseña incorrectos");
-            strTo = "/Administrador/login";
-        } else {
-
-            if (cliente != null) {
-                session.setAttribute("usuario", cliente);
-                session.setAttribute("tipo", "cliente");
-                strTo = "/Cliente/inicio";
-
-            } else if (trabajador != null) {
-                String tipoTrabajador = trabajador.getTipo();
-                session.setAttribute("usuario", trabajador);
-                session.setAttribute("tipo", tipoTrabajador);
-                strTo = "/Trabajador/inicio";
-
-            } else if(administrador != null) {
-                session.setAttribute("usuario", administrador);
-                session.setAttribute("tipo", "administrador");
-                strTo = "/Administrador/inicio";
-            }
-        }
-
-        return strTo;
-    }
-    */
-
     public ClienteDTO autenticarCliente(String email, String contrasenya) {
         Cliente cliente = this.clienteRepository.findByEmailAndContrasenya(email, contrasenya).orElse(null);
         if (cliente != null) {
@@ -98,28 +60,6 @@ public class AdministradorService {
         }
     }
 
-    /*
-    public String redirigirRegistro(String tipo,
-                                    Model model){
-        String strTo = "";
-
-        if(tipo.equals("administrador")) {
-            model.addAttribute("administrador", new AdministradorDTO());
-            strTo = "/Administrador/registroAdministrador";
-
-        } else if(tipo.equals("cliente")) {
-            model.addAttribute("cliente", new ClienteDTO());
-            strTo = "/Administrador/registroCliente";
-
-        } else if(tipo.equals("trabajador")) {
-            model.addAttribute("trabajador", new TrabajadorDTO());
-            strTo = "/Administrador/registroTrabajador";
-        }
-
-        return strTo;
-    }
-    */
-
     public AdministradorDTO registrarAdministrador(AdministradorDTO administrador) {
 
         Administrador admin = this.administradorRepository.findByEmail(administrador.getEmail()).orElse(null);
@@ -144,7 +84,8 @@ public class AdministradorService {
             nuevoCliente.setNombre(clienteDTO.getNombre());
             nuevoCliente.setEmail(clienteDTO.getEmail());
             nuevoCliente.setContrasenya(clienteDTO.getContrasenya());
-            if(clienteDTO.getImagenperfilFile() != null){
+
+            if (clienteDTO.getImagenperfilFile() != null && !clienteDTO.getImagenperfilFile().isEmpty()) {
                 MultipartFile myFile = clienteDTO.getImagenperfilFile();
                 byte[] imagenBytes = myFile.getBytes();
                 nuevoCliente.setImagenperfil(imagenBytes);

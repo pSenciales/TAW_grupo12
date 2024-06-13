@@ -1,5 +1,15 @@
+<%
+ /**
+* @author María Victoria Huesca
+*/
+%>
+
+<!--OPCIÓN: AÑADIR UN BOTÓN DE VOLVER ATRÁS-->
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,7 +47,7 @@
     <br>
 
     <label for="alergias">Alergias</label>
-    <form:input type="textarea" id="alergias" path="alergias" maxlength="150" />
+    <form:textarea id="alergias" path="alergias" maxlength="150" />
     <br>
 
     <form:button>Aceptar</form:button>

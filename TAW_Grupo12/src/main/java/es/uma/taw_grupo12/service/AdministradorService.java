@@ -1,3 +1,7 @@
+/**
+ * @author María Victoria Huesca
+ */
+
 package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dao.AdministradorRepository;
@@ -20,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.nio.file.Files;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class AdministradorService {
@@ -77,7 +82,7 @@ public class AdministradorService {
 
     public ClienteDTO registrarCliente(ClienteDTO clienteDTO) throws IOException {
 
-        Cliente cliente  = this.clienteRepository.findByEmail(clienteDTO.getEmail()).orElse(null);
+        Cliente cliente  = this.clienteRepository.findByEmailorNombre(clienteDTO.getEmail(), clienteDTO.getNombre()).orElse(null);
 
         if(cliente == null){
             Cliente nuevoCliente = new Cliente();
@@ -102,6 +107,37 @@ public class AdministradorService {
         } else {
             return null;
         }
+    }
+
+    public TrabajadorDTO registrarTrabajador(TrabajadorDTO trabajadorDTO) throws IOException {
+
+        Trabajador trabajador  = this.trabajadorRepository.findByEmailorNombre(trabajadorDTO.getEmail(), trabajadorDTO.getNombre()).orElse(null);
+
+        if(trabajador == null){
+            Trabajador nuevoTrabajador = new Trabajador();
+            nuevoTrabajador.setNombre(trabajadorDTO.getNombre());
+            nuevoTrabajador.setEmail(trabajadorDTO.getEmail());
+            nuevoTrabajador.setContrasenya(trabajadorDTO.getContrasenya());
+            nuevoTrabajador.setTipo(trabajadorDTO.getTipo());
+
+            if (trabajadorDTO.getImagenperfilFile() != null && !trabajadorDTO.getImagenperfilFile().isEmpty()) {
+                MultipartFile myFile = trabajadorDTO.getImagenperfilFile();
+                byte[] imagenBytes = myFile.getBytes();
+                nuevoTrabajador.setImagenperfil(imagenBytes);
+            } else {
+                nuevoTrabajador.setImagenperfil(null);
+            }
+
+            this.trabajadorRepository.save(nuevoTrabajador);
+            return nuevoTrabajador.toDTO();
+
+        } else {
+            return null;
+        }
+    }
+
+    public List<String> getTiposTrabajador() {
+        return this.trabajadorRepository.findTipos();
     }
 }
 

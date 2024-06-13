@@ -1,3 +1,7 @@
+/**
+ * @author María Victoria Huesca
+ */
+
 package es.uma.taw_grupo12.controller.administrador;
 
 import es.uma.taw_grupo12.controller.BaseController;
@@ -50,6 +54,7 @@ public class LoginController extends BaseController {
         String strTo = "redirect:/";
 
         if(cliente == null && administrador == null && trabajador == null) {
+            //OPCIÓN: AÑADIR QUE SE MUESTREN DISTINTOS MENSAJES DE ERROR
             redirectAttributes.addFlashAttribute("errorLogin", "Email o contraseña incorrectos");
             return "redirect:/";
 
@@ -98,6 +103,7 @@ public class LoginController extends BaseController {
 
         } else if(tipo.equals("trabajador")) {
             model.addAttribute("trabajador", new TrabajadorDTO());
+            model.addAttribute("tipos", this.administradorService.getTiposTrabajador() );
             strTo = "/Administrador/registroTrabajador";
         }
 
@@ -125,7 +131,6 @@ public class LoginController extends BaseController {
     @PostMapping("/guardarCliente")
     public String doRegistroCliente(@ModelAttribute("cliente") ClienteDTO cliente,
                                           HttpSession session,
-                                          Model model,
                                     RedirectAttributes redirectAttributes) throws IOException {
 
         ClienteDTO clienteDTO = this.administradorService.registrarCliente(cliente);
@@ -136,12 +141,35 @@ public class LoginController extends BaseController {
             //strTo = "redirect:/Cliente/inicio";
             strTo = "redirect:/administrador/inicio";
         } else {
-            redirectAttributes.addFlashAttribute("errorRegistro", "Ya existe un cliente con ese email");
+            //OPCIÓN: AÑADIR QUE SE MUESTREN DISTINTOS MENSAJES DE ERROR
+            redirectAttributes.addFlashAttribute("errorRegistro", "Ya existe un cliente con ese email o nombre");
             return "redirect:/registro?tipo=cliente";
         }
         return strTo;
     }
 
+    @PostMapping("/guardarTrabajador")
+    public String doRegistroTrabajador(@ModelAttribute("trabajador") TrabajadorDTO trabajador,
+                                    HttpSession session,
+                                    RedirectAttributes redirectAttributes,
+                                    Model model) throws IOException {
+
+        TrabajadorDTO trabajadorDTO = this.administradorService.registrarTrabajador(trabajador);
+        String strTo = "";
+        if(trabajadorDTO != null) {
+            session.setAttribute("usuario", trabajadorDTO);
+            session.setAttribute("tipo", trabajadorDTO.getTipo());
+            //strTo = "redirect:/trabajador/inicio";       DESCOMENTAR CUANDO ESTE IMPLEMENTADO EL INICIO DE TRABAJADOR
+            strTo = "redirect:/administrador/inicio";
+        } else {
+            //OPCIÓN: AÑADIR QUE SE MUESTREN DISTINTOS MENSAJES DE ERROR
+            redirectAttributes.addFlashAttribute("errorRegistro", "Ya existe un trabajador con ese email o nombre");
+            model.addAttribute("trabajador", new TrabajadorDTO());
+            model.addAttribute("tipos", this.administradorService.getTiposTrabajador() );
+            return "redirect:/registro?tipo=trabajador";
+        }
+        return strTo;
+    }
 
     @GetMapping("/cerrarSesion")
     public String doCerrarSesion (HttpSession session) {

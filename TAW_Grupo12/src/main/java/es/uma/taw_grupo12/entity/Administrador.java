@@ -28,7 +28,6 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 
 /**
- *
  * @author María Victoria Huesca
  */
 @Entity

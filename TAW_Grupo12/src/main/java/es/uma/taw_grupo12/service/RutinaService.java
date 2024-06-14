@@ -12,6 +12,7 @@ public class RutinaService {
     @Autowired
     private RutinaRepository rutinaRepository;
 
+    //@Pablo
     public RutinaDTO findById(Integer id){
         Rutina rutina = rutinaRepository.findById(id).orElse(null);
         assert rutina != null;
@@ -20,6 +21,7 @@ public class RutinaService {
         return rutinaDTO;
 
     }
+    //@Pablo
 
 
 }

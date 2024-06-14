@@ -31,6 +31,7 @@ public class LoginController extends BaseController {
 
     @GetMapping("/")
     public String doLogin(HttpSession session, Model model) {
+
         String strTo = "/Administrador/login";
         if (estaAutenticado(session)) {
             String tipoUsuario = (String) session.getAttribute("tipo");

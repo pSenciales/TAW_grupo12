@@ -17,7 +17,7 @@ public class AdministradorController extends BaseController{
 
     @GetMapping("/inicio")
     public String doInicio(HttpSession session){
-        String strTo = "/Administrador/inicioAdministrador";
+        String strTo = "/Administrador/cabeceraAdministrador";
 
         if (!estaAutenticado(session)) {
             strTo = "redirect:/";

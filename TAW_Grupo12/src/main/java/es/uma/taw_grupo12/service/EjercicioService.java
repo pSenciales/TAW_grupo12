@@ -17,6 +17,7 @@ public class EjercicioService {
     private EjercicioRepository ejercicioRepository;
 
 
+    //@Pablo
     public List<EjercicioDTO> getFuerza() {
         List<Ejercicio> ejerciciosList = ejercicioRepository.getFuerza();
         List<EjercicioDTO> ejerciciosDTO = new ArrayList<>();
@@ -26,4 +27,5 @@ public class EjercicioService {
         }
         return ejerciciosDTO;
     }
+    //@Pablo
 }

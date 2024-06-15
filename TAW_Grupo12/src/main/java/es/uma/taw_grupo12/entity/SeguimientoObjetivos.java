@@ -24,7 +24,7 @@ import jakarta.persistence.TemporalType;
  * @author guzman
  */
 @Entity
-@Table(name = "SeguimientoObjetivos")
+@Table(name = "seguimiento_objetivos")
 @NamedQueries({
     @NamedQuery(name = "SeguimientoObjetivos.findAll", query = "SELECT s FROM SeguimientoObjetivos s"),
     @NamedQuery(name = "SeguimientoObjetivos.findByIdejerciciorutina", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.seguimientoObjetivosPK.idejerciciorutina = :idejerciciorutina"),

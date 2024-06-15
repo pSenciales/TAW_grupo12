@@ -123,9 +123,10 @@ public class Rutina implements Serializable {
         RutinaDTO rutina = new RutinaDTO();
         List<Integer> list = new ArrayList<>();
 
-        for(EjercicioRutina re : this.ejercicioRutinaList)
-            list.add(re.getEjercicioRutinaPK().getIdejerciciorutina());
-
+        if(this.getEjercicioRutinaList() != null) {
+            for (EjercicioRutina re : this.ejercicioRutinaList)
+                list.add(re.getEjercicioRutinaPK().getIdejerciciorutina());
+        }
         rutina.setEjercicioRutinaList(list);
         rutina.setIdcliente(this.idcliente.getIdcliente());
         rutina.setNombre(this.nombre);

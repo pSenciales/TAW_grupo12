@@ -1,5 +1,9 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="option" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="es.uma.taw_grupo12.dto.EjercicioDTO" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="es.uma.taw_grupo12.dto.RutinaDTO" %>
+<%@ page import="es.uma.taw_grupo12.entity.Rutina" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 16/05/2024
@@ -9,6 +13,7 @@
 
 <%
     List<EjercicioDTO> ejercicioDTOList = (List<EjercicioDTO>) request.getAttribute("ejercicioList");
+    RutinaDTO rutina = (RutinaDTO) request.getAttribute("rutina");
 
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -45,35 +50,28 @@
         <button type="submit" class="btn btn-danger mx-3">logout</button>
     </form>
 </nav>
-<form>
+<h1>Rutina: <%=rutina.getNombre()%></h1>
+<form:form method="post" action="/addEjercicio" modelAttribute="ejercicioRutinaDTO">
     <div class="m-5 d-flex flex-row " id="anyadir-ej">
-        <select required>
-            <option value="1">Lunes</option>
-            <option value="2">Martes</option>
-            <option value="3">Miércoles</option>
-            <option value="4">Jueves</option>
-            <option value="5">Viernes</option>
-            <option value="6">Sábado</option>
-            <option value="7">Domingo</option>
-        </select>
-        <input type="number" min="1" placeholder="Repeticiones" required/>
-        <input type="number" min="1" placeholder="Series" required/>
-        <input type="number" min="1" placeholder="Peso" required/>
-        <select required>
-            <%
-                for (EjercicioDTO e : ejercicioDTOList){
-
-            %>
-            <option value="<%=e.getIdejercicio()%>"><%=e.getNombre()%></option>
-            <%
-                }
-            %>
-        </select>
-        <input type="text" placeholder="Nombre" required/>
-
-        <button type="submit" class="btn btn-primary">Añadir</button>
+        <form:hidden path="rutina"></form:hidden>
+        <form:select path="diassemana" >
+            <form:option value="1" label="Lunes"></form:option>
+            <form:option value="2" label="Martes"></form:option>
+            <form:option value="3" label="Miercoles"></form:option>
+            <form:option value="4" label="Jueves"></form:option>
+            <form:option value="5" label="Viernes"></form:option>
+            <form:option value="6" label="Sábado"></form:option>
+            <form:option value="7" label="Domingo"></form:option>
+        </form:select>
+        <form:input type="number" min="1" placeholder="Repeticiones"  path="repeticiones"/>
+        <form:input type="number" min="1" placeholder="Series"  path="series"/>
+        <form:input type="number" min="1" placeholder="Peso"  path="peso"/>
+        <form:select path="ejercicio">
+            <form:options items="${ejercicioList}" itemLabel="nombre" itemValue="idejercicio"></form:options>
+        </form:select>
+        <form:button class="btn btn-primary">Añadir ejercicio</form:button>
     </div>
-</form>
+</form:form>
 
 <table class="table m-5">
     <thead>
@@ -89,24 +87,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>hola</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td>ghola</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+    <tr></tr>
     </tbody>
 </table>
 

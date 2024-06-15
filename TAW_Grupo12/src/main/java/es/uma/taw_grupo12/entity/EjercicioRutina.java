@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
  * @author guzman
  */
 @Entity
-@Table(name = "EjercicioRutina")
+@Table(name = "ejercicio_rutina")
 @NamedQueries({
     @NamedQuery(name = "EjercicioRutina.findAll", query = "SELECT e FROM EjercicioRutina e"),
     @NamedQuery(name = "EjercicioRutina.findByIdejerciciorutina", query = "SELECT e FROM EjercicioRutina e WHERE e.ejercicioRutinaPK.idejerciciorutina = :idejerciciorutina"),

@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `taw12`.`Cliente` (
   `altura` DOUBLE NULL DEFAULT NULL,
   `alergias` VARCHAR(150) NULL DEFAULT NULL,
   PRIMARY KEY (`idcliente`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE),
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;

@@ -5,7 +5,10 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import es.uma.taw_grupo12.dto.EjercicioDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -139,5 +142,22 @@ public class Ejercicio implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.Ejercicio[ idejercicio=" + idejercicio + " ]";
     }
-    
+
+    public EjercicioDTO toDTO() {
+
+        EjercicioDTO ejercicioDTO = new EjercicioDTO();
+        List<Integer> ejercicioRutinaList = new ArrayList<>();
+        for(EjercicioRutina er : this.ejercicioRutinaList)
+            ejercicioRutinaList.add(er.getEjercicioRutinaPK().getIdejerciciorutina());
+
+
+        ejercicioDTO.setEjercicioRutinaList(ejercicioRutinaList);
+        ejercicioDTO.setDescripcion(this.descripcion);
+        ejercicioDTO.setIdejercicio(this.idejercicio);
+        ejercicioDTO.setNombre(this.nombre);
+        ejercicioDTO.setTipo(this.tipo);
+        ejercicioDTO.setVideo(this.video);
+
+        return ejercicioDTO;
+    }
 }

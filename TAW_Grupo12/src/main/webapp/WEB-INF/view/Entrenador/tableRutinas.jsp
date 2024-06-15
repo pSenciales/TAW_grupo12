@@ -1,10 +1,16 @@
-<%--
+<%@ page import="es.uma.taw_grupo12.dto.EjercicioDTO" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 16/05/2024
   Time: 16:00
   To change this template use File | Settings | File Templates.
 --%>
+
+<%
+    List<EjercicioDTO> ejercicioDTOList = (List<EjercicioDTO>) request.getAttribute("ejercicioList");
+
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="es">
@@ -41,7 +47,7 @@
 </nav>
 <form>
     <div class="m-5 d-flex flex-row " id="anyadir-ej">
-        <select>
+        <select required>
             <option value="1">Lunes</option>
             <option value="2">Martes</option>
             <option value="3">Miércoles</option>
@@ -50,15 +56,20 @@
             <option value="6">Sábado</option>
             <option value="7">Domingo</option>
         </select>
-        <input type="number" min="1" placeholder="Repeticiones"/>
-        <input type="number" min="1" placeholder="Series"/>
-        <input type="number" min="1" placeholder="Peso"/>
-        <select>
-            <option>Ejercicio1</option>
-            <option>Ejercicio2</option>
+        <input type="number" min="1" placeholder="Repeticiones" required/>
+        <input type="number" min="1" placeholder="Series" required/>
+        <input type="number" min="1" placeholder="Peso" required/>
+        <select required>
+            <%
+                for (EjercicioDTO e : ejercicioDTOList){
 
+            %>
+            <option value="<%=e.getIdejercicio()%>"><%=e.getNombre()%></option>
+            <%
+                }
+            %>
         </select>
-        <input type="text" placeholder="Nombre"/>
+        <input type="text" placeholder="Nombre" required/>
 
         <button type="submit" class="btn btn-primary">Añadir</button>
     </div>

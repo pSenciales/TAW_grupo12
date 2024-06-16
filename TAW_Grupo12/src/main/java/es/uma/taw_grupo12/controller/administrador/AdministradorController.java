@@ -12,9 +12,11 @@ import es.uma.taw_grupo12.dto.TrabajadorDTO;
 import es.uma.taw_grupo12.entity.Trabajador;
 import es.uma.taw_grupo12.service.ClienteService;
 import es.uma.taw_grupo12.service.TrabajadorService;
+import es.uma.taw_grupo12.ui.Administrador.FiltroClientes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,7 +67,28 @@ public class AdministradorController extends BaseController{
         List<ClienteDTO> clientes = this.clienteService.listarClientesDTO();
         List<TrabajadorDTO> trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTO();
 
+        model.addAttribute("filtroClientes", new FiltroClientes());
         model.addAttribute("trabajadores", trabajadoresDTO );
+        model.addAttribute("clientes", clientes);
+        model.addAttribute("tituloCabeceraAdmin", "Asignar Clientes");
+        return "/Administrador/AsignarClientes/asignarClientes";
+    }
+
+
+
+    @PostMapping("/filtrarAsignarClientes")
+    public String doFiltrarAsignarClientes(Model model, HttpSession session, @ModelAttribute("filtroClientes") FiltroClientes filtroClientes) {
+        if (!estaAutenticado(session) || session.getAttribute("tipo") != "administrador") {
+            return "redirect:/";
+        } else if (filtroClientes.estaVacio()) {
+            return "redirect:/administrador/asignarClientes";
+        }
+
+        List<ClienteDTO> clientes = this.clienteService.listarClientesDTO(filtroClientes.getBusqueda());
+        List<TrabajadorDTO> trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTO();
+
+        model.addAttribute("filtroClientes",filtroClientes);
+        model.addAttribute("trabajadores", trabajadoresDTO);
         model.addAttribute("clientes", clientes);
         model.addAttribute("tituloCabeceraAdmin", "Asignar Clientes");
         return "/Administrador/AsignarClientes/asignarClientes";
@@ -77,9 +100,7 @@ public class AdministradorController extends BaseController{
             return "redirect:/";
         }
 
-
         model.addAttribute("tituloCabeceraAdmin", "Asignar Cliente");
         return "/Administrador/AsignarClientes/asignarCliente";
     }
-
 }

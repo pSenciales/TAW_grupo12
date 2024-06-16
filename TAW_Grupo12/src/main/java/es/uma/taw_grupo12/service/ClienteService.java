@@ -18,7 +18,11 @@ public class ClienteService {
 
     //@Victoria
     public List<ClienteDTO> listarClientesDTO () {
-        List<Cliente> clientes = this.clienteRepository.findAll();
+        return this.listarClientesDTO("");
+    }
+
+    public List<ClienteDTO> listarClientesDTO (String busqueda) {
+        List<Cliente> clientes = this.clienteRepository.findByEmailorNombre(busqueda);
 
         List<ClienteDTO> clientesDTO = new ArrayList<>();
         for(Cliente c : clientes){

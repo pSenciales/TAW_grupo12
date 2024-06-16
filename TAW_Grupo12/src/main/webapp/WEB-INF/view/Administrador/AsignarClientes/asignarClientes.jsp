@@ -7,6 +7,8 @@
 <%
     List<ClienteDTO> clientes = (List<ClienteDTO>) request.getAttribute("clientes");
     List<TrabajadorDTO> trabajadoresDTO = (List<TrabajadorDTO>) request.getAttribute("trabajadores");
+    String filtro = request.getParameter("filtroClientes");
+    if (filtro == null) filtro = "";
 %>
 
 <!DOCTYPE html>
@@ -57,6 +59,10 @@
         .bold{
             font-weight: bold;
         }
+
+        .form-control{
+            width: 80%;
+        }
     </style>
 </head>
 <body>
@@ -64,16 +70,17 @@
     <jsp:include page="../cabeceraAdministrador.jsp"/>
 </header>
 <div class="container-asignarClientes">
-    <form:form modelAttribue="filtro" method="post" action="/administrador/filtrarAsignarClientes">
+    <form:form modelAttribute="filtroClientes" method="post" action="/administrador/filtrarAsignarClientes">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                 </svg>
             </span>
-            <input type="text" class="form-control" placeholder="Introduzca el nombre o correo de cliente que deseas asignar" aria-label="Input group example" aria-describedby="basic-addon1"/>
+            <form:input type="text" class="form-control" placeholder="Introduzca el nombre o correo de cliente que deseas asignar"  path="busqueda"/>
+
         </div>
-        <button type="submit" class="btn btn-primary">Buscar</button>
+
     </form:form>
     <div class="row">
         <% for(ClienteDTO cliente : clientes) {
@@ -107,7 +114,7 @@
                     <p class="card-text"><span class="bold">Entrenador Crosstrainning: </span> <%= !entrenadorCrosstraining.isEmpty() ? entrenadorCrosstraining : "ninguno" %></p>
                     <p class="card-text"><span class="bold">Entrenador Fuerza: </span> <%= !entrenadorFuerza.isEmpty() ? entrenadorFuerza : "ninguno" %></p>
                     <p class="card-text"><span class="bold">Dietista: </span> <%= !dietista.isEmpty() ? dietista : "ninguno" %></p>
-                    <a href="/administrador/asignarCliente" class="btn btn-primary">Asignar</a>
+                    <a href="/administrador/asignarCliente" class="btn btn-outline-primary">Asignar</a>
                 </div>
             </div>
         </div>

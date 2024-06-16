@@ -1,31 +1,20 @@
 package es.uma.taw_grupo12.ui.Administrador;
 
 public class FiltroClientes {
-    protected String nombre;
-    protected String email;
-
+    protected String busqueda;
     public FiltroClientes() {
-        this.nombre = "";
-        this.email = "";
+        this.busqueda = "";
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getBusqueda() {
+        return busqueda;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setBusqueda(String busqueda) {
+        this.busqueda = busqueda;
     }
 
     public boolean estaVacio () {
-        return nombre.isEmpty() && this.email.isEmpty();
+        return busqueda.isEmpty();
     }
 }

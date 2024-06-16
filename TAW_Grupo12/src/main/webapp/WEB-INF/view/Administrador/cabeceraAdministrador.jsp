@@ -31,7 +31,7 @@
     </div>
 
     <div class="titulo-cabecera">
-        <h1><%= request.getAttribute("tituloCabeceraAdmin") %></h1>
+        <h2><%= request.getAttribute("tituloCabeceraAdmin") %></h2>
     </div>
 
     <div class="container-fluid">

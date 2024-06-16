@@ -18,6 +18,8 @@
     <title>Asignar Clientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta1/js/bootstrap.min.js"></script>
 
     <style>
         body {
@@ -64,11 +66,55 @@
             width: 80%;
         }
     </style>
+    <script>
+        $(document).ready(function() {
+            $('#asignarButton').click(function() {
+                $('#asignarForm').submit();
+            });
+
+            $('#asignarModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var clienteId = button.data('cliente-id') // Extract the client ID from the data attribute
+
+                var modal = $(this)
+                modal.find('#clienteId').val(clienteId) // Set the value of the hidden input field
+            })
+        });
+    </script>
 </head>
 <body>
 <header>
     <jsp:include page="../cabeceraAdministrador.jsp"/>
 </header>
+<div class="modal fade" id="asignarModal" tabindex="-1" aria-labelledby="asignarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="asignarModalLabel">Asignar Trabajador</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="asignarForm" action="/administrador/asignarCliente" method="post">
+                    <input type="hidden" id="clienteId" name="clienteId">
+                    <div class="mb-3">
+                        <label for="tipoTrabajador" class="form-label">Tipo de Trabajador</label>
+                        <select class="form-select" id="tipoTrabajador" name="tipoTrabajador">
+                            <option selected>Selecciona...</option>
+                            <option value="ENTRENADOR FUERZA">Entrenador Fuerza</option>
+                            <option value="ENTRENADOR CROSSTRAINNING">Entrenador Crosstrainning</option>
+                            <option value="DIETISTA">Dietista</option>
+                        </select>
+                    </div>
+                    <!-- Aquí puedes agregar más campos si los necesitas -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="asignarButton">Asignar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-asignarClientes">
     <form:form modelAttribute="filtroClientes" method="post" action="/administrador/filtrarAsignarClientes">
         <div class="input-group mb-3">
@@ -78,7 +124,6 @@
                 </svg>
             </span>
             <form:input type="text" class="form-control" placeholder="Introduzca el nombre o correo de cliente que deseas asignar"  path="busqueda"/>
-
         </div>
 
     </form:form>
@@ -114,7 +159,7 @@
                     <p class="card-text"><span class="bold">Entrenador Crosstrainning: </span> <%= !entrenadorCrosstraining.isEmpty() ? entrenadorCrosstraining : "ninguno" %></p>
                     <p class="card-text"><span class="bold">Entrenador Fuerza: </span> <%= !entrenadorFuerza.isEmpty() ? entrenadorFuerza : "ninguno" %></p>
                     <p class="card-text"><span class="bold">Dietista: </span> <%= !dietista.isEmpty() ? dietista : "ninguno" %></p>
-                    <a href="/administrador/asignarCliente" class="btn btn-outline-primary">Asignar</a>
+                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#asignarModal" data-cliente-id="<%=cliente.getIdcliente()%>">Asignar</a>
                 </div>
             </div>
         </div>

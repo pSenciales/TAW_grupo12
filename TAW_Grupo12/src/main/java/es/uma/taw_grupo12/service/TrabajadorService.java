@@ -26,4 +26,18 @@ public class TrabajadorService {
 
         return trabajadoresDTO;
     }
+
+    public List<TrabajadorDTO> listarTrabajadoresDTOTipo(String tipo) {
+        List<Trabajador> trabajadores = this.trabajadorRepository.findByTipo(tipo);
+
+        List<TrabajadorDTO> trabajadoresDTO = new ArrayList<>();
+        for(Trabajador t : trabajadores){
+            trabajadoresDTO.add(t.toDTO());
+        }
+
+        return trabajadoresDTO;
+    }
+    //@Victoria
+
+
 }

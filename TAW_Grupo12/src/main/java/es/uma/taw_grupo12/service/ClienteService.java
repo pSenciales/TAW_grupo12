@@ -30,5 +30,14 @@ public class ClienteService {
         }
         return clientesDTO;
     }
+
+    public ClienteDTO buscarClienteId(Integer idCliente) {
+        Cliente cliente = this.clienteRepository.findById(idCliente).orElse(null);
+        if (cliente != null) {
+            return cliente.toDTO();
+        } else {
+            return null;
+        }
+    }
     //@Victoria
 }

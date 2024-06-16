@@ -16,10 +16,7 @@ import es.uma.taw_grupo12.ui.Administrador.FiltroClientes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
@@ -51,7 +48,7 @@ public class AdministradorController extends BaseController{
 
     @PostMapping("/verPerfil")
     public String doVerPerfil(HttpSession session){
-        if (!estaAutenticado(session)) {
+        if (!estaAutenticado(session) || session.getAttribute("tipo") != "administrador"){
             return "redirect:/";
         }
         return "/Administrador/perfilAdministrador";
@@ -94,13 +91,28 @@ public class AdministradorController extends BaseController{
         return "/Administrador/AsignarClientes/asignarClientes";
     }
 
-    @GetMapping("/asignarCliente")
-    public String doAsignarCliente(Model model, HttpSession session){
+    @PostMapping("/asignarCliente")
+    public String doAsignarCliente(Model model, HttpSession session, @RequestParam("tipoTrabajador") String tipoTrabajador, @RequestParam("clienteId") Integer idCliente){
         if (!estaAutenticado(session) || session.getAttribute("tipo") != "administrador"){
             return "redirect:/";
         }
 
-        model.addAttribute("tituloCabeceraAdmin", "Asignar Cliente");
+        List<TrabajadorDTO> trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo(tipoTrabajador);
+        ClienteDTO cliente = this.clienteService.buscarClienteId(idCliente);
+        model.addAttribute("trabajadores", trabajadoresDTO);
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("tituloCabeceraAdmin", "Asignación Cliente");
+
+        if(tipoTrabajador.equals("ENTRENADOR FUERZA")){
+            return "/Administrador/AsignarClientes/asignarEntrenadorFuerza";
+        }
+        if(tipoTrabajador.equals("ENTRENADOR CROSSTRAINNING")){
+            return "/Administrador/AsignarClientes/asignarEntrenadorCrosstraining";
+        }
+        if(tipoTrabajador.equals("DIETISTA")){
+            return "/Aadministrador/AsignarClientes/asignarEntrenadorHipopresivos";
+        }
+
         return "/Administrador/AsignarClientes/asignarCliente";
     }
 }

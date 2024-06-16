@@ -21,7 +21,7 @@ public class ClienteDTO {
     private Double altura;
     private String alergias;
     private MultipartFile imagenperfilFile;     //AÑADIDO PARA MANEJAR LA SUBIDA DE IMÁGENES A LA BASE DE DATOS
-    private List<Trabajador> trabajadorList;
+    private List<Integer> trabajadorList;
     private List<Dieta> dietaList;
     private List<Rutina> rutinaList;
 

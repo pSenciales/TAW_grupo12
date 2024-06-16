@@ -4,6 +4,6 @@
 
 </head>
 <body>
-<h1>INICIO ADMINISTRADOR</h1>
+<h1>INICIO CLIENTE</h1>
 </body>
 </html>

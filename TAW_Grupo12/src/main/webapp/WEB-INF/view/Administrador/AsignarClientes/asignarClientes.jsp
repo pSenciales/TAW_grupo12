@@ -133,11 +133,11 @@
             String entrenadorCrosstraining = "";
             String entrenadorFuerza = "";
 
-            List<Trabajador> trabajadores = cliente.getTrabajadorList();
+            List<Integer> trabajadores = cliente.getTrabajadorList();
             if (trabajadores != null) {
-                for (Trabajador trabajador : trabajadores) {
+                for (Integer trabajador : trabajadores) {
                     for (TrabajadorDTO trabajadorDTO : trabajadoresDTO) {
-                        if (trabajadorDTO.getIdtrabajador().equals(trabajador.getIdtrabajador())) {
+                        if (trabajadorDTO.getIdtrabajador().equals(trabajador)) {
                             if (trabajadorDTO.getTipo().equals("ENTRENADOR CROSSTRAINNING")) {
                                 entrenadorCrosstraining = trabajadorDTO.getNombre();
                             } else if (trabajadorDTO.getTipo().equals("ENTRENADOR FUERZA")) {

@@ -139,7 +139,7 @@ public class LoginController extends BaseController {
             session.setAttribute("usuario", clienteDTO);
             session.setAttribute("tipo", "cliente");
             //strTo = "redirect:/Cliente/inicio";
-            return "redirect:/administrador/inicio";
+            return "/Cliente/inicioCliente";
         }
 
         //OPCIÓN: AÑADIR QUE SE MUESTREN DISTINTOS MENSAJES DE ERROR
@@ -158,8 +158,8 @@ public class LoginController extends BaseController {
         if(trabajadorDTO != null) {
             session.setAttribute("usuario", trabajadorDTO);
             session.setAttribute("tipo", trabajadorDTO.getTipo());
-            //return "redirect:/trabajador/inicio";       DESCOMENTAR CUANDO ESTE IMPLEMENTADO EL INICIO DE TRABAJADOR
-            return "redirect:/administrador/inicio";
+            //return "redirect:/" + session.getTipo() + "/inicio";       DESCOMENTAR CUANDO ESTE IMPLEMENTADO EL INICIO DE TRABAJADORES
+            return "/Cliente/inicioCliente";
         }
 
         //OPCIÓN: AÑADIR QUE SE MUESTREN DISTINTOS MENSAJES DE ERROR

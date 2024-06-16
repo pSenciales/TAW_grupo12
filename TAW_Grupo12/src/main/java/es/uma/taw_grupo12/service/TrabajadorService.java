@@ -38,6 +38,4 @@ public class TrabajadorService {
         return trabajadoresDTO;
     }
     //@Victoria
-
-
 }

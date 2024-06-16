@@ -9,7 +9,7 @@ import es.uma.taw_grupo12.controller.BaseController;
 import es.uma.taw_grupo12.dto.AdministradorDTO;
 import es.uma.taw_grupo12.dto.ClienteDTO;
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
-import es.uma.taw_grupo12.entity.Trabajador;
+import es.uma.taw_grupo12.service.AdministradorService;
 import es.uma.taw_grupo12.service.ClienteService;
 import es.uma.taw_grupo12.service.TrabajadorService;
 import es.uma.taw_grupo12.ui.Administrador.FiltroClientes;
@@ -31,6 +31,10 @@ public class AdministradorController extends BaseController{
     @Autowired
     protected TrabajadorService trabajadorService;
 
+    @Autowired
+    protected AdministradorService administradorService;
+
+
     @GetMapping("/inicio")
     public String doInicio(HttpSession session, Model model){
         String strTo = "/Administrador/inicioAdministrador";
@@ -48,9 +52,6 @@ public class AdministradorController extends BaseController{
 
     @PostMapping("/verPerfil")
     public String doVerPerfil(HttpSession session){
-        if (!estaAutenticado(session) || session.getAttribute("tipo") != "administrador"){
-            return "redirect:/";
-        }
         return "/Administrador/perfilAdministrador";
     }
 
@@ -75,9 +76,7 @@ public class AdministradorController extends BaseController{
 
     @PostMapping("/filtrarAsignarClientes")
     public String doFiltrarAsignarClientes(Model model, HttpSession session, @ModelAttribute("filtroClientes") FiltroClientes filtroClientes) {
-        if (!estaAutenticado(session) || session.getAttribute("tipo") != "administrador") {
-            return "redirect:/";
-        } else if (filtroClientes.estaVacio()) {
+        if (filtroClientes.estaVacio()) {
             return "redirect:/administrador/asignarClientes";
         }
 
@@ -93,9 +92,6 @@ public class AdministradorController extends BaseController{
 
     @PostMapping("/asignarCliente")
     public String doAsignarCliente(Model model, HttpSession session, @RequestParam("tipoTrabajador") String tipoTrabajador, @RequestParam("clienteId") Integer idCliente){
-        if (!estaAutenticado(session) || session.getAttribute("tipo") != "administrador"){
-            return "redirect:/";
-        }
 
         List<TrabajadorDTO> trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo(tipoTrabajador);
         ClienteDTO cliente = this.clienteService.buscarClienteId(idCliente);
@@ -110,9 +106,22 @@ public class AdministradorController extends BaseController{
             return "/Administrador/AsignarClientes/asignarEntrenadorCrosstraining";
         }
         if(tipoTrabajador.equals("DIETISTA")){
-            return "/Aadministrador/AsignarClientes/asignarEntrenadorHipopresivos";
+            return "/Administrador/AsignarClientes/asignarEntrenadorHipopresivos";
         }
 
-        return "/Administrador/AsignarClientes/asignarCliente";
+        return "redirect:/administrador/asignarClientes";
+    }
+
+    @PostMapping("/guardarAsignacionClienteEntrenadorFuerza")
+    public String doAsignarEntrenadorFuerza(@RequestParam("idEntrenador") Integer idEntrenador, @RequestParam("idCliente") Integer idCliente){
+        this.administradorService.asignarTrabajador(idCliente, idEntrenador);
+        return "redirect:/administrador/asignarClientes";
+    }
+
+    @PostMapping("/desasignarTrabajador")
+    public String doDesasignarTrabajador(@RequestParam("idClienteDes") Integer idCliente, @RequestParam("idEntrenadorDes") Integer idTrabajador){
+        this.administradorService.desasignarTrabajador(idCliente, idTrabajador);
+
+        return "redirect:/administrador/asignarClientes";
     }
 }

@@ -21,11 +21,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             flex-direction: column;
+        }
+        .btn-primary{
+            margin-bottom: 0;
         }
         .form-container {
             margin-top: 2rem;
+            margin-bottom: 2rem;
             background-color: #ffffff;
             padding: 2rem;
             border-radius: 8px;
@@ -38,12 +41,14 @@
         }
         h1 {
             margin-bottom: 1.5rem;
+            text-align: center;
         }
+
     </style>
 </head>
 <body>
 <div class="form-container">
-    <h1>REGISTRO CLIENTE</h1>
+    <h1>Registro Cliente</h1>
     <form:form modelAttribute="cliente" action="/guardarCliente" method="post" enctype="multipart/form-data">
         <% if (request.getAttribute("errorRegistro") != null && !request.getAttribute("errorRegistro").equals("")) { %>
         <div class="alert alert-danger" role="alert"><%= request.getAttribute("errorRegistro") %>
@@ -67,19 +72,22 @@
         <label for="imagenPerfil" class="form-label">Selecciona imagen de perfil</label> <br>
         <form:input id="imagenPerfil" type="file" path="imagenperfilFile" accept="image/*" class="form-control"/>
     </div>
-    <div class="form-group">
-        <label for="peso" class="form-label">Peso</label>
-        <form:input id="peso" type="number" path="peso" class="form-control"/><span>Kg</span>
-
-        <label for="altura" class="form-label">Altura</label>
-        <form:input id="altura" type="number" path="altura" class="form-control"/><span>cm</span>
-    </div>
+        <div class="row">
+            <div class="col-md-6 form-group" style="display: inline-block;">
+                <label for="peso" class="form-label">Peso</label>
+                <form:input id="peso" type="number" path="peso" class="form-control" style="width: 85%; display: inline-block;"/><span style="display: inline-block;">Kg</span>
+            </div>
+            <div class="col-md-6 form-group" style="display: inline-block;">
+                <label for="altura" class="form-label">Altura</label>
+                <form:input id="altura" type="number" path="altura" class="form-control" style="width: 85%; display: inline-block;"/><span style="display: inline-block;">cm</span>
+            </div>
+        </div>
     <div class="form-group">
         <label for="alergias" class="form-label">Alergias</label>
         <form:textarea id="alergias" path="alergias" maxlength="150" class="form-control"/>
     </div>
     <div class="form-group text-center">
-        <form:button class="btn btn-primary w-30">Aceptar</form:button>
+        <form:button class="btn btn-primary w-30" style="{marginBottom='0'}">Aceptar</form:button>
     </div>
     </form:form>
 </div>

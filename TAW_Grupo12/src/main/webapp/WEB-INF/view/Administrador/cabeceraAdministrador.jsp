@@ -30,7 +30,7 @@
 
     </div>
 
-    <div class="mx-auto">
+    <div class="titulo-cabecera">
         <h1><%= request.getAttribute("tituloCabeceraAdmin") %></h1>
     </div>
 

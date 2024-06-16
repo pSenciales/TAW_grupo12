@@ -1,5 +1,6 @@
 .titulo-cabecera {
     font-family: 'helvetica', serif;
+    white-space: nowrap;
 }
 
 .volver-incio{

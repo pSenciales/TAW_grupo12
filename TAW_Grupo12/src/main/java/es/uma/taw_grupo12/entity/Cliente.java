@@ -68,7 +68,7 @@ public class Cliente implements Serializable, DTO<ClienteDTO> {
     private Double altura;
     @Column(name = "alergias")
     private String alergias;
-    @JoinTable(name = "Cliente-Trabajador", joinColumns = {
+    @JoinTable(name = "Cliente_Trabajador", joinColumns = {
         @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")}, inverseJoinColumns = {
         @JoinColumn(name = "idtrabajador", referencedColumnName = "idtrabajador")})
     @ManyToMany
@@ -217,6 +217,10 @@ public class Cliente implements Serializable, DTO<ClienteDTO> {
         cliente.setPeso(this.peso);
         cliente.setAltura(this.altura);
         cliente.setAlergias(this.alergias);
+        cliente.setTrabajadorList(this.trabajadorList);
+        cliente.setDietaList(this.dietaList);
+        cliente.setRutinaList(this.rutinaList);
+
         return cliente;
     }
     //@Victoria

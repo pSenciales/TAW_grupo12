@@ -125,7 +125,7 @@ public class Rutina implements Serializable {
 
         if(this.getEjercicioRutinaList() != null) {
             for (EjercicioRutina re : this.ejercicioRutinaList)
-                list.add(re.getEjercicioRutinaPK().getIdejerciciorutina());
+                list.add(re.getEjercicioRutinaPK());
         }
         rutina.setEjercicioRutinaList(list);
         rutina.setIdcliente(this.idcliente.getIdcliente());

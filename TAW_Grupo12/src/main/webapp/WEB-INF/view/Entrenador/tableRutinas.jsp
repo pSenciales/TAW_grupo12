@@ -3,7 +3,9 @@
 <%@ page import="es.uma.taw_grupo12.dto.EjercicioDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw_grupo12.dto.RutinaDTO" %>
-<%@ page import="es.uma.taw_grupo12.entity.Rutina" %><%--
+<%@ page import="es.uma.taw_grupo12.entity.Rutina" %>
+<%@ page import="es.uma.taw_grupo12.dto.EjercicioRutinaDTO" %>
+<%@ page import="java.util.Objects" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 16/05/2024
@@ -14,6 +16,7 @@
 <%
     List<EjercicioDTO> ejercicioDTOList = (List<EjercicioDTO>) request.getAttribute("ejercicioList");
     RutinaDTO rutina = (RutinaDTO) request.getAttribute("rutina");
+    List<EjercicioRutinaDTO> ejerciciosRutina = (List<EjercicioRutinaDTO>) request.getAttribute("ejerciciosRutina");
 
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -29,6 +32,20 @@
     <style>
         #anyadir-ej *{
             margin-left: 20px;
+        }
+
+        .table th, .table td {
+            text-align: center; /* Center text in thead and tbody */
+            font-size: 0.85rem; /* Make tbody text smaller */
+            width: 14.28%; /* Ensure equal width for all columns */
+        }
+
+        .table thead th {
+            font-size: 1rem; /* Keep thead text size default */
+        }
+        .table-container {
+            margin: 0 auto;
+            width: 90%;
         }
     </style>
 </head>
@@ -51,10 +68,11 @@
     </form>
 </nav>
 <h1>Rutina: <%=rutina.getNombre()%></h1>
-<form:form method="post" action="/addEjercicio" modelAttribute="ejercicioRutinaDTO">
+
+<form:form method="post" action="/entrenador/addEjercicio" modelAttribute="ejercicioRutinaDTO">
     <div class="m-5 d-flex flex-row " id="anyadir-ej">
         <form:hidden path="rutina"></form:hidden>
-        <form:select path="diassemana" >
+        <form:select required="required" path="diassemana" >
             <form:option value="1" label="Lunes"></form:option>
             <form:option value="2" label="Martes"></form:option>
             <form:option value="3" label="Miercoles"></form:option>
@@ -63,17 +81,17 @@
             <form:option value="6" label="Sábado"></form:option>
             <form:option value="7" label="Domingo"></form:option>
         </form:select>
-        <form:input type="number" min="1" placeholder="Repeticiones"  path="repeticiones"/>
-        <form:input type="number" min="1" placeholder="Series"  path="series"/>
-        <form:input type="number" min="1" placeholder="Peso"  path="peso"/>
-        <form:select path="ejercicio">
+        <form:input required="required" type="number" min="1" placeholder="Repeticiones"  path="repeticiones"/>
+        <form:input required="required" type="number" min="1" placeholder="Series"  path="series"/>
+        <form:input required="required" type="number" min="1" placeholder="Peso"  path="peso"/>
+        <form:select required="required" path="ejercicio">
             <form:options items="${ejercicioList}" itemLabel="nombre" itemValue="idejercicio"></form:options>
         </form:select>
         <form:button class="btn btn-primary">Añadir ejercicio</form:button>
     </div>
 </form:form>
-
-<table class="table m-5">
+<div class="table-container">
+<table class="table table-bordered table-striped">
     <thead>
     <tr>
         <th scope="col">Lunes</th>
@@ -87,9 +105,219 @@
     </tr>
     </thead>
     <tbody>
-    <tr></tr>
+    <%
+        int size = !ejerciciosRutina.isEmpty() ? ejerciciosRutina.getLast().getOrden()+1 : 0;
+        for(int i = 0; i<size; i++){
+
+
+    %>
+    <tr>
+        <%
+            int index = 0;
+            String[] ejerciciorutina = new String[]{"","","","","","",""};
+            Integer[] ids = new Integer[]{-1,-1,-1,-1,-1,-1,-1,};
+
+            while(index < ejerciciosRutina.size() && ejerciciosRutina.get(index).getOrden() <= i){
+                if(ejerciciosRutina.get(index).getOrden() == i) {
+                    boolean encontrada = false;
+                    int ej = 0;
+                    EjercicioDTO aux = null;
+                    while(!encontrada && ej < ejercicioDTOList.size()){
+                        aux = ejercicioDTOList.get(ej);
+                        if(Objects.equals(aux.getIdejercicio(), ejerciciosRutina.get(index).getEjercicio()))
+                            encontrada = true;
+                        ej++;
+                    }
+                    EjercicioRutinaDTO ejercicio = ejerciciosRutina.get(index);
+                    ids[ejercicio.getDiassemanaInt() - 1] = ejercicio.getEjercicioRutinaPK();
+                    assert aux != null;
+                    ejerciciorutina[ejercicio.getDiassemanaInt() - 1] = aux.getNombre()+" "+ejercicio.toString();
+                }
+                index++;
+            }
+        %>
+        <td>
+            <%=ejerciciorutina[0]%>
+            <%
+                if(ejerciciorutina[0] != ""){
+            %>
+            <form method="post" action="/entrenador/rutina/subir">
+                <input type="hidden" value="<%=ids[0]%>" name="id">
+                <button type="submit">Subir</button>
+            </form>
+            <form method="post" action="/entrenador/rutina/bajar">
+                <input type="hidden" value="<%=ids[0]%>" name="id">
+                <button type="submit">Bajar</button>
+            </form>
+            <form method="get" action="/entrenador/rutina/borrar">
+                <input type="hidden" value="<%=ids[0]%>" name="id">
+                <button type="submit">Borrar</button>
+            </form>
+            <form method="post" action="/entrenador/rutina/editar">
+                <input type="hidden" value="<%=ids[0]%>" name="id">
+                <button type="submit">Editar</button>
+            </form>
+            <%
+                }
+            %>
+        </td>
+        <td>
+            <%=ejerciciorutina[1]%>
+            <%
+                if(ejerciciorutina[1] != ""){
+            %>
+            <form method="post" action="/entrenador/rutina/subir">
+                <input type="hidden" value="<%=ids[1]%>" name="id">
+                <button type="submit">Subir</button>
+            </form>
+            <form method="post" action="/entrenador/rutina/bajar">
+                <input type="hidden" value="<%=ids[1]%>" name="id">
+                <button type="submit">Bajar</button>
+            </form>
+            <form method="post" action="/entrenador/rutina/borrar">
+                <input type="hidden" value="<%=ids[1]%>" name="id">
+                <button type="submit">Borrar</button>
+            </form>
+            <form method="post" action="/entrenador/rutina/editar">
+                <input type="hidden" value="<%=ids[1]%>" name="id">
+                <button>Editar</button>
+            </form>
+            <%
+                }
+            %>
+        </td>
+        <td>
+            <%=ejerciciorutina[2]%>
+            <%
+                if(ejerciciorutina[2] != ""){
+            %>
+            <form>
+                <input type="hidden" value="<%=ids[2]%>" name="id">
+                <button>Subir</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[2]%>" name="id">
+                <button>Bajar</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[2]%>" name="id">
+                <button>Borrar</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[2]%>" name="id">
+                <button>Editar</button>
+            </form>
+            <%
+                }
+            %>
+        </td>
+        <td>
+            <%=ejerciciorutina[3]%>
+            <%
+                if(ejerciciorutina[3] != ""){
+            %>
+            <form>
+                <input type="hidden" value="<%=ids[3]%>" name="id">
+                <button>Subir</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[3]%>" name="id">
+                <button>Bajar</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[3]%>" name="id">
+                <button>Borrar</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[3]%>" name="id">
+                <button>Editar</button>
+            </form>
+            <%
+                }
+            %>
+        </td>
+        <td>
+            <%=ejerciciorutina[4]%>
+            <%
+                if(ejerciciorutina[4] != ""){
+            %>
+            <form>
+                <input type="hidden" value="<%=ids[4]%>" name="id">
+                <button>Subir</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[4]%>" name="id">
+                <button>Bajar</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[4]%>" name="id">
+                <button>Borrar</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[4]%>" name="id">
+                <button>Editar</button>
+            </form>
+            <%
+                }
+            %>
+        </td>
+        <td>
+            <%=ejerciciorutina[5]%>
+            <%
+                if(ejerciciorutina[5] != ""){
+            %>
+            <form>
+                <input type="hidden" value="<%=ids[5]%>" name="id">
+                <button>Subir</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[5]%>" name="id">
+                <button>Bajar</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[5]%>" name="id">
+                <button>Borrar</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[5]%>" name="id">
+                <button>Editar</button>
+            </form>
+            <%
+                }
+            %>
+        </td>
+        <td>
+            <%=ejerciciorutina[6]%>
+            <%
+                if(ejerciciorutina[6] != ""){
+            %>
+            <form>
+                <input type="hidden" value="<%=ids[6]%>" name="id">
+                <button>Subir</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[6]%>" name="id">
+                <button>Bajar</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[6]%>" name="id">
+                <button>Borrar</button>
+            </form>
+            <form>
+                <input type="hidden" value="<%=ids[6]%>" name="id">
+                <button>Editar</button>
+            </form>
+            <%
+                }
+            %>
+        </td>
+    </tr>
+    <%
+        }
+    %>
     </tbody>
 </table>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

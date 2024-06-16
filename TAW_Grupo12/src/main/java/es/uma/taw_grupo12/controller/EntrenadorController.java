@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/entrenador")
 public class EntrenadorController {
 
 
@@ -26,7 +27,7 @@ public class EntrenadorController {
     private EjercicioRutinaService ejercicioRutinaService;
 
 
-    @GetMapping("/entrenador/new-rutina")
+    @GetMapping("/new-rutina")
     public String doCreacion(HttpSession sesion){
       /*  if(sesion.getAttribute("id") == null ||
                 sesion.getAttribute("tipo").equals("entrenador")){
@@ -35,7 +36,7 @@ public class EntrenadorController {
         return "/Entrenador/crearRutina";
     }
 
-    @PostMapping("/entrenador/new-rutina/crear")
+    @PostMapping("/new-rutina/crear")
     public String doCrearRutina(HttpSession sesion, @RequestParam("nombre") String nombre){
         RutinaDTO rutinaDTO = new RutinaDTO(nombre);
 
@@ -47,7 +48,7 @@ public class EntrenadorController {
 
 
 
-    @GetMapping("/entrenador/rutina/{id}")
+    @GetMapping("/rutina/{id}")
     public String doTabla(HttpSession sesion, Model model, @PathVariable Integer id){
       /*  if(sesion.getAttribute("id") == null ||
                 sesion.getAttribute("tipo").equals("entrenador")){
@@ -56,11 +57,17 @@ public class EntrenadorController {
 
         List<EjercicioDTO> ejercicioList = ejercicioService.getFuerza();
         model.addAttribute("ejercicioList", ejercicioList);
+
         RutinaDTO rutinaDTO = rutinaService.findById(id);
         model.addAttribute("rutina",rutinaDTO);
+
         EjercicioRutinaDTO ejercicioRutinaDTO = new EjercicioRutinaDTO();
         ejercicioRutinaDTO.setRutina(id);
         model.addAttribute("ejercicioRutinaDTO", ejercicioRutinaDTO);
+
+        List<EjercicioRutinaDTO> ejerciciosRutina = ejercicioRutinaService.findAllByRutinaId(id);
+        model.addAttribute("ejerciciosRutina", ejerciciosRutina);
+
         return "/Entrenador/tableRutinas";
     }
 
@@ -68,7 +75,35 @@ public class EntrenadorController {
     public String doAddEjercicio(HttpSession sesion, @ModelAttribute EjercicioRutinaDTO ejercicioRutinaDTO){
         ejercicioRutinaService.save(ejercicioRutinaDTO);
 
-        return "redirect:entrenador/rutina/"+ejercicioRutinaDTO.getRutina();
+        return "redirect:/entrenador/rutina/"+ejercicioRutinaDTO.getRutina();
+    }
+
+    @PostMapping("/rutina/subir")
+    public String doSubirEjercicio(HttpSession sesion, @RequestParam("id") Integer id){
+
+        //true significa que lo subirá
+        ejercicioRutinaService.cambiarOrden(id, true);
+        EjercicioRutinaDTO ejercicioRutinaDTO = ejercicioRutinaService.findById(id);
+        return "redirect:/entrenador/rutina/"+ejercicioRutinaDTO.getRutina();
+    }
+
+    @PostMapping("/rutina/bajar")
+    public String doBajarEjercicio(HttpSession sesion, @RequestParam("id") Integer id){
+        ejercicioRutinaService.cambiarOrden(id, false);
+        EjercicioRutinaDTO ejercicioRutinaDTO = ejercicioRutinaService.findById(id);
+        return "redirect:/entrenador/rutina/"+ejercicioRutinaDTO.getRutina();
+    }
+
+    @GetMapping("/rutina/borrar")
+    public String doBorrarEjercicio(HttpSession sesion, @RequestParam("id") Integer id){
+        EjercicioRutinaDTO ejercicioRutinaDTO = ejercicioRutinaService.findById(id);
+        ejercicioRutinaService.deleteById(id);
+        return "redirect:/entrenador/rutina/"+ejercicioRutinaDTO.getRutina();
+    }
+
+    @PostMapping("/rutina/editar")
+    public String doEditarEjercicio(HttpSession sesion, @RequestParam("id") Integer id){
+        return "redirect:/entrenador/rutina/"+id;
     }
 
 

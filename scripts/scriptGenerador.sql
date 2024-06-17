@@ -151,25 +151,13 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `taw12`.`SeguimientoDieta` ;
 
 CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoDieta` (
-<<<<<<< Updated upstream
-  `idplatodieta` INT NOT NULL,
-  `idplato` INT NOT NULL,
-  `iddieta` INT NOT NULL,
-=======
   `idseguimientodieta` INT NOT NULL AUTO_INCREMENT, 
   `iddieta` INT NOT NULL, 
   `idcliente` INT NOT NULL,
->>>>>>> Stashed changes
   `fecha` DATE NOT NULL,
   `comido` TINYINT NULL DEFAULT NULL,
   `cantidad` INT NULL DEFAULT NULL,
   `observaciones` VARCHAR(250) NULL DEFAULT NULL,
-<<<<<<< Updated upstream
-  PRIMARY KEY (`idplatodieta`, `idplato`, `iddieta`),
-  CONSTRAINT `fk_seguimientodieta_PlatoDieta1`
-    FOREIGN KEY (`idplatodieta` , `idplato` , `iddieta`)
-    REFERENCES `taw12`.`PlatoDieta` (`idplatodieta` , `idplato` , `iddieta`)
-=======
    `cantidadobjetivo` INT NULL DEFAULT NULL,  -- Nueva columna para cantidad objetivo
   `nombreplato` VARCHAR(100) NOT NULL,  -- Nueva columna para nombre del plato
   PRIMARY KEY (`idseguimientodieta`),
@@ -178,7 +166,6 @@ CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoDieta` (
   CONSTRAINT `fk_SeguimientoDieta_Dieta1`
     FOREIGN KEY (`iddieta`)
     REFERENCES `taw12`.`Dieta` (`iddieta`)
->>>>>>> Stashed changes
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_SeguimientoCliente_Dieta1`
@@ -229,26 +216,14 @@ DROP TABLE IF EXISTS `taw12`.`SeguimientoObjetivos` ;
 
 CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoObjetivos` (
   `idseguimiento` INT NOT NULL AUTO_INCREMENT,
-<<<<<<< Updated upstream
-  `idejerciciorutina` INT NOT NULL,
-=======
   `idrutina` INT NOT NULL,
   `idcliente` INT NOT NULL,
->>>>>>> Stashed changes
   `fecha` DATE NOT NULL,
   `realizado` TINYINT NOT NULL,
   `pesorealizado` FLOAT NULL DEFAULT NULL,
   `repeticionesrealizadas` INT NULL DEFAULT NULL,
   `seriesrealizadas` INT NULL DEFAULT NULL,
   `observaciones` VARCHAR(200) NULL,
-<<<<<<< Updated upstream
-  PRIMARY KEY (`idseguimiento`),
-  INDEX `fk_SeguimientoObjetivos_EjercicioRutina1_idx` (`idejerciciorutina`),
-  CONSTRAINT `fk_SeguimientoObjetivos_EjercicioRutina1`
-    FOREIGN KEY (`idejerciciorutina`)
-    REFERENCES `taw12`.`EjercicioRutina` (`idejerciciorutina`)
-    ON DELETE NO ACTION
-=======
   `pesoobjetivo` FLOAT NULL DEFAULT NULL, 
   `seriesobjetivo` INT NULL DEFAULT NULL,  
   `repeticionesobjetivo` INT NULL DEFAULT NULL,
@@ -265,7 +240,6 @@ CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoObjetivos` (
     FOREIGN KEY (`idcliente`)
     REFERENCES `taw12`.`Cliente` (`idcliente`)
     ON DELETE NO ACTION
->>>>>>> Stashed changes
     ON UPDATE NO ACTION
 ) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;

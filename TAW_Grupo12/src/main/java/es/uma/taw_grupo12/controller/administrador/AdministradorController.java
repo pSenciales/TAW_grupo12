@@ -13,6 +13,7 @@ import es.uma.taw_grupo12.service.AdministradorService;
 import es.uma.taw_grupo12.service.ClienteService;
 import es.uma.taw_grupo12.service.TrabajadorService;
 import es.uma.taw_grupo12.ui.Administrador.FiltroClientes;
+import es.uma.taw_grupo12.ui.Administrador.FiltroUsuarios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,8 +73,6 @@ public class AdministradorController extends BaseController{
         return "/Administrador/AsignarClientes/asignarClientes";
     }
 
-
-
     @PostMapping("/filtrarAsignarClientes")
     public String doFiltrarAsignarClientes(Model model, HttpSession session, @ModelAttribute("filtroClientes") FiltroClientes filtroClientes) {
         if (filtroClientes.estaVacio()) {
@@ -121,7 +120,67 @@ public class AdministradorController extends BaseController{
     @PostMapping("/desasignarTrabajador")
     public String doDesasignarTrabajador(@RequestParam("idClienteDes") Integer idCliente, @RequestParam("idTrabajadorDes") Integer idTrabajador){
         this.administradorService.desasignarTrabajador(idCliente, idTrabajador);
-
         return "redirect:/administrador/asignarClientes";
+    }
+
+    @GetMapping("/gestionarUsuarios")
+    public String doGestionarUsuarios(HttpSession session, Model model){
+
+        if (!estaAutenticado(session) || session.getAttribute("tipo") != "administrador"){
+            return "redirect:/";
+        }
+
+        List<ClienteDTO> clientesDTO = this.clienteService.listarClientesDTO();
+        List<TrabajadorDTO> trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTO();
+        model.addAttribute("filtroUsuarios", new FiltroUsuarios());
+        model.addAttribute("clientes", clientesDTO);
+        model.addAttribute("trabajadores", trabajadoresDTO);
+        model.addAttribute("tituloCabeceraAdmin", "Gestionar Usuarios");
+
+        return "/Administrador/GestionarUsuarios/gestionarUsuarios";
+    }
+
+    @PostMapping("/filtrarGestionarClientes")
+    public String doFiltrarGestionarClientes(Model model, @ModelAttribute("filtroUsuarios") FiltroUsuarios filtroUsuarios) {
+        if (filtroUsuarios.estaVacio()) {
+            return "redirect:/administrador/gestionarUsuarios";
+        }
+        List<ClienteDTO> clientesDTO = null;
+        List<TrabajadorDTO> trabajadoresDTO = null;
+
+        if(filtroUsuarios.estaVacio()){
+            trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTO();
+            clientesDTO = this.clienteService.listarClientesDTO();
+        }
+
+        List<String> tipoUsuario = filtroUsuarios.getTipoUsuario();
+        List<String> tipoTrabajador = filtroUsuarios.getTipoTrabajador();
+        String busqueda = filtroUsuarios.getBusqueda();
+
+        if (tipoUsuario.isEmpty() || tipoUsuario.contains("Cliente")) {
+            clientesDTO = this.clienteService.listarClientesDTO(busqueda);
+        }
+
+        if (tipoUsuario.isEmpty() || tipoUsuario.contains("Trabajador")) {
+            if(tipoTrabajador.isEmpty()) {
+                trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTO(busqueda);
+            } else {
+                if(tipoTrabajador.contains("ENTRENADOR FUERZA")){
+                    trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo("ENTRENADOR FUERZA", busqueda);
+                }
+                if(tipoTrabajador.contains("ENTRENADOR CROSSTRAINNING")){
+                    trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo("ENTRENADOR CROSSTRAINNING", busqueda);
+                }
+                if(tipoTrabajador.contains("DIETISTA")){
+                    trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo("DIETISTA", busqueda);
+                }
+            }
+        }
+
+        model.addAttribute("filtroUsuarios", filtroUsuarios);
+        model.addAttribute("trabajadores", trabajadoresDTO);
+        model.addAttribute("clientes", clientesDTO);
+        model.addAttribute("tituloCabeceraAdmin", "Gestionar Clientes");
+        return "/Administrador/GestionarUsuarios/gestionarUsuarios";
     }
 }

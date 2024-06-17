@@ -54,8 +54,11 @@ public class EjercicioRutina implements Serializable {
     @JoinColumn(name = "idejercicio", referencedColumnName = "idejercicio", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Ejercicio ejercicio;
+<<<<<<< Updated upstream
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "ejercicioRutina")
     private SeguimientoObjetivos seguimientoObjetivos;
+=======
+>>>>>>> Stashed changes
 
     public EjercicioRutina() {
     }
@@ -132,6 +135,7 @@ public class EjercicioRutina implements Serializable {
         this.ejercicio = ejercicio;
     }
 
+<<<<<<< Updated upstream
     public SeguimientoObjetivos getSeguimientoObjetivos() {
         return seguimientoObjetivos;
     }
@@ -139,6 +143,8 @@ public class EjercicioRutina implements Serializable {
     public void setSeguimientoObjetivos(SeguimientoObjetivos seguimientoObjetivos) {
         this.seguimientoObjetivos = seguimientoObjetivos;
     }
+=======
+>>>>>>> Stashed changes
 
     @Override
     public int hashCode() {
@@ -164,5 +170,35 @@ public class EjercicioRutina implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.EjercicioRutina[ ejercicioRutinaPK=" + ejercicioRutinaPK + " ]";
     }
+<<<<<<< Updated upstream
     
+=======
+
+    public String getDiassemanaString(){
+
+        return switch (this.diassemana) {
+            case "1" -> "Lunes";
+            case "2" -> "Martes";
+            case "3" -> "Miercoles";
+            case "4" -> "Jueves";
+            case "5" -> "Viernes";
+            case "6" -> "Sabado";
+            case "7" -> "Domingo";
+            default -> null;
+        };
+    }
+
+    public EjercicioRutinaDTO toDTO() {
+        EjercicioRutinaDTO nueva = new EjercicioRutinaDTO();
+        nueva.setEjercicioRutinaPK(this.ejercicioRutinaPK);
+        nueva.setRutina(this.rutina.getIdrutina());
+        nueva.setEjercicio(this.ejercicio.getIdejercicio());
+        nueva.setPeso(this.peso);
+        nueva.setRepeticiones(this.repeticiones);
+        nueva.setSeries(this.series);
+        nueva.setOrden(this.orden);
+        nueva.setDiassemana(this.diassemana);
+        return nueva;
+    }
+>>>>>>> Stashed changes
 }

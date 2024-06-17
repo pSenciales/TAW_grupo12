@@ -46,6 +46,8 @@ public class Dieta implements Serializable {
     private Cliente idcliente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dieta")
     private List<PlatoDieta> platoDietaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seguimientoDietaPK")
+    private List<SeguimientoDieta> seguimientoDieta;
 
     public Dieta() {
     }
@@ -91,6 +93,9 @@ public class Dieta implements Serializable {
         this.platoDietaList = platoDietaList;
     }
 
+    public List<SeguimientoDieta> getSeguimientoDieta() {return seguimientoDieta;}
+
+    public void setSeguimientoDieta(List<SeguimientoDieta> seguimientoDieta) {this.seguimientoDieta = seguimientoDieta;}
     @Override
     public int hashCode() {
         int hash = 0;

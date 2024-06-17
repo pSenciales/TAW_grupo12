@@ -48,8 +48,6 @@ public class EjercicioRutina implements Serializable {
     @JoinColumn(name = "idejercicio", referencedColumnName = "idejercicio")
     @ManyToOne(optional = false)
     private Ejercicio ejercicio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ejercicioRutina")
-    private List<SeguimientoObjetivos> seguimientoObjetivos;
 
     public EjercicioRutina() {
     }
@@ -138,13 +136,6 @@ public class EjercicioRutina implements Serializable {
         this.ejercicio = ejercicio;
     }
 
-    public List<SeguimientoObjetivos> getSeguimientoObjetivos() {
-        return seguimientoObjetivos;
-    }
-
-    public void setSeguimientoObjetivos(List<SeguimientoObjetivos> seguimientoObjetivos) {
-        this.seguimientoObjetivos = seguimientoObjetivos;
-    }
 
     @Override
     public int hashCode() {

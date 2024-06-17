@@ -3,6 +3,16 @@ package es.uma.taw_grupo12.controller;
 import es.uma.taw_grupo12.dto.*;
 import es.uma.taw_grupo12.entity.Trabajador;
 import es.uma.taw_grupo12.service.*;
+import es.uma.taw_grupo12.dto.EjercicioDTO;
+import es.uma.taw_grupo12.dto.RutinaDTO;
+import es.uma.taw_grupo12.service.EjercicioService;
+import es.uma.taw_grupo12.service.RutinaService;
+import es.uma.taw_grupo12.dto.*;
+import es.uma.taw_grupo12.entity.Rutina;
+import es.uma.taw_grupo12.entity.Trabajador;
+import es.uma.taw_grupo12.service.*;
+import es.uma.taw_grupo12.ui.Entrenador.FiltroRutinas;
+
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

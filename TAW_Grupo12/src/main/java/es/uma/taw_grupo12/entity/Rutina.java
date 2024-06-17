@@ -53,6 +53,8 @@ import jakarta.persistence.Table;
     @JoinColumn(name = "idtrabajador", referencedColumnName = "idtrabajador")
     @ManyToOne(optional = false)
     private Trabajador idtrabajador;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seguimientoObjetivosPK")
+    private List<SeguimientoObjetivos> seguimientoobjetivos;
 
     public Rutina() {
     }
@@ -101,6 +103,9 @@ import jakarta.persistence.Table;
     public Trabajador getIdtrabajador() {return idtrabajador;}
 
     public void setIdtrabajador(Trabajador idtrabajador) {this.idtrabajador = idtrabajador;}
+    public List<SeguimientoObjetivos> getSeguimientoobjetivos() {return seguimientoobjetivos;}
+
+    public void setSeguimientoobjetivos(List<SeguimientoObjetivos> seguimientoobjetivos) {this.seguimientoobjetivos = seguimientoobjetivos;}
 
     @Override
     public int hashCode() {

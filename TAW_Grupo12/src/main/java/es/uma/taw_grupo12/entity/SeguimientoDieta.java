@@ -6,18 +6,8 @@ package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinColumns;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+
+import jakarta.persistence.*;
 
 /**
  *
@@ -27,9 +17,6 @@ import jakarta.persistence.TemporalType;
 @Table(name = "SeguimientoDieta")
 @NamedQueries({
     @NamedQuery(name = "SeguimientoDieta.findAll", query = "SELECT s FROM SeguimientoDieta s"),
-    @NamedQuery(name = "SeguimientoDieta.findByIdplatodieta", query = "SELECT s FROM SeguimientoDieta s WHERE s.seguimientoDietaPK.idplatodieta = :idplatodieta"),
-    @NamedQuery(name = "SeguimientoDieta.findByIdplato", query = "SELECT s FROM SeguimientoDieta s WHERE s.seguimientoDietaPK.idplato = :idplato"),
-    @NamedQuery(name = "SeguimientoDieta.findByIddieta", query = "SELECT s FROM SeguimientoDieta s WHERE s.seguimientoDietaPK.iddieta = :iddieta"),
     @NamedQuery(name = "SeguimientoDieta.findByFecha", query = "SELECT s FROM SeguimientoDieta s WHERE s.fecha = :fecha"),
     @NamedQuery(name = "SeguimientoDieta.findByComido", query = "SELECT s FROM SeguimientoDieta s WHERE s.comido = :comido"),
     @NamedQuery(name = "SeguimientoDieta.findByCantidad", query = "SELECT s FROM SeguimientoDieta s WHERE s.cantidad = :cantidad"),
@@ -37,8 +24,11 @@ import jakarta.persistence.TemporalType;
 public class SeguimientoDieta implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected SeguimientoDietaPK seguimientoDietaPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idseguimientodieta")
+    protected Integer seguimientoDietaPK;
     @Basic(optional = false)
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
@@ -49,34 +39,32 @@ public class SeguimientoDieta implements Serializable {
     private Integer cantidad;
     @Column(name = "observaciones")
     private String observaciones;
-    @JoinColumns({
-        @JoinColumn(name = "idplatodieta", referencedColumnName = "idplatodieta", insertable = false, updatable = false),
-        @JoinColumn(name = "idplato", referencedColumnName = "idplato", insertable = false, updatable = false),
-        @JoinColumn(name = "iddieta", referencedColumnName = "iddieta", insertable = false, updatable = false)})
-    @OneToOne(optional = false)
-    private PlatoDieta platoDieta;
+    @Column(name = "cantidadobjetivo")
+    private String cantidadobjetivo;
+    @Column(name = "nombreplato")
+    private String nombreplato;
+    @JoinColumn(name = "iddieta", referencedColumnName = "iddieta")
+    @ManyToOne(optional = false)
+    private Dieta dieta;
 
     public SeguimientoDieta() {
     }
 
-    public SeguimientoDieta(SeguimientoDietaPK seguimientoDietaPK) {
+    public SeguimientoDieta(Integer  seguimientoDietaPK) {
         this.seguimientoDietaPK = seguimientoDietaPK;
     }
 
-    public SeguimientoDieta(SeguimientoDietaPK seguimientoDietaPK, Date fecha) {
+    public SeguimientoDieta(Integer  seguimientoDietaPK, Date fecha) {
         this.seguimientoDietaPK = seguimientoDietaPK;
         this.fecha = fecha;
     }
 
-    public SeguimientoDieta(int idplatodieta, int idplato, int iddieta) {
-        this.seguimientoDietaPK = new SeguimientoDietaPK(idplatodieta, idplato, iddieta);
-    }
 
-    public SeguimientoDietaPK getSeguimientoDietaPK() {
+    public Integer  getSeguimientoDietaPK() {
         return seguimientoDietaPK;
     }
 
-    public void setSeguimientoDietaPK(SeguimientoDietaPK seguimientoDietaPK) {
+    public void setSeguimientoDietaPK(Integer  seguimientoDietaPK) {
         this.seguimientoDietaPK = seguimientoDietaPK;
     }
 
@@ -112,14 +100,21 @@ public class SeguimientoDieta implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public PlatoDieta getPlatoDieta() {
-        return platoDieta;
+    public Dieta getPlatoDieta() {
+        return dieta;
     }
 
-    public void setPlatoDieta(PlatoDieta platoDieta) {
-        this.platoDieta = platoDieta;
+    public void setDieta(Dieta platoDieta) {
+        this.dieta = platoDieta;
     }
 
+    public String getCantidadobjetivo() {return cantidadobjetivo;}
+
+    public void setCantidadobjetivo(String cantidadobjetivo) {this.cantidadobjetivo = cantidadobjetivo;}
+
+    public String getNombreplato() {return nombreplato;}
+
+    public void setNombreplato(String nombreplato) {this.nombreplato = nombreplato;}
     @Override
     public int hashCode() {
         int hash = 0;

@@ -50,9 +50,17 @@ public class SeguimientoObjetivos implements Serializable {
     private Integer seriesrealizadas;
     @Column(name = "observaciones")
     private String observaciones;
-    @JoinColumn(name = "idejerciciorutina", referencedColumnName = "idejerciciorutina", insertable = false, updatable = false)
+    @Column(name = "pesoobjetivo")
+    private Float pesoobjetivo;
+    @Column(name = "repeticionesobjetivo")
+    private Integer repeticionesobjetivo;
+    @Column(name = "seriesobjetivo")
+    private Integer seriesobjetivo;
+    @Column(name = "nombreejercicio")
+    private String nombreejercicio;
+    @JoinColumn(name = "idrutina", referencedColumnName = "idrutina", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private EjercicioRutina ejercicioRutina;
+    private Rutina rutina;
 
     public SeguimientoObjetivos() {
     }
@@ -125,13 +133,29 @@ public class SeguimientoObjetivos implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public EjercicioRutina getEjercicioRutina() {
-        return ejercicioRutina;
+    public Rutina getRutina() {
+        return rutina;
     }
 
-    public void setEjercicioRutina(EjercicioRutina ejercicioRutina) {
-        this.ejercicioRutina = ejercicioRutina;
+    public void setRutina(Rutina ejercicioRutina) {
+        this.rutina = ejercicioRutina;
     }
+
+    public String getNombreejercicio() {return nombreejercicio;}
+
+    public void setNombreejercicio(String nombreejercicio) {this.nombreejercicio = nombreejercicio;}
+
+    public Integer getSeriesobjetivo() {return seriesobjetivo;}
+
+    public void setSeriesobjetivo(Integer seriesobjetivo) {this.seriesobjetivo = seriesobjetivo;}
+
+    public Integer getRepeticionesobjetivo() {return repeticionesobjetivo;}
+
+    public void setRepeticionesobjetivo(Integer repeticionesobjetivo) {this.repeticionesobjetivo = repeticionesobjetivo;}
+
+    public Float getPesoobjetivo() {return pesoobjetivo;}
+
+    public void setPesoobjetivo(Float pesoobjetivo) {this.pesoobjetivo = pesoobjetivo;}
 
     @Override
     public int hashCode() {

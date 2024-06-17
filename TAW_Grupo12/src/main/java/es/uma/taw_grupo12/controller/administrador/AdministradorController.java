@@ -103,23 +103,23 @@ public class AdministradorController extends BaseController{
             return "/Administrador/AsignarClientes/asignarEntrenadorFuerza";
         }
         if(tipoTrabajador.equals("ENTRENADOR CROSSTRAINNING")){
-            return "/Administrador/AsignarClientes/asignarEntrenadorCrosstraining";
+            return "/Administrador/AsignarClientes/asignarEntrenadorCrosstrainning";
         }
         if(tipoTrabajador.equals("DIETISTA")){
-            return "/Administrador/AsignarClientes/asignarEntrenadorHipopresivos";
+            return "/Administrador/AsignarClientes/asignarDietista";
         }
 
         return "redirect:/administrador/asignarClientes";
     }
 
-    @PostMapping("/guardarAsignacionClienteEntrenadorFuerza")
-    public String doAsignarEntrenadorFuerza(@RequestParam("idEntrenador") Integer idEntrenador, @RequestParam("idCliente") Integer idCliente){
-        this.administradorService.asignarTrabajador(idCliente, idEntrenador);
+    @PostMapping("/guardarAsignacionClienteTrabajador")
+    public String doAsignarTrabajador(@RequestParam("idTrabajador") Integer idTrabajador, @RequestParam("idCliente") Integer idCliente){
+        this.administradorService.asignarTrabajador(idCliente, idTrabajador);
         return "redirect:/administrador/asignarClientes";
     }
 
     @PostMapping("/desasignarTrabajador")
-    public String doDesasignarTrabajador(@RequestParam("idClienteDes") Integer idCliente, @RequestParam("idEntrenadorDes") Integer idTrabajador){
+    public String doDesasignarTrabajador(@RequestParam("idClienteDes") Integer idCliente, @RequestParam("idTrabajadorDes") Integer idTrabajador){
         this.administradorService.desasignarTrabajador(idCliente, idTrabajador);
 
         return "redirect:/administrador/asignarClientes";

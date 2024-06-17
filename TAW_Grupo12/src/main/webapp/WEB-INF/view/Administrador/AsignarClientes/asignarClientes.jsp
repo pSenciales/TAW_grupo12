@@ -1,3 +1,9 @@
+<%
+    /**
+     * @author María Victoria Huesca
+     */
+%>
+
 <%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw_grupo12.dto.TrabajadorDTO" %>

@@ -1,3 +1,9 @@
+<%
+    /**
+     * @author María Victoria Huesca
+     */
+%>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %>
 <%@ page import="es.uma.taw_grupo12.dto.TrabajadorDTO" %>
@@ -7,16 +13,16 @@
 <%
     //OPCION: AÑADIR BOTON DE VOLVER ATRÁS
 
-    List<TrabajadorDTO> entrenadores = (List<TrabajadorDTO>) request.getAttribute("trabajadores");
+    List<TrabajadorDTO> entrenadoresFuerza = (List<TrabajadorDTO>) request.getAttribute("trabajadores");
     ClienteDTO cliente = (ClienteDTO) request.getAttribute("cliente");
     List<Integer> trabajadoresCliente = cliente.getTrabajadorList();
 
-    Integer idEntrenadorFuerza = null;
+    Integer idEntrenadorFuerza = 0;
 
     //compruebo si el cliente ya tiene asignado un entrenador de fuerza para más tarde desasignarrlo
-    for (TrabajadorDTO entrenador : entrenadores) {
+    for (TrabajadorDTO entrenadorFuerza : entrenadoresFuerza) {
         for(Integer idTrabajador : trabajadoresCliente) {
-            if (idTrabajador.equals(entrenador.getIdtrabajador()) && "ENTRENADOR FUERZA".equals(entrenador.getTipo())) {
+            if (idTrabajador.equals(entrenadorFuerza.getIdtrabajador())) {
                 idEntrenadorFuerza = idTrabajador;
                 break;
             }
@@ -37,17 +43,17 @@
 <body>
 <div class="parent-container-asignarEntrenadorFuerza">
 <div class="form-container container-asignarEntrenadorFuerza">
-<form action="/administrador/guardarAsignacionClienteEntrenadorFuerza" method="post" class="form-asignarEntrenadorFuerza">
+<form action="/administrador/guardarAsignacionClienteTrabajador" method="post" class="form-asignarEntrenadorFuerza">
     <input type="hidden" value="<%=idCliente%>" name="idCliente"/>
     <p>Cliente: <%=nombre%></p>
     <div class="form-group mb-3">
     <label for="entrenador" class="form-label">Entrenador de fuerza que desees asiganar: </label>
-    <select id="entrenador" name="idEntrenador" class="form-control mb-3">
+    <select id="entrenador" name="idTrabajador" class="form-control mb-3">
         <option value="0">Selecciona un entrenador</option>
         <%
-            for (TrabajadorDTO entrenador : entrenadores) {
+            for (TrabajadorDTO entrenadorFuerza : entrenadoresFuerza) {
         %>
-            <option value="<%=entrenador.getIdtrabajador()%>" label="<%=entrenador.getNombre()%>"></option>
+            <option value="<%=entrenadorFuerza.getIdtrabajador()%>" label="<%=entrenadorFuerza.getNombre()%>"></option>
         <%
             }
         %>
@@ -57,7 +63,7 @@
     <input type="submit" class="btn btn-primary mb-3 boton-asignarEntrenadorFuerza" value="Asignar nuevo entrenador de fuerza" />
 </form>
 <form action="/administrador/desasignarTrabajador" method="post" class="d-flex justify-content-center align-items-center">
-    <input type="hidden" value="<%=idEntrenadorFuerza%>" name="idEntrenadorDes"/>
+    <input type="hidden" value="<%=idEntrenadorFuerza%>" name="idTrabajadorDes"/>
     <input type="hidden" value="<%=idCliente%>" name="idClienteDes">
     <input type="submit" class="btn btn-outline-danger boton-desasignarEntrenadorFuerza" value="Desasignar entrenador de fuerza actual" />
 </form>

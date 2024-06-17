@@ -6,30 +6,20 @@ package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinColumns;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+
+import jakarta.persistence.*;
 
 /**
  *
  * @author guzman
  */
 @Entity
-@Table(name = "SeguimientoObjetivos")
+@Table(name = "seguimientoobjetivos")
 @NamedQueries({
     @NamedQuery(name = "SeguimientoObjetivos.findAll", query = "SELECT s FROM SeguimientoObjetivos s"),
-    @NamedQuery(name = "SeguimientoObjetivos.findByIdejerciciorutina", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.seguimientoObjetivosPK.idejerciciorutina = :idejerciciorutina"),
-    @NamedQuery(name = "SeguimientoObjetivos.findByIdrutina", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.seguimientoObjetivosPK.idrutina = :idrutina"),
-    @NamedQuery(name = "SeguimientoObjetivos.findByIdejercicio", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.seguimientoObjetivosPK.idejercicio = :idejercicio"),
+    @NamedQuery(name = "SeguimientoObjetivos.findByIdejerciciorutina", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.seguimientoObjetivosPK = :idejerciciorutina"),
+    @NamedQuery(name = "SeguimientoObjetivos.findByIdrutina", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.seguimientoObjetivosPK = :idrutina"),
+    @NamedQuery(name = "SeguimientoObjetivos.findByIdejercicio", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.seguimientoObjetivosPK = :idejercicio"),
     @NamedQuery(name = "SeguimientoObjetivos.findByFecha", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.fecha = :fecha"),
     @NamedQuery(name = "SeguimientoObjetivos.findByRealizado", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.realizado = :realizado"),
     @NamedQuery(name = "SeguimientoObjetivos.findByPesorealizado", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.pesorealizado = :pesorealizado"),
@@ -39,8 +29,11 @@ import jakarta.persistence.TemporalType;
 public class SeguimientoObjetivos implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected SeguimientoObjetivosPK seguimientoObjetivosPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idseguimiento")
+    protected Integer seguimientoObjetivosPK;
     @Basic(optional = false)
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
@@ -57,49 +50,30 @@ public class SeguimientoObjetivos implements Serializable {
     private Integer seriesrealizadas;
     @Column(name = "observaciones")
     private String observaciones;
-<<<<<<< Updated upstream
-    @JoinColumns({
-        @JoinColumn(name = "idejerciciorutina", referencedColumnName = "idejerciciorutina", insertable = false, updatable = false),
-        @JoinColumn(name = "idrutina", referencedColumnName = "idrutina", insertable = false, updatable = false),
-        @JoinColumn(name = "idejercicio", referencedColumnName = "idejercicio", insertable = false, updatable = false)})
-    @OneToOne(optional = false)
-    private EjercicioRutina ejercicioRutina;
-=======
-    @Column(name = "pesoobjetivo")
-    private Float pesoobjetivo;
-    @Column(name = "repeticionesobjetivo")
-    private Integer repeticionesobjetivo;
-    @Column(name = "seriesobjetivo")
-    private Integer seriesobjetivo;
-    @Column(name = "nombreejercicio")
-    private String nombreejercicio;
-    @JoinColumn(name = "idrutina", referencedColumnName = "idrutina")
+    @JoinColumn(name = "idejerciciorutina", referencedColumnName = "idejerciciorutina", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Rutina rutina;
->>>>>>> Stashed changes
+    private EjercicioRutina ejercicioRutina;
 
     public SeguimientoObjetivos() {
     }
 
-    public SeguimientoObjetivos(SeguimientoObjetivosPK seguimientoObjetivosPK) {
+    public SeguimientoObjetivos(Integer seguimientoObjetivosPK) {
         this.seguimientoObjetivosPK = seguimientoObjetivosPK;
     }
 
-    public SeguimientoObjetivos(SeguimientoObjetivosPK seguimientoObjetivosPK, Date fecha, short realizado) {
+    public SeguimientoObjetivos(Integer seguimientoObjetivosPK, Date fecha, short realizado) {
         this.seguimientoObjetivosPK = seguimientoObjetivosPK;
         this.fecha = fecha;
         this.realizado = realizado;
     }
 
-    public SeguimientoObjetivos(int idejerciciorutina, int idrutina, int idejercicio) {
-        this.seguimientoObjetivosPK = new SeguimientoObjetivosPK(idejerciciorutina, idrutina, idejercicio);
-    }
 
-    public SeguimientoObjetivosPK getSeguimientoObjetivosPK() {
+
+    public Integer getSeguimientoObjetivosPK() {
         return seguimientoObjetivosPK;
     }
 
-    public void setSeguimientoObjetivosPK(SeguimientoObjetivosPK seguimientoObjetivosPK) {
+    public void setSeguimientoObjetivosPK(Integer seguimientoObjetivosPK) {
         this.seguimientoObjetivosPK = seguimientoObjetivosPK;
     }
 
@@ -151,32 +125,13 @@ public class SeguimientoObjetivos implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public Rutina getEjercicioRutina() {
-        return rutina;
+    public EjercicioRutina getEjercicioRutina() {
+        return ejercicioRutina;
     }
 
-    public void setRutina(Rutina ejercicioRutina) {
-        this.rutina = ejercicioRutina;
+    public void setEjercicioRutina(EjercicioRutina ejercicioRutina) {
+        this.ejercicioRutina = ejercicioRutina;
     }
-
-    public Rutina getRutina() {return rutina;}
-
-    public String getNombreejercicio() {return nombreejercicio;}
-
-    public void setNombreejercicio(String nombreejercicio) {this.nombreejercicio = nombreejercicio;}
-
-    public Integer getSeriesobjetivo() {return seriesobjetivo;}
-
-    public void setSeriesobjetivo(Integer seriesobjetivo) {this.seriesobjetivo = seriesobjetivo;}
-
-    public Integer getRepeticionesobjetivo() {return repeticionesobjetivo;}
-
-    public void setRepeticionesobjetivo(Integer repeticionesobjetivo) {this.repeticionesobjetivo = repeticionesobjetivo;}
-
-    public Float getPesoobjetivo() {return pesoobjetivo;}
-
-    public void setPesoobjetivo(Float pesoobjetivo) {this.pesoobjetivo = pesoobjetivo;}
-
 
     @Override
     public int hashCode() {
@@ -202,5 +157,5 @@ public class SeguimientoObjetivos implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.SeguimientoObjetivos[ seguimientoObjetivosPK=" + seguimientoObjetivosPK + " ]";
     }
-
+    
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.uma.taw_grupo12.dto.RutinaDTO;
+import es.uma.taw_grupo12.dto.TrabajadorDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -33,7 +34,7 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "Rutina.findAll", query = "SELECT r FROM Rutina r"),
     @NamedQuery(name = "Rutina.findByIdrutina", query = "SELECT r FROM Rutina r WHERE r.idrutina = :idrutina"),
     @NamedQuery(name = "Rutina.findByNombre", query = "SELECT r FROM Rutina r WHERE r.nombre = :nombre")})
-public class Rutina implements Serializable {
+    public class Rutina implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,9 +50,9 @@ public class Rutina implements Serializable {
     @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")
     @ManyToOne(optional = false)
     private Cliente idcliente;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seguimientoObjetivosPK")
-    private List<SeguimientoObjetivos> seguimientoobjetivos;
+    @JoinColumn(name = "idtrabajador", referencedColumnName = "idtrabajador")
+    @ManyToOne(optional = false)
+    private Trabajador idtrabajador;
 
     public Rutina() {
     }
@@ -97,17 +98,10 @@ public class Rutina implements Serializable {
         this.idcliente = idcliente;
     }
 
-<<<<<<< Updated upstream
-=======
     public Trabajador getIdtrabajador() {return idtrabajador;}
 
     public void setIdtrabajador(Trabajador idtrabajador) {this.idtrabajador = idtrabajador;}
 
-    public List<SeguimientoObjetivos> getSeguimientoobjetivos() {return seguimientoobjetivos;}
-
-    public void setSeguimientoobjetivos(List<SeguimientoObjetivos> seguimientoobjetivos) {this.seguimientoobjetivos = seguimientoobjetivos;}
-
->>>>>>> Stashed changes
     @Override
     public int hashCode() {
         int hash = 0;
@@ -137,14 +131,15 @@ public class Rutina implements Serializable {
         RutinaDTO rutina = new RutinaDTO();
         List<Integer> list = new ArrayList<>();
 
-        for(EjercicioRutina re : this.ejercicioRutinaList)
-            list.add(re.getEjercicioRutinaPK().getIdejerciciorutina());
-
+        if(this.getEjercicioRutinaList() != null) {
+            for (EjercicioRutina re : this.ejercicioRutinaList)
+                list.add(re.getEjercicioRutinaPK());
+        }
         rutina.setEjercicioRutinaList(list);
         rutina.setIdcliente(this.idcliente.getIdcliente());
         rutina.setNombre(this.nombre);
         rutina.setIdrutina(this.idrutina);
-
+        rutina.setIdtrabajador(this.idtrabajador.getIdtrabajador());
         return rutina;
     }
 }

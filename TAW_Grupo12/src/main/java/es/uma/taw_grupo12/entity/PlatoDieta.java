@@ -47,6 +47,8 @@ public class PlatoDieta implements Serializable {
     private String diassemana;
     @Column(name = "franjahoraria")
     private String franjahoraria;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "platoDieta")
+    private SeguimientoDieta seguimientoDieta;
     @JoinColumn(name = "iddieta", referencedColumnName = "iddieta", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Dieta dieta;
@@ -111,6 +113,14 @@ public class PlatoDieta implements Serializable {
 
     public void setFranjahoraria(String franjahoraria) {
         this.franjahoraria = franjahoraria;
+    }
+
+    public SeguimientoDieta getSeguimientoDieta() {
+        return seguimientoDieta;
+    }
+
+    public void setSeguimientoDieta(SeguimientoDieta seguimientoDieta) {
+        this.seguimientoDieta = seguimientoDieta;
     }
 
     public Dieta getDieta() {

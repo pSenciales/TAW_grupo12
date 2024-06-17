@@ -4,8 +4,10 @@ import es.uma.taw_grupo12.entity.Rutina;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface RutinaRepository extends JpaRepository<Rutina, Integer> {
 
-    @Query("select r from Rutina r where r.idcliente.idcliente = ?1 and r.nombre = ?2")
-    Rutina findByClienteAndName(Integer idcliente, String nombre);
+    @Query("select r from Rutina r where r.idtrabajador.idtrabajador = ?1")
+    List<Rutina> findAllByTrabajador(Integer idtrabajador);
 }

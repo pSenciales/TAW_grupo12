@@ -1,4 +1,4 @@
-package es.uma.taw_grupo12.repository;
+package es.uma.taw_grupo12.dao;
 
 import es.uma.taw_grupo12.entity.EjercicioRutina;
 import org.springframework.data.jpa.repository.JpaRepository;

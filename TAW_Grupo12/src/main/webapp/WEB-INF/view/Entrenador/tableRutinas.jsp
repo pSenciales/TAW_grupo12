@@ -26,6 +26,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/af60b01aeb.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -47,6 +48,14 @@
             margin: 0 auto;
             width: 90%;
         }
+        .button-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+        }
+
     </style>
 </head>
 
@@ -121,181 +130,39 @@
                 index++;
             }
         %>
+        <%
+            for(int j = 0; j<7; j++){
+        %>
         <td>
-            <%=ejerciciorutina[0]%>
+            <%=ejerciciorutina[j]%>
             <%
-                if(ejerciciorutina[0] != ""){
+                if(ejerciciorutina[j] != ""){
             %>
+            <div class="button-container">
             <form method="post" action="/entrenador/rutina/subir">
-                <input type="hidden" value="<%=ids[0]%>" name="id">
-                <button type="submit">Subir</button>
+                <input type="hidden" value="<%=ids[j]%>" name="id">
+                <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-arrow-up"></i></button>
             </form>
             <form method="post" action="/entrenador/rutina/bajar">
-                <input type="hidden" value="<%=ids[0]%>" name="id">
-                <button type="submit">Bajar</button>
+                <input type="hidden" value="<%=ids[j]%>" name="id">
+                <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-arrow-down"></i></button>
             </form>
             <form method="get" action="/entrenador/rutina/borrar">
-                <input type="hidden" value="<%=ids[0]%>" name="id">
-                <button type="submit">Borrar</button>
+                <input type="hidden" value="<%=ids[j]%>" name="id">
+                <button class="btn btn-danger btn-sm" type="submit"><i class="fa-solid fa-trash"></i></button>
             </form>
             <form method="post" action="/entrenador/rutina/editar">
-                <input type="hidden" value="<%=ids[0]%>" name="id">
-                <button type="submit">Editar</button>
+                <input type="hidden" value="<%=ids[j]%>" name="id">
+                <button class="btn btn-warning btn-sm" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
             </form>
+            </div>
             <%
                 }
             %>
         </td>
-        <td>
-            <%=ejerciciorutina[1]%>
-            <%
-                if(ejerciciorutina[1] != ""){
-            %>
-            <form method="post" action="/entrenador/rutina/subir">
-                <input type="hidden" value="<%=ids[1]%>" name="id">
-                <button type="submit">Subir</button>
-            </form>
-            <form method="post" action="/entrenador/rutina/bajar">
-                <input type="hidden" value="<%=ids[1]%>" name="id">
-                <button type="submit">Bajar</button>
-            </form>
-            <form method="post" action="/entrenador/rutina/borrar">
-                <input type="hidden" value="<%=ids[1]%>" name="id">
-                <button type="submit">Borrar</button>
-            </form>
-            <form method="post" action="/entrenador/rutina/editar">
-                <input type="hidden" value="<%=ids[1]%>" name="id">
-                <button>Editar</button>
-            </form>
-            <%
-                }
-            %>
-        </td>
-        <td>
-            <%=ejerciciorutina[2]%>
-            <%
-                if(ejerciciorutina[2] != ""){
-            %>
-            <form>
-                <input type="hidden" value="<%=ids[2]%>" name="id">
-                <button>Subir</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[2]%>" name="id">
-                <button>Bajar</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[2]%>" name="id">
-                <button>Borrar</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[2]%>" name="id">
-                <button>Editar</button>
-            </form>
-            <%
-                }
-            %>
-        </td>
-        <td>
-            <%=ejerciciorutina[3]%>
-            <%
-                if(ejerciciorutina[3] != ""){
-            %>
-            <form>
-                <input type="hidden" value="<%=ids[3]%>" name="id">
-                <button>Subir</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[3]%>" name="id">
-                <button>Bajar</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[3]%>" name="id">
-                <button>Borrar</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[3]%>" name="id">
-                <button>Editar</button>
-            </form>
-            <%
-                }
-            %>
-        </td>
-        <td>
-            <%=ejerciciorutina[4]%>
-            <%
-                if(ejerciciorutina[4] != ""){
-            %>
-            <form>
-                <input type="hidden" value="<%=ids[4]%>" name="id">
-                <button>Subir</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[4]%>" name="id">
-                <button>Bajar</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[4]%>" name="id">
-                <button>Borrar</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[4]%>" name="id">
-                <button>Editar</button>
-            </form>
-            <%
-                }
-            %>
-        </td>
-        <td>
-            <%=ejerciciorutina[5]%>
-            <%
-                if(ejerciciorutina[5] != ""){
-            %>
-            <form>
-                <input type="hidden" value="<%=ids[5]%>" name="id">
-                <button>Subir</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[5]%>" name="id">
-                <button>Bajar</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[5]%>" name="id">
-                <button>Borrar</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[5]%>" name="id">
-                <button>Editar</button>
-            </form>
-            <%
-                }
-            %>
-        </td>
-        <td>
-            <%=ejerciciorutina[6]%>
-            <%
-                if(ejerciciorutina[6] != ""){
-            %>
-            <form>
-                <input type="hidden" value="<%=ids[6]%>" name="id">
-                <button>Subir</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[6]%>" name="id">
-                <button>Bajar</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[6]%>" name="id">
-                <button>Borrar</button>
-            </form>
-            <form>
-                <input type="hidden" value="<%=ids[6]%>" name="id">
-                <button>Editar</button>
-            </form>
-            <%
-                }
-            %>
-        </td>
+        <%
+            }
+        %>
     </tr>
     <%
         }

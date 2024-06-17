@@ -4,9 +4,9 @@ import es.uma.taw_grupo12.dto.EjercicioRutinaDTO;
 import es.uma.taw_grupo12.entity.Ejercicio;
 import es.uma.taw_grupo12.entity.EjercicioRutina;
 import es.uma.taw_grupo12.entity.Rutina;
-import es.uma.taw_grupo12.repository.EjercicioRepository;
-import es.uma.taw_grupo12.repository.EjercicioRutinaRepository;
-import es.uma.taw_grupo12.repository.RutinaRepository;
+import es.uma.taw_grupo12.dao.EjercicioRepository;
+import es.uma.taw_grupo12.dao.EjercicioRutinaRepository;
+import es.uma.taw_grupo12.dao.RutinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,7 @@ package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
 import es.uma.taw_grupo12.entity.Trabajador;
-import es.uma.taw_grupo12.repository.TrabajadorRepository;
+import es.uma.taw_grupo12.dao.TrabajadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

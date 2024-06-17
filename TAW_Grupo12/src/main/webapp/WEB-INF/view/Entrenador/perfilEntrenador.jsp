@@ -16,5 +16,7 @@
 <body>
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
 
+
+<h1>Entrenador: <%=trabajador.getNombre()%></h1>
 </body>
 </html>

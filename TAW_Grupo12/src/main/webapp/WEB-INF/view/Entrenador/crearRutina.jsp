@@ -1,4 +1,5 @@
-<%--
+<%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: pablo
   Date: 15/06/2024
@@ -6,6 +7,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    List<ClienteDTO> clientes = (List<ClienteDTO>) request.getAttribute("clientes");
+
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -18,8 +23,20 @@
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
     <form method="post" action="new-rutina/crear">
 
-        <input name="nombre" type="text"/><label>Nombre</label>
-        <br/>
+        <input name="nombre" type="text" placeholder="Nombre" required/>
+        <select name="cliente" required>
+            <option>Seleccione un cliente</option>
+            <%
+                for(ClienteDTO cliente : clientes){
+
+
+            %>
+            <option value="<%=cliente.getIdcliente()%>"><%=cliente.getNombre()%></option>
+
+            <%
+                }
+            %>
+        </select>
         <button type="submit" class="btn btn-primary">Crear</button>
 
 

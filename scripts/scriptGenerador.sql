@@ -1,4 +1,3 @@
-
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -97,15 +96,22 @@ CREATE TABLE IF NOT EXISTS `taw12`.`Rutina` (
   `idrutina` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `idcliente` INT NOT NULL,
+  `idtrabajador` INT NOT NULL, -- Nueva columna para la clave foránea
   PRIMARY KEY (`idrutina`),
   INDEX `fk_rutina_cliente1_idx` (`idcliente` ASC) VISIBLE,
+  INDEX `fk_rutina_trabajador1_idx` (`idtrabajador` ASC) VISIBLE, -- Índice para la nueva clave foránea
   CONSTRAINT `fk_rutina_cliente1`
     FOREIGN KEY (`idcliente`)
     REFERENCES `taw12`.`Cliente` (`idcliente`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rutina_trabajador1`
+    FOREIGN KEY (`idtrabajador`)
+    REFERENCES `taw12`.`Trabajador` (`idtrabajador`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
+ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -117,7 +123,6 @@ CREATE TABLE IF NOT EXISTS `taw12`.`PlatoDieta` (
   `idplatodieta` INT NOT NULL,
   `idplato` INT NOT NULL,
   `iddieta` INT NOT NULL,
-  `fecha` DATE NOT NULL,
   `calorias` INT NULL,
   `cantidad` INT NULL,
   `orden` INT NULL,
@@ -149,6 +154,7 @@ CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoDieta` (
   `idplatodieta` INT NOT NULL,
   `idplato` INT NOT NULL,
   `iddieta` INT NOT NULL,
+  `fecha` DATE NOT NULL,
   `comido` TINYINT NULL DEFAULT NULL,
   `cantidad` INT NULL DEFAULT NULL,
   `observaciones` VARCHAR(250) NULL DEFAULT NULL,
@@ -168,30 +174,30 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `taw12`.`EjercicioRutina` ;
 
 CREATE TABLE IF NOT EXISTS `taw12`.`EjercicioRutina` (
-  `idejerciciorutina` INT NOT NULL,
+  `idejerciciorutina` INT NOT NULL AUTO_INCREMENT,
   `idrutina` INT NOT NULL,
   `idejercicio` INT NOT NULL,
-  `fecha` DATE NOT NULL,
   `peso` FLOAT NULL,
   `repeticiones` INT NULL,
   `series` INT NULL,
   `orden` INT NULL,
   `diassemana` ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo') NULL,
-  PRIMARY KEY (`idejerciciorutina`, `idrutina`, `idejercicio`),
-  INDEX `fk_EjercicioRutina_Rutina1_idx` (`idrutina` ASC) VISIBLE,
-  INDEX `fk_EjercicioRutina_ejercicio1_idx` (`idejercicio` ASC) VISIBLE,
+  PRIMARY KEY (`idejerciciorutina`),
+  INDEX `fk_EjercicioRutina_Rutina1_idx` (`idrutina`),
+  INDEX `fk_EjercicioRutina_ejercicio1_idx` (`idejercicio`),
   CONSTRAINT `fk_EjercicioRutina_Rutina1`
     FOREIGN KEY (`idrutina`)
     REFERENCES `taw12`.`Rutina` (`idrutina`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_EjercicioRutina_ejercicio1`
+  CONSTRAINT `fk_EjercicioRutina_Ejercicio1`
     FOREIGN KEY (`idejercicio`)
     REFERENCES `taw12`.`Ejercicio` (`idejercicio`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
 
 
 -- -----------------------------------------------------
@@ -200,23 +206,24 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `taw12`.`SeguimientoObjetivos` ;
 
 CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoObjetivos` (
+  `idseguimiento` INT NOT NULL AUTO_INCREMENT,
   `idejerciciorutina` INT NOT NULL,
-  `idrutina` INT NOT NULL,
-  `idejercicio` INT NOT NULL,
+  `fecha` DATE NOT NULL,
   `realizado` TINYINT NOT NULL,
   `pesorealizado` FLOAT NULL DEFAULT NULL,
   `repeticionesrealizadas` INT NULL DEFAULT NULL,
   `seriesrealizadas` INT NULL DEFAULT NULL,
   `observaciones` VARCHAR(200) NULL,
-  PRIMARY KEY (`idejerciciorutina`, `idrutina`, `idejercicio`),
-  INDEX `fk_SeguimientoObjetivos_EjercicioRutina1_idx` (`idejerciciorutina` ASC, `idrutina` ASC, `idejercicio` ASC) VISIBLE,
+  PRIMARY KEY (`idseguimiento`),
+  INDEX `fk_SeguimientoObjetivos_EjercicioRutina1_idx` (`idejerciciorutina`),
   CONSTRAINT `fk_SeguimientoObjetivos_EjercicioRutina1`
-    FOREIGN KEY (`idejerciciorutina` , `idrutina` , `idejercicio`)
-    REFERENCES `taw12`.`EjercicioRutina` (`idejerciciorutina` , `idrutina` , `idejercicio`)
+    FOREIGN KEY (`idejerciciorutina`)
+    REFERENCES `taw12`.`EjercicioRutina` (`idejerciciorutina`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
 
 
 -- -----------------------------------------------------

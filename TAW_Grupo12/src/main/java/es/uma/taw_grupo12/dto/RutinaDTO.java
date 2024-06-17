@@ -7,13 +7,16 @@ import java.util.List;
 
 @Data
 public class RutinaDTO {
+    private Integer idtrabajador;
     private Integer idrutina;
     private String nombre;
     private List<Integer> ejercicioRutinaList;
     private Integer idcliente;
 
-    public RutinaDTO(String nombre) {
+    public RutinaDTO(String nombre, Integer idtrabajador, Integer idcliente) {
         this.nombre = nombre;
+        this.idtrabajador = idtrabajador;
+        this.idcliente = idcliente;
     }
 
     public RutinaDTO() {

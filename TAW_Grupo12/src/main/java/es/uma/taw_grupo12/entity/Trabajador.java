@@ -10,17 +10,7 @@ import java.util.List;
 
 import es.uma.taw_grupo12.dto.DTO;
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 /**
  *
@@ -60,6 +50,8 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
     private byte[] imagenperfil;
     @ManyToMany(mappedBy = "trabajadorList")
     private List<Cliente> clienteList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrabajador")
+    private List<Rutina> rutinaList;
 
     public Trabajador() {
     }
@@ -131,6 +123,10 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
     public void setClienteList(List<Cliente> clienteList) {
         this.clienteList = clienteList;
     }
+
+    public List<Rutina> getRutinaList() {return rutinaList;}
+
+    public void setRutinaList(List<Rutina> rutinaList) {this.rutinaList = rutinaList;}
 
     @Override
     public int hashCode() {

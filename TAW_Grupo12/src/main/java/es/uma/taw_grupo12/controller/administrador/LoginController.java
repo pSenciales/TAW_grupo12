@@ -34,7 +34,7 @@ public class LoginController extends BaseController {
 
         if (estaAutenticado(session)) {
             String tipoUsuario = (String) session.getAttribute("tipo");
-            //strTo = "redirect:/" + tipoUsuario + "/inicio";           DECOMENTAR CUANDO ESTÉN IMPLEMENTADOS LOS INICIOS DE CADA ROL
+            String strTo = "redirect:/" + tipoUsuario;
             return "redirect:/administrador/inicio";
         }
 
@@ -49,7 +49,7 @@ public class LoginController extends BaseController {
 
         if (estaAutenticado(session)) {
             String tipoUsuario = (String) session.getAttribute("tipo");
-            //strTo = "redirect:/" + tipoUsuario + "/inicio";           DECOMENTAR CUANDO ESTÉN IMPLEMENTADOS LOS INICIOS DE CADA ROL
+            String strTo = "redirect:/" + tipoUsuario + "/inicio";
             return "redirect:/administrador/inicio";
         }
 
@@ -74,8 +74,9 @@ public class LoginController extends BaseController {
         if(trabajador != null) {
             session.setAttribute("usuario", trabajador);
             session.setAttribute("tipo", trabajador.getTipo());
-            //strTo = "redirect:/" + trabajador.getTipo() + "/inicio";          DESCOMENTAR CUANDO ESTE IMPLEMENTADO EL INICIO DE TRABAJADOR
-            return "redirect:/administrador/inicio";
+            String strTo = "redirect:/" + trabajador.getTipo()+"/";
+
+            return strTo;
         }
 
         //administrador

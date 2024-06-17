@@ -61,6 +61,10 @@ public class EntrenadorController {
         } else {
             List<RutinaDTO> rutinas = rutinaService.findAllByTrabajador(trabajador.getIdtrabajador());
             model.addAttribute("rutinas", rutinas);
+            FiltroRutinas filtro = new FiltroRutinas();
+            model.addAttribute("filtro", filtro);
+            List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());
+            model.addAttribute("clientes", clientes);
             return "/Entrenador/listarRutinas";
         }
     }
@@ -108,7 +112,22 @@ public class EntrenadorController {
 
         }
     }
+    @PostMapping("/filtrar")
+    public String doFiltrar(HttpSession sesion, Model model, @ModelAttribute("filtro") FiltroRutinas filtro){
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            List<RutinaDTO> rutinas = rutinaService.findByFiltro(filtro);
+            model.addAttribute("rutinas", rutinas);
+            model.addAttribute("filtro", filtro);
+            List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());
+            model.addAttribute("clientes", clientes);
+            return "/Entrenador/listarRutinas";
+        }
 
+    }
 
 
 

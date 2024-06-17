@@ -1,11 +1,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="option" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="es.uma.taw_grupo12.dto.EjercicioDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw_grupo12.dto.RutinaDTO" %>
 <%@ page import="es.uma.taw_grupo12.entity.Rutina" %>
 <%@ page import="es.uma.taw_grupo12.dto.EjercicioRutinaDTO" %>
-<%@ page import="java.util.Objects" %><%--
+<%@ page import="java.util.Objects" %>
+<%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 16/05/2024
@@ -15,7 +17,7 @@
 
 <%
     List<RutinaDTO> rutinas = (List<RutinaDTO>) request.getAttribute("rutinas");
-
+    List<ClienteDTO> clientes = (List<ClienteDTO>) request.getAttribute("clientes");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -75,25 +77,36 @@
         <div class="vertical">
         </div>
     <div class="search-container">
-    <form>
-        <input name = "nombre" type="text" placeholder="Nombre">
-        <select name="idcliente">
-            <option>Seleccione un cliente</option>
-            <option>CLIENTE1</option>
-        </select>
-        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
-    </form>
+    <form:form method="post" action="/entrenador/filtrar" modelAttribute="filtro">
+        <form:input path="nombre" type="text" placeholder="Nombre"/>
+        <form:select path="idcliente">
+            <form:option value="-1" label="Seleccione un cliente"/>
+            <form:options items="${clientes}" itemValue="idcliente" itemLabel="nombre"/>
+        </form:select>
+        <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form:form>
     </div>
     </div>
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
             <th scope="col">Rutinas</th>
+            <th scope="col">Clientes</th>
         </tr>
         </thead>
         <tbody>
         <%
             for(RutinaDTO rutina : rutinas){
+                String cliente = "Sin asignar";
+                boolean encontrado = false;
+                int i = 0;
+                while(i<clientes.size() && !encontrado){
+                    if(Objects.equals(clientes.get(i).getIdcliente(), rutina.getIdcliente())){
+                        encontrado = true;
+                        cliente = clientes.get(i).getNombre();
+                    }
+                    i++;
+                }
         %>
         <tr>
             <td class="contenedor">
@@ -111,6 +124,9 @@
                             <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
                         </form>
                     </div>
+            </td>
+            <td>
+               <%=cliente%>
             </td>
         </tr>
         <%

@@ -8,6 +8,7 @@ import es.uma.taw_grupo12.entity.Rutina;
 import es.uma.taw_grupo12.dao.ClienteRepository;
 import es.uma.taw_grupo12.dao.RutinaRepository;
 import es.uma.taw_grupo12.entity.Trabajador;
+import es.uma.taw_grupo12.ui.Entrenador.FiltroRutinas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +60,20 @@ public class RutinaService {
 
     public void deleteById(int id) {
         rutinaRepository.deleteById(id);
+    }
+
+    public List<RutinaDTO> findByFiltro(FiltroRutinas filtro) {
+        String nombre = filtro.getNombre() == null ? "" : filtro.getNombre();
+
+        List<Rutina> lista = filtro.getIdcliente() == null || filtro.getIdcliente().equals("-1") ?  rutinaRepository.findByFiltroNombre(nombre) :
+                rutinaRepository.findByFiltroNombreAndId(nombre, filtro.getIdcliente());
+
+        List<RutinaDTO> listaDTO = new ArrayList<>();
+
+        for(Rutina rutina : lista){
+             listaDTO.add(rutina.toDTO());
+        }
+
+        return listaDTO;
     }
 }

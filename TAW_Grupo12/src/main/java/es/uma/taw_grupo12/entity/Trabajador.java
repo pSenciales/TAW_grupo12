@@ -5,7 +5,10 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import es.uma.taw_grupo12.dto.TrabajadorDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -152,5 +155,21 @@ public class Trabajador implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.Trabajador[ idtrabajador=" + idtrabajador + " ]";
     }
-    
+
+    public TrabajadorDTO toDTO() {
+        TrabajadorDTO trabajadorDTO = new TrabajadorDTO();
+        trabajadorDTO.setImagenperfil(this.imagenperfil);
+        trabajadorDTO.setNombre(this.nombre);
+        trabajadorDTO.setContrasenya(this.contrasenya);
+        trabajadorDTO.setTipo(this.tipo);
+        trabajadorDTO.setEmail(this.email);
+        trabajadorDTO.setIdtrabajador(this.idtrabajador);
+        List<Integer> clientes = new ArrayList<>();
+        for(Cliente cliente : this.clienteList) {
+            clientes.add(cliente.getIdcliente());
+        }
+        trabajadorDTO.setClienteList(clientes);
+
+        return trabajadorDTO;
+    }
 }

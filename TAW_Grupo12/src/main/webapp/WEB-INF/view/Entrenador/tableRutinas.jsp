@@ -51,22 +51,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse mx-3" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link " href="#">Portal personal</a>
-            <a class="nav-item nav-link active" href="#">Rutinas</a>
-            <a class="nav-item nav-link" href="#">Clientes</a>
-        </div>
-    </div>
-    <form method="post" action="/logout">
-        <button type="submit" class="btn btn-danger mx-3">logout</button>
-    </form>
-</nav>
+<jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
 <h1>Rutina: <%=rutina.getNombre()%></h1>
 
 <form:form method="post" action="/entrenador/addEjercicio" modelAttribute="ejercicioRutinaDTO">

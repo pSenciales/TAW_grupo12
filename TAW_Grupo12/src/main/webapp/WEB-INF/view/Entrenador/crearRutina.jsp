@@ -15,6 +15,7 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
     <form method="post" action="new-rutina/crear">
 
         <input name="nombre" type="text"/><label>Nombre</label>

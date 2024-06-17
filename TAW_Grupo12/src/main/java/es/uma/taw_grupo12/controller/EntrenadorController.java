@@ -3,9 +3,11 @@ package es.uma.taw_grupo12.controller;
 import es.uma.taw_grupo12.dto.EjercicioDTO;
 import es.uma.taw_grupo12.dto.EjercicioRutinaDTO;
 import es.uma.taw_grupo12.dto.RutinaDTO;
+import es.uma.taw_grupo12.dto.TrabajadorDTO;
 import es.uma.taw_grupo12.service.EjercicioRutinaService;
 import es.uma.taw_grupo12.service.EjercicioService;
 import es.uma.taw_grupo12.service.RutinaService;
+import es.uma.taw_grupo12.service.TrabajadorService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +27,22 @@ public class EntrenadorController {
     private RutinaService rutinaService;
     @Autowired
     private EjercicioRutinaService ejercicioRutinaService;
+    @Autowired
+    private TrabajadorService trabajadorService;
 
 
+    @GetMapping("/")
+    public String perfil(HttpSession sesion, Model model) {
+          if(sesion.getAttribute("id") == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")){
+            return "redirect :/";
+        }else{
+              TrabajadorDTO trabajador = trabajadorService.findById((Integer) sesion.getAttribute("id"));
+              model.addAttribute("trabajador", trabajador);
+              return "/Entrenador/perfilEntrenador";
+          }
+
+    }
     @GetMapping("/new-rutina")
     public String doCreacion(HttpSession sesion){
       /*  if(sesion.getAttribute("id") == null ||

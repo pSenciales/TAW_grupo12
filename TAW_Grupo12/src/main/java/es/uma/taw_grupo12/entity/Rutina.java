@@ -50,6 +50,9 @@ public class Rutina implements Serializable {
     @ManyToOne(optional = false)
     private Cliente idcliente;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seguimientoObjetivosPK")
+    private List<SeguimientoObjetivos> seguimientoobjetivos;
+
     public Rutina() {
     }
 
@@ -94,6 +97,17 @@ public class Rutina implements Serializable {
         this.idcliente = idcliente;
     }
 
+<<<<<<< Updated upstream
+=======
+    public Trabajador getIdtrabajador() {return idtrabajador;}
+
+    public void setIdtrabajador(Trabajador idtrabajador) {this.idtrabajador = idtrabajador;}
+
+    public List<SeguimientoObjetivos> getSeguimientoobjetivos() {return seguimientoobjetivos;}
+
+    public void setSeguimientoobjetivos(List<SeguimientoObjetivos> seguimientoobjetivos) {this.seguimientoobjetivos = seguimientoobjetivos;}
+
+>>>>>>> Stashed changes
     @Override
     public int hashCode() {
         int hash = 0;

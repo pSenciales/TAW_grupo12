@@ -6,19 +6,8 @@ package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 
 /**
  *
@@ -46,6 +35,8 @@ public class Dieta implements Serializable {
     private Cliente idcliente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dieta")
     private List<PlatoDieta> platoDietaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seguimientoDietaPK")
+    private List<SeguimientoDieta> seguimientoDieta;
 
     public Dieta() {
     }
@@ -90,6 +81,10 @@ public class Dieta implements Serializable {
     public void setPlatoDietaList(List<PlatoDieta> platoDietaList) {
         this.platoDietaList = platoDietaList;
     }
+
+    public List<SeguimientoDieta> getSeguimientoDieta() {return seguimientoDieta;}
+
+    public void setSeguimientoDieta(List<SeguimientoDieta> seguimientoDieta) {this.seguimientoDieta = seguimientoDieta;}
 
     @Override
     public int hashCode() {

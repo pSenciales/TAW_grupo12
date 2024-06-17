@@ -145,20 +145,30 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `taw12`.`SeguimientoDieta` ;
 
 CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoDieta` (
+<<<<<<< Updated upstream
   `idplatodieta` INT NOT NULL,
   `idplato` INT NOT NULL,
   `iddieta` INT NOT NULL,
+=======
+  `idseguimientodieta` INT NOT NULL AUTO_INCREMENT,  -- Nueva columna para la clave primaria
+  `iddieta` INT NOT NULL,  -- Nueva columna para la clave foránea a Dieta
+  `fecha` DATE NOT NULL,
+>>>>>>> Stashed changes
   `comido` TINYINT NULL DEFAULT NULL,
   `cantidad` INT NULL DEFAULT NULL,
   `observaciones` VARCHAR(250) NULL DEFAULT NULL,
-  PRIMARY KEY (`idplatodieta`, `idplato`, `iddieta`),
-  CONSTRAINT `fk_seguimientodieta_PlatoDieta1`
-    FOREIGN KEY (`idplatodieta` , `idplato` , `iddieta`)
-    REFERENCES `taw12`.`PlatoDieta` (`idplatodieta` , `idplato` , `iddieta`)
+  `cantidadobjetivo` INT NULL DEFAULT NULL,  -- Nueva columna para cantidad objetivo
+  `nombreplato` VARCHAR(100) NOT NULL,  -- Nueva columna para nombre del plato
+  PRIMARY KEY (`idseguimientodieta`),
+  INDEX `fk_SeguimientoDieta_Dieta1_idx` (`iddieta`),  -- Índice para la nueva clave foránea
+  CONSTRAINT `fk_SeguimientoDieta_Dieta1`
+    FOREIGN KEY (`iddieta`)
+    REFERENCES `taw12`.`Dieta` (`iddieta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
 
 
 -- -----------------------------------------------------
@@ -199,25 +209,48 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `taw12`.`SeguimientoObjetivos` ;
 
 CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoObjetivos` (
+<<<<<<< Updated upstream
   `idejerciciorutina` INT NOT NULL,
   `idrutina` INT NOT NULL,
   `idejercicio` INT NOT NULL,
+=======
+  `idseguimiento` INT NOT NULL AUTO_INCREMENT,
+  `idrutina` INT NOT NULL,  -- Nueva columna para la clave foránea a Rutina
+  `fecha` DATE NOT NULL,
+>>>>>>> Stashed changes
   `realizado` TINYINT NOT NULL,
   `pesorealizado` FLOAT NULL DEFAULT NULL,
   `repeticionesrealizadas` INT NULL DEFAULT NULL,
   `seriesrealizadas` INT NULL DEFAULT NULL,
   `observaciones` VARCHAR(200) NULL,
+<<<<<<< Updated upstream
   PRIMARY KEY (`idejerciciorutina`, `idrutina`, `idejercicio`),
   INDEX `fk_SeguimientoObjetivos_EjercicioRutina1_idx` (`idejerciciorutina` ASC, `idrutina` ASC, `idejercicio` ASC) VISIBLE,
   CONSTRAINT `fk_SeguimientoObjetivos_EjercicioRutina1`
     FOREIGN KEY (`idejerciciorutina` , `idrutina` , `idejercicio`)
     REFERENCES `taw12`.`EjercicioRutina` (`idejerciciorutina` , `idrutina` , `idejercicio`)
+=======
+  `pesoobjetivo` FLOAT NULL DEFAULT NULL,  -- Nueva columna para peso objetivo
+  `seriesobjetivo` INT NULL DEFAULT NULL,  -- Nueva columna para series objetivo
+  `repeticionesobjetivo` INT NULL DEFAULT NULL,  -- Nueva columna para repeticiones objetivo
+  `nombreejercicio` VARCHAR(100) NOT NULL,  -- Nueva columna para nombre del ejercicio
+  PRIMARY KEY (`idseguimiento`),
+  INDEX `fk_SeguimientoObjetivos_Rutina1_idx` (`idrutina`),  -- Índice para la nueva clave foránea
+  CONSTRAINT `fk_SeguimientoObjetivos_Rutina1`
+    FOREIGN KEY (`idrutina`)
+    REFERENCES `taw12`.`Rutina` (`idrutina`)
+>>>>>>> Stashed changes
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 -- -----------------------------------------------------
 -- Table `taw12`.`Trabajador`
 -- -----------------------------------------------------

@@ -6,15 +6,20 @@
 <%
     List<TrabajadorDTO> entrenadores = (List<TrabajadorDTO>) request.getAttribute("trabajadores");
     ClienteDTO cliente = (ClienteDTO) request.getAttribute("cliente");
-    TrabajadorDTO entrenadorFuerza = null;
+    List<Integer> trabajadoresCliente = cliente.getTrabajadorList();
+
+    Integer idEntrenadorFuerza = null;
+
+    //compruebo si el cliente ya tiene asignado un entrenador de fuerza para más tarde desasignarrlo
     for (TrabajadorDTO entrenador : entrenadores) {
-        if ("ENTRENADOR FUERZA".equals(entrenador.getTipo())) {
-            entrenadorFuerza = entrenador;
-            break;
+        for(Integer idTrabajador : trabajadoresCliente) {
+            if (idTrabajador.equals(entrenador.getIdtrabajador()) && "ENTRENADOR FUERZA".equals(entrenador.getTipo())) {
+                idEntrenadorFuerza = idTrabajador;
+                break;
+            }
         }
     }
     Integer idCliente = cliente.getIdcliente();
-    Integer idEntrenador = entrenadorFuerza != null ? entrenadorFuerza.getIdtrabajador() : 0;
     String nombre = cliente.getNombre();
 %>
 
@@ -42,7 +47,7 @@
     <input type="submit" class="btn" value="Asignar" />
 </form>
 <form action="/administrador/desasignarTrabajador" method="post">
-    <input type="hidden" value="<%=idEntrenador%>" name="idEntrenadorDes"/>
+    <input type="hidden" value="<%=idEntrenadorFuerza%>" name="idEntrenadorDes"/>
     <input type="hidden" value="<%=idCliente%>" name="idClienteDes">
     <input type="submit" class="btn" value="Desasignar entrenador de fuerza actual" />
 </form>

@@ -1,0 +1,21 @@
+.parent-container-login {
+    background-color: #f8f9fa;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container-login {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.miForm-group-login {
+    margin-bottom: 1rem;
+}
+
+.miForm-control-login {
+    border-radius: 0.25rem;
+}

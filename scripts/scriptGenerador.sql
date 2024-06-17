@@ -1,3 +1,4 @@
+
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -116,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `taw12`.`PlatoDieta` (
   `idplatodieta` INT NOT NULL,
   `idplato` INT NOT NULL,
   `iddieta` INT NOT NULL,
+  `fecha` DATE NOT NULL,
   `calorias` INT NULL,
   `cantidad` INT NULL,
   `orden` INT NULL,
@@ -147,7 +149,6 @@ CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoDieta` (
   `idplatodieta` INT NOT NULL,
   `idplato` INT NOT NULL,
   `iddieta` INT NOT NULL,
-  `fecha` DATE NOT NULL,
   `comido` TINYINT NULL DEFAULT NULL,
   `cantidad` INT NULL DEFAULT NULL,
   `observaciones` VARCHAR(250) NULL DEFAULT NULL,
@@ -170,6 +171,7 @@ CREATE TABLE IF NOT EXISTS `taw12`.`EjercicioRutina` (
   `idejerciciorutina` INT NOT NULL,
   `idrutina` INT NOT NULL,
   `idejercicio` INT NOT NULL,
+  `fecha` DATE NOT NULL,
   `peso` FLOAT NULL,
   `repeticiones` INT NULL,
   `series` INT NULL,
@@ -201,7 +203,6 @@ CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoObjetivos` (
   `idejerciciorutina` INT NOT NULL,
   `idrutina` INT NOT NULL,
   `idejercicio` INT NOT NULL,
-  `fecha` DATE NOT NULL,
   `realizado` TINYINT NOT NULL,
   `pesorealizado` FLOAT NULL DEFAULT NULL,
   `repeticionesrealizadas` INT NULL DEFAULT NULL,

@@ -5,7 +5,11 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import es.uma.taw_grupo12.dto.DTO;
+import es.uma.taw_grupo12.dto.ClienteDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -38,7 +42,7 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "Cliente.findByPeso", query = "SELECT c FROM Cliente c WHERE c.peso = :peso"),
     @NamedQuery(name = "Cliente.findByAltura", query = "SELECT c FROM Cliente c WHERE c.altura = :altura"),
     @NamedQuery(name = "Cliente.findByAlergias", query = "SELECT c FROM Cliente c WHERE c.alergias = :alergias")})
-public class Cliente implements Serializable {
+public class Cliente implements Serializable, DTO<ClienteDTO> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,7 +69,7 @@ public class Cliente implements Serializable {
     private Double altura;
     @Column(name = "alergias")
     private String alergias;
-    @JoinTable(name = "Cliente-Trabajador", joinColumns = {
+    @JoinTable(name = "Cliente_Trabajador", joinColumns = {
         @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")}, inverseJoinColumns = {
         @JoinColumn(name = "idtrabajador", referencedColumnName = "idtrabajador")})
     @ManyToMany
@@ -201,5 +205,30 @@ public class Cliente implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.Cliente[ idcliente=" + idcliente + " ]";
     }
-    
+
+    //@Victoria
+    @Override
+    public ClienteDTO toDTO() {
+        ClienteDTO cliente = new ClienteDTO();
+        cliente.setIdcliente(this.idcliente);
+        cliente.setNombre(this.nombre);
+        cliente.setEmail(this.email);
+        cliente.setContrasenya(this.contrasenya);
+        cliente.setImagenperfil(this.imagenperfil);
+        cliente.setPeso(this.peso);
+        cliente.setAltura(this.altura);
+        cliente.setAlergias(this.alergias);
+
+        List<Integer> listaTrabajadores = new ArrayList<Integer>();
+        for (Trabajador trabajador: this.trabajadorList) {
+            listaTrabajadores.add(trabajador.getIdtrabajador());
+        }
+        cliente.setTrabajadorList(listaTrabajadores);
+
+        cliente.setDietaList(this.dietaList);
+        cliente.setRutinaList(this.rutinaList);
+
+        return cliente;
+    }
+    //@Victoria
 }

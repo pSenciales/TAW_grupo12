@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.uma.taw_grupo12.dto.DTO;
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -34,7 +35,7 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "Trabajador.findByEmail", query = "SELECT t FROM Trabajador t WHERE t.email = :email"),
     @NamedQuery(name = "Trabajador.findByContrasenya", query = "SELECT t FROM Trabajador t WHERE t.contrasenya = :contrasenya"),
     @NamedQuery(name = "Trabajador.findByTipo", query = "SELECT t FROM Trabajador t WHERE t.tipo = :tipo")})
-public class Trabajador implements Serializable {
+public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
 
     private static final long serialVersionUID = 1L;
     @Id

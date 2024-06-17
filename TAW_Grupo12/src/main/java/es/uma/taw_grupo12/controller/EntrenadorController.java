@@ -121,10 +121,4 @@ public class EntrenadorController {
     public String doEditarEjercicio(HttpSession sesion, @RequestParam("id") Integer id){
         return "redirect:/entrenador/rutina/"+id;
     }
-
-
-
-
-
-
 }

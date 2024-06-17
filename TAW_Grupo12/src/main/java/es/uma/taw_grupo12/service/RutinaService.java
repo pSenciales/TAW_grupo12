@@ -32,6 +32,11 @@ public class RutinaService {
         return rutinaDTO;
 
     }
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
     //@Pablo
 
     public void save(RutinaDTO rutinaDTO){
@@ -43,8 +48,16 @@ public class RutinaService {
         rutina.setNombre(rutinaDTO.getNombre());
         rutina.setIdcliente(cliente);
         rutina.setIdtrabajador(trabajador);
+<<<<<<< Updated upstream
         rutinaRepository.saveAndFlush(rutina);
     }
+=======
+        rutina.setIdrutina(rutinaDTO.getIdrutina());
+
+        rutinaRepository.saveAndFlush(rutina);
+    }
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 
     public List<RutinaDTO> findAllByTrabajador(Integer id) {

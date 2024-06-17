@@ -5,7 +5,12 @@
 <%@ page import="es.uma.taw_grupo12.dto.RutinaDTO" %>
 <%@ page import="es.uma.taw_grupo12.entity.Rutina" %>
 <%@ page import="es.uma.taw_grupo12.dto.EjercicioRutinaDTO" %>
+<<<<<<< Updated upstream
 <%@ page import="java.util.Objects" %><%--
+=======
+<%@ page import="java.util.Objects" %>
+<%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %><%--
+>>>>>>> Stashed changes
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 16/05/2024
@@ -15,7 +20,11 @@
 
 <%
     List<RutinaDTO> rutinas = (List<RutinaDTO>) request.getAttribute("rutinas");
+<<<<<<< Updated upstream
 
+=======
+    List<ClienteDTO> clientes = (List<ClienteDTO>) request.getAttribute("clientes");
+>>>>>>> Stashed changes
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -75,6 +84,7 @@
         <div class="vertical">
         </div>
     <div class="search-container">
+<<<<<<< Updated upstream
     <form>
         <input name = "nombre" type="text" placeholder="Nombre">
         <select name="idcliente">
@@ -83,12 +93,24 @@
         </select>
         <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
+=======
+    <form:form action="/entrenador/filtrar" method="post" modelAttribute="filtro">
+        <form:input path="nombre" type="text" placeholder="Nombre"/>
+        <form:select path="idcliente"  items="${clientes}" itemLabel="nombre" itemValue="idcliente">
+        </form:select>
+        <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form:form>
+>>>>>>> Stashed changes
     </div>
     </div>
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
             <th scope="col">Rutinas</th>
+<<<<<<< Updated upstream
+=======
+            <th scope="col">Cliente</th>
+>>>>>>> Stashed changes
         </tr>
         </thead>
         <tbody>
@@ -103,8 +125,12 @@
                         <form action="/entrenador/visualizar/<%=rutina.getIdrutina()%>" method="get">
                             <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
                         </form>
+<<<<<<< Updated upstream
                         <form action="/entrenador/editar" method="post">
                             <input type="hidden" name="id" value="<%=rutina.getIdrutina()%>">
+=======
+                        <form action="/entrenador/editar/<%=rutina.getIdrutina()%>" method="get">
+>>>>>>> Stashed changes
                             <button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
                         </form>
                         <form action="/entrenador/borrar/<%=rutina.getIdrutina()%>" method="get">
@@ -112,6 +138,24 @@
                         </form>
                     </div>
             </td>
+<<<<<<< Updated upstream
+=======
+            <td>
+                <%
+                    String cliente = "Sin asignar";
+                    boolean encontrado = false;
+                    int i = 0;
+                    while(i<clientes.size() && !encontrado){
+                        if(Objects.equals(clientes.get(i).getIdcliente(), rutina.getIdcliente())){
+                            encontrado = true;
+                            cliente = clientes.get(i).getNombre();
+                        }
+                        i++;
+                    }
+                %>
+                <%=cliente%>
+            </td>
+>>>>>>> Stashed changes
         </tr>
         <%
             }

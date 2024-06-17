@@ -78,6 +78,11 @@ public class Cliente implements Serializable, DTO<ClienteDTO> {
     private List<Dieta> dietaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcliente")
     private List<Rutina> rutinaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private List<SeguimientoDieta> seguimientoDietasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private List<SeguimientoObjetivos> objetivosList;
+
 
     public Cliente() {
     }

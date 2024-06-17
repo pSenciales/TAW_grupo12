@@ -61,7 +61,9 @@ public class SeguimientoObjetivos implements Serializable {
     @JoinColumn(name = "idrutina", referencedColumnName = "idrutina", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Rutina rutina;
-
+    @JoinColumn(name = "idcliente", referencedColumnName = "idcliente", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Cliente cliente;
     public SeguimientoObjetivos() {
     }
 

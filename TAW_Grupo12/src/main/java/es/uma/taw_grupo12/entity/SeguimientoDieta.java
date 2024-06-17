@@ -46,6 +46,9 @@ public class SeguimientoDieta implements Serializable {
     @JoinColumn(name = "iddieta", referencedColumnName = "iddieta")
     @ManyToOne(optional = false)
     private Dieta dieta;
+    @JoinColumn(name = "idcliente", referencedColumnName = "idcliente", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Cliente cliente;
 
     public SeguimientoDieta() {
     }

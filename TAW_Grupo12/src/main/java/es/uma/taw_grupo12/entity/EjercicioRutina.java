@@ -5,19 +5,28 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
-import java.util.List;
-
-import es.uma.taw_grupo12.dto.EjercicioRutinaDTO;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 /**
  *
  * @author guzman
  */
 @Entity
-@Table(name = "ejerciciorutina")
+@Table(name = "EjercicioRutina")
 @NamedQueries({
     @NamedQuery(name = "EjercicioRutina.findAll", query = "SELECT e FROM EjercicioRutina e"),
+    @NamedQuery(name = "EjercicioRutina.findByIdejerciciorutina", query = "SELECT e FROM EjercicioRutina e WHERE e.ejercicioRutinaPK.idejerciciorutina = :idejerciciorutina"),
+    @NamedQuery(name = "EjercicioRutina.findByIdrutina", query = "SELECT e FROM EjercicioRutina e WHERE e.ejercicioRutinaPK.idrutina = :idrutina"),
+    @NamedQuery(name = "EjercicioRutina.findByIdejercicio", query = "SELECT e FROM EjercicioRutina e WHERE e.ejercicioRutinaPK.idejercicio = :idejercicio"),
     @NamedQuery(name = "EjercicioRutina.findByPeso", query = "SELECT e FROM EjercicioRutina e WHERE e.peso = :peso"),
     @NamedQuery(name = "EjercicioRutina.findByRepeticiones", query = "SELECT e FROM EjercicioRutina e WHERE e.repeticiones = :repeticiones"),
     @NamedQuery(name = "EjercicioRutina.findBySeries", query = "SELECT e FROM EjercicioRutina e WHERE e.series = :series"),
@@ -26,11 +35,8 @@ import jakarta.persistence.*;
 public class EjercicioRutina implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idejerciciorutina")
-    protected Integer ejercicioRutinaPK;
+    @EmbeddedId
+    protected EjercicioRutinaPK ejercicioRutinaPK;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "peso")
     private Float peso;
@@ -42,29 +48,34 @@ public class EjercicioRutina implements Serializable {
     private Integer orden;
     @Column(name = "diassemana")
     private String diassemana;
-    @JoinColumn(name = "idrutina", referencedColumnName = "idrutina")
+    @JoinColumn(name = "idrutina", referencedColumnName = "idrutina", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Rutina rutina;
-    @JoinColumn(name = "idejercicio", referencedColumnName = "idejercicio")
+    @JoinColumn(name = "idejercicio", referencedColumnName = "idejercicio", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Ejercicio ejercicio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ejercicioRutina")
-    private List<SeguimientoObjetivos> seguimientoObjetivos;
+<<<<<<< Updated upstream
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ejercicioRutina")
+    private SeguimientoObjetivos seguimientoObjetivos;
+=======
+>>>>>>> Stashed changes
 
     public EjercicioRutina() {
     }
 
-    public EjercicioRutina(Integer ejercicioRutinaPK) {
+    public EjercicioRutina(EjercicioRutinaPK ejercicioRutinaPK) {
         this.ejercicioRutinaPK = ejercicioRutinaPK;
     }
 
+    public EjercicioRutina(int idejerciciorutina, int idrutina, int idejercicio) {
+        this.ejercicioRutinaPK = new EjercicioRutinaPK(idejerciciorutina, idrutina, idejercicio);
+    }
 
-
-    public Integer getEjercicioRutinaPK() {
+    public EjercicioRutinaPK getEjercicioRutinaPK() {
         return ejercicioRutinaPK;
     }
 
-    public void setEjercicioRutinaPK(Integer ejercicioRutinaPK) {
+    public void setEjercicioRutinaPK(EjercicioRutinaPK ejercicioRutinaPK) {
         this.ejercicioRutinaPK = ejercicioRutinaPK;
     }
 
@@ -104,20 +115,6 @@ public class EjercicioRutina implements Serializable {
         return diassemana;
     }
 
-    public String getDiassemanaString(){
-
-        return switch (this.diassemana) {
-            case "1" -> "Lunes";
-            case "2" -> "Martes";
-            case "3" -> "Miercoles";
-            case "4" -> "Jueves";
-            case "5" -> "Viernes";
-            case "6" -> "Sabado";
-            case "7" -> "Domingo";
-            default -> null;
-        };
-    }
-
     public void setDiassemana(String diassemana) {
         this.diassemana = diassemana;
     }
@@ -138,13 +135,16 @@ public class EjercicioRutina implements Serializable {
         this.ejercicio = ejercicio;
     }
 
-    public List<SeguimientoObjetivos> getSeguimientoObjetivos() {
+<<<<<<< Updated upstream
+    public SeguimientoObjetivos getSeguimientoObjetivos() {
         return seguimientoObjetivos;
     }
 
-    public void setSeguimientoObjetivos(List<SeguimientoObjetivos> seguimientoObjetivos) {
+    public void setSeguimientoObjetivos(SeguimientoObjetivos seguimientoObjetivos) {
         this.seguimientoObjetivos = seguimientoObjetivos;
     }
+=======
+>>>>>>> Stashed changes
 
     @Override
     public int hashCode() {
@@ -170,6 +170,23 @@ public class EjercicioRutina implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.EjercicioRutina[ ejercicioRutinaPK=" + ejercicioRutinaPK + " ]";
     }
+<<<<<<< Updated upstream
+    
+=======
+
+    public String getDiassemanaString(){
+
+        return switch (this.diassemana) {
+            case "1" -> "Lunes";
+            case "2" -> "Martes";
+            case "3" -> "Miercoles";
+            case "4" -> "Jueves";
+            case "5" -> "Viernes";
+            case "6" -> "Sabado";
+            case "7" -> "Domingo";
+            default -> null;
+        };
+    }
 
     public EjercicioRutinaDTO toDTO() {
         EjercicioRutinaDTO nueva = new EjercicioRutinaDTO();
@@ -183,4 +200,5 @@ public class EjercicioRutina implements Serializable {
         nueva.setDiassemana(this.diassemana);
         return nueva;
     }
+>>>>>>> Stashed changes
 }

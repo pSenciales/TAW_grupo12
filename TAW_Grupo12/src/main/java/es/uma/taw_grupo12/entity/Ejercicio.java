@@ -148,7 +148,7 @@ public class Ejercicio implements Serializable {
         EjercicioDTO ejercicioDTO = new EjercicioDTO();
         List<Integer> ejercicioRutinaList = new ArrayList<>();
         for(EjercicioRutina er : this.ejercicioRutinaList)
-            ejercicioRutinaList.add(er.getEjercicioRutinaPK().getIdejerciciorutina());
+            ejercicioRutinaList.add(er.getEjercicioRutinaPK());
 
 
         ejercicioDTO.setEjercicioRutinaList(ejercicioRutinaList);

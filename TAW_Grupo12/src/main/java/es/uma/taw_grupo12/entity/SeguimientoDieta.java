@@ -46,24 +46,28 @@ public class SeguimientoDieta implements Serializable {
     @JoinColumn(name = "iddieta", referencedColumnName = "iddieta")
     @ManyToOne(optional = false)
     private Dieta dieta;
+    @JoinColumn(name = "idcliente", referencedColumnName = "idcliente", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Cliente cliente;
 
     public SeguimientoDieta() {
     }
 
-    public SeguimientoDieta(Integer seguimientoDietaPK) {
+    public SeguimientoDieta(Integer  seguimientoDietaPK) {
         this.seguimientoDietaPK = seguimientoDietaPK;
     }
 
-    public SeguimientoDieta(Integer seguimientoDietaPK, Date fecha) {
+    public SeguimientoDieta(Integer  seguimientoDietaPK, Date fecha) {
         this.seguimientoDietaPK = seguimientoDietaPK;
         this.fecha = fecha;
     }
 
-    public Integer getSeguimientoDietaPK() {
+
+    public Integer  getSeguimientoDietaPK() {
         return seguimientoDietaPK;
     }
 
-    public void setSeguimientoDietaPK(Integer seguimientoDietaPK) {
+    public void setSeguimientoDietaPK(Integer  seguimientoDietaPK) {
         this.seguimientoDietaPK = seguimientoDietaPK;
     }
 
@@ -99,12 +103,12 @@ public class SeguimientoDieta implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public Dieta getDieta() {
+    public Dieta getPlatoDieta() {
         return dieta;
     }
 
-    public void setDieta(Dieta dieta) {
-        this.dieta = dieta;
+    public void setDieta(Dieta platoDieta) {
+        this.dieta = platoDieta;
     }
 
     public String getCantidadobjetivo() {return cantidadobjetivo;}
@@ -114,7 +118,6 @@ public class SeguimientoDieta implements Serializable {
     public String getNombreplato() {return nombreplato;}
 
     public void setNombreplato(String nombreplato) {this.nombreplato = nombreplato;}
-
     @Override
     public int hashCode() {
         int hash = 0;

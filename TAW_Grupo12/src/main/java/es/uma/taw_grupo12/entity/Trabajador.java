@@ -5,18 +5,12 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Table;
+
+import es.uma.taw_grupo12.dto.DTO;
+import es.uma.taw_grupo12.dto.TrabajadorDTO;
+import jakarta.persistence.*;
 
 /**
  *
@@ -31,7 +25,7 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "Trabajador.findByEmail", query = "SELECT t FROM Trabajador t WHERE t.email = :email"),
     @NamedQuery(name = "Trabajador.findByContrasenya", query = "SELECT t FROM Trabajador t WHERE t.contrasenya = :contrasenya"),
     @NamedQuery(name = "Trabajador.findByTipo", query = "SELECT t FROM Trabajador t WHERE t.tipo = :tipo")})
-public class Trabajador implements Serializable {
+public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,6 +50,8 @@ public class Trabajador implements Serializable {
     private byte[] imagenperfil;
     @ManyToMany(mappedBy = "trabajadorList")
     private List<Cliente> clienteList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrabajador")
+    private List<Rutina> rutinaList;
 
     public Trabajador() {
     }
@@ -128,6 +124,10 @@ public class Trabajador implements Serializable {
         this.clienteList = clienteList;
     }
 
+    public List<Rutina> getRutinaList() {return rutinaList;}
+
+    public void setRutinaList(List<Rutina> rutinaList) {this.rutinaList = rutinaList;}
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -152,5 +152,21 @@ public class Trabajador implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.Trabajador[ idtrabajador=" + idtrabajador + " ]";
     }
-    
+
+    public TrabajadorDTO toDTO() {
+        TrabajadorDTO trabajadorDTO = new TrabajadorDTO();
+        trabajadorDTO.setImagenperfil(this.imagenperfil);
+        trabajadorDTO.setNombre(this.nombre);
+        trabajadorDTO.setContrasenya(this.contrasenya);
+        trabajadorDTO.setTipo(this.tipo);
+        trabajadorDTO.setEmail(this.email);
+        trabajadorDTO.setIdtrabajador(this.idtrabajador);
+        List<Integer> clientes = new ArrayList<>();
+        for(Cliente cliente : this.clienteList) {
+            clientes.add(cliente.getIdcliente());
+        }
+        trabajadorDTO.setClienteList(clientes);
+
+        return trabajadorDTO;
+    }
 }

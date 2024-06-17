@@ -1,0 +1,14 @@
+.titulo-cabecera {
+    font-family: 'helvetica', serif;
+    font-size: 20vh;
+    white-space: nowrap;
+}
+
+.volver-incio{
+    margin-left: 2vh;
+    font-size: 20px;
+
+}
+.boton-perfil{
+    margin-right: 1vh;
+}

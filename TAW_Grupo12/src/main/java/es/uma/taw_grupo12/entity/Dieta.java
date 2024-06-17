@@ -85,7 +85,6 @@ public class Dieta implements Serializable {
     public List<SeguimientoDieta> getSeguimientoDieta() {return seguimientoDieta;}
 
     public void setSeguimientoDieta(List<SeguimientoDieta> seguimientoDieta) {this.seguimientoDieta = seguimientoDieta;}
-
     @Override
     public int hashCode() {
         int hash = 0;

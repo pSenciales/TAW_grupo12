@@ -19,9 +19,9 @@
     tiposUsuario.add("Cliente");
     tiposUsuario.add("Trabajador");
     List<String> tiposTrabajador = new ArrayList<>();
-    tiposTrabajador.add("ENTRENADOR FUERZA");
-    tiposTrabajador.add("ENTRENADOR CROSSTRAINNING");
-    tiposTrabajador.add("DIETISTA");
+    tiposTrabajador.add("Entrenador fuerza");
+    tiposTrabajador.add("Entrenador crosstraining");
+    tiposTrabajador.add("Dietista");
 %>
 
 <!DOCTYPE html>
@@ -37,7 +37,9 @@
     <style>
         body {
             background-color: #f8f9fa;
-            padding: 2.5rem;
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+            padding-bottom: 2.5rem;
         }
         .container-gestionarUsuarios {
             max-width: 1200px;
@@ -58,6 +60,8 @@
             margin-bottom: 20px;
             border: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 200px;
+            overflow-y: auto;
         }
         .card-title {
             font-size: 1.25rem;
@@ -133,7 +137,7 @@
     <% if(clientesDTO != null && !clientesDTO.isEmpty()){
         for (ClienteDTO clienteDTO : clientesDTO) { %>
     <div class="col-md-4 col-sm-6">
-        <div class="card d-flex flex-column">
+        <div class="card d-flex flex-column" style="height: 25rem;">
             <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "../Images/Administrador/perfilDefault.jpg" %>"
                  alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
             <div class="card-body text-center flex-grow-1">
@@ -141,8 +145,8 @@
                 </h5>
                 <p class="card-text"><span class="bold">Email: </span> <%=clienteDTO.getEmail()%>
                 </p>
-                <p class="card-text mb-5"><span class="bold">Tipo Usuario: </span> cliente </p>
-                <a href="#" class="btn btn-outline-primary mt-4" data-bs-toggle="modal" data-bs-target="#asignarModal"
+                <p class="card-text"><span class="bold">Tipo Usuario: </span> cliente </p>
+                <a href="#" class="btn btn-outline-primary mt-5" data-bs-toggle="modal" data-bs-target="#asignarModal"
                    data-cliente-id="<%=clienteDTO.getIdcliente()%>">Gestionar</a>
             </div>
         </div>
@@ -151,7 +155,7 @@
     <% if(trabajadoresDTO != null && !trabajadoresDTO.isEmpty()){
         for (TrabajadorDTO trabajadorDTO : trabajadoresDTO) { %>
     <div class="col-md-4 col-sm-6">
-        <div class="card d-flex flex-column">
+        <div class="card d-flex flex-column" style="height: 25rem;">
             <img src="<%=trabajadorDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + trabajadorDTO.getImagenBase64() : "../Images/Administrador/perfilDefault.jpg" %>"
                  alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios"">
             <div class="card-body text-center flex-grow-1">
@@ -160,9 +164,9 @@
                 <p class="card-text"><span class="bold">Email: </span> <%=trabajadorDTO.getEmail()%>
                 </p>
                 <p class="card-text"><span class="bold">Tipo Usuario: </span> trabajador </p>
-                <p class="card-text"><span class="bold">Tipo Trabajador: </span> <%= trabajadorDTO.getTipo() %>
+                <p class="card-text"><span class="bold">Tipo Trabajador: </span> <%= trabajadorDTO.getTipo().toLowerCase() %>
                 </p>
-                <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#asignarModal"
+                <a href="#" class="btn btn-outline-primary mt-1" data-bs-toggle="modal" data-bs-target="#asignarModal"
                    data-cliente-id="<%=trabajadorDTO.getIdtrabajador()%>">Gestionar</a>
             </div>
         </div>

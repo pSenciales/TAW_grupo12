@@ -165,13 +165,13 @@ public class AdministradorController extends BaseController{
             if(tipoTrabajador.isEmpty()) {
                 trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTO(busqueda);
             } else {
-                if(tipoTrabajador.contains("ENTRENADOR FUERZA")){
+                if(tipoTrabajador.contains("Entrenador fuerza")){
                     trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo("ENTRENADOR FUERZA", busqueda);
                 }
-                if(tipoTrabajador.contains("ENTRENADOR CROSSTRAINNING")){
+                if(tipoTrabajador.contains("Entrenador crosstraining")){
                     trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo("ENTRENADOR CROSSTRAINNING", busqueda);
                 }
-                if(tipoTrabajador.contains("DIETISTA")){
+                if(tipoTrabajador.contains("Dietista")){
                     trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo("DIETISTA", busqueda);
                 }
             }

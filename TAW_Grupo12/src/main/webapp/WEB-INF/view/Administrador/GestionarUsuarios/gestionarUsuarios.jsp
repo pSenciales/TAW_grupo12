@@ -88,7 +88,13 @@
 <header>
     <jsp:include page="../cabeceraAdministrador.jsp"/>
 </header>
+
 <div class="container-gestionarUsuarios">
+    <% if (request.getAttribute("errorGestionarCliente") != null) { %>
+    <div class="alert alert-danger">
+        <%= request.getAttribute("errorGestionarCliente") %>
+    </div>
+    <% } %>
     <form:form modelAttribute="filtroUsuarios" method="post" action="/administrador/filtrarGestionarClientes">
     <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">
@@ -149,11 +155,11 @@
                 <p class="card-text"><span class="bold">Email: </span> <%=clienteDTO.getEmail()%>
                 </p>
                 <p class="card-text"><span class="bold">Tipo Usuario: </span> cliente </p>
-                <a href="#" class="btn btn-outline-primary mt-5" data-bs-toggle="modal" data-bs-target="#asignarModal"
-                   data-cliente-id="<%=clienteDTO.getIdcliente()%>" id="modalCliente">Gestionar</a>
+                <a href="#" class="btn btn-outline-primary mt-5" data-bs-toggle="modal" data-bs-target="#editarClienteModal<%=clienteDTO.getIdcliente()%>"
+                   data-cliente-id="<%=clienteDTO.getIdcliente()%>" id="modalCliente<%=clienteDTO.getIdcliente()%>">Gestionar</a>
 
                 <!-- Modal para editar los datos del cliente -->
-                <div class="modal fade" id="editarClienteModal" tabindex="-1" aria-labelledby="editarClienteModalLabel" aria-hidden="true">
+                <div class="modal fade" id="editarClienteModal<%=clienteDTO.getIdcliente()%>" tabindex="-1" aria-labelledby="editarClienteModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">

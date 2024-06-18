@@ -9,6 +9,7 @@ import es.uma.taw_grupo12.controller.BaseController;
 import es.uma.taw_grupo12.dto.AdministradorDTO;
 import es.uma.taw_grupo12.dto.ClienteDTO;
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
+import es.uma.taw_grupo12.entity.Cliente;
 import es.uma.taw_grupo12.service.AdministradorService;
 import es.uma.taw_grupo12.service.ClienteService;
 import es.uma.taw_grupo12.service.TrabajadorService;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
@@ -193,7 +195,11 @@ public class AdministradorController extends BaseController{
     }
 
     @PostMapping("/guardarCliente")
-    public String doGuardarCliente(@ModelAttribute("clienteModel") ClienteDTO cliente) throws IOException {
+    public String doGuardarCliente(@ModelAttribute("clienteModel") ClienteDTO cliente, RedirectAttributes redirectAttributes) throws IOException {
+        List<Cliente> existe = this.clienteService.buscarClienteNombreoEmail(cliente);
+        if(existe != null){
+            redirectAttributes.addFlashAttribute("errorGestionarCliente", "Se ha intentado guardar un cliente con un email o nombre ya existente, los cambios no se han guardado");            return "redirect:/administrador/gestionarUsuarios";
+        }
         this.clienteService.guardarCliente(cliente);
         return "redirect:/administrador/gestionarUsuarios";
     }

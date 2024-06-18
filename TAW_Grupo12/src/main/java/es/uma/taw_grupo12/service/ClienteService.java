@@ -61,8 +61,10 @@ public class ClienteService {
     }
 
     public void guardarCliente(ClienteDTO cliente) throws IOException {
+
+
         Cliente miCliente = this.clienteRepository.findById(cliente.getIdcliente()).orElse(null);
-        if(cliente != null) {
+        if(cliente != null){
             miCliente.setNombre(cliente.getNombre());
             miCliente.setEmail(cliente.getEmail());
             miCliente.setContrasenya(cliente.getContrasenya());
@@ -75,10 +77,30 @@ public class ClienteService {
             }
             miCliente.setPeso(cliente.getPeso());
             miCliente.setAltura(cliente.getAltura());
-            miCliente.setAlergias(cliente.getAlergias());
+            if(!cliente.getAlergias().isEmpty()){
+                miCliente.setAlergias(cliente.getAlergias());
+            }
+            
 
             this.clienteRepository.save(miCliente);
         }
+    }
+
+    public List<Cliente>  buscarClienteNombreoEmail(ClienteDTO cliente) {
+        Cliente original = this.clienteRepository.findById(cliente.getIdcliente()).orElse(null);
+        if(original.getEmail().equals(cliente.getEmail())){
+            if(original.getNombre().equals(cliente.getNombre())){
+                return null;
+            }
+            return this.clienteRepository.findAllByEmailorNombre("", cliente.getNombre());
+        }
+        if(original.getNombre().equals(cliente.getNombre())){
+            if(original.getEmail().equals(cliente.getEmail())){
+                return null;
+            }
+            return this.clienteRepository.findAllByEmailorNombre(cliente.getEmail(), "");
+        }
+        return  this.clienteRepository.findAllByEmailorNombre(cliente.getEmail(), cliente.getNombre());
     }
     //@Victoria
 }

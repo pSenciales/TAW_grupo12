@@ -61,8 +61,14 @@
 
 <body>
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
-<h1>Rutina: <%=rutina.getNombre()%></h1>
-
+<div class="m-3">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="http://localhost:8080/entrenador/rutinas">Rutinas</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><%=rutina.getNombre()%></li>
+    </ol>
+</nav>
+</div>
 <form:form method="post" action="/entrenador/addEjercicio" modelAttribute="ejercicioRutinaDTO">
     <div class="m-5 d-flex flex-row " id="anyadir-ej">
         <form:hidden path="rutina"></form:hidden>

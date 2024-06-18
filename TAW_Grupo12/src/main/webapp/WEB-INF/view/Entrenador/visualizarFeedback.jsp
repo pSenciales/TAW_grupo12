@@ -17,10 +17,11 @@
 --%>
 
 <%
-    List<ClienteDTO> clientes = (List<ClienteDTO>) request.getAttribute("clientes");
-    List<RutinaDTO> rutinas = (List<RutinaDTO>) request.getAttribute("rutinas");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    ClienteDTO cliente = (ClienteDTO) request.getAttribute("cliente");
+%>
 <!doctype html>
 <html lang="es">
 
@@ -33,79 +34,64 @@
 
     <style>
         .table th, .table td {
-            text-align: center;
+            text-align: center; /* Center text in thead and tbody */
         }
 
-        .table-container {
-            margin: 2rem auto;
-            width: 90%;
-        }
         .contenedor {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 20px;
         }
 
-        .botones {
-            display: flex;
-            gap: 10px;
+        .table-container {
+            width: 60%;
+            margin-left: 1.5rem;
         }
+
+        .select-container{
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
+        .vertical{
+            border-left: solid #000000;
+            max-height: 2.5rem;
+        }
+        .link-button {
+            background: none;
+            border: none;
+            color: #0d6efd;
+            text-decoration: underline;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .link-button:hover {
+            color: #0a58ca;
+        }
+
     </style>
 </head>
 
 <body>
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
-<div class="container mt-3">
-    <div class="row">
-        <div class="col">
-            <h1 class="text-center">Clientes</h1>
-        </div>
-    </div>
-</div>
-<div class="table-container">
-    <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Clientes</th>
-            <th scope="col">Rutinas</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%
-            for(ClienteDTO cliente : clientes){
-                StringJoiner sj = new StringJoiner(" - ");
-                for(RutinaDTO rutina : rutinas) {
-                    if(Objects.equals(rutina.getIdcliente(), cliente.getIdcliente()))
-                        sj.add(rutina.getNombre());
-                }
-                if(Objects.equals(sj.toString(), ""))
-                    sj.add("Sin asignar");
-
-        %>
-        <tr>
-            <td class="contenedor">
-                <span><%=cliente.getNombre()%></span>
-                <div class="botones">
-
-                    <form action="/entrenador/cliente/visualizar/<%=cliente.getIdcliente()%>" method="post">
-                        <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
-                    </form>
-                </div>
-            </td>
-            <td>
-                <%=sj.toString()%>
-            </td>
-        </tr>
-        <%
-            }
-        %>
-        </tbody>
-    </table>
+<div class="m-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="http://localhost:8080/entrenador/clientes">Clientes</a></li>
+            <li class="breadcrumb-item">
+                <form method="post" action="/entrenador/cliente/visualizar/<%=cliente.getIdcliente()%>" style="display:inline;">
+                    <button type="submit" class="link-button"><%=cliente.getNombre()%></button>
+                </form>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Feedback de <%=cliente.getNombre()%> de </li>
+        </ol>
+    </nav>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
-
 </html>

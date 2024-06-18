@@ -1,5 +1,6 @@
 package es.uma.taw_grupo12.controller;
 
+import ch.qos.logback.core.net.server.Client;
 import es.uma.taw_grupo12.dto.*;
 import es.uma.taw_grupo12.entity.Trabajador;
 import es.uma.taw_grupo12.service.*;
@@ -33,8 +34,6 @@ public class EntrenadorController {
     private RutinaService rutinaService;
     @Autowired
     private EjercicioRutinaService ejercicioRutinaService;
-    @Autowired
-    private TrabajadorService trabajadorService;
     @Autowired
     private ClienteService clienteService;
 
@@ -178,8 +177,8 @@ public class EntrenadorController {
         }
     }
 
-    @PostMapping("/cliente/visualizar")
-    public String doClienteVisualizar(HttpSession sesion, Model model, @RequestParam("id") Integer id,
+    @PostMapping("/cliente/visualizar/{idcliente}")
+    public String doClienteVisualizar(HttpSession sesion, Model model, @PathVariable("idcliente") Integer idcliente,
                                       @RequestParam(required = false) String idrutina ){
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
@@ -189,7 +188,7 @@ public class EntrenadorController {
             List<EjercicioDTO> ejercicioList = ejercicioService.getFuerza();
             model.addAttribute("ejercicioList", ejercicioList);
 
-            ClienteDTO cliente = clienteService.buscarClienteId(id);
+            ClienteDTO cliente = clienteService.buscarClienteId(idcliente);
             model.addAttribute("cliente", cliente);
 
             List<RutinaDTO> rutinas = rutinaService.findAllByTrabajadorAndCliente(trabajador.getIdtrabajador(), cliente.getIdcliente());
@@ -206,6 +205,19 @@ public class EntrenadorController {
 
     }
 
+    @GetMapping("cliente/feedback/{idcliente}/{idrutina}")
+    public String doFeedBack(HttpSession sesion, Model model, @PathVariable Integer idcliente, @PathVariable Integer idrutina) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            ClienteDTO cliente = clienteService.buscarClienteId(idcliente);
+            model.addAttribute("cliente", cliente);
+
+            return "/Entrenador/visualizarFeedback";
+        }
+    }
 
 
 

@@ -39,43 +39,43 @@
             text-align: center; /* Center text in thead and tbody */
         }
 
-        .table-container {
-            margin: 5rem auto;
-            width: 90%;
-        }
         .contenedor {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 20px;
         }
 
-        .botones {
-            display: flex;
-            gap: 10px;
+        .table-container {
+            width: 60%;
+            margin-left: 1.5rem;
         }
-        .search-container{
-            margin-bottom: 1rem;
 
-        }
-        .func-container{
+        .select-container{
             display: flex;
-            gap: 2rem;
+            flex-direction: row;
+            gap: 1rem;
         }
         .vertical{
             border-left: solid #000000;
             max-height: 2.5rem;
         }
 
-
     </style>
 </head>
 
 <body>
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
-
-<body>
+    <div class="m-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="http://localhost:8080/entrenador/clientes">Clientes</a></li>
+             <li class="breadcrumb-item active" aria-current="page"><%=cliente.getNombre()%></li>
+            </ol>
+        </nav>
+    </div>
 <div class="container mt-5">
-    <div class="row justify-content-center">
+    <div class="contenedor">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header bg-primary text-white">
@@ -101,108 +101,114 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div>
-    <%
-        if(rutinas.size()>0){
+        <div class="col-md-6">
+            <div class="card">
+                <%
+                    if(!rutinas.isEmpty()){
+                %>
+                <div class="card-header bg-secondary text-white">
+                    <h4>Seleccionar Rutina</h4>
+                </div>
+                <div class="card-body">
+                    <div class="select-container">
+                        <form action="/entrenador/cliente/feedback/<%=cliente.getIdcliente()%>/<%=rutina.getIdrutina()%>" method="get">
+                            <button class="btn btn-success">Feedback</button>
+                        </form>
+                        <div class="vertical">
+                        </div>
+                    <form method="post" action="/entrenador/cliente/visualizar/<%=cliente.getIdcliente()%>">
+                        <div class="mb-3 select-container">
+                            <select name="idrutina" class="form-select">
+                                <%
+                                    for(RutinaDTO r : rutinas){
+                                        String selected = "";
+                                        if(Objects.equals(r.getIdrutina(), rutina.getIdrutina()))
+                                            selected = "selected";
+                                %>
+                                <option value="<%=r.getIdrutina()%>" <%=selected%>><%=r.getNombre()%></option>
+                                <%
+                                    }
+                                %>
+                            </select>
 
-    %>
-    <form method="post" action="/entrenador/cliente/visualizar">
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </form>
+                    </div>
+                    <div class="table-container mt-4">
 
-        <input type="hidden" name="id" value="<%=cliente.getIdcliente()%>"/>
-        <select name="idrutina">
-            <%
-                for(RutinaDTO r : rutinas){
-                String selected = "";
-                if(Objects.equals(r.getIdrutina(), rutina.getIdrutina()))
-                    selected = "selected";
-            %>
-            <option value="<%=r.getIdrutina()%>" <%=selected%>><%=r.getNombre()%></option>
-            <%
-                }
-            %>
-        </select>
-        <button class="btn btn-primary">Buscar</button>
-    </form>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Lunes</th>
+                                <th scope="col">Martes</th>
+                                <th scope="col">Miércoles</th>
+                                <th scope="col">Jueves</th>
+                                <th scope="col">Viernes</th>
+                                <th scope="col">Sábado</th>
+                                <th scope="col">Domingo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%
+                                int size = !ejerciciosRutina.isEmpty() ? ejerciciosRutina.get(ejerciciosRutina.size() - 1).getOrden() + 1 : 0;
+                                for(int i = 0; i < size; i++){
+                                    int index = 0;
+                                    String[] ejerciciorutina = new String[]{"","","","","","",""};
+                                    Integer[] ids = new Integer[]{-1,-1,-1,-1,-1,-1,-1,};
 
-    <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Lunes</th>
-            <th scope="col">Martes</th>
-            <th scope="col">Miercoles</th>
-            <th scope="col">Jueves</th>
-            <th scope="col">Viernes</th>
-            <th scope="col">Sábado</th>
-            <th scope="col">Domingo</th>
+                                    while(index < ejerciciosRutina.size() && ejerciciosRutina.get(index).getOrden() <= i){
+                                        if(ejerciciosRutina.get(index).getOrden() == i) {
+                                            boolean encontrada = false;
+                                            int ej = 0;
+                                            EjercicioDTO aux = null;
+                                            while(!encontrada && ej < ejercicioDTOList.size()){
+                                                aux = ejercicioDTOList.get(ej);
+                                                if(Objects.equals(aux.getIdejercicio(), ejerciciosRutina.get(index).getEjercicio()))
+                                                    encontrada = true;
+                                                ej++;
+                                            }
+                                            EjercicioRutinaDTO ejercicio = ejerciciosRutina.get(index);
+                                            ids[ejercicio.getDiassemanaInt() - 1] = ejercicio.getEjercicioRutinaPK();
+                                            assert aux != null;
+                                            ejerciciorutina[ejercicio.getDiassemanaInt() - 1] = aux.getNombre()+" "+ejercicio.toString();
+                                        }
+                                        index++;
+                                    }
+                            %>
+                            <tr>
+                                <%
+                                    for(int j = 0; j < 7; j++){
+                                %>
+                                <td><%= ejerciciorutina[j] %></td>
+                                <%
+                                    }
+                                %>
+                            </tr>
+                            <%
+                                }
+                            %>
+                            </tbody>
+                        </table>
 
-        </tr>
-        </thead>
-        <tbody>
-        <%
-            int size = !ejerciciosRutina.isEmpty() ? ejerciciosRutina.getLast().getOrden()+1 : 0;
-            for(int i = 0; i<size; i++){
-
-
-        %>
-        <tr>
-            <%
-                int index = 0;
-                String[] ejerciciorutina = new String[]{"","","","","","",""};
-                Integer[] ids = new Integer[]{-1,-1,-1,-1,-1,-1,-1,};
-
-                while(index < ejerciciosRutina.size() && ejerciciosRutina.get(index).getOrden() <= i){
-                    if(ejerciciosRutina.get(index).getOrden() == i) {
-                        boolean encontrada = false;
-                        int ej = 0;
-                        EjercicioDTO aux = null;
-                        while(!encontrada && ej < ejercicioDTOList.size()){
-                            aux = ejercicioDTOList.get(ej);
-                            if(Objects.equals(aux.getIdejercicio(), ejerciciosRutina.get(index).getEjercicio()))
-                                encontrada = true;
-                            ej++;
+                    </div>
+                    <%
+                    } else {
+                    %>
+                    <div class="card-header bg-secondary text-white text-center">
+                        <h4>No tiene rutinas asignadas</h4>
+                    </div>
+                    <%
                         }
-                        EjercicioRutinaDTO ejercicio = ejerciciosRutina.get(index);
-                        ids[ejercicio.getDiassemanaInt() - 1] = ejercicio.getEjercicioRutinaPK();
-                        assert aux != null;
-                        ejerciciorutina[ejercicio.getDiassemanaInt() - 1] = aux.getNombre()+" "+ejercicio.toString();
-                    }
-                    index++;
-                }
-            %>
-            <%
-                for(int j = 0; j<7; j++){
-            %>
-            <td>
-                <%=ejerciciorutina[j]%>
-            </td>
-            <%
-                }
-            %>
-        </tr>
-        <%
-            }
-        %>
-        </tbody>
-    </table>
-
-    <%
-        }else{
-
-
-    %>
-    <h5>SIN RUTINAS ASIGNADAS</h5>
-    <%
-        }
-    %>
-
+                    %>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
-
 </html>

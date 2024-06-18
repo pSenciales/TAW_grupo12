@@ -80,7 +80,6 @@ public class ClienteService {
             if(!cliente.getAlergias().isEmpty()){
                 miCliente.setAlergias(cliente.getAlergias());
             }
-            
 
             this.clienteRepository.save(miCliente);
         }

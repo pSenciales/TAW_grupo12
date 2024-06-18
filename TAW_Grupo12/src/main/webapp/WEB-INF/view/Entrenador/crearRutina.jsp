@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
@@ -21,27 +22,12 @@
 </head>
 <body>
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
-    <form method="post" action="new-rutina/crear">
-
-        <input name="nombre" type="text" placeholder="Nombre" required/>
-        <select name="cliente" required>
-            <option>Seleccione un cliente</option>
-            <%
-                for(ClienteDTO cliente : clientes){
-
-
-            %>
-            <option value="<%=cliente.getIdcliente()%>"><%=cliente.getNombre()%></option>
-
-            <%
-                }
-            %>
-        </select>
-        <button type="submit" class="btn btn-primary">Crear</button>
-
-
-
-    </form>
+    <form:form method="post" action="new-rutina/crear" modelAttribute="rutina">
+        <form:hidden path="idrutina"></form:hidden>
+        <form:input name="nombre" type="text" placeholder="Nombre" required="required" path="nombre"/>
+        <form:select path="idcliente" items="${clientes}" itemValue="idcliente" itemLabel="nombre"></form:select>
+        <form:button class="btn btn-primary">Guardar</form:button>
+    </form:form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

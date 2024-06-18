@@ -7,7 +7,8 @@
 <%@ page import="es.uma.taw_grupo12.entity.Rutina" %>
 <%@ page import="es.uma.taw_grupo12.dto.EjercicioRutinaDTO" %>
 <%@ page import="java.util.Objects" %>
-<%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %><%--
+<%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %>
+<%@ page import="java.util.StringJoiner" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 16/05/2024
@@ -16,8 +17,8 @@
 --%>
 
 <%
-    List<RutinaDTO> rutinas = (List<RutinaDTO>) request.getAttribute("rutinas");
     List<ClienteDTO> clientes = (List<ClienteDTO>) request.getAttribute("clientes");
+    List<RutinaDTO> rutinas = (List<RutinaDTO>) request.getAttribute("rutinas");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -70,62 +71,38 @@
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
 
 <div class="table-container">
-    <div class="func-container">
-    <form action="/entrenador/new-rutina" method="get">
-        <button class="btn btn-success">Crear Rutina</button>
-    </form>
-        <div class="vertical">
-        </div>
-    <div class="search-container">
-    <form:form method="post" action="/entrenador/filtrar" modelAttribute="filtro">
-        <form:input path="nombre" type="text" placeholder="Nombre"/>
-        <form:select path="idcliente">
-            <form:option value="-1" label="Seleccione un cliente"/>
-            <form:options items="${clientes}" itemValue="idcliente" itemLabel="nombre"/>
-        </form:select>
-        <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
-    </form:form>
-    </div>
-    </div>
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th scope="col">Rutinas</th>
             <th scope="col">Clientes</th>
+            <th scope="col">Rutinas</th>
         </tr>
         </thead>
         <tbody>
         <%
-            for(RutinaDTO rutina : rutinas){
-                String cliente = "Sin asignar";
-                boolean encontrado = false;
-                int i = 0;
-                while(i<clientes.size() && !encontrado){
-                    if(Objects.equals(clientes.get(i).getIdcliente(), rutina.getIdcliente())){
-                        encontrado = true;
-                        cliente = clientes.get(i).getNombre();
-                    }
-                    i++;
+            for(ClienteDTO cliente : clientes){
+                StringJoiner sj = new StringJoiner(" - ");
+                for(RutinaDTO rutina : rutinas) {
+                    if(Objects.equals(rutina.getIdcliente(), cliente.getIdcliente()))
+                        sj.add(rutina.getNombre());
                 }
+                if(Objects.equals(sj.toString(), ""))
+                    sj.add("Sin asignar");
+
         %>
         <tr>
             <td class="contenedor">
-                    <span><%=rutina.getNombre()%></span>
-                    <div class="botones">
+                <span><%=cliente.getNombre()%></span>
+                <div class="botones">
 
-                        <form action="/entrenador/visualizar/<%=rutina.getIdrutina()%>" method="get">
-                            <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
-                        </form>
-                        <form action="/entrenador/editar/<%=rutina.getIdrutina()%>" method="get">
-                            <button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </form>
-                        <form action="/entrenador/borrar/<%=rutina.getIdrutina()%>" method="get">
-                            <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                        </form>
-                    </div>
+                    <form action="/entrenador/cliente/visualizar" method="post">
+                        <input type="hidden" name="id" value="<%=cliente.getIdcliente()%>"/>
+                        <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
+                    </form>
+                </div>
             </td>
             <td>
-               <%=cliente%>
+                <%=sj.toString()%>
             </td>
         </tr>
         <%

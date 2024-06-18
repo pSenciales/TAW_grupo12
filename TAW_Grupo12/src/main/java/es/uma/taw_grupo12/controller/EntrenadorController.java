@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -78,28 +79,47 @@ public class EntrenadorController {
         } else {
             List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());
             model.addAttribute("clientes", clientes);
+            RutinaDTO rutina = new RutinaDTO();
+            model.addAttribute("rutina", rutina);
             return "/Entrenador/crearRutina";
         }
     }
 
-    @PostMapping("/new-rutina/crear")
-    public String doCrearRutina(HttpSession sesion, @RequestParam("nombre") String nombre, @RequestParam("cliente") Integer idcliente) {
+    @PostMapping(value = {"/new-rutina/crear", "editar/new-rutina/crear"})
+    public String doCrearRutina(HttpSession sesion, @ModelAttribute("rutina") RutinaDTO rutina) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
                 !sesion.getAttribute("tipo").equals("entrenador")) {
             return "redirect:/";
         } else {
-            RutinaDTO rutinaDTO = new RutinaDTO(nombre, trabajador.getIdtrabajador(), idcliente);
-
-            rutinaService.save(rutinaDTO);
+            rutina.setIdtrabajador(trabajador.getIdtrabajador());
+            rutinaService.save(rutina);
 
             return "redirect:/entrenador/rutinas";
 
         }
     }
 
+
+    @GetMapping("/editar/{id}")
+    public String doEditarRutina(HttpSession sesion, @PathVariable int id, Model model) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());
+            model.addAttribute("clientes", clientes);
+            RutinaDTO rutina = rutinaService.findById(id);
+            model.addAttribute("rutina", rutina);
+
+            return "/Entrenador/crearRutina";
+
+
+        }
+    }
     @GetMapping("/borrar/{id}")
-    public String borrarRutina(HttpSession sesion, @PathVariable int id) {
+    public String doBorrarRutina(HttpSession sesion, @PathVariable int id) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
                 !sesion.getAttribute("tipo").equals("entrenador")) {
@@ -112,6 +132,9 @@ public class EntrenadorController {
 
         }
     }
+
+
+
     @PostMapping("/filtrar")
     public String doFiltrar(HttpSession sesion, Model model, @ModelAttribute("filtro") FiltroRutinas filtro){
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
@@ -131,6 +154,57 @@ public class EntrenadorController {
 
 
 
+
+
+    /*
+     *
+     * VISUALIZAR CLIENTES
+     *
+     * */
+
+
+    @GetMapping("/clientes")
+    public String doClientes(HttpSession sesion, Model model) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());
+            model.addAttribute("clientes", clientes);
+            List<RutinaDTO> rutinas = rutinaService.findAllByTrabajador(trabajador.getIdtrabajador());
+            model.addAttribute("rutinas", rutinas);
+            return "/Entrenador/listarClientes";
+        }
+    }
+
+    @PostMapping("/cliente/visualizar")
+    public String doClienteVisualizar(HttpSession sesion, Model model, @RequestParam("id") Integer id,
+                                      @RequestParam(required = false) String idrutina ){
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            List<EjercicioDTO> ejercicioList = ejercicioService.getFuerza();
+            model.addAttribute("ejercicioList", ejercicioList);
+
+            ClienteDTO cliente = clienteService.buscarClienteId(id);
+            model.addAttribute("cliente", cliente);
+
+            List<RutinaDTO> rutinas = rutinaService.findAllByTrabajadorAndCliente(trabajador.getIdtrabajador(), cliente.getIdcliente());
+            model.addAttribute("rutinas", rutinas);
+
+            RutinaDTO rutina = idrutina != null ? rutinaService.findById(Integer.parseInt(idrutina)) : !rutinas.isEmpty() ? rutinas.get(0) : null ;
+            model.addAttribute("rutina", rutina);
+
+            List<EjercicioRutinaDTO> ejerciciosRutina = rutina != null ? ejercicioRutinaService.findAllByRutinaId(rutina.getIdrutina()):
+                    new ArrayList<>();
+            model.addAttribute("ejerciciosRutina", ejerciciosRutina);
+            return "/Entrenador/visualizarCliente";
+        }
+
+    }
 
 
 

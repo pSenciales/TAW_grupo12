@@ -27,7 +27,6 @@ public class EjercicioRutinaService {
 
     public void save(EjercicioRutinaDTO ejercicioRutinaDTO) {
         EjercicioRutina ejercicioRutina = new EjercicioRutina();
-
         Rutina rutina = rutinaRepository.findById(ejercicioRutinaDTO.getRutina()).orElse(null);
         assert(rutina!=null);
         ejercicioRutina.setRutina(rutina);
@@ -42,12 +41,13 @@ public class EjercicioRutinaService {
         ejercicioRutina.setDiassemana(ejercicioRutinaDTO.getDiassemana());
         ejercicioRutina.setEjercicioRutinaPK(ejercicioRutinaDTO.getEjercicioRutinaPK());
 
-        EjercicioRutina ejercicioRutinaFound = ejercicioRutinaRepository.findById(ejercicioRutinaDTO.getEjercicioRutinaPK()).orElse(null);
         String orden = ejercicioRutinaRepository.findByOrden(rutina.getIdrutina(), ejercicioRutina.getDiassemanaString());
         int ordenInt = (orden == null) ? 0 : (Integer.parseInt(orden)+1);
 
         ejercicioRutina.setOrden(ordenInt);
 
+        if(ejercicioRutinaDTO.getEjercicioRutinaPK() != null){
+            EjercicioRutina ejercicioRutinaFound = ejercicioRutinaRepository.findById(ejercicioRutinaDTO.getEjercicioRutinaPK()).orElse(null);
 
         if(ejercicioRutinaFound!=null && !Objects.equals(ejercicioRutinaFound.getDiassemana(), ejercicioRutina.getDiassemana())) {
             int rutinaid = ejercicioRutinaFound.getRutina().getIdrutina();
@@ -55,7 +55,7 @@ public class EjercicioRutinaService {
             int ordenprev = ejercicioRutinaFound.getOrden();
             List<EjercicioRutina> rutinas = ejercicioRutinaRepository.findMayoresOrden(rutinaid, diassemana, ordenprev);
             desfragmentar(rutinas);
-        }
+        }}
         ejercicioRutinaRepository.save(ejercicioRutina);
 
 

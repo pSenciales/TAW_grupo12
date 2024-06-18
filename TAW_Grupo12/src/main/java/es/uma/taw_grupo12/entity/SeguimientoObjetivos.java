@@ -186,5 +186,23 @@ public class SeguimientoObjetivos implements Serializable, DTO<SeguimientoObjeti
     public String toString() {
         return "es.taw12.app.entity.SeguimientoObjetivos[ seguimientoObjetivosPK=" + seguimientoObjetivosPK + " ]";
     }
-    
+    @Override
+    public SeguimientoObjetivosDTO toDTO() {
+        SeguimientoObjetivosDTO nueva = new SeguimientoObjetivosDTO();
+        nueva.setSeguimientoObjetivosPK(this.seguimientoObjetivosPK);
+        nueva.setRutina(this.rutina.getIdrutina());
+        nueva.setCliente(this.cliente.getIdcliente());
+        nueva.setFecha(this.fecha);
+        nueva.setRealizado(this.realizado);
+        nueva.setPesorealizado(this.pesorealizado);
+        nueva.setRepeticionesrealizadas(this.repeticionesrealizadas);
+        nueva.setSeriesrealizadas(this.seriesrealizadas);
+        nueva.setObservaciones(this.observaciones);
+        nueva.setPesoobjetivo(this.pesoobjetivo);
+        nueva.setSeriesobjetivo(this.seriesobjetivo);
+        nueva.setRepeticionesobjetivo(this.repeticionesobjetivo);
+        nueva.setNombreejercicio(this.nombreejercicio);
+
+        return nueva;
+    }
 }

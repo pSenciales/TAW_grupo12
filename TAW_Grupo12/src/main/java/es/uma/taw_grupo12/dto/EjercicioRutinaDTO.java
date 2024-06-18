@@ -21,7 +21,7 @@ public class EjercicioRutinaDTO {
             case "Miércoles" -> 3;
             case "Jueves" -> 4;
             case "Viernes" -> 5;
-            case "Sabado" -> 6;
+            case "Sábado" -> 6;
             case "Domingo" -> 7;
             default -> -1;
         };
@@ -30,7 +30,7 @@ public class EjercicioRutinaDTO {
     @Override
     public String toString() {
 
-        return "("+this.series+"s, "+this.repeticiones+"r, "+this.peso+" kg)";
+        return "("+this.series+"s, "+this.repeticiones+"r, "+this.peso+"kg)";
 
     }
 }

@@ -12,11 +12,11 @@ public class SeguimientoObjetivosDTO {
     protected Integer seguimientoObjetivosPK;
     private Date fecha;
     private short realizado;
-    private Float pesorealizado;
+    private String pesorealizado;
     private Integer repeticionesrealizadas;
     private Integer seriesrealizadas;
     private String observaciones;
-    private Float pesoobjetivo;
+    private String pesoobjetivo;
     private Integer repeticionesobjetivo;
     private Integer seriesobjetivo;
     private String nombreejercicio;

@@ -153,12 +153,10 @@
                 <input type="hidden" value="<%=ids[j]%>" name="id">
                 <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-arrow-down"></i></button>
             </form>
-            <form method="get" action="/entrenador/rutina/borrar">
-                <input type="hidden" value="<%=ids[j]%>" name="id">
+            <form method="get" action="/entrenador/rutina/borrar/<%=ids[j]%>">
                 <button class="btn btn-danger btn-sm" type="submit"><i class="fa-solid fa-trash"></i></button>
             </form>
-            <form method="post" action="/entrenador/rutina/editar">
-                <input type="hidden" value="<%=ids[j]%>" name="id">
+            <form method="get" action="/entrenador/rutina/editar/<%=ids[j]%>">
                 <button class="btn btn-warning btn-sm" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
             </form>
             </div>

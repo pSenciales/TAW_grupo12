@@ -111,7 +111,7 @@
                 </div>
                 <div class="card-body">
                     <div class="select-container">
-                        <form action="/entrenador/cliente/feedback/<%=cliente.getIdcliente()%>/<%=rutina.getIdrutina()%>" method="get">
+                        <form action="/entrenador/cliente/feedback/<%=cliente.getIdcliente()%>/<%=rutina.getIdrutina()%>" method="post">
                             <button class="btn btn-success">Feedback</button>
                         </form>
                         <div class="vertical">

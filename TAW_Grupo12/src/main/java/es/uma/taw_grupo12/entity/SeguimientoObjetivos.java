@@ -7,6 +7,8 @@ package es.uma.taw_grupo12.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import es.uma.taw_grupo12.dto.DTO;
+import es.uma.taw_grupo12.dto.SeguimientoObjetivosDTO;
 import jakarta.persistence.*;
 
 /**
@@ -26,7 +28,7 @@ import jakarta.persistence.*;
     @NamedQuery(name = "SeguimientoObjetivos.findByRepeticionesrealizadas", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.repeticionesrealizadas = :repeticionesrealizadas"),
     @NamedQuery(name = "SeguimientoObjetivos.findBySeriesrealizadas", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.seriesrealizadas = :seriesrealizadas"),
     @NamedQuery(name = "SeguimientoObjetivos.findByObservaciones", query = "SELECT s FROM SeguimientoObjetivos s WHERE s.observaciones = :observaciones")})
-public class SeguimientoObjetivos implements Serializable {
+public class SeguimientoObjetivos implements Serializable, DTO<SeguimientoObjetivosDTO> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,12 +60,13 @@ public class SeguimientoObjetivos implements Serializable {
     private Integer seriesobjetivo;
     @Column(name = "nombreejercicio")
     private String nombreejercicio;
-    @JoinColumn(name = "idrutina", referencedColumnName = "idrutina", insertable = false, updatable = false)
+    @JoinColumn(name = "idrutina", referencedColumnName = "idrutina")
     @ManyToOne(optional = false)
     private Rutina rutina;
-    @JoinColumn(name = "idcliente", referencedColumnName = "idcliente", insertable = false, updatable = false)
+    @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")
     @ManyToOne(optional = false)
     private Cliente cliente;
+
     public SeguimientoObjetivos() {
     }
 
@@ -183,5 +186,24 @@ public class SeguimientoObjetivos implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.SeguimientoObjetivos[ seguimientoObjetivosPK=" + seguimientoObjetivosPK + " ]";
     }
-    
+
+    @Override
+    public SeguimientoObjetivosDTO toDTO() {
+        SeguimientoObjetivosDTO nueva = new SeguimientoObjetivosDTO();
+        nueva.setSeguimientoObjetivosPK(this.seguimientoObjetivosPK);
+        nueva.setRutina(this.rutina.getIdrutina());
+        nueva.setCliente(this.cliente.getIdcliente());
+        nueva.setFecha(this.fecha);
+        nueva.setRealizado(this.realizado);
+        nueva.setPesorealizado(this.pesorealizado);
+        nueva.setRepeticionesrealizadas(this.repeticionesrealizadas);
+        nueva.setSeriesrealizadas(this.seriesrealizadas);
+        nueva.setObservaciones(this.observaciones);
+        nueva.setPesoobjetivo(this.pesoobjetivo);
+        nueva.setSeriesobjetivo(this.seriesobjetivo);
+        nueva.setRepeticionesobjetivo(this.repeticionesobjetivo);
+        nueva.setNombreejercicio(this.nombreejercicio);
+
+        return nueva;
+    }
 }

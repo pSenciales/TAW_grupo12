@@ -12,15 +12,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    //OPCIÓN: AÑADIR QUE SE PUEDAN SELECCIONAR VARIOS TIPOS DE TRABAJADORES
     List<ClienteDTO> clientesDTO = (List<ClienteDTO>) request.getAttribute("clientes");
     List<TrabajadorDTO> trabajadoresDTO = (List<TrabajadorDTO>) request.getAttribute("trabajadores");
     List<String> tiposUsuario = new ArrayList<>();
     tiposUsuario.add("Cliente");
     tiposUsuario.add("Trabajador");
     List<String> tiposTrabajador = new ArrayList<>();
-    tiposTrabajador.add("Entrenador fuerza");
-    tiposTrabajador.add("Entrenador crosstrainning");
-    tiposTrabajador.add("Dietista");
+    tiposTrabajador.add("ENTRENADOR FUERZA");
+    tiposTrabajador.add("ENTRENADOR CROSSTRAINNING");
+    tiposTrabajador.add("DIETISTA");
 %>
 
 <!DOCTYPE html>
@@ -31,14 +32,56 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/Styles/Administrador/asignarClientes">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 2.5rem;
+        }
+        .container-gestionarUsuarios {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        .imagenperfil-gestionarUsuarios {
+            display: block;
+            margin-top: 1.5vh;
+            margin-left: auto;
+            margin-right: auto;
+            width: 20vh;
+            height: 20vh;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .card {
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-title {
+            font-size: 1.25rem;
+        }
+        .card-text {
+            color: #6c757d;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .card-text{
+            text-align: left;
+        }
 
+        .bold{
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <header>
     <jsp:include page="../cabeceraAdministrador.jsp"/>
 </header>
-<div class="container-asignarClientes">
+<div class="container-gestionarUsuarios">
     <form:form modelAttribute="filtroUsuarios" method="post" action="/administrador/filtrarGestionarClientes">
     <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">
@@ -49,13 +92,14 @@
             </span>
         <form:input type="text" class="form-control"
                     placeholder="Introduzca el nombre o correo de usaurio que deseas gestionar" path="busqueda"/>
+        <button type="button" class="btn btn-secondary" id="filtros">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter"
+                 viewBox="0 0 16 16">
+                <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"></path>
+            </svg>
+        </button>
     </div>
-    <button type="button" class="btn btn-secondary" id="filtros">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter"
-             viewBox="0 0 16 16">
-            <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"></path>
-        </svg>
-    </button>
+
         <div class="modal fade" id="filtrosModal" tabindex="-1" aria-labelledby="filtrosModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -86,29 +130,31 @@
 </div>
 </form:form>
 <div class="row">
-    <% for (ClienteDTO clienteDTO : clientesDTO) { %>
+    <% if(clientesDTO != null && !clientesDTO.isEmpty()){
+        for (ClienteDTO clienteDTO : clientesDTO) { %>
     <div class="col-md-4 col-sm-6">
-        <div class="card">
+        <div class="card d-flex flex-column">
             <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "../Images/Administrador/perfilDefault.jpg" %>"
-                 alt="Imagen de perfil" class="imagenperfil-asignarClientes">
-            <div class="card-body text-center">
+                 alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
+            <div class="card-body text-center flex-grow-1">
                 <h5 class="card-title mt-3 mb-3"><%=clienteDTO.getNombre()%>
                 </h5>
                 <p class="card-text"><span class="bold">Email: </span> <%=clienteDTO.getEmail()%>
                 </p>
-                <p class="card-text"><span class="bold">Tipo Usuario: </span> cliente </p>
-                <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#asignarModal"
+                <p class="card-text mb-5"><span class="bold">Tipo Usuario: </span> cliente </p>
+                <a href="#" class="btn btn-outline-primary mt-4" data-bs-toggle="modal" data-bs-target="#asignarModal"
                    data-cliente-id="<%=clienteDTO.getIdcliente()%>">Gestionar</a>
             </div>
         </div>
     </div>
-    <% } %>
-    <% for (TrabajadorDTO trabajadorDTO : trabajadoresDTO) { %>
+    <% }} %>
+    <% if(trabajadoresDTO != null && !trabajadoresDTO.isEmpty()){
+        for (TrabajadorDTO trabajadorDTO : trabajadoresDTO) { %>
     <div class="col-md-4 col-sm-6">
-        <div class="card">
+        <div class="card d-flex flex-column">
             <img src="<%=trabajadorDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + trabajadorDTO.getImagenBase64() : "../Images/Administrador/perfilDefault.jpg" %>"
-                 alt="Imagen de perfil" class="imagenperfil-asignarClientes">
-            <div class="card-body text-center">
+                 alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios"">
+            <div class="card-body text-center flex-grow-1">
                 <h5 class="card-title mt-3 mb-3"><%=trabajadorDTO.getNombre()%>
                 </h5>
                 <p class="card-text"><span class="bold">Email: </span> <%=trabajadorDTO.getEmail()%>
@@ -121,7 +167,7 @@
             </div>
         </div>
     </div>
-    <% } %>
+    <% }} %>
 </div>
 <script>
     document.getElementById('filtros').addEventListener('click', function () {

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class EjercicioRutinaDTO {
     private Integer ejercicioRutinaPK;
-    private Float peso;
+    private String peso;
     private Integer repeticiones;
     private Integer series;
     private Integer orden;

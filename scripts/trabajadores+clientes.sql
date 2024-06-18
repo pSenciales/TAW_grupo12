@@ -29,9 +29,9 @@ VALUES 	('Juan López', 'juan.lopez@example.com', 'contraseña4', 'ENTRENADOR FU
 
 -- Entrenadores de Crosstraining
 INSERT INTO taw12.Trabajador (nombre, email, contrasenya, tipo, imagenPerfil) 
-VALUES 	('Elena Martínez', 'elena.martinez@example.com', 'contraseña7', 'ENTRENADOR CROSSTRAINNING', NULL),
-		('Mario Gómez', 'mario.gomez@example.com', 'contraseña8', 'ENTRENADOR CROSSTRAINNING', NULL),
-		('Sara Fernández', 'sara.fernandez@example.com', 'contraseña9', 'ENTRENADOR CROSSTRAINNING', NULL);
+VALUES 	('Elena Martínez', 'elena.martinez@example.com', 'contraseña7', 'ENTRENADOR CROSSTRAINING', NULL),
+		('Mario Gómez', 'mario.gomez@example.com', 'contraseña8', 'ENTRENADOR CROSSTRAINING', NULL),
+		('Sara Fernández', 'sara.fernandez@example.com', 'contraseña9', 'ENTRENADOR CROSSTRAINING', NULL);
         
 -- Relaciones Cliente-Entrenador
 INSERT INTO taw12.cliente_trabajador (idcliente, idtrabajador)

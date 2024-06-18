@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `taw12`.`EjercicioRutina` (
   `idejerciciorutina` INT NOT NULL AUTO_INCREMENT,
   `idrutina` INT NOT NULL,
   `idejercicio` INT NOT NULL,
-  `peso` FLOAT NULL,
+  `peso` VARCHAR(40) NULL,
   `repeticiones` INT NULL,
   `series` INT NULL,
   `orden` INT NULL,
@@ -220,11 +220,11 @@ CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoObjetivos` (
   `idcliente` INT NOT NULL,
   `fecha` DATE NOT NULL,
   `realizado` TINYINT NOT NULL,
-  `pesorealizado` FLOAT NULL DEFAULT NULL,
+  `pesorealizado` VARCHAR(40) NULL DEFAULT NULL,
   `repeticionesrealizadas` INT NULL DEFAULT NULL,
   `seriesrealizadas` INT NULL DEFAULT NULL,
   `observaciones` VARCHAR(200) NULL,
-  `pesoobjetivo` FLOAT NULL DEFAULT NULL, 
+  `pesoobjetivo` VARCHAR(40) NULL DEFAULT NULL, 
   `seriesobjetivo` INT NULL DEFAULT NULL,  
   `repeticionesobjetivo` INT NULL DEFAULT NULL,
   `nombreejercicio` VARCHAR(100) NOT NULL,  
@@ -247,7 +247,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `taw12`.`Trabajador`
+-- Table `taw12`.`Trabajador`	
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `taw12`.`Trabajador` ;
 
@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `taw12`.`Trabajador` (
   `nombre` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `contrasenya` VARCHAR(45) NOT NULL,
-  `tipo` ENUM('ENTRENADOR FUERZA', 'ENTRENADOR CROSSTRAINNING', 'DIETISTA') NOT NULL,
+  `tipo` ENUM('ENTRENADOR FUERZA', 'ENTRENADOR CROSSTRAINING', 'DIETISTA') NOT NULL,
   `imagenperfil` LONGBLOB NULL DEFAULT NULL,
   PRIMARY KEY (`idtrabajador`),
   UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE,

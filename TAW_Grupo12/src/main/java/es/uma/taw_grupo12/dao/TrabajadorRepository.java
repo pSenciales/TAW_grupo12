@@ -30,5 +30,10 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>
 
     @Query("SELECT c FROM Trabajador c WHERE c.tipo = :tipo AND (c.email LIKE %:busqueda% OR c.nombre LIKE %:busqueda%)")
     List<Trabajador> findByTipoAndNombreorEmail(String tipo, String busqueda);
+
+    //consulta para encontrar los trabajadores asociados a un cliente dado su id
+    @Query("SELECT c FROM Trabajador c JOIN c.clienteList t WHERE t.idcliente = :idCliente")
+    List<Trabajador> findTrabajadoresAsociados(Integer idCliente);
+
     //@Victoria
 }

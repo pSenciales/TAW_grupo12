@@ -73,6 +73,7 @@
         }
     </style>
     <script>
+        //SCRIPT PARA MOSTRAR EL MODAL DE ASIGNAR TRABAJADOR
         $(document).ready(function() {
             $('#asignarButton').click(function() {
                 $('#asignarForm').submit();

@@ -32,7 +32,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/Styles/Administrador/asignarClientes">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
@@ -79,6 +78,10 @@
         .bold{
             font-weight: bold;
         }
+        .form-group{
+            margin-top: 1.5rem;
+        }
+
     </style>
 </head>
 <body>
@@ -147,7 +150,7 @@
                 </p>
                 <p class="card-text"><span class="bold">Tipo Usuario: </span> cliente </p>
                 <a href="#" class="btn btn-outline-primary mt-5" data-bs-toggle="modal" data-bs-target="#asignarModal"
-                   data-cliente-id="<%=clienteDTO.getIdcliente()%>">Gestionar</a>
+                   data-cliente-id="<%=clienteDTO.getIdcliente()%>" id="modalCliente">Gestionar</a>
 
                 <!-- Modal para editar los datos del cliente -->
                 <div class="modal fade" id="editarClienteModal" tabindex="-1" aria-labelledby="editarClienteModalLabel" aria-hidden="true">
@@ -157,23 +160,50 @@
                                 <h5 class="modal-title" id="editarClienteModalLabel">Editar Cliente</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body ps-4 pt-3" style="text-align: start">
                                 <!-- Aquí iría tu formulario para editar los datos del cliente -->
-                                <form:form action="/administrador/guardarCliente" modelAttribute="clienteModel" method="post">
+                                <form:form action="/administrador/guardarCliente" modelAttribute="clienteModel" method="post" enctype="multipart/form-data">
                                     <form:hidden path="idcliente" value="<%= clienteDTO.getIdcliente() %>"/>
                                     <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "../Images/Administrador/perfilDefault.jpg" %>"
                                          alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
-                                    <label for="imagenperfil">Imagen de perfil: </label><form:input type="file" path="imagenperfilFile" id="imagenperfil"/>
-
-                                    <label for="nombre">Nombre: </label><form:input type="text" value="<%= clienteDTO.getNombre() %>" path="nombre" required="true" id="nombre" maxlength="45"/>
-                                    <label for="email">Email: </label><form:input type="email" value="<%= clienteDTO.getEmail() %>" path="email" required="true" id="email" maxlength="45"/>
-                                    <label for="altura">Altura: </label><form:input type="number" value="<%= clienteDTO.getAltura()%>" path="altura" id="altura"/>
-                                    <label for="peso">Peso: </label><form:input type="number" value="<%= clienteDTO.getPeso()%>" path="peso" id="peso"/>
+                                    <div class="form-group">
+                                        <label for="imagenperfil" class="form-label">Imagen de perfil: </label>
+                                        <form:input type="file" path="imagenperfilFile" id="imagenperfil"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nombre" class="form-label">Nombre: </label>
+                                        <form:input class="form-control" type="text" value="<%= clienteDTO.getNombre() %>" path="nombre" required="true" id="nombre" maxlength="45"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email: </label>
+                                        <form:input class="form-control" type="email" value="<%= clienteDTO.getEmail() %>" path="email" required="true" id="email" maxlength="45"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contrasenya" class="form-label">Contraseña: </label>
+                                        <form:input class="form-control" type="password" value="<%= clienteDTO.getContrasenya() %>" path="contrasenya" required="true" id="contrasenya" maxlength="45"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="altura" class="form-label">Altura: </label>
+                                        <form:input class="form-control" type="number" value="<%= clienteDTO.getAltura()%>" path="altura" id="altura"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="peso" class="form-label">Peso: </label>
+                                        <form:input class="form-control" type="number" value="<%= clienteDTO.getPeso()%>" path="peso" id="peso"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="alergias" class="form-label">Alergias: </label>
+                                        <form:textarea path="alergias" class="form-control" id="alergias" placeholder="<%= clienteDTO.getAlergias()%>" maxlength="150"/>
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <form:button class="btn btn-primary">Guardar cambios</form:button>
+                                    </div>
                                 </form:form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary">Guardar cambios</button>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <form action="/administrador/eliminarCliente" method="post">
+                                    <input type="hidden" value="<%= clienteDTO.getIdcliente() %>" name="idCliente"/>
+                                    <button type="submit" class="btn btn-outline-danger" id="eliminarCliente">Eliminar cliente</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -196,7 +226,7 @@
                 <p class="card-text"><span class="bold">Tipo Usuario: </span> trabajador </p>
                 <p class="card-text"><span class="bold">Tipo Trabajador: </span> <%= trabajadorDTO.getTipo().toLowerCase() %>
                 </p>
-                <a href="#" class="btn btn-outline-primary mt-1" data-bs-toggle="modal" data-bs-target="#asignarModal"
+                <a href="#" class="btn btn-outline-primary mt-1" data-bs-toggle="modal" data-bs-target="#editarClienteModal"
                    data-cliente-id="<%=trabajadorDTO.getIdtrabajador()%>">Gestionar</a>
             </div>
         </div>
@@ -209,21 +239,10 @@
         myModal.show();
     });
 
-    // Controlador de eventos para los botones "Gestionar"
-    document.querySelectorAll('[data-bs-toggle="modal"]').forEach(item => {
-        item.addEventListener('click', event => {
-            // Obtén el ID del cliente
-            const clienteId = event.target.getAttribute('data-cliente-id');
-
-            // Aquí puedes hacer una petición AJAX para obtener los datos del cliente
-            // y llenar el formulario dentro del modal. Por ejemplo:
-
-            // $.get(`/api/clientes/${clienteId}`, function(data) {
-            //   // Llena el formulario con los datos del cliente
-            //   $('#nombreCliente').val(data.nombre);
-            //   $('#emailCliente').val(data.email);
-            //   // etc.
-            // });
+    document.querySelectorAll('#modalCliente').forEach(item => {
+        item.addEventListener('click', function () {
+            var myModal = new bootstrap.Modal(document.getElementById('editarClienteModal'), {});
+            myModal.show();
         });
     });
 </script>

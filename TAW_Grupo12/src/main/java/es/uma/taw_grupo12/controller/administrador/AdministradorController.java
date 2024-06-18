@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -183,5 +184,17 @@ public class AdministradorController extends BaseController{
         model.addAttribute("clientes", clientesDTO);
         model.addAttribute("tituloCabeceraAdmin", "Gestionar Clientes");
         return "/Administrador/GestionarUsuarios/gestionarUsuarios";
+    }
+
+    @PostMapping("/eliminarCliente")
+    public String doEliminarCliente(@RequestParam("idCliente") Integer idCliente){
+        this.clienteService.eliminarCliente(idCliente);
+        return "redirect:/administrador/gestionarUsuarios";
+    }
+
+    @PostMapping("/guardarCliente")
+    public String doGuardarCliente(@ModelAttribute("clienteModel") ClienteDTO cliente) throws IOException {
+        this.clienteService.guardarCliente(cliente);
+        return "redirect:/administrador/gestionarUsuarios";
     }
 }

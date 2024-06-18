@@ -20,7 +20,7 @@ public class TrabajadorDTO {
     public String getTipo(){
         return switch (this.tipo){
             case "ENTRENADOR FUERZA" -> "entrenador";
-            case "ENTRENADOR CROSSTRAINNING" -> "entrenador-cross";
+            case "ENTRENADOR CROSSTRAINING" -> "entrenadorcross";
             case "DIETISTA" -> "dietista";
             default -> null;
         };

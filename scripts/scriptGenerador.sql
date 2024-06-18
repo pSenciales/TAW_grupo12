@@ -96,15 +96,22 @@ CREATE TABLE IF NOT EXISTS `taw12`.`Rutina` (
   `idrutina` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `idcliente` INT NOT NULL,
+  `idtrabajador` INT NOT NULL, -- Nueva columna para la clave foránea
   PRIMARY KEY (`idrutina`),
   INDEX `fk_rutina_cliente1_idx` (`idcliente` ASC) VISIBLE,
+  INDEX `fk_rutina_trabajador1_idx` (`idtrabajador` ASC) VISIBLE, -- Índice para la nueva clave foránea
   CONSTRAINT `fk_rutina_cliente1`
     FOREIGN KEY (`idcliente`)
     REFERENCES `taw12`.`Cliente` (`idcliente`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rutina_trabajador1`
+    FOREIGN KEY (`idtrabajador`)
+    REFERENCES `taw12`.`Trabajador` (`idtrabajador`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
+ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -116,7 +123,6 @@ CREATE TABLE IF NOT EXISTS `taw12`.`PlatoDieta` (
   `idplatodieta` INT NOT NULL,
   `idplato` INT NOT NULL,
   `iddieta` INT NOT NULL,
-  `fecha` DATE NOT NULL,
   `calorias` INT NULL,
   `cantidad` INT NULL,
   `orden` INT NULL,
@@ -145,30 +151,30 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `taw12`.`SeguimientoDieta` ;
 
 CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoDieta` (
-<<<<<<< Updated upstream
-  `idplatodieta` INT NOT NULL,
-  `idplato` INT NOT NULL,
-  `iddieta` INT NOT NULL,
-=======
-  `idseguimientodieta` INT NOT NULL AUTO_INCREMENT,  -- Nueva columna para la clave primaria
-  `iddieta` INT NOT NULL,  -- Nueva columna para la clave foránea a Dieta
+  `idseguimientodieta` INT NOT NULL AUTO_INCREMENT, 
+  `iddieta` INT NOT NULL, 
+  `idcliente` INT NOT NULL,
   `fecha` DATE NOT NULL,
->>>>>>> Stashed changes
   `comido` TINYINT NULL DEFAULT NULL,
   `cantidad` INT NULL DEFAULT NULL,
   `observaciones` VARCHAR(250) NULL DEFAULT NULL,
-  `cantidadobjetivo` INT NULL DEFAULT NULL,  -- Nueva columna para cantidad objetivo
+   `cantidadobjetivo` INT NULL DEFAULT NULL,  -- Nueva columna para cantidad objetivo
   `nombreplato` VARCHAR(100) NOT NULL,  -- Nueva columna para nombre del plato
   PRIMARY KEY (`idseguimientodieta`),
   INDEX `fk_SeguimientoDieta_Dieta1_idx` (`iddieta`),  -- Índice para la nueva clave foránea
+  INDEX `fk_SeguimientoDieta_Cliente1_idx` (`idcliente`),  -- Índice para la nueva clave foránea
   CONSTRAINT `fk_SeguimientoDieta_Dieta1`
     FOREIGN KEY (`iddieta`)
     REFERENCES `taw12`.`Dieta` (`iddieta`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_SeguimientoCliente_Dieta1`
+    FOREIGN KEY (`idcliente`)
+    REFERENCES `taw12`.`Cliente` (`idcliente`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
-
 
 
 -- -----------------------------------------------------
@@ -177,30 +183,30 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `taw12`.`EjercicioRutina` ;
 
 CREATE TABLE IF NOT EXISTS `taw12`.`EjercicioRutina` (
-  `idejerciciorutina` INT NOT NULL,
+  `idejerciciorutina` INT NOT NULL AUTO_INCREMENT,
   `idrutina` INT NOT NULL,
   `idejercicio` INT NOT NULL,
-  `fecha` DATE NOT NULL,
-  `peso` FLOAT NULL,
+  `peso` VARCHAR(40) NULL,
   `repeticiones` INT NULL,
   `series` INT NULL,
   `orden` INT NULL,
   `diassemana` ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo') NULL,
-  PRIMARY KEY (`idejerciciorutina`, `idrutina`, `idejercicio`),
-  INDEX `fk_EjercicioRutina_Rutina1_idx` (`idrutina` ASC) VISIBLE,
-  INDEX `fk_EjercicioRutina_ejercicio1_idx` (`idejercicio` ASC) VISIBLE,
+  PRIMARY KEY (`idejerciciorutina`),
+  INDEX `fk_EjercicioRutina_Rutina1_idx` (`idrutina`),
+  INDEX `fk_EjercicioRutina_ejercicio1_idx` (`idejercicio`),
   CONSTRAINT `fk_EjercicioRutina_Rutina1`
     FOREIGN KEY (`idrutina`)
     REFERENCES `taw12`.`Rutina` (`idrutina`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_EjercicioRutina_ejercicio1`
+  CONSTRAINT `fk_EjercicioRutina_Ejercicio1`
     FOREIGN KEY (`idejercicio`)
     REFERENCES `taw12`.`Ejercicio` (`idejercicio`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
 
 
 -- -----------------------------------------------------
@@ -209,50 +215,39 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `taw12`.`SeguimientoObjetivos` ;
 
 CREATE TABLE IF NOT EXISTS `taw12`.`SeguimientoObjetivos` (
-<<<<<<< Updated upstream
-  `idejerciciorutina` INT NOT NULL,
-  `idrutina` INT NOT NULL,
-  `idejercicio` INT NOT NULL,
-=======
   `idseguimiento` INT NOT NULL AUTO_INCREMENT,
-  `idrutina` INT NOT NULL,  -- Nueva columna para la clave foránea a Rutina
+  `idrutina` INT NOT NULL,
+  `idcliente` INT NOT NULL,
   `fecha` DATE NOT NULL,
->>>>>>> Stashed changes
   `realizado` TINYINT NOT NULL,
-  `pesorealizado` FLOAT NULL DEFAULT NULL,
+  `pesorealizado` VARCHAR(40) NULL DEFAULT NULL,
   `repeticionesrealizadas` INT NULL DEFAULT NULL,
   `seriesrealizadas` INT NULL DEFAULT NULL,
   `observaciones` VARCHAR(200) NULL,
-<<<<<<< Updated upstream
-  PRIMARY KEY (`idejerciciorutina`, `idrutina`, `idejercicio`),
-  INDEX `fk_SeguimientoObjetivos_EjercicioRutina1_idx` (`idejerciciorutina` ASC, `idrutina` ASC, `idejercicio` ASC) VISIBLE,
-  CONSTRAINT `fk_SeguimientoObjetivos_EjercicioRutina1`
-    FOREIGN KEY (`idejerciciorutina` , `idrutina` , `idejercicio`)
-    REFERENCES `taw12`.`EjercicioRutina` (`idejerciciorutina` , `idrutina` , `idejercicio`)
-=======
-  `pesoobjetivo` FLOAT NULL DEFAULT NULL,  -- Nueva columna para peso objetivo
-  `seriesobjetivo` INT NULL DEFAULT NULL,  -- Nueva columna para series objetivo
-  `repeticionesobjetivo` INT NULL DEFAULT NULL,  -- Nueva columna para repeticiones objetivo
-  `nombreejercicio` VARCHAR(100) NOT NULL,  -- Nueva columna para nombre del ejercicio
+  `pesoobjetivo` VARCHAR(40) NULL DEFAULT NULL, 
+  `seriesobjetivo` INT NULL DEFAULT NULL,  
+  `repeticionesobjetivo` INT NULL DEFAULT NULL,
+  `nombreejercicio` VARCHAR(100) NOT NULL,  
   PRIMARY KEY (`idseguimiento`),
-  INDEX `fk_SeguimientoObjetivos_Rutina1_idx` (`idrutina`),  -- Índice para la nueva clave foránea
+  INDEX `fk_SeguimientoObjetivos_Rutina1_idx` (`idrutina`),  
+  INDEX `fk_SeguimientoObjetivos_Cliente1_idx` (`idcliente`),  
   CONSTRAINT `fk_SeguimientoObjetivos_Rutina1`
     FOREIGN KEY (`idrutina`)
     REFERENCES `taw12`.`Rutina` (`idrutina`)
->>>>>>> Stashed changes
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_SeguimientoObjetivos_Cliente1`
+    FOREIGN KEY (`idcliente`)
+    REFERENCES `taw12`.`Cliente` (`idcliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> Stashed changes
 -- -----------------------------------------------------
--- Table `taw12`.`Trabajador`
+-- Table `taw12`.`Trabajador`	
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `taw12`.`Trabajador` ;
 
@@ -261,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `taw12`.`Trabajador` (
   `nombre` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `contrasenya` VARCHAR(45) NOT NULL,
-  `tipo` ENUM('ENTRENADOR FUERZA', 'ENTRENADOR CROSSTRAINNING', 'DIETISTA') NOT NULL,
+  `tipo` ENUM('ENTRENADOR FUERZA', 'ENTRENADOR CROSSTRAINING', 'DIETISTA') NOT NULL,
   `imagenperfil` LONGBLOB NULL DEFAULT NULL,
   PRIMARY KEY (`idtrabajador`),
   UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE,

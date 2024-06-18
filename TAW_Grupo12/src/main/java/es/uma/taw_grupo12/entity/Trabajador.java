@@ -5,21 +5,12 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import es.uma.taw_grupo12.dto.DTO;
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 /**
  *
@@ -59,6 +50,8 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
     private byte[] imagenperfil;
     @ManyToMany(mappedBy = "trabajadorList")
     private List<Cliente> clienteList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrabajador")
+    private List<Rutina> rutinaList;
 
     public Trabajador() {
     }
@@ -131,6 +124,10 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
         this.clienteList = clienteList;
     }
 
+    public List<Rutina> getRutinaList() {return rutinaList;}
+
+    public void setRutinaList(List<Rutina> rutinaList) {this.rutinaList = rutinaList;}
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -156,17 +153,20 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
         return "es.taw12.app.entity.Trabajador[ idtrabajador=" + idtrabajador + " ]";
     }
 
-    //@Victoria
-    @Override
     public TrabajadorDTO toDTO() {
-        TrabajadorDTO trabajador = new TrabajadorDTO();
-        trabajador.setIdtrabajador(this.idtrabajador);
-        trabajador.setNombre(this.nombre);
-        trabajador.setEmail(this.email);
-        trabajador.setContrasenya(this.contrasenya);
-        trabajador.setTipo(this.tipo);
-        trabajador.setImagenperfil(this.imagenperfil);
-        return trabajador;
+        TrabajadorDTO trabajadorDTO = new TrabajadorDTO();
+        trabajadorDTO.setImagenperfil(this.imagenperfil);
+        trabajadorDTO.setNombre(this.nombre);
+        trabajadorDTO.setContrasenya(this.contrasenya);
+        trabajadorDTO.setTipo(this.tipo);
+        trabajadorDTO.setEmail(this.email);
+        trabajadorDTO.setIdtrabajador(this.idtrabajador);
+        List<Integer> clientes = new ArrayList<>();
+        for(Cliente cliente : this.clienteList) {
+            clientes.add(cliente.getIdcliente());
+        }
+        trabajadorDTO.setClienteList(clientes);
+
+        return trabajadorDTO;
     }
-    //@Victoria
 }

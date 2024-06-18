@@ -20,5 +20,8 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>
 
     @Query("SELECT c FROM Trabajador c WHERE c.email = :email or c.nombre = :nombre")
     Optional<Trabajador> findByEmailorNombre(@Param("email") String email, @Param("nombre") String nombre);
+
+    @Query("SELECT c FROM Trabajador c WHERE c.tipo = :tipo")
+    List<Trabajador> findByTipo(@Param("tipo")String tipo);
     //@Victoria
 }

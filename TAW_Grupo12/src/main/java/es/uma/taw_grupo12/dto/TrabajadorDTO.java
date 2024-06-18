@@ -17,5 +17,13 @@ public class TrabajadorDTO {
     private List<Integer> clienteList;
     private MultipartFile imagenperfilFile; //AÑADIDO PARA MANEJAR LA SUBIDAD DE IMÁGENES A LA BASE DE DATOS
 
+    public String getTipo(){
+        return switch (this.tipo){
+            case "ENTRENADOR FUERZA" -> "entrenador";
+            case "ENTRENADOR CROSSTRAINNING" -> "entrenador-cross";
+            case "DIETISTA" -> "dietista";
+            default -> null;
+        };
+    }
 
 }

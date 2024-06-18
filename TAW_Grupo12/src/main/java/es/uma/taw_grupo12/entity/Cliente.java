@@ -5,6 +5,7 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import es.uma.taw_grupo12.dto.DTO;
@@ -68,7 +69,7 @@ public class Cliente implements Serializable, DTO<ClienteDTO> {
     private Double altura;
     @Column(name = "alergias")
     private String alergias;
-    @JoinTable(name = "Cliente-Trabajador", joinColumns = {
+    @JoinTable(name = "Cliente_Trabajador", joinColumns = {
         @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")}, inverseJoinColumns = {
         @JoinColumn(name = "idtrabajador", referencedColumnName = "idtrabajador")})
     @ManyToMany
@@ -77,6 +78,11 @@ public class Cliente implements Serializable, DTO<ClienteDTO> {
     private List<Dieta> dietaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcliente")
     private List<Rutina> rutinaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private List<SeguimientoDieta> seguimientoDietasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private List<SeguimientoObjetivos> objetivosList;
+
 
     public Cliente() {
     }
@@ -217,6 +223,16 @@ public class Cliente implements Serializable, DTO<ClienteDTO> {
         cliente.setPeso(this.peso);
         cliente.setAltura(this.altura);
         cliente.setAlergias(this.alergias);
+
+        List<Integer> listaTrabajadores = new ArrayList<Integer>();
+        for (Trabajador trabajador: this.trabajadorList) {
+            listaTrabajadores.add(trabajador.getIdtrabajador());
+        }
+        cliente.setTrabajadorList(listaTrabajadores);
+
+        cliente.setDietaList(this.dietaList);
+        cliente.setRutinaList(this.rutinaList);
+
         return cliente;
     }
     //@Victoria

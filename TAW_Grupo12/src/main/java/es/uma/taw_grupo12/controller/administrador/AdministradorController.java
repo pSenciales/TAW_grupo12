@@ -133,6 +133,7 @@ public class AdministradorController extends BaseController{
         List<ClienteDTO> clientesDTO = this.clienteService.listarClientesDTO();
         List<TrabajadorDTO> trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTO();
         model.addAttribute("filtroUsuarios", new FiltroUsuarios());
+        model.addAttribute("clienteModel", new ClienteDTO());
         model.addAttribute("clientes", clientesDTO);
         model.addAttribute("trabajadores", trabajadoresDTO);
         model.addAttribute("tituloCabeceraAdmin", "Gestionar Usuarios");

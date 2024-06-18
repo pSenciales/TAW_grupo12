@@ -33,7 +33,7 @@ public class EjercicioRutina implements Serializable {
     protected Integer ejercicioRutinaPK;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "peso")
-    private Float peso;
+    private String peso;
     @Column(name = "repeticiones")
     private Integer repeticiones;
     @Column(name = "series")
@@ -66,11 +66,11 @@ public class EjercicioRutina implements Serializable {
         this.ejercicioRutinaPK = ejercicioRutinaPK;
     }
 
-    public Float getPeso() {
+    public String getPeso() {
         return peso;
     }
 
-    public void setPeso(Float peso) {
+    public void setPeso(String peso) {
         this.peso = peso;
     }
 

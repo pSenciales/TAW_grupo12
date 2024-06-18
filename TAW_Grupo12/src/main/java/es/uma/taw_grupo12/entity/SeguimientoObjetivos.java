@@ -43,7 +43,7 @@ public class SeguimientoObjetivos implements Serializable {
     private short realizado;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "pesorealizado")
-    private Float pesorealizado;
+    private String pesorealizado;
     @Column(name = "repeticionesrealizadas")
     private Integer repeticionesrealizadas;
     @Column(name = "seriesrealizadas")
@@ -51,7 +51,7 @@ public class SeguimientoObjetivos implements Serializable {
     @Column(name = "observaciones")
     private String observaciones;
     @Column(name = "pesoobjetivo")
-    private Float pesoobjetivo;
+    private String pesoobjetivo;
     @Column(name = "repeticionesobjetivo")
     private Integer repeticionesobjetivo;
     @Column(name = "seriesobjetivo")
@@ -103,11 +103,11 @@ public class SeguimientoObjetivos implements Serializable {
         this.realizado = realizado;
     }
 
-    public Float getPesorealizado() {
+    public String getPesorealizado() {
         return pesorealizado;
     }
 
-    public void setPesorealizado(Float pesorealizado) {
+    public void setPesorealizado(String pesorealizado) {
         this.pesorealizado = pesorealizado;
     }
 
@@ -155,9 +155,9 @@ public class SeguimientoObjetivos implements Serializable {
 
     public void setRepeticionesobjetivo(Integer repeticionesobjetivo) {this.repeticionesobjetivo = repeticionesobjetivo;}
 
-    public Float getPesoobjetivo() {return pesoobjetivo;}
+    public String getPesoobjetivo() {return pesoobjetivo;}
 
-    public void setPesoobjetivo(Float pesoobjetivo) {this.pesoobjetivo = pesoobjetivo;}
+    public void setPesoobjetivo(String pesoobjetivo) {this.pesoobjetivo = pesoobjetivo;}
 
     @Override
     public int hashCode() {

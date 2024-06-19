@@ -9,9 +9,9 @@
 <%@ page import="java.util.Objects" %>
 <%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %><%--
   Created by IntelliJ IDEA.
-  User: Usuario
+  User: Guillermo
   Date: 18/06/2024
-  Time: 18:53
+  Time: 18:23
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -32,11 +32,11 @@
 
     <style>
         .table th, .table td {
-            text-align: center; /* Center text in thead and tbody */
+            text-align: center;
         }
 
         .table-container {
-            margin: 5rem auto;
+            margin: 2rem auto;
             width: 90%;
         }
         .contenedor {
@@ -68,7 +68,13 @@
 
 <body>
 <jsp:include page="cabeceraEntrenadorCrosstraining.jsp"></jsp:include>
-
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">Rutinas</h1>
+        </div>
+    </div>
+</div>
 <div class="table-container">
     <div class="func-container">
         <form action="/entrenadorcross/nuevarutina" method="get">
@@ -113,11 +119,10 @@
                 <span><%=rutina.getNombre()%></span>
                 <div class="botones">
 
-                    <form action="/entrenadorcross/ver/<%=rutina.getIdrutina()%>" method="get">
+                    <form action="/entrenadorcross/mostrar/<%=rutina.getIdrutina()%>" method="get">
                         <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
                     </form>
-                    <form action="/entrenadorcross/editar" method="post">
-                        <input type="hidden" name="id" value="<%=rutina.getIdrutina()%>">
+                    <form action="/entrenadorcross/editar/<%=rutina.getIdrutina()%>" method="get">
                         <button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
                     </form>
                     <form action="/entrenadorcross/eliminar/<%=rutina.getIdrutina()%>" method="get">

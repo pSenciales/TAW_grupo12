@@ -26,6 +26,7 @@ public class EntrenadorCrossTrainingController {
     @Autowired
     ClienteService clienteService;
 
+    //Pagina de Inicio
     @GetMapping("/")
     public String perfil(HttpSession sesion, Model model) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
@@ -38,6 +39,7 @@ public class EntrenadorCrossTrainingController {
         }
     }
 
+    //Página y lista de Rutinas
     @GetMapping("/rutinas")
     public String doListarRutinas(HttpSession sesion, Model model) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
@@ -56,7 +58,7 @@ public class EntrenadorCrossTrainingController {
         }
     }
 
-
+    //Formulario para crear una Rutina nueva
     @GetMapping("/nuevarutina")
     public String doCreacion(HttpSession sesion, Model model) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
@@ -70,6 +72,7 @@ public class EntrenadorCrossTrainingController {
         }
     }
 
+    //Método post (guardar) de la Rutina nueva
     @PostMapping("/nuevarutina/guardar")
     public String doGuardarRutina(HttpSession sesion, @RequestParam("nombre") String nombre, @RequestParam("cliente") Integer idcliente) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
@@ -86,6 +89,7 @@ public class EntrenadorCrossTrainingController {
         }
     }
 
+    //Borrar una rutina (idrutina)
     @GetMapping("/borrar/{idrutina}")
     public String borrarRutina(HttpSession sesion, @PathVariable("idrutina") int idrutina) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
@@ -101,6 +105,7 @@ public class EntrenadorCrossTrainingController {
         }
     }
 
+    //Aplicar filtro (nombre de la Rutina y Cliente)
     @PostMapping("/filtrar")
     public String doFiltrar(HttpSession sesion, Model model, @ModelAttribute("filtro") FiltroRutinas filtro) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
@@ -118,8 +123,9 @@ public class EntrenadorCrossTrainingController {
 
     }
 
-    @GetMapping("/visualizar/{id}")
-    public String doTabla(HttpSession sesion, Model model, @PathVariable Integer id) {
+    //Mostrar una Rutina (idrutina)
+    @GetMapping("/mostrar/{idrutina}")
+    public String doTabla(HttpSession sesion, Model model, @PathVariable("idrutina") Integer idrutina) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
                 !sesion.getAttribute("tipo").equals("entrenadorcross")) {
@@ -128,20 +134,94 @@ public class EntrenadorCrossTrainingController {
             List<EjercicioDTO> ejercicioList = ejercicioService.getFuerza();
             model.addAttribute("ejercicioList", ejercicioList);
 
-            RutinaDTO rutinaDTO = rutinaService.findById(id);
+            RutinaDTO rutinaDTO = rutinaService.findById(idrutina);
             model.addAttribute("rutina", rutinaDTO);
 
             EjercicioRutinaDTO ejercicioRutinaDTO = new EjercicioRutinaDTO();
-            ejercicioRutinaDTO.setRutina(id);
+            ejercicioRutinaDTO.setRutina(idrutina);
             model.addAttribute("ejercicioRutinaDTO", ejercicioRutinaDTO);
 
-            List<EjercicioRutinaDTO> ejerciciosRutina = ejercicioRutinaService.findAllByRutinaId(id);
+            List<EjercicioRutinaDTO> ejerciciosRutina = ejercicioRutinaService.findAllByRutinaId(idrutina);
             model.addAttribute("ejerciciosRutina", ejerciciosRutina);
 
             return "/EntrenadorCrosstraining/tableRutinas";
 
         }
 
+    }
+
+    //Añadir/Guardar un Ejercicio en una Rutina (se crea la entidad-relación EjercicioRutina)
+    @PostMapping("/addEjercicio")
+    public String doGuardarEjercicio(HttpSession sesion, @ModelAttribute EjercicioRutinaDTO ejercicioRutinaDTO) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenadorcross")) {
+            return "redirect:/";
+        } else {
+            ejercicioRutinaService.save(ejercicioRutinaDTO);
+
+            return "redirect:/entrenadorcross/mostrar/" + ejercicioRutinaDTO.getRutina();
+
+        }
+
+    }
+
+    //(Subir) Disminuir orden del EjercicioRutina
+    @PostMapping("/rutina/subir")
+    public String doSubirEjercicio(HttpSession sesion, @RequestParam("id") Integer id) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            //true significa que lo subirá
+            ejercicioRutinaService.cambiarOrden(id, true);
+            EjercicioRutinaDTO ejercicioRutinaDTO = ejercicioRutinaService.findById(id);
+            return "redirect:/entrenador/visualizar/" + ejercicioRutinaDTO.getRutina();
+
+        }
+    }
+
+    //(Bajar) Aumentar orden del EjercicioRutina
+    @PostMapping("/rutina/bajar")
+    public String doBajarEjercicio(HttpSession sesion, @RequestParam("id") Integer id) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            ejercicioRutinaService.cambiarOrden(id, false);
+            EjercicioRutinaDTO ejercicioRutinaDTO = ejercicioRutinaService.findById(id);
+            return "redirect:/entrenador/visualizar/" + ejercicioRutinaDTO.getRutina();
+
+        }
+    }
+
+    //Borrar Ejercicio de una Rutina (eliminamos la relación EjercicioRutina)
+    @GetMapping("/rutina/borrar")
+    public String doBorrarEjercicio(HttpSession sesion, @RequestParam("id") Integer id) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            EjercicioRutinaDTO ejercicioRutinaDTO = ejercicioRutinaService.findById(id);
+            ejercicioRutinaService.deleteById(id);
+            return "redirect:/entrenador/visualizar/" + ejercicioRutinaDTO.getRutina();
+
+        }
+    }
+
+    @PostMapping("/rutina/editar")
+    public String doEditarEjercicio(HttpSession sesion, @RequestParam("id") Integer id) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            return "redirect:/entrenador/visualizar/" + id;
+
+        }
     }
 
 

@@ -137,6 +137,7 @@ public class AdministradorController extends BaseController{
         List<TrabajadorDTO> trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTO();
         model.addAttribute("filtroUsuarios", new FiltroUsuarios());
         model.addAttribute("clienteModel", new ClienteDTO());
+        model.addAttribute("trabajadorModel", new TrabajadorDTO());
         model.addAttribute("clientes", clientesDTO);
         model.addAttribute("trabajadores", trabajadoresDTO);
         model.addAttribute("tituloCabeceraAdmin", "Gestionar Usuarios");
@@ -144,7 +145,7 @@ public class AdministradorController extends BaseController{
         return "/Administrador/GestionarUsuarios/gestionarUsuarios";
     }
 
-    @PostMapping("/filtrarGestionarClientes")
+    @PostMapping("/filtrarGestionarUsuarios")
     public String doFiltrarGestionarClientes(Model model, @ModelAttribute("filtroUsuarios") FiltroUsuarios filtroUsuarios) {
         if (filtroUsuarios.estaVacio()) {
             return "redirect:/administrador/gestionarUsuarios";
@@ -183,6 +184,7 @@ public class AdministradorController extends BaseController{
 
         model.addAttribute("filtroUsuarios", filtroUsuarios);
         model.addAttribute("clienteModel", new ClienteDTO());
+        model.addAttribute("trabajadorModel", new TrabajadorDTO());
         model.addAttribute("trabajadores", trabajadoresDTO);
         model.addAttribute("clientes", clientesDTO);
         model.addAttribute("tituloCabeceraAdmin", "Gestionar Clientes");

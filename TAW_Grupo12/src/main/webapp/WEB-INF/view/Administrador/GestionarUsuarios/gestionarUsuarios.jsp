@@ -96,7 +96,7 @@
         <%= request.getAttribute("errorGestionarCliente") %>
     </div>
     <% } %>
-    <form:form modelAttribute="filtroUsuarios" method="post" action="/administrador/filtrarGestionarClientes">
+    <form:form modelAttribute="filtroUsuarios" method="post" action="/administrador/filtrarGestionarUsuarios">
     <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
@@ -233,8 +233,33 @@
                 <p class="card-text"><span class="bold">Tipo Usuario: </span> trabajador </p>
                 <p class="card-text"><span class="bold">Tipo Trabajador: </span> <%= trabajadorDTO.getTipo().toLowerCase() %>
                 </p>
-                <a href="#" class="btn btn-outline-primary mt-1" data-bs-toggle="modal" data-bs-target="#editarClienteModal"
-                   data-cliente-id="<%=trabajadorDTO.getIdtrabajador()%>">Gestionar</a>
+                <a href="#" class="btn btn-outline-primary mt-1" data-bs-toggle="modal" data-bs-target="#editarTrabajadorModal<%=trabajadorDTO.getIdtrabajador()%>"
+                   id="modalTrabajador<%=trabajadorDTO.getIdtrabajador()%>">Gestionar</a>
+
+                <!-- Modal para editar los datos del trabajador -->
+                <div class="modal fade" id="editarTrabajadorModal<%=trabajadorDTO.getIdtrabajador()%>" tabindex="-1" aria-labelledby="editarTrabajadorModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editarTrabajadorModalLabel">Editar Trabajador</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body ps-4 pt-3" style="text-align: start">
+                                <!-- Aquí iría tu formulario para editar los datos del trabajador -->
+                                <form:form action="/administrador/guardarTrabajador" modelAttribute="trabajadorModel" method="post" enctype="multipart/form-data">
+                                    <form:hidden path="idtrabajador" value="<%= trabajadorDTO.getIdtrabajador() %>"/>
+                                    <!-- Aquí irían los campos del formulario para editar los datos del trabajador -->
+                                </form:form>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <form action="/administrador/eliminarTrabajador" method="post">
+                                    <input type="hidden" value="<%= trabajadorDTO.getIdtrabajador() %>" name="idTrabajador"/>
+                                    <button type="submit" class="btn btn-outline-danger" id="eliminarTrabajador">Eliminar trabajador</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -249,6 +274,14 @@
     document.querySelectorAll('#modalCliente').forEach(item => {
         item.addEventListener('click', function () {
             var myModal = new bootstrap.Modal(document.getElementById('editarClienteModal'), {});
+            myModal.show();
+        });
+    });
+
+    document.querySelectorAll('[id^="modalTrabajador"]').forEach(item => {
+        item.addEventListener('click', function () {
+            var modalId = 'editarTrabajadorModal' + this.getAttribute('data-trabajador-id');
+            var myModal = new bootstrap.Modal(document.getElementById(modalId), {});
             myModal.show();
         });
     });

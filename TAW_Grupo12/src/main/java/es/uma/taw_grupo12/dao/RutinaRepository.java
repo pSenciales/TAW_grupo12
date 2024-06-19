@@ -16,4 +16,6 @@ public interface RutinaRepository extends JpaRepository<Rutina, Integer> {
     @Query("select r from Rutina r where r.nombre like concat('%',?1,'%')  and r.idcliente.idcliente = ?2")
     List<Rutina> findByFiltroNombreAndId(String nombre, String idcliente);
 
+    @Query("select r from Rutina r where r.idtrabajador.idtrabajador = ?1 and r.idcliente.idcliente = ?2")
+    List<Rutina> findAllByTrabajadorAndCliente(Integer idtrabajador, Integer idcliente);
 }

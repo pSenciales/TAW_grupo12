@@ -61,8 +61,14 @@
 
 <body>
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
-<h1>Rutina: <%=rutina.getNombre()%></h1>
-
+<div class="m-3">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="http://localhost:8080/entrenador/rutinas">Rutinas</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><%=rutina.getNombre()%></li>
+    </ol>
+</nav>
+</div>
 <form:form method="post" action="/entrenador/addEjercicio" modelAttribute="ejercicioRutinaDTO">
     <div class="m-5 d-flex flex-row " id="anyadir-ej">
         <form:hidden path="rutina"></form:hidden>
@@ -90,7 +96,7 @@
     <tr>
         <th scope="col">Lunes</th>
         <th scope="col">Martes</th>
-        <th scope="col">Miercoles</th>
+        <th scope="col">Miércoles</th>
         <th scope="col">Jueves</th>
         <th scope="col">Viernes</th>
         <th scope="col">Sábado</th>
@@ -147,12 +153,10 @@
                 <input type="hidden" value="<%=ids[j]%>" name="id">
                 <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-arrow-down"></i></button>
             </form>
-            <form method="get" action="/entrenador/rutina/borrar">
-                <input type="hidden" value="<%=ids[j]%>" name="id">
+            <form method="get" action="/entrenador/rutina/borrar/<%=ids[j]%>">
                 <button class="btn btn-danger btn-sm" type="submit"><i class="fa-solid fa-trash"></i></button>
             </form>
-            <form method="post" action="/entrenador/rutina/editar">
-                <input type="hidden" value="<%=ids[j]%>" name="id">
+            <form method="get" action="/entrenador/rutina/editar/<%=ids[j]%>">
                 <button class="btn btn-warning btn-sm" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
             </form>
             </div>

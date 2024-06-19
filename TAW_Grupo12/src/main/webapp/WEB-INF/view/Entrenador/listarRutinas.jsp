@@ -32,11 +32,11 @@
 
     <style>
         .table th, .table td {
-            text-align: center; /* Center text in thead and tbody */
+            text-align: center;
         }
 
         .table-container {
-            margin: 5rem auto;
+            margin: 2rem auto;
             width: 90%;
         }
         .contenedor {
@@ -68,7 +68,13 @@
 
 <body>
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
-
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">Rutinas</h1>
+        </div>
+    </div>
+</div>
 <div class="table-container">
     <div class="func-container">
     <form action="/entrenador/new-rutina" method="get">
@@ -116,8 +122,7 @@
                         <form action="/entrenador/visualizar/<%=rutina.getIdrutina()%>" method="get">
                             <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
                         </form>
-                        <form action="/entrenador/editar" method="post">
-                            <input type="hidden" name="id" value="<%=rutina.getIdrutina()%>">
+                        <form action="/entrenador/editar/<%=rutina.getIdrutina()%>" method="get">
                             <button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
                         </form>
                         <form action="/entrenador/borrar/<%=rutina.getIdrutina()%>" method="get">

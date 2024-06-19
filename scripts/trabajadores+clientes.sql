@@ -4,7 +4,6 @@ TRUNCATE TABLE taw12.trabajador;
 TRUNCATE TABLE taw12.cliente;
 TRUNCATE TABLE taw12.cliente_trabajador;
 SET FOREIGN_KEY_CHECKS = 1;
---
 
 -- Añadir clientes
 INSERT INTO taw12.Cliente (nombre, email, contrasenya, imagenPerfil, peso, altura, alergias) 
@@ -51,5 +50,6 @@ VALUES
     -- Cliente Laura Rodríguez (idCliente = 4) con un trabajador
     (4, 2),  -- Laura Rodríguez con Pedro Sánchez (Dietista)
     
-    -- Cliente Ana López (idCliente = 5) con un trabajador
-    (5, 6); -- Ana López con Carlos Pérez (Entrenador de Fuerza)
+    -- Cliente Ana López (idCliente = 5) con trabajadores
+    (5, 6), -- Ana López con Carlos Pérez (Entrenador de Fuerza)
+    (5, 7); -- Ana López con Elena Martínez (Entrenador Crosstraining)

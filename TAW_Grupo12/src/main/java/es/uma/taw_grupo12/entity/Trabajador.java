@@ -145,6 +145,7 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
         if (!(object instanceof Trabajador)) {
             return false;
         }
+
         Trabajador other = (Trabajador) object;
         if ((this.idtrabajador == null && other.idtrabajador != null) || (this.idtrabajador != null && !this.idtrabajador.equals(other.idtrabajador))) {
             return false;

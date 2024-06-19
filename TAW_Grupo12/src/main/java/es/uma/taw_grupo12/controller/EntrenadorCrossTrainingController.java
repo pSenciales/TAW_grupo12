@@ -61,7 +61,7 @@ public class EntrenadorCrossTrainingController {
 
     //Formulario para crear una Rutina nueva
     @GetMapping("/nuevarutina")
-    public String doCreacion(HttpSession sesion, Model model) {
+    public String doCrearRutina(HttpSession sesion, Model model) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
                 !sesion.getAttribute("tipo").equals("entrenadorcross")) {
@@ -69,30 +69,51 @@ public class EntrenadorCrossTrainingController {
         } else {
             List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());
             model.addAttribute("clientes", clientes);
+            RutinaDTO rutina = new RutinaDTO();
+            model.addAttribute("rutina", rutina);
             return "/EntrenadorCrosstraining/crearRutina";
         }
+
     }
 
     //Método post (guardar) de la Rutina nueva
-    @PostMapping("/nuevarutina/guardar")
-    public String doGuardarRutina(HttpSession sesion, @RequestParam("nombre") String nombre, @RequestParam("cliente") Integer idcliente) {
+    @PostMapping(value = {"/nuevarutina/guardar", "editar/nuevarutina/guardar"})
+    public String doCrearRutina(HttpSession sesion, @ModelAttribute("rutina") RutinaDTO rutina) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
                 !sesion.getAttribute("tipo").equals("entrenadorcross")) {
             return "redirect:/";
         } else {
-            RutinaDTO rutinaDTO = new RutinaDTO(nombre, trabajador.getIdtrabajador(), idcliente);
-
-            rutinaService.save(rutinaDTO);
+            rutina.setIdtrabajador(trabajador.getIdtrabajador());
+            rutinaService.save(rutina);
 
             return "redirect:/entrenadorcross/rutinas";
 
         }
     }
 
-    //Borrar una rutina (idrutina)
-    @GetMapping("/borrar/{idrutina}")
-    public String borrarRutina(HttpSession sesion, @PathVariable("idrutina") int idrutina) {
+    //Editar una Rutina
+    @GetMapping("/editar/{idrutina}")
+    public String doEditarRutina(HttpSession sesion, @PathVariable("idrutina") Integer idrutina, Model model) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenadorcross")) {
+            return "redirect:/";
+        } else {
+            List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());
+            model.addAttribute("clientes", clientes);
+            RutinaDTO rutina = rutinaService.findById(idrutina);
+            model.addAttribute("rutina", rutina);
+
+            return "/EntrenadorCrosstraining/crearRutina";
+
+
+        }
+    }
+
+    //Eliminar una rutina (idrutina)
+    @GetMapping("/eliminar/{idrutina}")
+    public String eliminarRutina(HttpSession sesion, @PathVariable("idrutina") int idrutina) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
                 !sesion.getAttribute("tipo").equals("entrenadorcross")) {
@@ -119,7 +140,7 @@ public class EntrenadorCrossTrainingController {
             model.addAttribute("filtro", filtro);
             List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());
             model.addAttribute("clientes", clientes);
-            return "/EntrenadorCrosstraining/listarRutinas";
+            return "/EntrenadorCrosstraining/listarRutina";
         }
 
     }

@@ -25,7 +25,6 @@
 <html lang="es">
 
 <head>
-    <title>Tabla de Rutina</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://kit.fontawesome.com/af60b01aeb.js" crossorigin="anonymous"></script>
@@ -69,10 +68,15 @@
 
 <body>
 <jsp:include page="cabeceraEntrenadorCrosstraining.jsp"></jsp:include>
-
-<h1>Rutina: <%=rutina.getNombre()%>
-</h1>
-
+<div class="m-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="http://localhost:8080/entrenadorcross/rutinas">Rutinas</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><%=rutina.getNombre()%>
+            </li>
+        </ol>
+    </nav>
+</div>
 <div class="filtroContainer m-5">
     <form method="post" action="/entrenadorcross/filtrarTipoEjercicio/<%=rutina.getIdrutina()%>">
         <div class="form-group">
@@ -105,8 +109,8 @@
             <form:option value="6" label="Sábado"></form:option>
             <form:option value="7" label="Domingo"></form:option>
         </form:select>
-        <form:input required="required" type="number" min="1" placeholder="Repeticiones" path="repeticiones"/>
         <form:input required="required" type="number" min="1" placeholder="Series" path="series"/>
+        <form:input required="required" type="number" min="1" placeholder="Repeticiones" path="repeticiones"/>
         <form:input required="required" placeholder="Peso" path="peso"/>
         <form:select required="required" path="ejercicio">
             <%

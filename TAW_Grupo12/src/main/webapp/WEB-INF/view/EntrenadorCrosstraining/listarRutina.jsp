@@ -11,7 +11,7 @@
   Created by IntelliJ IDEA.
   User: Guillermo
   Date: 18/06/2024
-  Time: 18:59
+  Time: 18:23
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -24,7 +24,6 @@
 <html lang="es">
 
 <head>
-    <title>Lista de Rutinas</title>
     <script src="https://kit.fontawesome.com/af60b01aeb.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,14 +32,13 @@
 
     <style>
         .table th, .table td {
-            text-align: center; /* Center text in thead and tbody */
+            text-align: center;
         }
 
         .table-container {
-            margin: 5rem auto;
+            margin: 2rem auto;
             width: 90%;
         }
-
         .contenedor {
             display: flex;
             align-items: center;
@@ -51,18 +49,15 @@
             display: flex;
             gap: 10px;
         }
-
-        .search-container {
+        .search-container{
             margin-bottom: 1rem;
 
         }
-
-        .func-container {
+        .func-container{
             display: flex;
             gap: 2rem;
         }
-
-        .vertical {
+        .vertical{
             border-left: solid #000000;
             max-height: 2.5rem;
         }
@@ -73,7 +68,13 @@
 
 <body>
 <jsp:include page="cabeceraEntrenadorCrosstraining.jsp"></jsp:include>
-
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">Rutinas</h1>
+        </div>
+    </div>
+</div>
 <div class="table-container">
     <div class="func-container">
         <form action="/entrenadorcross/nuevarutina" method="get">
@@ -101,12 +102,12 @@
         </thead>
         <tbody>
         <%
-            for (RutinaDTO r : rutinas) {
+            for(RutinaDTO rutina : rutinas){
                 String cliente = "Sin asignar";
                 boolean encontrado = false;
                 int i = 0;
-                while (i < clientes.size() && !encontrado) {
-                    if (Objects.equals(clientes.get(i).getIdcliente(), r.getIdcliente())) {
+                while(i<clientes.size() && !encontrado){
+                    if(Objects.equals(clientes.get(i).getIdcliente(), rutina.getIdcliente())){
                         encontrado = true;
                         cliente = clientes.get(i).getNombre();
                     }
@@ -115,17 +116,16 @@
         %>
         <tr>
             <td class="contenedor">
-                <span><%=r.getNombre()%></span>
+                <span><%=rutina.getNombre()%></span>
                 <div class="botones">
 
-                    <form action="/entrenadorcross/mostrar/<%=r.getIdrutina()%>" method="get">
+                    <form action="/entrenadorcross/mostrar/<%=rutina.getIdrutina()%>" method="get">
                         <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
                     </form>
-                    <form action="/entrenadorcross/rutina/editar" method="post">
-                        <input type="hidden" name="id" value="<%=r.getIdrutina()%>">
+                    <form action="/entrenadorcross/editar/<%=rutina.getIdrutina()%>" method="get">
                         <button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
                     </form>
-                    <form action="/entrenadorcross/borrar/<%=r.getIdrutina()%>" method="get">
+                    <form action="/entrenadorcross/eliminar/<%=rutina.getIdrutina()%>" method="get">
                         <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
                     </form>
                 </div>

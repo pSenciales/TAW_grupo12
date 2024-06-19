@@ -35,8 +35,12 @@ public class EjercicioRutinaDTO {
     }
 
     public String toStringCross() {
+        String seriesText = (this.series == 1) ? " serie" : " series";
+        String repeticionesText = (this.repeticiones == 1) ? " repetición" : " repeticiones";
+        String pesoText = (this.peso.isEmpty()) ? repeticionesText : " " + this.peso;
 
-        return "(" + this.series + " series de " + this.repeticiones + " " + this.peso;
-
+        return "(" + this.series + seriesText + " de " + this.repeticiones + pesoText + ")";
     }
+
+
 }

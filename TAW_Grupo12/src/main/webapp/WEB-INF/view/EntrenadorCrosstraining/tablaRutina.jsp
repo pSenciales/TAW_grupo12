@@ -25,6 +25,7 @@
 <html lang="es">
 
 <head>
+    <title>Tabla de la Rutina</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://kit.fontawesome.com/af60b01aeb.js" crossorigin="anonymous"></script>
@@ -111,7 +112,7 @@
         </form:select>
         <form:input required="required" type="number" min="1" placeholder="Series" path="series"/>
         <form:input required="required" type="number" min="1" placeholder="Repeticiones" path="repeticiones"/>
-        <form:input required="required" placeholder="Peso" path="peso"/>
+        <form:input placeholder="Unidad/Medición" path="peso"/>
         <form:select required="required" path="ejercicio">
             <%
                 if (ejercicioListFiltrado == null || ejercicioListFiltrado.isEmpty()) {
@@ -185,22 +186,17 @@
                 <div class="button-container">
                     <form method="post" action="/entrenadorcross/rutina/subir">
                         <input type="hidden" value="<%=ids[j]%>" name="id">
-                        <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-arrow-up"></i>
-                        </button>
+                        <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-arrow-up"></i></button>
                     </form>
                     <form method="post" action="/entrenadorcross/rutina/bajar">
                         <input type="hidden" value="<%=ids[j]%>" name="id">
-                        <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-arrow-down"></i>
-                        </button>
+                        <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-arrow-down"></i></button>
                     </form>
-                    <form method="get" action="/entrenadorcross/rutina/borrar">
-                        <input type="hidden" value="<%=ids[j]%>" name="id">
+                    <form method="get" action="/entrenadorcross/rutina/borrar/<%=ids[j]%>">
                         <button class="btn btn-danger btn-sm" type="submit"><i class="fa-solid fa-trash"></i></button>
                     </form>
-                    <form method="post" action="/entrenadorcross/rutina/editar">
-                        <input type="hidden" value="<%=ids[j]%>" name="id">
-                        <button class="btn btn-warning btn-sm" type="submit"><i class="fa-solid fa-pen-to-square"></i>
-                        </button>
+                    <form method="get" action="/entrenadorcross/rutina/editar/<%=ids[j]%>">
+                        <button class="btn btn-warning btn-sm" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
                     </form>
                 </div>
                 <%

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SegumientoObjetivosService {
+public class SeguimientoObjetivosService {
     @Autowired
     SeguimientoObjetivosRepository seguimientoObjetivosRepository;
 

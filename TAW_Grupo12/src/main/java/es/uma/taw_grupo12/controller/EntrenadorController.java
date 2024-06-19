@@ -1,18 +1,11 @@
 package es.uma.taw_grupo12.controller;
 
-import ch.qos.logback.core.net.server.Client;
 import es.uma.taw_grupo12.dto.*;
-import es.uma.taw_grupo12.entity.SeguimientoObjetivos;
-import es.uma.taw_grupo12.entity.Trabajador;
 import es.uma.taw_grupo12.service.*;
 import es.uma.taw_grupo12.dto.EjercicioDTO;
 import es.uma.taw_grupo12.dto.RutinaDTO;
 import es.uma.taw_grupo12.service.EjercicioService;
 import es.uma.taw_grupo12.service.RutinaService;
-import es.uma.taw_grupo12.dto.*;
-import es.uma.taw_grupo12.entity.Rutina;
-import es.uma.taw_grupo12.entity.Trabajador;
-import es.uma.taw_grupo12.service.*;
 import es.uma.taw_grupo12.ui.Entrenador.FiltroRutinas;
 
 import jakarta.servlet.http.HttpSession;
@@ -39,7 +32,7 @@ public class EntrenadorController {
     @Autowired
     private ClienteService clienteService;
     @Autowired
-    private SegumientoObjetivosService segumientoObjetivosService;
+    private SeguimientoObjetivosService seguimientoObjetivosService;
 
 
     @GetMapping("/")
@@ -225,8 +218,8 @@ public class EntrenadorController {
             Date fechaDate = fecha != null && !fecha.isEmpty() ? Date.valueOf(fecha) : null;
             List<SeguimientoObjetivosDTO> seguimientoObjetivos =
                     (nombre != null && !nombre.isEmpty()) || fechaDate != null ?
-                            segumientoObjetivosService.findByNombreEjercicioAndFecha(nombre, idcliente, idrutina, fechaDate)
-                            : segumientoObjetivosService.findByClienteAndRutina(idcliente, idrutina);
+                            seguimientoObjetivosService.findByNombreEjercicioAndFecha(nombre, idcliente, idrutina, fechaDate)
+                            : seguimientoObjetivosService.findByClienteAndRutina(idcliente, idrutina);
 
             model.addAttribute("feedback", seguimientoObjetivos);
             model.addAttribute("filtro",nombre );

@@ -25,7 +25,8 @@
     <script src="https://kit.fontawesome.com/af60b01aeb.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <style>
         .table th, .table td {
@@ -95,11 +96,15 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="http://localhost:8080/entrenadorcross/clientes">Clientes</a></li>
             <li class="breadcrumb-item">
-                <form method="post" action="/entrenadorcross/cliente/mostrar/<%=cliente.getIdcliente()%>" style="display:inline;">
-                    <button type="submit" class="link-button"><%=cliente.getNombre()%></button>
+                <form method="post" action="/entrenadorcross/cliente/mostrar/<%=cliente.getIdcliente()%>"
+                      style="display:inline;">
+                    <button type="submit" class="link-button"><%=cliente.getNombre()%>
+                    </button>
                 </form>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Feedback de <%=cliente.getNombre()%> en rutina <%=rutina.getNombre()%></li>
+            <li class="breadcrumb-item active" aria-current="page">Feedback de <%=cliente.getNombre()%> en
+                rutina <%=rutina.getNombre()%>
+            </li>
         </ol>
     </nav>
 </div>
@@ -115,12 +120,24 @@
                 <tbody>
                 <% for (SeguimientoObjetivosDTO s : feedback) {
                     String checked = (s.getRealizado() == 1) ? "checked" : "";
+
+                    // Determine text for series and repetitions for objective
+                    String seriesObjetivoText = (s.getSeriesobjetivo() == 1) ? " serie" : " series";
+                    String repeticionesObjetivoText = (s.getRepeticionesobjetivo() == 1) ? " repetición" : " repeticiones";
+                    String pesoObjetivoText = (s.getPesoobjetivo()==null) ? repeticionesObjetivoText : s.getPesoobjetivo();
+
+                    // Determine text for series and repetitions for realized
+                    String seriesRealizadasText = (s.getSeriesrealizadas() == 1) ? " serie" : " series";
+                    String repeticionesRealizadasText = (s.getRepeticionesrealizadas() == 1) ? " repetición" : " repeticiones";
+                    String pesoRealizadoText = (s.getPesorealizado()==null) ? repeticionesRealizadasText : s.getPesorealizado();
                 %>
                 <tr>
                     <td>
                         <div class="feedback-instance fw-normal">
-                            <%= s.getFecha().toString() + " Ejercicio: " + s.getNombreejercicio() %>, objetivo de (<%= s.getSeriesobjetivo() + "s, " + s.getRepeticionesobjetivo() + "r, " + s.getPesoobjetivo() %> )
-                            y realizado con (<%= s.getSeriesrealizadas() + "s, " + s.getRepeticionesrealizadas() + "r, " + s.getPesorealizado()%>)
+                            <%= s.getFecha().toString() + " Ejercicio: " + s.getNombreejercicio() %>, objetivo de
+                            <%="(" + s.getSeriesobjetivo() + seriesObjetivoText + " de " + s.getRepeticionesobjetivo() + " " + pesoObjetivoText + ")" %>
+                            y realizado con
+                            <%="(" + s.getSeriesrealizadas() + seriesRealizadasText + " de " + s.getRepeticionesrealizadas() + " " + pesoRealizadoText + ")" %>
                             <% if (s.getObservaciones() != null && !s.getObservaciones().isEmpty()) { %>
                             <br>
                             Observaciones: <%= s.getObservaciones() %>
@@ -148,8 +165,11 @@
     </div>
 
     <div class="mt-3">
-        <form class="d-flex flex-column" action="/entrenadorcross/cliente/feedback/<%=cliente.getIdcliente()%>/<%=rutina.getIdrutina()%>" method="post">
-            <input class="form-control me-2" type="search" placeholder="Nombre del ejercicio" name="nombre" value="<%=filtro%>">
+        <form class="d-flex flex-column"
+              action="/entrenadorcross/cliente/feedback/<%=cliente.getIdcliente()%>/<%=rutina.getIdrutina()%>"
+              method="post">
+            <input class="form-control me-2" type="search" placeholder="Nombre del ejercicio" name="nombre"
+                   value="<%=filtro%>">
             <div class="d-flex mt-2">
                 <input class="form-control me-2" type="date" name="fecha">
                 <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -158,7 +178,9 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

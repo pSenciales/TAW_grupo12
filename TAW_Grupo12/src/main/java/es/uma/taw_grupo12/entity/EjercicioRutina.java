@@ -7,6 +7,7 @@ package es.uma.taw_grupo12.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import es.uma.taw_grupo12.dto.DTO;
 import es.uma.taw_grupo12.dto.EjercicioRutinaDTO;
 import jakarta.persistence.*;
 
@@ -22,7 +23,7 @@ import jakarta.persistence.*;
         @NamedQuery(name = "EjercicioRutina.findBySeries", query = "SELECT e FROM EjercicioRutina e WHERE e.series = :series"),
         @NamedQuery(name = "EjercicioRutina.findByOrden", query = "SELECT e FROM EjercicioRutina e WHERE e.orden = :orden"),
         @NamedQuery(name = "EjercicioRutina.findByDiassemana", query = "SELECT e FROM EjercicioRutina e WHERE e.diassemana = :diassemana")})
-public class EjercicioRutina implements Serializable {
+public class EjercicioRutina implements Serializable, DTO<EjercicioRutinaDTO> {
 
     private static final long serialVersionUID = 1L;
     @Id

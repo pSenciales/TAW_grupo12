@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,7 +212,7 @@ public class EntrenadorController {
 
     @PostMapping("cliente/feedback/{idcliente}/{idrutina}")
     public String doFeedBack(HttpSession sesion, Model model, @PathVariable Integer idcliente, @PathVariable Integer idrutina,
-                             @RequestParam(required = false) String nombre) {
+                             @RequestParam(required = false) String nombre, @RequestParam(required = false) String fecha) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
                 !sesion.getAttribute("tipo").equals("entrenador")) {
@@ -221,8 +222,12 @@ public class EntrenadorController {
             model.addAttribute("cliente", cliente);
             RutinaDTO rutina = rutinaService.findById(idrutina);
             model.addAttribute("rutina", rutina);
-            List<SeguimientoObjetivosDTO> seguimientoObjetivos = nombre != null && !nombre.isEmpty() ? segumientoObjetivosService.findByNombreEjercicio(nombre, idcliente, idrutina):
-            segumientoObjetivosService.findByClienteAndRutina(idcliente, idrutina);
+            Date fechaDate = fecha != null && !fecha.isEmpty() ? Date.valueOf(fecha) : null;
+            List<SeguimientoObjetivosDTO> seguimientoObjetivos =
+                    (nombre != null && !nombre.isEmpty()) || fechaDate != null ?
+                            segumientoObjetivosService.findByNombreEjercicioAndFecha(nombre, idcliente, idrutina, fechaDate)
+                            : segumientoObjetivosService.findByClienteAndRutina(idcliente, idrutina);
+
             model.addAttribute("feedback", seguimientoObjetivos);
             model.addAttribute("filtro",nombre );
 

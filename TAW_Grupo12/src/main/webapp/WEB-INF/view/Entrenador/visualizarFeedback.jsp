@@ -120,7 +120,7 @@
                     <td>
                         <div class="feedback-instance fw-normal">
                             <%= s.getFecha().toString() + " Ejercicio: " + s.getNombreejercicio() %>, objetivo de (<%= s.getSeriesobjetivo() + "s, " + s.getRepeticionesobjetivo() + "r, " + s.getPesoobjetivo() %> kg)
-                            y realizado con (<%= s.getSeriesrealizadas() + "s, " + s.getRepeticionesrealizadas() + "r, " + s.getPesorealizado() %> kg)
+                            y realizado con (<%= s.getSeriesrealizadas() + "s, " + s.getRepeticionesrealizadas() + "r, " + s.getPesorealizado()%>kg)
                             <% if (s.getObservaciones() != null && !s.getObservaciones().isEmpty()) { %>
                             <br>
                             Observaciones: <%= s.getObservaciones() %>
@@ -138,7 +138,7 @@
                 } else {
                 %>
                 <tr>
-                    <td class="text-danger">Todavía <%= cliente.getNombre() %> no ha dado feedback</td>
+                    <td class="text-danger"><%= cliente.getNombre() %> todavía no ha dado feedback</td>
                 </tr>
                 <%
                     }
@@ -148,9 +148,12 @@
     </div>
 
     <div class="mt-3">
-        <form class="d-flex" action="/entrenador/cliente/feedback/<%=cliente.getIdcliente()%>/<%=rutina.getIdrutina()%>" method="post">
+        <form class="d-flex flex-column" action="/entrenador/cliente/feedback/<%=cliente.getIdcliente()%>/<%=rutina.getIdrutina()%>" method="post">
             <input class="form-control me-2" type="search" placeholder="Nombre del ejercicio" name="nombre" value="<%=filtro%>">
+            <div class="d-flex mt-2">
+            <input class="form-control me-2" type="date" name="fecha">
             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
         </form>
     </div>
 </div>

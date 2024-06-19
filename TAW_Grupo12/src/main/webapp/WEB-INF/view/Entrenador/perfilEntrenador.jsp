@@ -21,6 +21,17 @@
         .container {
             margin-top: 50px;
         }
+
+        .table th, .table td {
+            text-align: center; /* Center text in thead and tbody */
+        }
+
+        .contenedor {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
     </style>
 </head>
 <body>
@@ -31,11 +42,37 @@
             <h1 class="text-center">Mi Perfil</h1>
         </div>
     </div>
+    <div class="container mt-5 col">
+        <div class="contenedor">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4>Perfil de entrenador de fuerza</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Nombre:</strong></label>
+                            <p class="form-control-plaintext"><%=trabajador.getNombre()%>
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Email:</strong></label>
+                            <p class="form-control-plaintext"><%=trabajador.getEmail()%>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous">
+
+        </script>
+    </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
 </body>
 </html>

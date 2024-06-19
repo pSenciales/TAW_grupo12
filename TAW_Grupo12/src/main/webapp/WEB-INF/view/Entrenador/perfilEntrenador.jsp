@@ -17,22 +17,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        .container {
-            margin-top: 50px;
-        }
 
-        .table th, .table td {
-            text-align: center; /* Center text in thead and tbody */
-        }
-
-        .contenedor {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/Styles/Entrenador/perfilEntrenador.css">
 </head>
 <body>
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>

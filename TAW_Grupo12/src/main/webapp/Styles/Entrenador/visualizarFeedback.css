@@ -1,0 +1,40 @@
+.table th, .table td {
+    text-align: center;
+}
+
+.table-container {
+    width: 100%;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: #0d6efd;
+    text-decoration: underline;
+    cursor: pointer;
+    font: inherit;
+}
+
+.link-button:hover {
+    color: #0a58ca;
+}
+
+
+.list {
+    max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.card {
+    width: 50%;
+    margin: 1rem;
+    text-align: center;
+}
+
+.feedback-instance {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: start;
+}

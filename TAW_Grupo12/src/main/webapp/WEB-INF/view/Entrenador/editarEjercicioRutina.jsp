@@ -27,18 +27,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Editar Ejercicio</title>
-    <style>
-        .container {
-            margin-top: 50px;
-        }
-        .card-header {
-            background-color: #007bff;
-            color: white;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-    </style>
+
+    <link rel="stylesheet" type="text/css" href="/Styles/Entrenador/editarEjercicioRutina.css">
 </head>
 
 <body>
@@ -80,13 +70,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="repeticiones">Repeticiones</label>
-                            <form:input required="required" type="number" min="1" placeholder="Repeticiones" path="repeticiones" class="form-control"/>
+                            <label for="series">Series</label>
+                            <form:input required="required" type="number" min="1" placeholder="Series" path="series" class="form-control"/>
                         </div>
 
                         <div class="form-group">
-                            <label for="series">Series</label>
-                            <form:input required="required" type="number" min="1" placeholder="Series" path="series" class="form-control"/>
+                            <label for="repeticiones">Repeticiones</label>
+                            <form:input required="required" type="number" min="1" placeholder="Repeticiones" path="repeticiones" class="form-control"/>
                         </div>
 
                         <div class="form-group">

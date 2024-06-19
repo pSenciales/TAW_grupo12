@@ -30,40 +30,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <style>
-        .table th, .table td {
-            text-align: center;
-        }
-
-        .table-container {
-            margin: 2rem auto;
-            width: 90%;
-        }
-        .contenedor {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .botones {
-            display: flex;
-            gap: 10px;
-        }
-        .search-container{
-            margin-bottom: 1rem;
-
-        }
-        .func-container{
-            display: flex;
-            gap: 2rem;
-        }
-        .vertical{
-            border-left: solid #000000;
-            max-height: 2.5rem;
-        }
-
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="/Styles/Entrenador/listarRutinas.css">
 </head>
 
 <body>

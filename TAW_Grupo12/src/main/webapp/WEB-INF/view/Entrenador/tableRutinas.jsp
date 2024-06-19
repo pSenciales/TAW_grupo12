@@ -30,33 +30,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <style>
-        #anyadir-ej *{
-            margin-left: 20px;
-        }
-
-        .table th, .table td {
-            text-align: center; /* Center text in thead and tbody */
-            font-size: 0.85rem; /* Make tbody text smaller */
-            width: 14.28%; /* Ensure equal width for all columns */
-        }
-
-        .table thead th {
-            font-size: 1rem; /* Keep thead text size default */
-        }
-        .table-container {
-            margin: 0 auto;
-            width: 90%;
-        }
-        .button-container {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-left: 2rem;
-            margin-top: 0.5rem;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="/Styles/Entrenador/tableRutinas.css">
 </head>
 
 <body>
@@ -81,8 +55,8 @@
             <form:option value="6" label="Sábado"></form:option>
             <form:option value="7" label="Domingo"></form:option>
         </form:select>
-        <form:input required="required" type="number" min="1" placeholder="Repeticiones"  path="repeticiones"/>
         <form:input required="required" type="number" min="1" placeholder="Series"  path="series"/>
+        <form:input required="required" type="number" min="1" placeholder="Repeticiones"  path="repeticiones"/>
         <form:input required="required" type="number" min="1" placeholder="Peso"  path="peso"/>
         <form:select required="required" path="ejercicio">
             <form:options items="${ejercicioList}" itemLabel="nombre" itemValue="idejercicio"></form:options>

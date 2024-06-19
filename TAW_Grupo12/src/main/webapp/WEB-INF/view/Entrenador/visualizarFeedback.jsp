@@ -27,64 +27,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <style>
-        .table th, .table td {
-            text-align: center;
-        }
-
-        .table-container {
-            width: 100%;
-        }
-
-        .select-container {
-            display: flex;
-            flex-direction: row;
-            gap: 1rem;
-        }
-
-        .vertical {
-            border-left: solid #000000;
-            max-height: 2.5rem;
-        }
-
-        .link-button {
-            background: none;
-            border: none;
-            color: #0d6efd;
-            text-decoration: underline;
-            cursor: pointer;
-            font: inherit;
-        }
-
-        .link-button:hover {
-            color: #0a58ca;
-        }
-
-        .comunicados-container {
-            display: flex;
-            flex-direction: column;
-            width: 80%;
-        }
-
-        .list {
-            max-height: 400px;
-            overflow-y: auto;
-            width: 100%;
-        }
-
-        .card {
-            width: 50%;
-            margin: 1rem;
-            text-align: center;
-        }
-
-        .feedback-instance {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-            align-items: start;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/Styles/Entrenador/visualizarFeedback.css">
 </head>
 
 <body>

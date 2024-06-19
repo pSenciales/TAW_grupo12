@@ -2,13 +2,14 @@ package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dao.ClienteRepository;
 import es.uma.taw_grupo12.dao.TrabajadorRepository;
-import es.uma.taw_grupo12.dto.ClienteDTO;
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
 import es.uma.taw_grupo12.entity.Cliente;
 import es.uma.taw_grupo12.entity.Trabajador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,41 @@ public class TrabajadorService {
             this.clienteRepository.save(c);
         }
         this.trabajadorRepository.deleteById(idTrabajador);
+    }
+
+    public void guardarTrabajador(TrabajadorDTO trabajador) throws IOException {
+
+
+        Trabajador miTrabajador = this.trabajadorRepository.findById(trabajador.getIdtrabajador()).orElse(null);
+        if(trabajador != null){
+            miTrabajador.setNombre(trabajador.getNombre());
+            miTrabajador.setEmail(trabajador.getEmail());
+            miTrabajador.setContrasenya(trabajador.getContrasenya());
+            if (trabajador.getImagenperfilFile() != null && !trabajador.getImagenperfilFile().isEmpty()) {
+                MultipartFile myFile = trabajador.getImagenperfilFile();
+                byte[] imagenBytes = myFile.getBytes();
+                miTrabajador.setImagenperfil(imagenBytes);
+            }
+
+            this.trabajadorRepository.save(miTrabajador);
+        }
+    }
+
+    public List<Trabajador>  buscarTrabajadorNombreoEmail(TrabajadorDTO trabajador) {
+        Trabajador original = this.trabajadorRepository.findById(trabajador.getIdtrabajador()).orElse(null);
+        if(original.getEmail().equals(trabajador.getEmail())){
+            if(original.getNombre().equals(trabajador.getNombre())){
+                return null;
+            }
+            return this.trabajadorRepository.findAllByEmailorNombre("", trabajador.getNombre());
+        }
+        if(original.getNombre().equals(trabajador.getNombre())){
+            if(original.getEmail().equals(trabajador.getEmail())){
+                return null;
+            }
+            return this.trabajadorRepository.findAllByEmailorNombre(trabajador.getEmail(), "");
+        }
+        return  this.trabajadorRepository.findAllByEmailorNombre(trabajador.getEmail(), trabajador.getNombre());
     }
     //@Victoria
 }

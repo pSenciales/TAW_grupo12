@@ -220,11 +220,13 @@ public class Cliente implements Serializable, DTO<ClienteDTO> {
         cliente.setAlergias(this.alergias);
 
         List<Integer> listaTrabajadores = new ArrayList<Integer>();
-        for (Trabajador trabajador: this.trabajadorList) {
-            listaTrabajadores.add(trabajador.getIdtrabajador());
+        if(this.trabajadorList != null) {
+            for (Trabajador trabajador: this.trabajadorList) {
+                listaTrabajadores.add(trabajador.getIdtrabajador());
+            }
         }
-        cliente.setTrabajadorList(listaTrabajadores);
 
+        cliente.setTrabajadorList(listaTrabajadores);
         cliente.setDietaList(this.dietaList);
         cliente.setRutinaList(this.rutinaList);
 

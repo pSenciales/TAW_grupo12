@@ -5,6 +5,7 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import es.uma.taw_grupo12.dto.DTO;
@@ -166,6 +167,12 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
         trabajador.setContrasenya(this.contrasenya);
         trabajador.setTipo(this.tipo);
         trabajador.setImagenperfil(this.imagenperfil);
+        List<Integer> listaClientes = new ArrayList<Integer>();
+        if(this.clienteList != null) {
+            for (Cliente c: this.clienteList) {
+                listaClientes.add(c.getIdcliente());
+            }
+        }
         return trabajador;
     }
     //@Victoria

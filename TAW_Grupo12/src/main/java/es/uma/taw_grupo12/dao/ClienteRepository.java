@@ -21,8 +21,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     @Query("SELECT DISTINCT c FROM Cliente c WHERE c.email LIKE %:busqueda% OR c.nombre LIKE %:busqueda%")
     public List<Cliente> findByEmailorNombre(@Param("busqueda") String busqueda);
 
-    @Query("SELECT c FROM Cliente c WHERE c.email = :email OR c.nombre = :nombre")
-    public List<Cliente> findAllByEmailorNombre(@Param("email")String email, @Param("nombre") String nombre);
+    @Query("SELECT c FROM Cliente c WHERE c.email = :email OR c.nombre = :nombre and c.idcliente != :idcliente")
+    public List<Cliente> findAllByEmailorNombre(@Param("email")String email, @Param("nombre") String nombre, @Param("idcliente") Integer idcliente);
 
     @Query("SELECT c FROM Cliente c JOIN c.trabajadorList t WHERE t.idtrabajador = :idTrabajador")
     List<Cliente> findClientesAsociados(@Param("idTrabajador") Integer idTrabajador);

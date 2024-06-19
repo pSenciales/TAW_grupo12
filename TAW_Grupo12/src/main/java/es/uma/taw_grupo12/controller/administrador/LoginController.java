@@ -68,14 +68,14 @@ public class LoginController extends BaseController {
             session.setAttribute("usuario", cliente);
             session.setAttribute("tipo", "cliente");
             //strTo = "redirect:/cliente/inicio";          DESCOMENTAR CUANDO ESTE IMPLEMENTADO EL INICIO DE CLIENTE
-            return "redirect:/administrador/inicio";
+            return "/Cliente/inicioCliente";
         }
 
         if(trabajador != null) {
             session.setAttribute("usuario", trabajador);
             session.setAttribute("tipo", trabajador.getTipo());
             //strTo = "redirect:/" + trabajador.getTipo() + "/inicio";          DESCOMENTAR CUANDO ESTE IMPLEMENTADO EL INICIO DE TRABAJADOR
-            return "redirect:/administrador/inicio";
+            return "/Cliente/inicioCliente";
         }
 
         //administrador
@@ -102,7 +102,6 @@ public class LoginController extends BaseController {
         if(tipo.equals("cliente")) {
             model.addAttribute("cliente", new ClienteDTO());
             return "/Administrador/Autenticacion/registroCliente";
-
         }
 
         //tipo = trabajador

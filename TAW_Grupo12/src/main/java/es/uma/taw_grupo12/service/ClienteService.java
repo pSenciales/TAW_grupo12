@@ -72,8 +72,6 @@ public class ClienteService {
                 MultipartFile myFile = cliente.getImagenperfilFile();
                 byte[] imagenBytes = myFile.getBytes();
                 miCliente.setImagenperfil(imagenBytes);
-            } else {
-                miCliente.setImagenperfil(null);
             }
             miCliente.setPeso(cliente.getPeso());
             miCliente.setAltura(cliente.getAltura());
@@ -91,15 +89,15 @@ public class ClienteService {
             if(original.getNombre().equals(cliente.getNombre())){
                 return null;
             }
-            return this.clienteRepository.findAllByEmailorNombre("", cliente.getNombre());
+            return this.clienteRepository.findAllByEmailorNombre("", cliente.getNombre(), cliente.getIdcliente());
         }
         if(original.getNombre().equals(cliente.getNombre())){
             if(original.getEmail().equals(cliente.getEmail())){
                 return null;
             }
-            return this.clienteRepository.findAllByEmailorNombre(cliente.getEmail(), "");
+            return this.clienteRepository.findAllByEmailorNombre(cliente.getEmail(), "", cliente.getIdcliente());
         }
-        return  this.clienteRepository.findAllByEmailorNombre(cliente.getEmail(), cliente.getNombre());
+        return  this.clienteRepository.findAllByEmailorNombre(cliente.getEmail(), cliente.getNombre(), cliente.getIdcliente());
     }
     //@Victoria
 }

@@ -10,6 +10,7 @@ import es.uma.taw_grupo12.dto.AdministradorDTO;
 import es.uma.taw_grupo12.dto.ClienteDTO;
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
 import es.uma.taw_grupo12.entity.Cliente;
+import es.uma.taw_grupo12.entity.Trabajador;
 import es.uma.taw_grupo12.service.AdministradorService;
 import es.uma.taw_grupo12.service.ClienteService;
 import es.uma.taw_grupo12.service.TrabajadorService;
@@ -206,10 +207,20 @@ public class AdministradorController extends BaseController{
     @PostMapping("/guardarCliente")
     public String doGuardarCliente(@ModelAttribute("clienteModel") ClienteDTO cliente, RedirectAttributes redirectAttributes) throws IOException {
         List<Cliente> existe = this.clienteService.buscarClienteNombreoEmail(cliente);
-        if(existe != null){
-            redirectAttributes.addFlashAttribute("errorGestionarCliente", "Se ha intentado guardar un cliente con un email o nombre ya existente, los cambios no se han guardado");            return "redirect:/administrador/gestionarUsuarios";
+        if(existe != null && !existe.isEmpty()){
+            redirectAttributes.addFlashAttribute("errorGestionarUsuario", "Se ha intentado guardar un cliente con un email o nombre ya existente, los cambios no se han guardado");            return "redirect:/administrador/gestionarUsuarios";
         }
         this.clienteService.guardarCliente(cliente);
+        return "redirect:/administrador/gestionarUsuarios";
+    }
+
+    @PostMapping("/guardarTrabajador")
+    public String doGuardarTrabajador(@ModelAttribute("trabajadorModel") TrabajadorDTO trabajador, RedirectAttributes redirectAttributes) throws IOException {
+        List<Trabajador> existe = this.trabajadorService.buscarTrabajadorNombreoEmail(trabajador);
+        if(existe != null && !existe.isEmpty()){
+            redirectAttributes.addFlashAttribute("errorGestionarUsuario", "Se ha intentado guardar un trabajador con un email o nombre ya existente, los cambios no se han guardado");            return "redirect:/administrador/gestionarUsuarios";
+        }
+        this.trabajadorService.guardarTrabajador(trabajador);
         return "redirect:/administrador/gestionarUsuarios";
     }
 }

@@ -96,9 +96,9 @@
 </header>
 
 <div class="container-gestionarUsuarios">
-    <% if (request.getAttribute("errorGestionarCliente") != null) { %>
+    <% if (request.getAttribute("errorGestionarUsuario") != null) { %>
     <div class="alert alert-danger">
-        <%= request.getAttribute("errorGestionarCliente") %>
+        <%= request.getAttribute("errorGestionarUsuario") %>
     </div>
     <% } %>
     <form:form modelAttribute="filtroUsuarios" method="post" action="/administrador/filtrarGestionarUsuarios">
@@ -274,7 +274,6 @@
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body ps-4 pt-3" style="text-align: start">
-                                    <!-- Aquí iría tu formulario para editar los datos del trabajador -->
                                     <form:form action="/administrador/guardarTrabajador"
                                                modelAttribute="trabajadorModel"
                                                method="post" enctype="multipart/form-data">

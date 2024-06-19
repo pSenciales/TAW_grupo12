@@ -34,6 +34,9 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>
     //consulta para encontrar los trabajadores asociados a un cliente dado su id
     @Query("SELECT c FROM Trabajador c JOIN c.clienteList t WHERE t.idcliente = :idCliente")
     List<Trabajador> findTrabajadoresAsociados(Integer idCliente);
+
+    @Query("SELECT c FROM Trabajador c WHERE c.email = :email OR c.nombre = :nombre")
+    public List<Trabajador> findAllByEmailorNombre(@Param("email")String email, @Param("nombre") String nombre);
     //@Victoria
 
 

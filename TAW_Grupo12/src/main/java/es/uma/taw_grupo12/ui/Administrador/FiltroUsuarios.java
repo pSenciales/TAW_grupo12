@@ -6,12 +6,12 @@ import java.util.List;
 public class FiltroUsuarios {
     protected String busqueda;
     protected List<String> tipoUsuario;
-    protected List<String> tipoTrabajador;
+    protected String tipoTrabajador;
 
     public FiltroUsuarios() {
         this.busqueda = "";
         this.tipoUsuario = new ArrayList<>();
-        this.tipoTrabajador = new ArrayList<>();
+        this.tipoTrabajador = "";
     }
 
     public String getBusqueda() {
@@ -30,11 +30,11 @@ public class FiltroUsuarios {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public List<String> getTipoTrabajador() {
+    public String getTipoTrabajador() {
         return tipoTrabajador;
     }
 
-    public void setTipoTrabajador(List<String> tipoTrabajador) {
+    public void setTipoTrabajador(String tipoTrabajador) {
         this.tipoTrabajador = tipoTrabajador;
     }
 

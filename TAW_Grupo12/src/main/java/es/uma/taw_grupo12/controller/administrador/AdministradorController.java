@@ -158,7 +158,7 @@ public class AdministradorController extends BaseController{
         }
 
         List<String> tipoUsuario = filtroUsuarios.getTipoUsuario();
-        List<String> tipoTrabajador = filtroUsuarios.getTipoTrabajador();
+        String tipoTrabajador = filtroUsuarios.getTipoTrabajador();
         String busqueda = filtroUsuarios.getBusqueda();
 
         if (tipoUsuario.isEmpty() || tipoUsuario.contains("Cliente")) {
@@ -182,6 +182,7 @@ public class AdministradorController extends BaseController{
         }
 
         model.addAttribute("filtroUsuarios", filtroUsuarios);
+        model.addAttribute("clienteModel", new ClienteDTO());
         model.addAttribute("trabajadores", trabajadoresDTO);
         model.addAttribute("clientes", clientesDTO);
         model.addAttribute("tituloCabeceraAdmin", "Gestionar Clientes");

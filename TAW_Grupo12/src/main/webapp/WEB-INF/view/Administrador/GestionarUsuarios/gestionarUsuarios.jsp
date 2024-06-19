@@ -19,6 +19,7 @@
     tiposUsuario.add("Cliente");
     tiposUsuario.add("Trabajador");
     List<String> tiposTrabajador = new ArrayList<>();
+    tiposTrabajador.add("");
     tiposTrabajador.add("Entrenador fuerza");
     tiposTrabajador.add("Entrenador crosstraining");
     tiposTrabajador.add("Dietista");

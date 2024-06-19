@@ -15,7 +15,7 @@ public class EjercicioRutinaDTO {
     private Integer seguimientoObjetivos;
 
     public Integer getDiassemanaInt() {
-        return switch (this.diassemana){
+        return switch (this.diassemana) {
             case "Lunes" -> 1;
             case "Martes" -> 2;
             case "Miércoles" -> 3;
@@ -30,7 +30,13 @@ public class EjercicioRutinaDTO {
     @Override
     public String toString() {
 
-        return "("+this.series+"s, "+this.repeticiones+"r, "+this.peso+" kg)";
+        return "(" + this.series + "s, " + this.repeticiones + "r, " + this.peso + " kg)";
+
+    }
+
+    public String toStringCross() {
+
+        return "(" + this.series + " series de " + this.repeticiones + " " + this.peso;
 
     }
 }

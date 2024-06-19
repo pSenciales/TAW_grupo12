@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -131,8 +132,12 @@ public class EntrenadorCrossTrainingController {
                 !sesion.getAttribute("tipo").equals("entrenadorcross")) {
             return "redirect:/";
         } else {
-            List<EjercicioDTO> ejercicioList = ejercicioService.getFuerza();
+            List<EjercicioDTO> ejercicioList = ejercicioService.getAll();
             model.addAttribute("ejercicioList", ejercicioList);
+            model.addAttribute("ejercicioListFiltrado", ejercicioList);
+
+            List<String> tipos = ejercicioService.getTipos();
+            model.addAttribute("tipos", tipos);
 
             RutinaDTO rutinaDTO = rutinaService.findById(idrutina);
             model.addAttribute("rutina", rutinaDTO);
@@ -144,10 +149,42 @@ public class EntrenadorCrossTrainingController {
             List<EjercicioRutinaDTO> ejerciciosRutina = ejercicioRutinaService.findAllByRutinaId(idrutina);
             model.addAttribute("ejerciciosRutina", ejerciciosRutina);
 
-            return "/EntrenadorCrosstraining/tableRutinas";
+            return "/EntrenadorCrosstraining/tablaRutina";
 
         }
 
+    }
+
+    //Filtrar el tipo de Ejercicios
+    @PostMapping("/filtrarTipoEjercicio/{idrutina}")
+    public String doFiltrarTipoEjercicios(@PathVariable("idrutina") Integer idrutina, HttpSession sesion, @RequestParam("filtrotipos") List<String> filtrotipos, Model model) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenadorcross")) {
+            return "redirect:/";
+        } else {
+            List<EjercicioDTO> ejercicioListFiltrado = ejercicioService.getByTipos(filtrotipos);
+            model.addAttribute("ejercicioListFiltrado", ejercicioListFiltrado);
+
+            List<EjercicioDTO> ejercicioList = ejercicioService.getAll();
+            model.addAttribute("ejercicioList", ejercicioList);
+
+            List<String> tipos = ejercicioService.getTipos();
+            model.addAttribute("tipos", tipos);
+
+            RutinaDTO rutinaDTO = rutinaService.findById(idrutina);
+            model.addAttribute("rutina", rutinaDTO);
+
+            EjercicioRutinaDTO ejercicioRutinaDTO = new EjercicioRutinaDTO();
+            ejercicioRutinaDTO.setRutina(idrutina);
+            model.addAttribute("ejercicioRutinaDTO", ejercicioRutinaDTO);
+
+            List<EjercicioRutinaDTO> ejerciciosRutina = ejercicioRutinaService.findAllByRutinaId(idrutina);
+            model.addAttribute("ejerciciosRutina", ejerciciosRutina);
+
+            return "/EntrenadorCrosstraining/tablaRutina";
+
+        }
     }
 
     //Añadir/Guardar un Ejercicio en una Rutina (se crea la entidad-relación EjercicioRutina)
@@ -171,13 +208,13 @@ public class EntrenadorCrossTrainingController {
     public String doSubirEjercicio(HttpSession sesion, @RequestParam("id") Integer id) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
-                !sesion.getAttribute("tipo").equals("entrenador")) {
+                !sesion.getAttribute("tipo").equals("entrenadorcross")) {
             return "redirect:/";
         } else {
             //true significa que lo subirá
             ejercicioRutinaService.cambiarOrden(id, true);
             EjercicioRutinaDTO ejercicioRutinaDTO = ejercicioRutinaService.findById(id);
-            return "redirect:/entrenador/visualizar/" + ejercicioRutinaDTO.getRutina();
+            return "redirect:/entrenadorcross/mostrar/" + ejercicioRutinaDTO.getRutina();
 
         }
     }
@@ -187,12 +224,12 @@ public class EntrenadorCrossTrainingController {
     public String doBajarEjercicio(HttpSession sesion, @RequestParam("id") Integer id) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
-                !sesion.getAttribute("tipo").equals("entrenador")) {
+                !sesion.getAttribute("tipo").equals("entrenadorcross")) {
             return "redirect:/";
         } else {
             ejercicioRutinaService.cambiarOrden(id, false);
             EjercicioRutinaDTO ejercicioRutinaDTO = ejercicioRutinaService.findById(id);
-            return "redirect:/entrenador/visualizar/" + ejercicioRutinaDTO.getRutina();
+            return "redirect:/entrenadorcross/mostrar/" + ejercicioRutinaDTO.getRutina();
 
         }
     }
@@ -202,12 +239,12 @@ public class EntrenadorCrossTrainingController {
     public String doBorrarEjercicio(HttpSession sesion, @RequestParam("id") Integer id) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
-                !sesion.getAttribute("tipo").equals("entrenador")) {
+                !sesion.getAttribute("tipo").equals("entrenadorcross")) {
             return "redirect:/";
         } else {
             EjercicioRutinaDTO ejercicioRutinaDTO = ejercicioRutinaService.findById(id);
             ejercicioRutinaService.deleteById(id);
-            return "redirect:/entrenador/visualizar/" + ejercicioRutinaDTO.getRutina();
+            return "redirect:/entrenadorcross/mostrar/" + ejercicioRutinaDTO.getRutina();
 
         }
     }
@@ -216,10 +253,10 @@ public class EntrenadorCrossTrainingController {
     public String doEditarEjercicio(HttpSession sesion, @RequestParam("id") Integer id) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
-                !sesion.getAttribute("tipo").equals("entrenador")) {
+                !sesion.getAttribute("tipo").equals("entrenadorcross")) {
             return "redirect:/";
         } else {
-            return "redirect:/entrenador/visualizar/" + id;
+            return "redirect:/entrenadorcross/mostrar/" + id;
 
         }
     }

@@ -11,18 +11,17 @@ import es.uma.taw_grupo12.dto.EjercicioRutinaDTO;
 import jakarta.persistence.*;
 
 /**
- *
  * @author guzman
  */
 @Entity
 @Table(name = "ejerciciorutina")
 @NamedQueries({
-    @NamedQuery(name = "EjercicioRutina.findAll", query = "SELECT e FROM EjercicioRutina e"),
-    @NamedQuery(name = "EjercicioRutina.findByPeso", query = "SELECT e FROM EjercicioRutina e WHERE e.peso = :peso"),
-    @NamedQuery(name = "EjercicioRutina.findByRepeticiones", query = "SELECT e FROM EjercicioRutina e WHERE e.repeticiones = :repeticiones"),
-    @NamedQuery(name = "EjercicioRutina.findBySeries", query = "SELECT e FROM EjercicioRutina e WHERE e.series = :series"),
-    @NamedQuery(name = "EjercicioRutina.findByOrden", query = "SELECT e FROM EjercicioRutina e WHERE e.orden = :orden"),
-    @NamedQuery(name = "EjercicioRutina.findByDiassemana", query = "SELECT e FROM EjercicioRutina e WHERE e.diassemana = :diassemana")})
+        @NamedQuery(name = "EjercicioRutina.findAll", query = "SELECT e FROM EjercicioRutina e"),
+        @NamedQuery(name = "EjercicioRutina.findByPeso", query = "SELECT e FROM EjercicioRutina e WHERE e.peso = :peso"),
+        @NamedQuery(name = "EjercicioRutina.findByRepeticiones", query = "SELECT e FROM EjercicioRutina e WHERE e.repeticiones = :repeticiones"),
+        @NamedQuery(name = "EjercicioRutina.findBySeries", query = "SELECT e FROM EjercicioRutina e WHERE e.series = :series"),
+        @NamedQuery(name = "EjercicioRutina.findByOrden", query = "SELECT e FROM EjercicioRutina e WHERE e.orden = :orden"),
+        @NamedQuery(name = "EjercicioRutina.findByDiassemana", query = "SELECT e FROM EjercicioRutina e WHERE e.diassemana = :diassemana")})
 public class EjercicioRutina implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,7 +54,6 @@ public class EjercicioRutina implements Serializable {
     public EjercicioRutina(Integer ejercicioRutinaPK) {
         this.ejercicioRutinaPK = ejercicioRutinaPK;
     }
-
 
 
     public Integer getEjercicioRutinaPK() {
@@ -102,7 +100,7 @@ public class EjercicioRutina implements Serializable {
         return diassemana;
     }
 
-    public String getDiassemanaString(){
+    public String getDiassemanaString() {
 
         return switch (this.diassemana) {
             case "1" -> "Lunes";

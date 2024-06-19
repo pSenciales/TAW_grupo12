@@ -141,6 +141,7 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
         if (!(object instanceof Trabajador)) {
             return false;
         }
+
         Trabajador other = (Trabajador) object;
         if ((this.idtrabajador == null && other.idtrabajador != null) || (this.idtrabajador != null && !this.idtrabajador.equals(other.idtrabajador))) {
             return false;
@@ -154,6 +155,7 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
     }
 
     public TrabajadorDTO toDTO() {
+<<<<<<< HEAD
         TrabajadorDTO trabajadorDTO = new TrabajadorDTO();
         trabajadorDTO.setImagenperfil(this.imagenperfil);
         trabajadorDTO.setNombre(this.nombre);
@@ -168,5 +170,21 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
         trabajadorDTO.setClienteList(clientes);
 
         return trabajadorDTO;
+=======
+        TrabajadorDTO trabajador = new TrabajadorDTO();
+        trabajador.setIdtrabajador(this.idtrabajador);
+        trabajador.setNombre(this.nombre);
+        trabajador.setEmail(this.email);
+        trabajador.setContrasenya(this.contrasenya);
+        trabajador.setTipo(this.tipo);
+        trabajador.setImagenperfil(this.imagenperfil);
+        List<Integer> listaClientes = new ArrayList<Integer>();
+        if(this.clienteList != null) {
+            for (Cliente c: this.clienteList) {
+                listaClientes.add(c.getIdcliente());
+            }
+        }
+        return trabajador;
+>>>>>>> administrador
     }
 }

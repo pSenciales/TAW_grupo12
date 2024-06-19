@@ -1,3 +1,9 @@
+<%
+    /**
+     * @author María Victoria Huesca
+     */
+%>
+
 <%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw_grupo12.dto.TrabajadorDTO" %>
@@ -67,6 +73,7 @@
         }
     </style>
     <script>
+        //SCRIPT PARA MOSTRAR EL MODAL DE ASIGNAR TRABAJADOR
         $(document).ready(function() {
             $('#asignarButton').click(function() {
                 $('#asignarForm').submit();

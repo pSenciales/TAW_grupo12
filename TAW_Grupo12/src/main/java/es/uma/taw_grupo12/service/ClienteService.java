@@ -1,11 +1,15 @@
 package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dao.ClienteRepository;
+import es.uma.taw_grupo12.dao.TrabajadorRepository;
 import es.uma.taw_grupo12.dto.ClienteDTO;
 import es.uma.taw_grupo12.entity.Cliente;
+import es.uma.taw_grupo12.entity.Trabajador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +19,9 @@ public class ClienteService {
 
     @Autowired
     protected ClienteRepository clienteRepository;
+
+    @Autowired
+    protected TrabajadorRepository trabajadorRepository;
 
     //@Victoria
     public List<ClienteDTO> listarClientesDTO () {
@@ -40,6 +47,7 @@ public class ClienteService {
         }
     }
 
+<<<<<<< HEAD
     public List<ClienteDTO> findByTrabajador(Integer idtrabajador) {
         List<ClienteDTO> clientesDTO = new ArrayList<>();
         List<Cliente> cliente = clienteRepository.findByTrabajador(idtrabajador);
@@ -50,4 +58,59 @@ public class ClienteService {
         return clientesDTO;
     }
 
+=======
+    public void eliminarCliente(Integer idCliente) {
+        Cliente cliente = this.clienteRepository.findById(idCliente).orElse(null);
+        List<Trabajador> trabajadores = this.trabajadorRepository.findTrabajadoresAsociados(idCliente);
+
+        for(Trabajador t : trabajadores){
+            List<Cliente> clientes = t.getClienteList();
+            clientes.remove(cliente);
+            this.trabajadorRepository.save(t);
+        }
+        this.clienteRepository.deleteById(idCliente);
+
+    }
+
+    public void guardarCliente(ClienteDTO cliente) throws IOException {
+
+
+        Cliente miCliente = this.clienteRepository.findById(cliente.getIdcliente()).orElse(null);
+        if(cliente != null){
+            miCliente.setNombre(cliente.getNombre());
+            miCliente.setEmail(cliente.getEmail());
+            miCliente.setContrasenya(cliente.getContrasenya());
+            if (cliente.getImagenperfilFile() != null && !cliente.getImagenperfilFile().isEmpty()) {
+                MultipartFile myFile = cliente.getImagenperfilFile();
+                byte[] imagenBytes = myFile.getBytes();
+                miCliente.setImagenperfil(imagenBytes);
+            }
+            miCliente.setPeso(cliente.getPeso());
+            miCliente.setAltura(cliente.getAltura());
+            if(!cliente.getAlergias().isEmpty()){
+                miCliente.setAlergias(cliente.getAlergias());
+            }
+
+            this.clienteRepository.save(miCliente);
+        }
+    }
+
+    public List<Cliente>  buscarClienteNombreoEmail(ClienteDTO cliente) {
+        Cliente original = this.clienteRepository.findById(cliente.getIdcliente()).orElse(null);
+        if(original.getEmail().equals(cliente.getEmail())){
+            if(original.getNombre().equals(cliente.getNombre())){
+                return null;
+            }
+            return this.clienteRepository.findAllByEmailorNombre("", cliente.getNombre(), cliente.getIdcliente());
+        }
+        if(original.getNombre().equals(cliente.getNombre())){
+            if(original.getEmail().equals(cliente.getEmail())){
+                return null;
+            }
+            return this.clienteRepository.findAllByEmailorNombre(cliente.getEmail(), "", cliente.getIdcliente());
+        }
+        return  this.clienteRepository.findAllByEmailorNombre(cliente.getEmail(), cliente.getNombre(), cliente.getIdcliente());
+    }
+    //@Victoria
+>>>>>>> administrador
 }

@@ -135,16 +135,16 @@ public class AdministradorService {
         return this.trabajadorRepository.findTipos();
     }
 
-    public void asignarTrabajador(Integer idCliente, Integer idTrabajador) {
+    public void asignarTrabajador(Integer idCliente, Integer idEntrenador) {
         Cliente cliente = this.clienteRepository.findById(idCliente).orElse(null);
-        Trabajador trabajador = this.trabajadorRepository.findById(idTrabajador).orElse(null);
+        Trabajador entrenador = this.trabajadorRepository.findById(idEntrenador).orElse(null);
 
-        if(trabajador != null && cliente != null) {
+        if(entrenador != null && cliente != null) {
             List<Trabajador> trabajadores = cliente.getTrabajadorList();
 
             // Busca si ya existe un Trabajador del mismo tipo asignado al Cliente
             Trabajador trabajadorExistente = trabajadores.stream()
-                    .filter(t -> t.getTipo().equals(trabajador.getTipo()))
+                    .filter(t -> t.getTipo().equals(entrenador.getTipo()))
                     .findFirst()
                     .orElse(null);
 
@@ -157,12 +157,12 @@ public class AdministradorService {
             }
 
             // Añade el nuevo Trabajador a la lista
-            trabajadores.add(trabajador);
-            List<Cliente> clientes = trabajador.getClienteList();
+            trabajadores.add(entrenador);
+            List<Cliente> clientes = entrenador.getClienteList();
             clientes.add(cliente);
 
             clienteRepository.save(cliente);
-            trabajadorRepository.save(trabajador);
+            trabajadorRepository.save(entrenador);
         }
     }
 

@@ -50,8 +50,8 @@ public class ClienteService {
     public void eliminarCliente(Integer idCliente) {
         Cliente cliente = this.clienteRepository.findById(idCliente).orElse(null);
         List<Trabajador> trabajadores = this.trabajadorRepository.findTrabajadoresAsociados(idCliente);
-        for(Trabajador t : trabajadores){
 
+        for(Trabajador t : trabajadores){
             List<Cliente> clientes = t.getClienteList();
             clientes.remove(cliente);
             this.trabajadorRepository.save(t);

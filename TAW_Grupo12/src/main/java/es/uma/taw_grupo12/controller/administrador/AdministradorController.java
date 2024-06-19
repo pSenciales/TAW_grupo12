@@ -197,6 +197,12 @@ public class AdministradorController extends BaseController{
         return "redirect:/administrador/gestionarUsuarios";
     }
 
+    @PostMapping("/eliminarTrabajador")
+    public String doEliminarTrabajador(@RequestParam("idTrabajador") Integer idTrabajador){
+        this.trabajadorService.eliminarTrabajador(idTrabajador);
+        return "redirect:/administrador/gestionarUsuarios";
+    }
+
     @PostMapping("/guardarCliente")
     public String doGuardarCliente(@ModelAttribute("clienteModel") ClienteDTO cliente, RedirectAttributes redirectAttributes) throws IOException {
         List<Cliente> existe = this.clienteService.buscarClienteNombreoEmail(cliente);

@@ -1,6 +1,7 @@
 package es.uma.taw_grupo12.dao;
 
 import es.uma.taw_grupo12.entity.Cliente;
+import es.uma.taw_grupo12.entity.Trabajador;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,5 +23,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Query("SELECT c FROM Cliente c WHERE c.email = :email OR c.nombre = :nombre")
     public List<Cliente> findAllByEmailorNombre(@Param("email")String email, @Param("nombre") String nombre);
+
+    @Query("SELECT c FROM Cliente c JOIN c.trabajadorList t WHERE t.idtrabajador = :idTrabajador")
+    List<Cliente> findClientesAsociados(@Param("idTrabajador") Integer idTrabajador);
     //@Victoria
 }

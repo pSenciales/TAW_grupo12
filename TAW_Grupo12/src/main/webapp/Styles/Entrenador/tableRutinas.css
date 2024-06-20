@@ -1,0 +1,24 @@
+#anyadir-ej *{
+    margin-left: 20px;
+}
+
+.table th, .table td {
+    text-align: center; /* Center text in thead and tbody */
+    font-size: 0.85rem; /* Make tbody text smaller */
+    width: 14.28%; /* Ensure equal width for all columns */
+}
+
+.table thead th {
+    font-size: 1rem; /* Keep thead text size default */
+}
+.table-container {
+    margin: 0 auto;
+    width: 90%;
+}
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+}

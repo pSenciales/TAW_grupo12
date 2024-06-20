@@ -1,0 +1,14 @@
+.container {
+    margin-top: 50px;
+}
+
+.table th, .table td {
+    text-align: center; /* Center text in thead and tbody */
+}
+
+.contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}

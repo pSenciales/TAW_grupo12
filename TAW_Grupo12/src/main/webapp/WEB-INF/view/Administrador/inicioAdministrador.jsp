@@ -11,23 +11,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/Styles/Administrador/inicioAdministrador.css">
     <title>Inicio Administrador</title>
-    <style>
-        body{
-            overflow: hidden;
-        }
-        .container-inicio {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            height: 90vh;
-            width: 100%;
-            align-content: center;
-            justify-content: center;
-            background-image: url('/Images/Administrador/fondoInicioAdministrador.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-    </style>
 </head>
 <body>
 <header>

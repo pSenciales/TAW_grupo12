@@ -103,7 +103,6 @@ public class LoginController extends BaseController {
         if(tipo.equals("cliente")) {
             model.addAttribute("cliente", new ClienteDTO());
             return "/Administrador/Autenticacion/registroCliente";
-
         }
 
         //tipo = trabajador

@@ -22,7 +22,7 @@ public class EjercicioService {
     public List<EjercicioDTO> getFuerza() {
         List<Ejercicio> ejerciciosList = ejercicioRepository.getFuerza();
         List<EjercicioDTO> ejerciciosDTO = new ArrayList<>();
-        for (Ejercicio ej : ejerciciosList) {
+        for(Ejercicio ej : ejerciciosList){
             EjercicioDTO aux = ej.toDTO();
             ejerciciosDTO.add(aux);
         }

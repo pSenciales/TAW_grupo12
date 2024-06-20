@@ -1,5 +1,7 @@
 package es.uma.taw_grupo12.dto;
 
+import es.uma.taw_grupo12.entity.EjercicioRutina;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;

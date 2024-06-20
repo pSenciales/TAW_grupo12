@@ -101,7 +101,7 @@
                         <select class="form-select" id="tipoTrabajador" name="tipoTrabajador">
                             <option selected>Selecciona...</option>
                             <option value="ENTRENADOR FUERZA">Entrenador Fuerza</option>
-                            <option value="ENTRENADOR CROSSTRAINNING">Entrenador Crosstrainning</option>
+                            <option value="ENTRENADOR CROSSTRAINING">Entrenador Crosstraining</option>
                             <option value="DIETISTA">Dietista</option>
                         </select>
                     </div>
@@ -138,7 +138,7 @@
                 for (Integer trabajador : trabajadores) {
                     for (TrabajadorDTO trabajadorDTO : trabajadoresDTO) {
                         if (trabajadorDTO.getIdtrabajador().equals(trabajador)) {
-                            if (trabajadorDTO.getTipo().equals("ENTRENADOR CROSSTRAINNING")) {
+                            if (trabajadorDTO.getTipo().equals("ENTRENADOR CROSSTRAINING")) {
                                 entrenadorCrosstraining = trabajadorDTO.getNombre();
                             } else if (trabajadorDTO.getTipo().equals("ENTRENADOR FUERZA")) {
                                 entrenadorFuerza = trabajadorDTO.getNombre();
@@ -152,11 +152,11 @@
         %>
         <div class="col-md-4 col-sm-6">
             <div class="card">
-                <img src="<%=cliente.getImagenBase64() != null ? "data:image/jpeg;base64," + cliente.getImagenBase64() : "../Images/Administrador/perfilDefault.jpg" %>" alt="Imagen de perfil" class="imagenperfil-asignarClientes">
+                <img src="<%=cliente.getImagenBase64() != null ? "data:image/jpeg;base64," + cliente.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>" alt="Imagen de perfil" class="imagenperfil-asignarClientes">
                 <div class="card-body text-center">
                     <h5 class="card-title mt-3 mb-3"><%=cliente.getNombre()%></h5>
                     <p class="card-text"><span class="bold">Email: </span> <%=cliente.getEmail()%></p>
-                    <p class="card-text"><span class="bold">Entrenador Crosstrainning: </span> <%= !entrenadorCrosstraining.isEmpty() ? entrenadorCrosstraining : "ninguno" %></p>
+                    <p class="card-text"><span class="bold">Entrenador Crosstraining: </span> <%= !entrenadorCrosstraining.isEmpty() ? entrenadorCrosstraining : "ninguno" %></p>
                     <p class="card-text"><span class="bold">Entrenador Fuerza: </span> <%= !entrenadorFuerza.isEmpty() ? entrenadorFuerza : "ninguno" %></p>
                     <p class="card-text"><span class="bold">Dietista: </span> <%= !dietista.isEmpty() ? dietista : "ninguno" %></p>
                     <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#asignarModal" data-cliente-id="<%=cliente.getIdcliente()%>">Asignar</a>

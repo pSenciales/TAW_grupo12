@@ -5,6 +5,7 @@ import es.uma.taw_grupo12.dao.TrabajadorRepository;
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
 import es.uma.taw_grupo12.entity.Cliente;
 import es.uma.taw_grupo12.entity.Trabajador;
+import es.uma.taw_grupo12.dao.TrabajadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +22,12 @@ public class TrabajadorService {
 
     @Autowired
     ClienteRepository clienteRepository;
+    public TrabajadorDTO findById(Integer id) {
+        Trabajador trabajador = trabajadorRepository.findById(id).orElse(null);
+        assert trabajador != null;
 
+        return trabajador.toDTO();
+    }
     //@Victoria
     public List<TrabajadorDTO> listarTrabajadoresDTO () {
         List<Trabajador> trabajadores = this.trabajadorRepository.findAll();

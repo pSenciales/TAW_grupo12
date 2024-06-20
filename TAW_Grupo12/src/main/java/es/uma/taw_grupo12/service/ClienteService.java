@@ -100,4 +100,14 @@ public class ClienteService {
         return  this.clienteRepository.findAllByEmailorNombre(cliente.getEmail(), cliente.getNombre(), cliente.getIdcliente());
     }
     //@Victoria
+
+    public List<ClienteDTO> findByTrabajador(Integer idtrabajador) {
+        List<ClienteDTO> clientesDTO = new ArrayList<>();
+        List<Cliente> cliente = clienteRepository.findByTrabajador(idtrabajador);
+
+        for(Cliente c : cliente){
+            clientesDTO.add(c.toDTO());
+        }
+        return clientesDTO;
+    }
 }

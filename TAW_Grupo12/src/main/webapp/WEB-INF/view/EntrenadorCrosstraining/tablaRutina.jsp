@@ -78,6 +78,13 @@
         </ol>
     </nav>
 </div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center"><%=rutina.getNombre()%></h1>
+        </div>
+    </div>
+</div>
 <div class="filtroContainer m-5">
     <form method="post" action="/entrenadorcross/filtrarTipoEjercicio/<%=rutina.getIdrutina()%>">
         <div class="form-group">
@@ -99,36 +106,57 @@
 </div>
 
 <form:form method="post" action="/entrenadorcross/addEjercicio" modelAttribute="ejercicioRutinaDTO">
-    <div class="m-5 d-flex flex-row" id="anyadir-ej">
+    <div class="m-5 d-flex flex-row align-items-center gap-3" id="anyadir-ej">
         <form:hidden path="rutina"></form:hidden>
-        <form:select required="required" path="diassemana">
-            <form:option value="1" label="Lunes"></form:option>
-            <form:option value="2" label="Martes"></form:option>
-            <form:option value="3" label="Miercoles"></form:option>
-            <form:option value="4" label="Jueves"></form:option>
-            <form:option value="5" label="Viernes"></form:option>
-            <form:option value="6" label="Sábado"></form:option>
-            <form:option value="7" label="Domingo"></form:option>
-        </form:select>
-        <form:input required="required" type="number" min="1" placeholder="Series" path="series"/>
-        <form:input required="required" type="number" min="1" placeholder="Repeticiones" path="repeticiones"/>
-        <form:input placeholder="Unidad/Medición" path="peso"/>
-        <form:select required="required" path="ejercicio">
-            <%
-                if (ejercicioListFiltrado == null || ejercicioListFiltrado.isEmpty()) {
-            %>
-            <form:options items="${ejercicioDTOList}" itemLabel="nombre" itemValue="idejercicio"></form:options>
 
-            <%
-            } else {
-            %>
-            <form:options items="${ejercicioListFiltrado}" itemLabel="nombre" itemValue="idejercicio"></form:options>
+        <div class="form-group">
+            <label for="diassemana">Día:</label>
+            <form:select id="diassemana" required="required" path="diassemana" class="form-control">
+                <form:option value="1" label="Lunes"></form:option>
+                <form:option value="2" label="Martes"></form:option>
+                <form:option value="3" label="Miércoles"></form:option>
+                <form:option value="4" label="Jueves"></form:option>
+                <form:option value="5" label="Viernes"></form:option>
+                <form:option value="6" label="Sábado"></form:option>
+                <form:option value="7" label="Domingo"></form:option>
+            </form:select>
+        </div>
 
-            <%
-                }
-            %>
-        </form:select>
-        <form:button class="btn btn-primary">Añadir ejercicio</form:button>
+        <div class="form-group">
+            <label for="series">Series:</label>
+            <form:input id="series" required="required" type="number" min="1" placeholder="Series" path="series" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="repeticiones">Repeticiones:</label>
+            <form:input id="repeticiones" required="required" type="number" min="1" placeholder="Repeticiones" path="repeticiones" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="peso">Unidad/Medición:</label>
+            <form:input id="peso" placeholder="Unidad/Medición" path="peso" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="ejercicio">Ejercicio:</label>
+            <form:select id="ejercicio" required="required" path="ejercicio" class="form-control">
+                <%
+                    if (ejercicioListFiltrado == null || ejercicioListFiltrado.isEmpty()) {
+                %>
+                <form:options items="${ejercicioDTOList}" itemLabel="nombre" itemValue="idejercicio"></form:options>
+                <%
+                } else {
+                %>
+                <form:options items="${ejercicioListFiltrado}" itemLabel="nombre" itemValue="idejercicio"></form:options>
+                <%
+                    }
+                %>
+            </form:select>
+        </div>
+
+        <div class="form-group">
+            <form:button class="btn btn-primary mt-4">Añadir ejercicio</form:button>
+        </div>
     </div>
 </form:form>
 
@@ -138,7 +166,7 @@
         <tr>
             <th scope="col">Lunes</th>
             <th scope="col">Martes</th>
-            <th scope="col">Miercoles</th>
+            <th scope="col">Miércoles</th>
             <th scope="col">Jueves</th>
             <th scope="col">Viernes</th>
             <th scope="col">Sábado</th>
@@ -147,7 +175,7 @@
         </thead>
         <tbody>
         <%
-            int size = !ejerciciosRutina.isEmpty() ? ejerciciosRutina.getLast().getOrden() + 1 : 0;
+            int size = !ejerciciosRutina.isEmpty() ? ejerciciosRutina.get(ejerciciosRutina.size() - 1).getOrden() + 1 : 0;
             for (int i = 0; i < size; i++) {
         %>
         <tr>

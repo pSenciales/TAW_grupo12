@@ -3,7 +3,6 @@ package es.uma.taw_grupo12.dto;
 
 import es.uma.taw_grupo12.entity.Dieta;
 import es.uma.taw_grupo12.entity.Rutina;
-import es.uma.taw_grupo12.entity.Trabajador;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 

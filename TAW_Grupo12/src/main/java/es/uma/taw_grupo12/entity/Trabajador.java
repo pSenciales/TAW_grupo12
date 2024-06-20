@@ -141,6 +141,7 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
         if (!(object instanceof Trabajador)) {
             return false;
         }
+
         Trabajador other = (Trabajador) object;
         if ((this.idtrabajador == null && other.idtrabajador != null) || (this.idtrabajador != null && !this.idtrabajador.equals(other.idtrabajador))) {
             return false;
@@ -153,20 +154,23 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
         return "es.taw12.app.entity.Trabajador[ idtrabajador=" + idtrabajador + " ]";
     }
 
+    //@Victoria
+    @Override
     public TrabajadorDTO toDTO() {
-        TrabajadorDTO trabajadorDTO = new TrabajadorDTO();
-        trabajadorDTO.setImagenperfil(this.imagenperfil);
-        trabajadorDTO.setNombre(this.nombre);
-        trabajadorDTO.setContrasenya(this.contrasenya);
-        trabajadorDTO.setTipo(this.tipo);
-        trabajadorDTO.setEmail(this.email);
-        trabajadorDTO.setIdtrabajador(this.idtrabajador);
-        List<Integer> clientes = new ArrayList<>();
-        for(Cliente cliente : this.clienteList) {
-            clientes.add(cliente.getIdcliente());
+        TrabajadorDTO trabajador = new TrabajadorDTO();
+        trabajador.setIdtrabajador(this.idtrabajador);
+        trabajador.setNombre(this.nombre);
+        trabajador.setEmail(this.email);
+        trabajador.setContrasenya(this.contrasenya);
+        trabajador.setTipo(this.tipo);
+        trabajador.setImagenperfil(this.imagenperfil);
+        List<Integer> listaClientes = new ArrayList<Integer>();
+        if(this.clienteList != null) {
+            for (Cliente c: this.clienteList) {
+                listaClientes.add(c.getIdcliente());
+            }
         }
-        trabajadorDTO.setClienteList(clientes);
-
-        return trabajadorDTO;
+        return trabajador;
     }
+    //@Victoria
 }

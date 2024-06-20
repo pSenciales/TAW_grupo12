@@ -25,12 +25,14 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 
 /**
  *
  * @author guzman
  */
+@Data
 @Entity
 @Table(name = "Cliente")
 @NamedQueries({
@@ -98,93 +100,6 @@ public class Cliente implements Serializable, DTO<ClienteDTO> {
         this.contrasenya = contrasenya;
     }
 
-    public Integer getIdcliente() {
-        return idcliente;
-    }
-
-    public void setIdcliente(Integer idcliente) {
-        this.idcliente = idcliente;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getContrasenya() {
-        return contrasenya;
-    }
-
-    public void setContrasenya(String contrasenya) {
-        this.contrasenya = contrasenya;
-    }
-
-    public byte[] getImagenperfil() {
-        return imagenperfil;
-    }
-
-    public void setImagenperfil(byte[] imagenperfil) {
-        this.imagenperfil = imagenperfil;
-    }
-
-    public Double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(Double peso) {
-        this.peso = peso;
-    }
-
-    public Double getAltura() {
-        return altura;
-    }
-
-    public void setAltura(Double altura) {
-        this.altura = altura;
-    }
-
-    public String getAlergias() {
-        return alergias;
-    }
-
-    public void setAlergias(String alergias) {
-        this.alergias = alergias;
-    }
-
-    public List<Trabajador> getTrabajadorList() {
-        return trabajadorList;
-    }
-
-    public void setTrabajadorList(List<Trabajador> trabajadorList) {
-        this.trabajadorList = trabajadorList;
-    }
-
-    public List<Dieta> getDietaList() {
-        return dietaList;
-    }
-
-    public void setDietaList(List<Dieta> dietaList) {
-        this.dietaList = dietaList;
-    }
-
-    public List<Rutina> getRutinaList() {
-        return rutinaList;
-    }
-
-    public void setRutinaList(List<Rutina> rutinaList) {
-        this.rutinaList = rutinaList;
-    }
 
     @Override
     public int hashCode() {
@@ -225,11 +140,13 @@ public class Cliente implements Serializable, DTO<ClienteDTO> {
         cliente.setAlergias(this.alergias);
 
         List<Integer> listaTrabajadores = new ArrayList<Integer>();
-        for (Trabajador trabajador: this.trabajadorList) {
-            listaTrabajadores.add(trabajador.getIdtrabajador());
+        if(this.trabajadorList != null) {
+            for (Trabajador trabajador: this.trabajadorList) {
+                listaTrabajadores.add(trabajador.getIdtrabajador());
+            }
         }
-        cliente.setTrabajadorList(listaTrabajadores);
 
+        cliente.setTrabajadorList(listaTrabajadores);
         cliente.setDietaList(this.dietaList);
         cliente.setRutinaList(this.rutinaList);
 

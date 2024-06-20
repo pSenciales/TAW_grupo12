@@ -1,0 +1,10 @@
+.container {
+    margin-top: 50px;
+}
+.card-header {
+    background-color: #007bff;
+    color: white;
+}
+.form-group {
+    margin-bottom: 15px;
+}

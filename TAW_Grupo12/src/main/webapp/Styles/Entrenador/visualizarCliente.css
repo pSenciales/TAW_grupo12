@@ -1,0 +1,25 @@
+.table th, .table td {
+    text-align: center;
+}
+
+.contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.table-container {
+    width: 60%;
+    margin-left: 1.5rem;
+}
+
+.select-container{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.vertical{
+    border-left: solid #000000;
+    max-height: 2.5rem;
+}

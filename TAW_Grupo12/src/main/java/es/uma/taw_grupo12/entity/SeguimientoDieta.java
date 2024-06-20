@@ -14,7 +14,7 @@ import jakarta.persistence.*;
  * @author guzman
  */
 @Entity
-@Table(name = "SeguimientoDieta")
+@Table(name = "seguimientodieta")
 @NamedQueries({
     @NamedQuery(name = "SeguimientoDieta.findAll", query = "SELECT s FROM SeguimientoDieta s"),
     @NamedQuery(name = "SeguimientoDieta.findByFecha", query = "SELECT s FROM SeguimientoDieta s WHERE s.fecha = :fecha"),

@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.uma.taw_grupo12.dto.DTO;
 import es.uma.taw_grupo12.dto.EjercicioDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
@@ -35,7 +36,7 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "Ejercicio.findByNombre", query = "SELECT e FROM Ejercicio e WHERE e.nombre = :nombre"),
     @NamedQuery(name = "Ejercicio.findByTipo", query = "SELECT e FROM Ejercicio e WHERE e.tipo = :tipo"),
     @NamedQuery(name = "Ejercicio.findByDescripcion", query = "SELECT e FROM Ejercicio e WHERE e.descripcion = :descripcion")})
-public class Ejercicio implements Serializable {
+public class Ejercicio implements Serializable, DTO<EjercicioDTO> {
 
     private static final long serialVersionUID = 1L;
     @Id

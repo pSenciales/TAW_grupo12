@@ -30,39 +30,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <style>
-        #anyadir-ej *{
-            margin-left: 20px;
-        }
-
-        .table th, .table td {
-            text-align: center; /* Center text in thead and tbody */
-            font-size: 0.85rem; /* Make tbody text smaller */
-            width: 14.28%; /* Ensure equal width for all columns */
-        }
-
-        .table thead th {
-            font-size: 1rem; /* Keep thead text size default */
-        }
-        .table-container {
-            margin: 0 auto;
-            width: 90%;
-        }
-        .button-container {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-left: 2rem;
-            margin-top: 0.5rem;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="/Styles/Entrenador/tableRutinas.css">
 </head>
 
 <body>
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
-<h1>Rutina: <%=rutina.getNombre()%></h1>
-
+<div class="m-3">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="http://localhost:8080/entrenador/rutinas">Rutinas</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><%=rutina.getNombre()%></li>
+    </ol>
+</nav>
+</div>
 <form:form method="post" action="/entrenador/addEjercicio" modelAttribute="ejercicioRutinaDTO">
     <div class="m-5 d-flex flex-row " id="anyadir-ej">
         <form:hidden path="rutina"></form:hidden>
@@ -75,8 +55,8 @@
             <form:option value="6" label="Sábado"></form:option>
             <form:option value="7" label="Domingo"></form:option>
         </form:select>
-        <form:input required="required" type="number" min="1" placeholder="Repeticiones"  path="repeticiones"/>
         <form:input required="required" type="number" min="1" placeholder="Series"  path="series"/>
+        <form:input required="required" type="number" min="1" placeholder="Repeticiones"  path="repeticiones"/>
         <form:input required="required" type="number" min="1" placeholder="Peso"  path="peso"/>
         <form:select required="required" path="ejercicio">
             <form:options items="${ejercicioList}" itemLabel="nombre" itemValue="idejercicio"></form:options>
@@ -90,7 +70,7 @@
     <tr>
         <th scope="col">Lunes</th>
         <th scope="col">Martes</th>
-        <th scope="col">Miercoles</th>
+        <th scope="col">Miércoles</th>
         <th scope="col">Jueves</th>
         <th scope="col">Viernes</th>
         <th scope="col">Sábado</th>
@@ -147,12 +127,10 @@
                 <input type="hidden" value="<%=ids[j]%>" name="id">
                 <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-arrow-down"></i></button>
             </form>
-            <form method="get" action="/entrenador/rutina/borrar">
-                <input type="hidden" value="<%=ids[j]%>" name="id">
+            <form method="get" action="/entrenador/rutina/borrar/<%=ids[j]%>">
                 <button class="btn btn-danger btn-sm" type="submit"><i class="fa-solid fa-trash"></i></button>
             </form>
-            <form method="post" action="/entrenador/rutina/editar">
-                <input type="hidden" value="<%=ids[j]%>" name="id">
+            <form method="get" action="/entrenador/rutina/editar/<%=ids[j]%>">
                 <button class="btn btn-warning btn-sm" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
             </form>
             </div>

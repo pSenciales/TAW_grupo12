@@ -13,7 +13,7 @@
                     <a class="nav-link active" aria-current="page" href="http://localhost:8080/entrenador/rutinas">Rutinas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Clientes</a>
+                    <a class="nav-link active" aria-current="page" href="http://localhost:8080/entrenador/clientes">Clientes</a>
                 </li>
             </ul>
         </div>

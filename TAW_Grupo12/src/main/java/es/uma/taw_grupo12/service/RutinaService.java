@@ -36,15 +36,18 @@ public class RutinaService {
     //@Pablo
 
     public void save(RutinaDTO rutinaDTO){
-        Rutina rutina = new Rutina();
-        Cliente cliente = clienteRepository.findById(rutinaDTO.getIdcliente()).orElse(null);
-        assert cliente != null;
-        Trabajador trabajador = trabajadorRepository.findById(rutinaDTO.getIdtrabajador()).orElse(null);
-        assert trabajador != null;
-        rutina.setNombre(rutinaDTO.getNombre());
-        rutina.setIdcliente(cliente);
-        rutina.setIdtrabajador(trabajador);
-        rutinaRepository.saveAndFlush(rutina);
+            Rutina rutina = new Rutina();
+            Cliente cliente = clienteRepository.findById(rutinaDTO.getIdcliente()).orElse(null);
+            assert cliente != null;
+            Trabajador trabajador = trabajadorRepository.findById(rutinaDTO.getIdtrabajador()).orElse(null);
+            assert trabajador != null;
+            rutina.setNombre(rutinaDTO.getNombre());
+            rutina.setIdcliente(cliente);
+            rutina.setIdtrabajador(trabajador);
+
+            rutina.setIdrutina(rutinaDTO.getIdrutina());
+
+            rutinaRepository.saveAndFlush(rutina);
     }
 
 
@@ -74,6 +77,15 @@ public class RutinaService {
              listaDTO.add(rutina.toDTO());
         }
 
+        return listaDTO;
+    }
+
+    public List<RutinaDTO> findAllByTrabajadorAndCliente(Integer idtrabajador, Integer idcliente) {
+        List<Rutina> rutinas = rutinaRepository.findAllByTrabajadorAndCliente(idtrabajador, idcliente);
+        List<RutinaDTO> listaDTO = new ArrayList<>();
+        for(Rutina rutina : rutinas){
+            listaDTO.add(rutina.toDTO());
+        }
         return listaDTO;
     }
 }

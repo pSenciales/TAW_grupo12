@@ -1,16 +1,11 @@
 package es.uma.taw_grupo12.controller;
 
 import es.uma.taw_grupo12.dto.*;
-import es.uma.taw_grupo12.entity.Trabajador;
 import es.uma.taw_grupo12.service.*;
 import es.uma.taw_grupo12.dto.EjercicioDTO;
 import es.uma.taw_grupo12.dto.RutinaDTO;
 import es.uma.taw_grupo12.service.EjercicioService;
 import es.uma.taw_grupo12.service.RutinaService;
-import es.uma.taw_grupo12.dto.*;
-import es.uma.taw_grupo12.entity.Rutina;
-import es.uma.taw_grupo12.entity.Trabajador;
-import es.uma.taw_grupo12.service.*;
 import es.uma.taw_grupo12.ui.Entrenador.FiltroRutinas;
 
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -33,9 +30,9 @@ public class EntrenadorController {
     @Autowired
     private EjercicioRutinaService ejercicioRutinaService;
     @Autowired
-    private TrabajadorService trabajadorService;
-    @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private SeguimientoObjetivosService seguimientoObjetivosService;
 
 
     @GetMapping("/")
@@ -78,28 +75,47 @@ public class EntrenadorController {
         } else {
             List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());
             model.addAttribute("clientes", clientes);
+            RutinaDTO rutina = new RutinaDTO();
+            model.addAttribute("rutina", rutina);
             return "/Entrenador/crearRutina";
         }
     }
 
-    @PostMapping("/new-rutina/crear")
-    public String doCrearRutina(HttpSession sesion, @RequestParam("nombre") String nombre, @RequestParam("cliente") Integer idcliente) {
+    @PostMapping(value = {"/new-rutina/crear", "editar/new-rutina/crear"})
+    public String doCrearRutina(HttpSession sesion, @ModelAttribute("rutina") RutinaDTO rutina) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
                 !sesion.getAttribute("tipo").equals("entrenador")) {
             return "redirect:/";
         } else {
-            RutinaDTO rutinaDTO = new RutinaDTO(nombre, trabajador.getIdtrabajador(), idcliente);
-
-            rutinaService.save(rutinaDTO);
+            rutina.setIdtrabajador(trabajador.getIdtrabajador());
+            rutinaService.save(rutina);
 
             return "redirect:/entrenador/rutinas";
 
         }
     }
 
+
+    @GetMapping("/editar/{id}")
+    public String doEditarRutina(HttpSession sesion, @PathVariable int id, Model model) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());
+            model.addAttribute("clientes", clientes);
+            RutinaDTO rutina = rutinaService.findById(id);
+            model.addAttribute("rutina", rutina);
+
+            return "/Entrenador/crearRutina";
+
+
+        }
+    }
     @GetMapping("/borrar/{id}")
-    public String borrarRutina(HttpSession sesion, @PathVariable int id) {
+    public String doBorrarRutina(HttpSession sesion, @PathVariable int id) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
                 !sesion.getAttribute("tipo").equals("entrenador")) {
@@ -112,6 +128,9 @@ public class EntrenadorController {
 
         }
     }
+
+
+
     @PostMapping("/filtrar")
     public String doFiltrar(HttpSession sesion, Model model, @ModelAttribute("filtro") FiltroRutinas filtro){
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
@@ -132,6 +151,82 @@ public class EntrenadorController {
 
 
 
+
+    /*
+     *
+     * VISUALIZAR CLIENTES
+     *
+     * */
+
+
+    @GetMapping("/clientes")
+    public String doClientes(HttpSession sesion, Model model) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());
+            model.addAttribute("clientes", clientes);
+            List<RutinaDTO> rutinas = rutinaService.findAllByTrabajador(trabajador.getIdtrabajador());
+            model.addAttribute("rutinas", rutinas);
+            return "/Entrenador/listarClientes";
+        }
+    }
+
+    @PostMapping("/cliente/visualizar/{idcliente}")
+    public String doClienteVisualizar(HttpSession sesion, Model model, @PathVariable("idcliente") Integer idcliente,
+                                      @RequestParam(required = false) String idrutina ){
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            List<EjercicioDTO> ejercicioList = ejercicioService.getFuerza();
+            model.addAttribute("ejercicioList", ejercicioList);
+
+            ClienteDTO cliente = clienteService.buscarClienteId(idcliente);
+            model.addAttribute("cliente", cliente);
+
+            List<RutinaDTO> rutinas = rutinaService.findAllByTrabajadorAndCliente(trabajador.getIdtrabajador(), cliente.getIdcliente());
+            model.addAttribute("rutinas", rutinas);
+
+            RutinaDTO rutina = idrutina != null ? rutinaService.findById(Integer.parseInt(idrutina)) : !rutinas.isEmpty() ? rutinas.get(0) : null ;
+            model.addAttribute("rutina", rutina);
+
+            List<EjercicioRutinaDTO> ejerciciosRutina = rutina != null ?
+                    ejercicioRutinaService.findAllByRutinaId(rutina.getIdrutina()):
+                    new ArrayList<>();
+            model.addAttribute("ejerciciosRutina", ejerciciosRutina);
+            return "/Entrenador/visualizarCliente";
+        }
+
+    }
+
+    @PostMapping("cliente/feedback/{idcliente}/{idrutina}")
+    public String doFeedBack(HttpSession sesion, Model model, @PathVariable Integer idcliente, @PathVariable Integer idrutina,
+                             @RequestParam(required = false) String nombre, @RequestParam(required = false) String fecha) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            ClienteDTO cliente = clienteService.buscarClienteId(idcliente);
+            model.addAttribute("cliente", cliente);
+            RutinaDTO rutina = rutinaService.findById(idrutina);
+            model.addAttribute("rutina", rutina);
+            Date fechaDate = fecha != null && !fecha.isEmpty() ? Date.valueOf(fecha) : null;
+            List<SeguimientoObjetivosDTO> seguimientoObjetivos =
+                    (nombre != null && !nombre.isEmpty()) || fechaDate != null ?
+                            seguimientoObjetivosService.findByNombreEjercicioAndFecha(nombre, idcliente, idrutina, fechaDate)
+                            : seguimientoObjetivosService.findByClienteAndRutina(idcliente, idrutina);
+
+            model.addAttribute("feedback", seguimientoObjetivos);
+            model.addAttribute("filtro",nombre );
+
+            return "/Entrenador/visualizarFeedback";
+        }
+    }
 
 
 
@@ -218,8 +313,8 @@ public class EntrenadorController {
         }
     }
 
-    @GetMapping("/rutina/borrar")
-    public String doBorrarEjercicio(HttpSession sesion, @RequestParam("id") Integer id) {
+    @GetMapping("/rutina/borrar/{id}")
+    public String doBorrarEjercicio(HttpSession sesion, @PathVariable("id") Integer id) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
                 !sesion.getAttribute("tipo").equals("entrenador")) {
@@ -232,14 +327,39 @@ public class EntrenadorController {
         }
     }
 
-    @PostMapping("/rutina/editar")
-    public String doEditarEjercicio(HttpSession sesion, @RequestParam("id") Integer id) {
+    @GetMapping("/rutina/editar/{id}")
+    public String doEditarEjercicio(HttpSession sesion, Model model, @PathVariable("id") Integer id) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
         if (trabajador == null ||
                 !sesion.getAttribute("tipo").equals("entrenador")) {
             return "redirect:/";
         } else {
-            return "redirect:/entrenador/visualizar/" + id;
+            EjercicioRutinaDTO ejercicioRutinaDTO = ejercicioRutinaService.findById(id);
+            model.addAttribute("ejercicioRutinaDTO", ejercicioRutinaDTO);
+
+            List<EjercicioDTO> ejercicioList = ejercicioService.getFuerza();
+            model.addAttribute("ejercicioDTOList", ejercicioList);
+
+            RutinaDTO rutina = rutinaService.findById(ejercicioRutinaDTO.getRutina());
+            model.addAttribute("rutina", rutina);
+
+            List<EjercicioRutinaDTO> ejerciciosRutina = ejercicioRutinaService.findAllByRutinaId(id);
+            model.addAttribute("ejerciciosRutina", ejerciciosRutina);
+            return "/Entrenador/editarEjercicioRutina";
+
+        }
+    }
+
+    @PostMapping("/rutina/editar-process")
+    public String doEditarEjercicio(HttpSession sesion, @ModelAttribute("ejercicioRutinaDTO") EjercicioRutinaDTO ejercicioRutinaDTO) {
+        TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");
+        if (trabajador == null ||
+                !sesion.getAttribute("tipo").equals("entrenador")) {
+            return "redirect:/";
+        } else {
+            ejercicioRutinaService.save(ejercicioRutinaDTO);
+
+            return "redirect:/entrenador/visualizar/" + ejercicioRutinaDTO.getRutina();
 
         }
     }

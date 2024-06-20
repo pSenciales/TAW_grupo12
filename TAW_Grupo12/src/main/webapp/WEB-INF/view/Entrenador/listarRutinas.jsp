@@ -30,45 +30,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <style>
-        .table th, .table td {
-            text-align: center; /* Center text in thead and tbody */
-        }
-
-        .table-container {
-            margin: 5rem auto;
-            width: 90%;
-        }
-        .contenedor {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .botones {
-            display: flex;
-            gap: 10px;
-        }
-        .search-container{
-            margin-bottom: 1rem;
-
-        }
-        .func-container{
-            display: flex;
-            gap: 2rem;
-        }
-        .vertical{
-            border-left: solid #000000;
-            max-height: 2.5rem;
-        }
-
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="/Styles/Entrenador/listarRutinas.css">
 </head>
 
 <body>
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
-
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">Rutinas</h1>
+        </div>
+    </div>
+</div>
 <div class="table-container">
     <div class="func-container">
     <form action="/entrenador/new-rutina" method="get">
@@ -116,8 +89,7 @@
                         <form action="/entrenador/visualizar/<%=rutina.getIdrutina()%>" method="get">
                             <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
                         </form>
-                        <form action="/entrenador/editar" method="post">
-                            <input type="hidden" name="id" value="<%=rutina.getIdrutina()%>">
+                        <form action="/entrenador/editar/<%=rutina.getIdrutina()%>" method="get">
                             <button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
                         </form>
                         <form action="/entrenador/borrar/<%=rutina.getIdrutina()%>" method="get">

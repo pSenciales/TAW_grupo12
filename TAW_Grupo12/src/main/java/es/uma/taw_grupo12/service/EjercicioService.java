@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EjercicioService {
@@ -28,4 +29,45 @@ public class EjercicioService {
         return ejerciciosDTO;
     }
     //@Pablo
+
+    //@Guillermo
+    public List<EjercicioDTO> getAll() {
+        List<Ejercicio> ejerciciosList = ejercicioRepository.findAll();
+        List<EjercicioDTO> ejerciciosDTO = new ArrayList<>();
+        for (Ejercicio ej : ejerciciosList) {
+            EjercicioDTO aux = ej.toDTO();
+            ejerciciosDTO.add(aux);
+        }
+        return ejerciciosDTO;
+    }
+
+    public List<String> getTipos() {
+        List<String> tipos = new ArrayList<>();
+        List<Ejercicio> ejerciciosList = ejercicioRepository.findAll();
+
+        for (Ejercicio ej : ejerciciosList) {
+            if (!tipos.contains(ej.getTipo())) {
+                tipos.add(ej.getTipo());
+            }
+
+        }
+
+        return tipos;
+    }
+
+    public List<EjercicioDTO> getByTipos(List<String> filtrotipos) {
+        List<Ejercicio> ejerciciosList = ejercicioRepository.findAll();
+        List<EjercicioDTO> ejerciciosDTO = new ArrayList<>();
+
+        for (Ejercicio ej : ejerciciosList) {
+            if (filtrotipos.contains(ej.getTipo())) {
+                EjercicioDTO aux = ej.toDTO();
+                ejerciciosDTO.add(aux);
+            }
+
+        }
+
+        return ejerciciosDTO;
+    }
+
 }

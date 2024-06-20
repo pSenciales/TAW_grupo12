@@ -6,6 +6,9 @@ package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
+import es.uma.taw_grupo12.dto.DTO;
+import es.uma.taw_grupo12.dto.PlatoDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -23,6 +26,7 @@ import jakarta.persistence.Table;
  *
  * @author guzman
  */
+
 @Entity
 @Table(name = "Plato")
 @NamedQueries({
@@ -31,7 +35,7 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "Plato.findByNombre", query = "SELECT p FROM Plato p WHERE p.nombre = :nombre"),
     @NamedQuery(name = "Plato.findByAlergenos", query = "SELECT p FROM Plato p WHERE p.alergenos = :alergenos"),
     @NamedQuery(name = "Plato.findByDescripcion", query = "SELECT p FROM Plato p WHERE p.descripcion = :descripcion")})
-public class Plato implements Serializable {
+public class Plato implements Serializable, DTO<PlatoDTO> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -136,5 +140,15 @@ public class Plato implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.Plato[ idplato=" + idplato + " ]";
     }
-    
+
+    @Override
+    public PlatoDTO toDTO() {
+        PlatoDTO dto = new PlatoDTO();
+        dto.setIdplato(this.idplato);
+        dto.setNombre(this.nombre);
+        dto.setAlergenos(this.alergenos);
+        dto.setVideo(this.video);
+        dto.setDescripcion(this.descripcion);
+        return dto;
+    }
 }

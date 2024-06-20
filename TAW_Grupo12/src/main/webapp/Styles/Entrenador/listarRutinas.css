@@ -1,0 +1,30 @@
+.table th, .table td {
+    text-align: center;
+}
+
+.table-container {
+    margin: 2rem auto;
+    width: 90%;
+}
+.contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.botones {
+    display: flex;
+    gap: 10px;
+}
+.search-container{
+    margin-bottom: 1rem;
+
+}
+.func-container{
+    display: flex;
+    gap: 2rem;
+}
+.vertical{
+    border-left: solid #000000;
+    max-height: 2.5rem;
+}

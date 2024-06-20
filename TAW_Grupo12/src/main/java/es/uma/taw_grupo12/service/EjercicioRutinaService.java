@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EjercicioRutinaService {
@@ -26,26 +27,37 @@ public class EjercicioRutinaService {
 
     public void save(EjercicioRutinaDTO ejercicioRutinaDTO) {
         EjercicioRutina ejercicioRutina = new EjercicioRutina();
-
         Rutina rutina = rutinaRepository.findById(ejercicioRutinaDTO.getRutina()).orElse(null);
-        assert(rutina!=null);
+        assert (rutina != null);
         ejercicioRutina.setRutina(rutina);
 
         Ejercicio ejercicio = ejercicioRepository.findById(ejercicioRutinaDTO.getEjercicio()).orElse(null);
-        assert(ejercicio!=null);
+        assert (ejercicio != null);
         ejercicioRutina.setEjercicio(ejercicio);
 
         ejercicioRutina.setPeso(ejercicioRutinaDTO.getPeso());
         ejercicioRutina.setRepeticiones(ejercicioRutinaDTO.getRepeticiones());
         ejercicioRutina.setSeries(ejercicioRutinaDTO.getSeries());
         ejercicioRutina.setDiassemana(ejercicioRutinaDTO.getDiassemana());
-
+        ejercicioRutina.setEjercicioRutinaPK(ejercicioRutinaDTO.getEjercicioRutinaPK());
 
         String orden = ejercicioRutinaRepository.findByOrden(rutina.getIdrutina(), ejercicioRutina.getDiassemanaString());
-        int ordenInt = (orden == null) ? 0 : (Integer.parseInt(orden)+1);
-
+        int ordenInt = (orden == null) ? 0 : (Integer.parseInt(orden) + 1);
         ejercicioRutina.setOrden(ordenInt);
 
+        if (ejercicioRutinaDTO.getEjercicioRutinaPK() != null) {
+            EjercicioRutina ejercicioRutinaFound = ejercicioRutinaRepository.findById(ejercicioRutinaDTO.getEjercicioRutinaPK()).orElse(null);
+            assert ejercicioRutinaFound != null;
+            if (!Objects.equals(ejercicioRutinaFound.getDiassemana(), ejercicioRutina.getDiassemanaString())) {
+                int rutinaid = ejercicioRutinaFound.getRutina().getIdrutina();
+                String diassemana = ejercicioRutinaFound.getDiassemana();
+                int ordenprev = ejercicioRutinaFound.getOrden();
+                List<EjercicioRutina> rutinas = ejercicioRutinaRepository.findMayoresOrden(rutinaid, diassemana, ordenprev);
+                desfragmentar(rutinas);
+            } else {
+                ejercicioRutina.setOrden(ejercicioRutinaFound.getOrden());
+            }
+        }
         ejercicioRutinaRepository.save(ejercicioRutina);
 
 
@@ -55,21 +67,21 @@ public class EjercicioRutinaService {
         List<EjercicioRutina> ejercicioRutinas = ejercicioRutinaRepository.findAllByRutinaId(id);
         List<EjercicioRutinaDTO> ejercicioRutinaDTOs = new ArrayList<>();
 
-        for(EjercicioRutina ejercicioRutina : ejercicioRutinas){
+        for (EjercicioRutina ejercicioRutina : ejercicioRutinas) {
             ejercicioRutinaDTOs.add(ejercicioRutina.toDTO());
         }
-        return  ejercicioRutinaDTOs;
+        return ejercicioRutinaDTOs;
     }
 
     public void cambiarOrden(Integer id, boolean b) {
         EjercicioRutina curr = ejercicioRutinaRepository.findById(id).orElse(null);
-        assert(curr!=null);
+        assert (curr != null);
         int rutina = curr.getRutina().getIdrutina();
         String diassemana = curr.getDiassemana();
         int orden = b ? curr.getOrden() - 1 : curr.getOrden() + 1;
 
-        EjercicioRutina other = ejercicioRutinaRepository.findSuperiorOrInferior(rutina,diassemana, orden).orElse(null);
-        if(other !=null){
+        EjercicioRutina other = ejercicioRutinaRepository.findSuperiorOrInferior(rutina, diassemana, orden).orElse(null);
+        if (other != null) {
             int aux = curr.getOrden();
             curr.setOrden(other.getOrden());
             other.setOrden(aux);
@@ -81,7 +93,7 @@ public class EjercicioRutinaService {
 
     public EjercicioRutinaDTO findById(Integer id) {
         EjercicioRutina ejercicioRutina = ejercicioRutinaRepository.findById(id).orElse(null);
-        assert(ejercicioRutina!=null);
+        assert (ejercicioRutina != null);
         return ejercicioRutina.toDTO();
     }
 
@@ -97,9 +109,10 @@ public class EjercicioRutinaService {
         desfragmentar(rutinas);
 
     }
-    private void desfragmentar(List<EjercicioRutina> rutinas){
-        for(EjercicioRutina ejercicioRutina : rutinas){
-            ejercicioRutina.setOrden(ejercicioRutina.getOrden()-1);
+
+    private void desfragmentar(List<EjercicioRutina> rutinas) {
+        for (EjercicioRutina ejercicioRutina : rutinas) {
+            ejercicioRutina.setOrden(ejercicioRutina.getOrden() - 1);
         }
         ejercicioRutinaRepository.saveAllAndFlush(rutinas);
     }

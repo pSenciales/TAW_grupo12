@@ -21,6 +21,7 @@ public class TrabajadorDTO {
     //@Victoria
     public String getImagenBase64() {
         return (this.imagenperfil != null) ? Base64.getEncoder().encodeToString(this.imagenperfil) : null;
+    }
     public String getTipo(){
         return switch (this.tipo){
             case "ENTRENADOR FUERZA" -> "entrenador";

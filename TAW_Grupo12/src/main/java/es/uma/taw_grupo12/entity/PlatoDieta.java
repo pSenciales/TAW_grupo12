@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
  * @author guzman
  */
 @Entity
-@Table(name = "PlatoDieta")
+@Table(name = "platodieta")
 @NamedQueries({
     @NamedQuery(name = "PlatoDieta.findAll", query = "SELECT p FROM PlatoDieta p"),
     @NamedQuery(name = "PlatoDieta.findByIdplatodieta", query = "SELECT p FROM PlatoDieta p WHERE p.platoDietaPK.idplatodieta = :idplatodieta"),

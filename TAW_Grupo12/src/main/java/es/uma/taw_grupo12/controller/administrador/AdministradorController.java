@@ -105,7 +105,7 @@ public class AdministradorController extends BaseController{
         if(tipoTrabajador.equals("ENTRENADOR FUERZA")){
             return "/Administrador/AsignarClientes/asignarEntrenadorFuerza";
         }
-        if(tipoTrabajador.equals("ENTRENADOR CROSSTRAINNING")){
+        if(tipoTrabajador.equals("ENTRENADOR CROSSTRAINING")){
             return "/Administrador/AsignarClientes/asignarEntrenadorCrosstraining";
         }
         if(tipoTrabajador.equals("DIETISTA")){

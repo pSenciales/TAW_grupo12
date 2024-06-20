@@ -4,7 +4,6 @@ TRUNCATE TABLE taw12.trabajador;
 TRUNCATE TABLE taw12.cliente;
 TRUNCATE TABLE taw12.cliente_trabajador;
 SET FOREIGN_KEY_CHECKS = 1;
---
 
 -- Añadir clientes
 INSERT INTO taw12.Cliente (nombre, email, contrasenya, imagenPerfil, peso, altura, alergias) 
@@ -29,9 +28,9 @@ VALUES 	('Juan López', 'juan.lopez@example.com', 'contraseña4', 'ENTRENADOR FU
 
 -- Entrenadores de Crosstraining
 INSERT INTO taw12.Trabajador (nombre, email, contrasenya, tipo, imagenPerfil) 
-VALUES 	('Elena Martínez', 'elena.martinez@example.com', 'contraseña7', 'ENTRENADOR CROSSTRAINNING', NULL),
-		('Mario Gómez', 'mario.gomez@example.com', 'contraseña8', 'ENTRENADOR CROSSTRAINNING', NULL),
-		('Sara Fernández', 'sara.fernandez@example.com', 'contraseña9', 'ENTRENADOR CROSSTRAINNING', NULL);
+VALUES 	('Elena Martínez', 'elena.martinez@example.com', 'contraseña7', 'ENTRENADOR CROSSTRAINING', NULL),
+		('Mario Gómez', 'mario.gomez@example.com', 'contraseña8', 'ENTRENADOR CROSSTRAINING', NULL),
+		('Sara Fernández', 'sara.fernandez@example.com', 'contraseña9', 'ENTRENADOR CROSSTRAINING', NULL);
         
 -- Relaciones Cliente-Entrenador
 INSERT INTO taw12.cliente_trabajador (idcliente, idtrabajador)
@@ -51,5 +50,6 @@ VALUES
     -- Cliente Laura Rodríguez (idCliente = 4) con un trabajador
     (4, 2),  -- Laura Rodríguez con Pedro Sánchez (Dietista)
     
-    -- Cliente Ana López (idCliente = 5) con un trabajador
-    (5, 6); -- Ana López con Carlos Pérez (Entrenador de Fuerza)
+    -- Cliente Ana López (idCliente = 5) con trabajadores
+    (5, 6), -- Ana López con Carlos Pérez (Entrenador de Fuerza)
+    (5, 7); -- Ana López con Elena Martínez (Entrenador Crosstraining)

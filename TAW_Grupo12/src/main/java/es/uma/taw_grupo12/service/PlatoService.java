@@ -1,7 +1,10 @@
 package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dao.PlatoRepository;
+import es.uma.taw_grupo12.dao.PlatodietaRepository;
 import es.uma.taw_grupo12.dto.PlatoDTO;
+import es.uma.taw_grupo12.entity.Cliente;
+import es.uma.taw_grupo12.entity.PlatoDieta;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -19,6 +22,9 @@ public class PlatoService {
 
     @Autowired
     protected PlatoRepository platoRepository;
+
+    @Autowired
+    protected PlatodietaRepository platodietaRepository;
 
     public List<PlatoDTO> listarPlatosDTO() {
         List<Plato> platos =  this.platoRepository.findAll();
@@ -90,7 +96,21 @@ public class PlatoService {
         }
     }
 
-    public List<Plato> buscarPlatoNombre(String nombre) {
-        return this.platoRepository.findByNombre(nombre);
+    public List<Plato> buscarPlatoNombre(PlatoDTO platoDTO) {
+        Plato original = this.platoRepository.findById(platoDTO.getIdplato()).orElse(null);
+        if(original.getNombre().equals(platoDTO.getNombre())){
+            return null;
+        }
+        return  this.platoRepository.findAllByNombre(platoDTO.getNombre());
+    }
+
+    public void eliminarPlato(Integer idplato) {
+        Plato plato = this.platoRepository.findById(idplato).orElse(null);
+        List<PlatoDieta> platosDieta = this.platodietaRepository.findPlatosDieta(idplato);
+
+        this.platodietaRepository.deleteAll(platosDieta);
+
+        this.platoRepository.deleteById(idplato);
+
     }
 }

@@ -12,7 +12,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/redir/perfil">Mi perfil</a></li>
+                        <li><a class="dropdown-item" href="/cliente/perfil">Mi perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Buscar rutinas</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -20,7 +20,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Página personal</a>
+                    <a class="nav-link active" aria-current="page" href="/cliente/">Página personal</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Mi Rutina</a>

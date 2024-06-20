@@ -50,4 +50,18 @@ public class ClienteService {
         return clientesDTO;
     }
 
+    public void actualizarCliente(ClienteDTO clienteDTO) {
+        Cliente cliente = clienteRepository.findById(clienteDTO.getIdcliente()).orElse(null);
+
+        if (cliente != null) {
+            cliente.setNombre(clienteDTO.getNombre());
+            cliente.setEmail(clienteDTO.getEmail());
+            cliente.setPeso(clienteDTO.getPeso());
+            cliente.setAltura(clienteDTO.getAltura());
+            cliente.setAlergias(clienteDTO.getAlergias());
+
+            clienteRepository.save(cliente);
+        }
+    }
+
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,33 +12,28 @@
     <div class="left-panel">
         <div class="profile-info">
             <p class="text-center text-decoration-underline fw-bold">Mis datos:</p>
-            <form method="post" action="/editarDatosCliente">
-                <h2>NOMBRE Y APELLIDOS</h2>
-                <input type="text" value="Nombre Apellido">
+            <form:form modelAttribute="cliente" method="post" action="/cliente/editarCliente">
+                <form:hidden path="idcliente"/>
+                <p>Nombre y apellidos</p>
+                <form:input path="nombre"/>
                 <p>Correo electrónico:</p>
-                <input type="text" value="correoemplejo@a.com">
-                <p>Número de teléfono:</p>
-                <input type="text" value="123 456 789">
+                <form:input path="email"/>
                 <p>Peso:</p>
-                <input type="text" value="xx Kg">
+                <form:input path="peso"/>
                 <p>Altura:</p>
-                <input type="text" value="xxx cm">
+                <form:input path="altura"/>
                 <p>Alergias:</p>
-                <input type="text" value="Alergia 1, alergia 2, alergia 3,...">
+                <form:input path="alergias"/>
                 <button class="save-button" type="submit">Guardar</button>
-            </form>
+            </form:form>
         </div>
-        <div class="horizontal-separator"></div>
+    </div>
+    <div class="vertical-separator"></div>
+    <div class="left-panel">
         <div class="plans">
             <p class="text-center text-decoration-underline fw-bold">Mis planes:</p>
             <input type="text" value="Rutina de ejemplo">
             <input type="text" value="Dieta de ejemplo">
-        </div>
-    </div>
-    <div class="vertical-separator"></div>
-    <div class="right-panel">
-        <div class="chart">
-            <p>Evolución</p>
         </div>
     </div>
 </div>

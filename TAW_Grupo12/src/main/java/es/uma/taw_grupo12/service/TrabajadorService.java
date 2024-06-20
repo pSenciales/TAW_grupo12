@@ -24,6 +24,7 @@ public class TrabajadorService {
     ClienteRepository clienteRepository;
     public TrabajadorDTO findById(Integer id) {
         Trabajador trabajador = trabajadorRepository.findById(id).orElse(null);
+        assert trabajador != null;
 
         return trabajador.toDTO();
     }

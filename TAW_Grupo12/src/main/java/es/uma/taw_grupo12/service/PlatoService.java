@@ -104,6 +104,11 @@ public class PlatoService {
         return  this.platoRepository.findAllByNombre(platoDTO.getNombre());
     }
 
+    public List<Plato> buscarPlatoNombre(String nombre) {
+        List<Plato> platos = this.platoRepository.findByNombre(nombre);
+       return platos;
+    }
+
     public void eliminarPlato(Integer idplato) {
         Plato plato = this.platoRepository.findById(idplato).orElse(null);
         List<PlatoDieta> platosDieta = this.platodietaRepository.findPlatosDieta(idplato);
@@ -112,5 +117,26 @@ public class PlatoService {
 
         this.platoRepository.deleteById(idplato);
 
+    }
+
+    public void crearPlato(PlatoDTO platoDTO) throws IOException {
+        List<Plato> existe = this.platoRepository.findByNombre(platoDTO.getNombre());
+        if(existe != null && !existe.isEmpty()){
+            return;
+        }
+        Plato plato = new Plato();
+        plato.setNombre(platoDTO.getNombre());
+        plato.setDescripcion(platoDTO.getDescripcion());
+        plato.setAlergenos(platoDTO.getAlergenos());
+
+        if (platoDTO.getVideoFile() != null && !platoDTO.getVideoFile().isEmpty()) {
+            MultipartFile myFile = platoDTO.getVideoFile();
+            byte[] imagenBytes = myFile.getBytes();
+            plato.setVideo(imagenBytes);
+        } else {
+            plato.setVideo(null);
+        }
+
+        this.platoRepository.save(plato);
     }
 }

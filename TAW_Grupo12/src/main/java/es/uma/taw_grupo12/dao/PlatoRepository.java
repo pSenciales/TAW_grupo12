@@ -19,5 +19,4 @@ public interface PlatoRepository extends JpaRepository<Plato, Integer> {
     @Query("SELECT p FROM Plato p WHERE p.nombre = :nombre")
     List<Plato> findByNombre(@Param("nombre") String nombre);
 
-
 }

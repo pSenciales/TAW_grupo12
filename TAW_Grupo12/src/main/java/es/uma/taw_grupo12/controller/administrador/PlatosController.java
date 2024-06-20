@@ -37,6 +37,7 @@ public class PlatosController extends BaseController {
         model.addAttribute("platos", platos);
         model.addAttribute("filtroPlatos", new FiltroPlatos());
         model.addAttribute("platoModel", new PlatoDTO());
+        model.addAttribute("platoNuevo", new PlatoDTO());
         model.addAttribute("tituloCabeceraAdmin", "Gestionar Platos");
         return "/Administrador/GestionarPlatos/gestionarPlatos";
     }
@@ -59,6 +60,7 @@ public class PlatosController extends BaseController {
         }
 
         model.addAttribute("platoModel", new PlatoDTO());
+        model.addAttribute("platoNuevo", new PlatoDTO());
         model.addAttribute("platos", platosDTO);
         model.addAttribute("tituloCabeceraAdmin", "Gestionar Platos");
         model.addAttribute("filtroPlatos", filtroPlatos);
@@ -71,14 +73,26 @@ public class PlatosController extends BaseController {
         List<Plato> existe = this.platoService.buscarPlatoNombre(platoDTO);
         if(existe != null && !existe.isEmpty()){
             redirectAttributes.addFlashAttribute("errorGestionarPlato", "Se ha intentado guardar un plato con un nombre ya existente, los cambios no se han guardado");
+        } else {
+            this.platoService.guardarPlato(platoDTO);
         }
-        this.platoService.guardarPlato(platoDTO);
         return "redirect:/administrador/platos/gestionarPlatos";
     }
 
     @PostMapping("/eliminarPlato")
     public String doEliminarPlato(@RequestParam("idPlato") Integer idPlato){
         this.platoService.eliminarPlato(idPlato);
+        return "redirect:/administrador/platos/gestionarPlatos";
+    }
+
+    @PostMapping("/crearPlato")
+    public String doCrearPlato(Model model, @ModelAttribute("platoNuevo") PlatoDTO platoDTO, RedirectAttributes redirectAttributes) throws IOException {
+        List<Plato> existe = this.platoService.buscarPlatoNombre(platoDTO.getNombre());
+        if(existe != null && !existe.isEmpty()){
+            redirectAttributes.addFlashAttribute("errorGestionarPlato", "Se ha intentado crear un plato con un nombre ya existente, los cambios no se han guardado");
+        } else {
+            this.platoService.crearPlato(platoDTO);
+        }
         return "redirect:/administrador/platos/gestionarPlatos";
     }
 

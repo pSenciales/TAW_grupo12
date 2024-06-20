@@ -204,8 +204,9 @@ public class AdministradorController extends BaseController{
         List<Cliente> existe = this.clienteService.buscarClienteNombreoEmail(cliente);
         if(existe != null && !existe.isEmpty()){
             redirectAttributes.addFlashAttribute("errorGestionarUsuario", "Se ha intentado guardar un cliente con un email o nombre ya existente, los cambios no se han guardado");            return "redirect:/administrador/gestionarUsuarios";
+        } else{
+            this.clienteService.guardarCliente(cliente);
         }
-        this.clienteService.guardarCliente(cliente);
         return "redirect:/administrador/gestionarUsuarios";
     }
 
@@ -214,8 +215,9 @@ public class AdministradorController extends BaseController{
         List<Trabajador> existe = this.trabajadorService.buscarTrabajadorNombreoEmail(trabajador);
         if(existe != null && !existe.isEmpty()){
             redirectAttributes.addFlashAttribute("errorGestionarUsuario", "Se ha intentado guardar un trabajador con un email o nombre ya existente, los cambios no se han guardado");            return "redirect:/administrador/gestionarUsuarios";
+        } else {
+            this.trabajadorService.guardarTrabajador(trabajador);
         }
-        this.trabajadorService.guardarTrabajador(trabajador);
         return "redirect:/administrador/gestionarUsuarios";
     }
 }

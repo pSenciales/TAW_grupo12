@@ -23,6 +23,9 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Query("SELECT c FROM Cliente c WHERE c.email = :email OR c.nombre = :nombre and c.idcliente != :idcliente")
     public List<Cliente> findAllByEmailorNombre(@Param("email")String email, @Param("nombre") String nombre, @Param("idcliente") Integer idcliente);
+    @Query(value = "select c.* from cliente c join cliente_trabajador ct on ct.idcliente = c.idcliente where ct.idtrabajador = ?1",
+            nativeQuery = true)
+    List<Cliente> findByTrabajador(Integer idtrabajador);
 
     @Query("SELECT c FROM Cliente c JOIN c.trabajadorList t WHERE t.idtrabajador = :idTrabajador")
     List<Cliente> findClientesAsociados(@Param("idTrabajador") Integer idTrabajador);

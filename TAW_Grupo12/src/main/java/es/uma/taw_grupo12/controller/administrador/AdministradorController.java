@@ -9,8 +9,6 @@ import es.uma.taw_grupo12.controller.BaseController;
 import es.uma.taw_grupo12.dto.AdministradorDTO;
 import es.uma.taw_grupo12.dto.ClienteDTO;
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
-import es.uma.taw_grupo12.entity.Cliente;
-import es.uma.taw_grupo12.entity.Trabajador;
 import es.uma.taw_grupo12.service.AdministradorService;
 import es.uma.taw_grupo12.service.ClienteService;
 import es.uma.taw_grupo12.service.TrabajadorService;

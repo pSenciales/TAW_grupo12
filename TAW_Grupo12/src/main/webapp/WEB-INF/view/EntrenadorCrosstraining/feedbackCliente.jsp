@@ -124,20 +124,20 @@
                     // Determine text for series and repetitions for objective
                     String seriesObjetivoText = (s.getSeriesobjetivo() == 1) ? " serie" : " series";
                     String repeticionesObjetivoText = (s.getRepeticionesobjetivo() == 1) ? " repetición" : " repeticiones";
-                    String pesoObjetivoText = (s.getPesoobjetivo()==null) ? repeticionesObjetivoText : s.getPesoobjetivo();
+                    String pesoObjetivoText = (s.getPesoobjetivo()==null) ? ")" : " de " + s.getPesoobjetivo() + ")";
 
                     // Determine text for series and repetitions for realized
                     String seriesRealizadasText = (s.getSeriesrealizadas() == 1) ? " serie" : " series";
                     String repeticionesRealizadasText = (s.getRepeticionesrealizadas() == 1) ? " repetición" : " repeticiones";
-                    String pesoRealizadoText = (s.getPesorealizado()==null) ? repeticionesRealizadasText : s.getPesorealizado();
+                    String pesoRealizadoText = (s.getPesorealizado()==null) ? ")" : " de " + s.getPesorealizado() + ")";
                 %>
                 <tr>
                     <td>
                         <div class="feedback-instance fw-normal">
                             <%= s.getFecha().toString() + " Ejercicio: " + s.getNombreejercicio() %>, objetivo de
-                            <%="(" + s.getSeriesobjetivo() + seriesObjetivoText + " de " + s.getRepeticionesobjetivo() + " " + pesoObjetivoText + ")" %>
+                            <%="(" + s.getSeriesobjetivo() + seriesObjetivoText + " de " + s.getRepeticionesobjetivo() + repeticionesObjetivoText + pesoObjetivoText%>
                             y realizado con
-                            <%="(" + s.getSeriesrealizadas() + seriesRealizadasText + " de " + s.getRepeticionesrealizadas() + " " + pesoRealizadoText + ")" %>
+                            <%="(" + s.getSeriesrealizadas() + seriesRealizadasText + " de " + s.getRepeticionesrealizadas() + repeticionesRealizadasText + pesoRealizadoText%>
                             <% if (s.getObservaciones() != null && !s.getObservaciones().isEmpty()) { %>
                             <br>
                             Observaciones: <%= s.getObservaciones() %>

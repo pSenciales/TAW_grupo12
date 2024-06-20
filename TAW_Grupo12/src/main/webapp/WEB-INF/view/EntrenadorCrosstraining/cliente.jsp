@@ -37,24 +37,25 @@
 
         .contenedor {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
+            flex-direction: column;
             gap: 20px;
         }
 
-        .table-container {
-            width: 60%;
-            margin-left: 1.5rem;
-        }
-
-        .select-container{
+        .select-container {
             display: flex;
             flex-direction: row;
             gap: 1rem;
         }
-        .vertical{
+
+        .vertical {
             border-left: solid #000000;
             max-height: 2.5rem;
+        }
+
+        .table-container {
+            width: 100%;
         }
 
     </style>
@@ -97,10 +98,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+
+        <div class="col-md-12 mt-4">
             <div class="card">
                 <%
-                    if(!rutinas.isEmpty()){
+                    if (!rutinas.isEmpty()) {
                 %>
                 <div class="card-header bg-secondary text-white">
                     <h4>Seleccionar Rutina</h4>
@@ -110,15 +112,14 @@
                         <form action="/entrenadorcross/cliente/feedback/<%=cliente.getIdcliente()%>/<%=rutina.getIdrutina()%>" method="post">
                             <button class="btn btn-success">Feedback</button>
                         </form>
-                        <div class="vertical">
-                        </div>
+                        <div class="vertical"></div>
                         <form method="post" action="/entrenadorcross/cliente/mostrar/<%=cliente.getIdcliente()%>">
                             <div class="mb-3 select-container">
                                 <select name="idrutina" class="form-select">
                                     <%
-                                        for(RutinaDTO r : rutinas){
+                                        for (RutinaDTO r : rutinas) {
                                             String selected = "";
-                                            if(Objects.equals(r.getIdrutina(), rutina.getIdrutina()))
+                                            if (Objects.equals(r.getIdrutina(), rutina.getIdrutina()))
                                                 selected = "selected";
                                     %>
                                     <option value="<%=r.getIdrutina()%>" <%=selected%>><%=r.getNombre()%></option>
@@ -126,14 +127,12 @@
                                         }
                                     %>
                                 </select>
-
                                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                         </form>
                     </div>
                     <div class="table-container mt-4">
-
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped w-100">
                             <thead>
                             <tr>
                                 <th scope="col">Lunes</th>
@@ -148,33 +147,33 @@
                             <tbody>
                             <%
                                 int size = !ejerciciosRutina.isEmpty() ? ejerciciosRutina.get(ejerciciosRutina.size() - 1).getOrden() + 1 : 0;
-                                for(int i = 0; i < size; i++){
+                                for (int i = 0; i < size; i++) {
                                     int index = 0;
-                                    String[] ejerciciorutina = new String[]{"","","","","","",""};
-                                    Integer[] ids = new Integer[]{-1,-1,-1,-1,-1,-1,-1,};
+                                    String[] ejerciciorutina = new String[]{"", "", "", "", "", "", ""};
+                                    Integer[] ids = new Integer[]{-1, -1, -1, -1, -1, -1, -1};
 
-                                    while(index < ejerciciosRutina.size() && ejerciciosRutina.get(index).getOrden() <= i){
-                                        if(ejerciciosRutina.get(index).getOrden() == i) {
+                                    while (index < ejerciciosRutina.size() && ejerciciosRutina.get(index).getOrden() <= i) {
+                                        if (ejerciciosRutina.get(index).getOrden() == i) {
                                             boolean encontrada = false;
                                             int ej = 0;
                                             EjercicioDTO aux = null;
-                                            while(!encontrada && ej < ejercicioDTOList.size()){
+                                            while (!encontrada && ej < ejercicioDTOList.size()) {
                                                 aux = ejercicioDTOList.get(ej);
-                                                if(Objects.equals(aux.getIdejercicio(), ejerciciosRutina.get(index).getEjercicio()))
+                                                if (Objects.equals(aux.getIdejercicio(), ejerciciosRutina.get(index).getEjercicio()))
                                                     encontrada = true;
                                                 ej++;
                                             }
                                             EjercicioRutinaDTO ejercicio = ejerciciosRutina.get(index);
                                             ids[ejercicio.getDiassemanaInt() - 1] = ejercicio.getEjercicioRutinaPK();
                                             assert aux != null;
-                                            ejerciciorutina[ejercicio.getDiassemanaInt() - 1] = aux.getNombre()+" "+ejercicio.toStringCross();
+                                            ejerciciorutina[ejercicio.getDiassemanaInt() - 1] = aux.getNombre() + " " + ejercicio.toStringCross();
                                         }
                                         index++;
                                     }
                             %>
                             <tr>
                                 <%
-                                    for(int j = 0; j < 7; j++){
+                                    for (int j = 0; j < 7; j++) {
                                 %>
                                 <td><%= ejerciciorutina[j] %></td>
                                 <%
@@ -186,7 +185,6 @@
                             %>
                             </tbody>
                         </table>
-
                     </div>
                     <%
                     } else {
@@ -201,7 +199,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

@@ -40,6 +40,7 @@
             margin: 2rem auto;
             width: 90%;
         }
+
         .contenedor {
             display: flex;
             align-items: center;
@@ -50,17 +51,24 @@
             display: flex;
             gap: 10px;
         }
-        .search-container{
+
+        .search-container {
             margin-bottom: 1rem;
 
         }
-        .func-container{
+
+        .func-container {
             display: flex;
             gap: 2rem;
         }
-        .vertical{
+
+        .vertical {
             border-left: solid #000000;
             max-height: 2.5rem;
+        }
+
+        .form-group {
+            margin-right: 5px; /* Puedes ajustar el valor para mayor o menor espacio */
         }
 
 
@@ -85,12 +93,20 @@
         </div>
         <div class="search-container">
             <form:form method="post" action="/entrenadorcross/filtrar" modelAttribute="filtro">
-                <form:input path="nombre" type="text" placeholder="Nombre"/>
-                <form:select path="idcliente">
-                    <form:option value="-1" label="Seleccione un cliente"/>
-                    <form:options items="${clientes}" itemValue="idcliente" itemLabel="nombre"/>
-                </form:select>
-                <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        Nombre: <form:input path="nombre" type="text" placeholder="Nombre" class="form-control d-inline w-auto"/>
+                    </div>
+                    <div class="me-3">
+                        Seleccione un cliente: <form:select path="idcliente" class="form-control d-inline w-auto">
+                        <form:option value="-1" label="Todos los clientes"/>
+                        <form:options items="${clientes}" itemValue="idcliente" itemLabel="nombre"/>
+                    </form:select>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </div>
             </form:form>
         </div>
     </div>
@@ -103,12 +119,12 @@
         </thead>
         <tbody>
         <%
-            for(RutinaDTO rutina : rutinas){
+            for (RutinaDTO rutina : rutinas) {
                 String cliente = "Sin asignar";
                 boolean encontrado = false;
                 int i = 0;
-                while(i<clientes.size() && !encontrado){
-                    if(Objects.equals(clientes.get(i).getIdcliente(), rutina.getIdcliente())){
+                while (i < clientes.size() && !encontrado) {
+                    if (Objects.equals(clientes.get(i).getIdcliente(), rutina.getIdcliente())) {
                         encontrado = true;
                         cliente = clientes.get(i).getNombre();
                     }

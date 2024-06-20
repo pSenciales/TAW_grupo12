@@ -4,10 +4,10 @@ import java.util.List;
 
 public class FiltroPlatos {
     protected String busqueda;
-    protected List<String> alergenos;
+    protected List<String> sinAlergenos;
     public FiltroPlatos() {
         this.busqueda = "";
-        this.alergenos = null;
+        this.sinAlergenos = null;
     }
     public String getBusqueda() {
         return busqueda;
@@ -15,13 +15,13 @@ public class FiltroPlatos {
     public void setBusqueda(String busqueda) {
         this.busqueda = busqueda;
     }
-    public List<String> getAlergenos() {
-        return alergenos;
+    public List<String> getSinAlergenos() {
+        return sinAlergenos;
     }
-    public void setAlergenos(List<String> alergenos) {
-        this.alergenos = alergenos;
+    public void setSinAlergenos(List<String> sinAlergenos) {
+        this.sinAlergenos = sinAlergenos;
     }
-    public boolean isEmpty() {
-        return this.busqueda.isEmpty() && this.alergenos == null;
+    public boolean estaVacio() {
+        return this.busqueda.isEmpty() && this.sinAlergenos == null;
     }
 }

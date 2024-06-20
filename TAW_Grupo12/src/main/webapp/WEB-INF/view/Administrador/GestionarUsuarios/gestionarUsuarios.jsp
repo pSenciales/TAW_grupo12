@@ -153,8 +153,7 @@
             for (ClienteDTO clienteDTO : clientesDTO) { %>
         <div class="col-md-4 col-sm-6">
             <div class="card d-flex flex-column" style="height: 25rem;">
-                <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "../Images/Administrador/perfilDefault.jpg" %>"
-                     alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
+                <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"  alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
                 <div class="card-body text-center flex-grow-1">
                     <h5 class="card-title mt-3 mb-3"><%=clienteDTO.getNombre()%>
                     </h5>
@@ -180,7 +179,7 @@
                                     <form:form action="/administrador/guardarCliente" modelAttribute="clienteModel"
                                                method="post" enctype="multipart/form-data">
                                         <form:hidden path="idcliente" value="<%= clienteDTO.getIdcliente() %>"/>
-                                        <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "../Images/Administrador/perfilDefault.jpg" %>"
+                                        <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
                                              alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
                                         <div class="form-group">
                                             <label for="imagenperfil" class="form-label">Imagen de perfil: </label>
@@ -248,7 +247,7 @@
             for (TrabajadorDTO trabajadorDTO : trabajadoresDTO) { %>
         <div class="col-md-4 col-sm-6">
             <div class="card d-flex flex-column" style="height: 25rem;">
-                <img src="<%=trabajadorDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + trabajadorDTO.getImagenBase64() : "../Images/Administrador/perfilDefault.jpg" %>"
+                <img src="<%=trabajadorDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + trabajadorDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
                      alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios"">
                 <div class="card-body text-center flex-grow-1">
                     <h5 class="card-title mt-3 mb-3"><%=trabajadorDTO.getNombre()%>
@@ -279,7 +278,7 @@
                                                method="post" enctype="multipart/form-data">
                                         <form:hidden path="idtrabajador"
                                                      value="<%= trabajadorDTO.getIdtrabajador() %>"/>
-                                        <img src="<%=trabajadorDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + trabajadorDTO.getImagenBase64() : "../Images/Administrador/perfilDefault.jpg" %>"
+                                        <img src="<%=trabajadorDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + trabajadorDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
                                              alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
                                         <div class="form-group">
                                             <label for="imagenperfilTrabajador" class="form-label">Imagen de

@@ -105,8 +105,8 @@ public class AdministradorController extends BaseController{
         if(tipoTrabajador.equals("ENTRENADOR FUERZA")){
             return "/Administrador/AsignarClientes/asignarEntrenadorFuerza";
         }
-        if(tipoTrabajador.equals("ENTRENADOR CROSSTRAINNING")){
-            return "/Administrador/AsignarClientes/asignarEntrenadorCrosstrainning";
+        if(tipoTrabajador.equals("ENTRENADOR CROSSTRAINING")){
+            return "/Administrador/AsignarClientes/asignarEntrenadorCrosstraining";
         }
         if(tipoTrabajador.equals("DIETISTA")){
             return "/Administrador/AsignarClientes/asignarDietista";
@@ -154,11 +154,6 @@ public class AdministradorController extends BaseController{
         List<ClienteDTO> clientesDTO = null;
         List<TrabajadorDTO> trabajadoresDTO = null;
 
-        if(filtroUsuarios.estaVacio()){
-            trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTO();
-            clientesDTO = this.clienteService.listarClientesDTO();
-        }
-
         List<String> tipoUsuario = filtroUsuarios.getTipoUsuario();
         String tipoTrabajador = filtroUsuarios.getTipoTrabajador();
         String busqueda = filtroUsuarios.getBusqueda();
@@ -175,7 +170,7 @@ public class AdministradorController extends BaseController{
                     trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo("ENTRENADOR FUERZA", busqueda);
                 }
                 if(tipoTrabajador.contains("Entrenador crosstraining")){
-                    trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo("ENTRENADOR CROSSTRAINNING", busqueda);
+                    trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo("ENTRENADOR CROSSTRAINING", busqueda);
                 }
                 if(tipoTrabajador.contains("Dietista")){
                     trabajadoresDTO = this.trabajadorService.listarTrabajadoresDTOTipo("DIETISTA", busqueda);

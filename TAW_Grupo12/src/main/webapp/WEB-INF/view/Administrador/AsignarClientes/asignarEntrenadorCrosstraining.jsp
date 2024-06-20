@@ -13,17 +13,16 @@
 <%
     //OPCION: AÑADIR BOTON DE VOLVER ATRÁS
 
-    List<TrabajadorDTO> entrenadoresCrosstrainning = (List<TrabajadorDTO>) request.getAttribute("trabajadores");
+    List<TrabajadorDTO> entrenadoresCrosstraining = (List<TrabajadorDTO>) request.getAttribute("trabajadores");
     ClienteDTO cliente = (ClienteDTO) request.getAttribute("cliente");
     List<Integer> trabajadoresCliente = cliente.getTrabajadorList();
 
-    Integer idEntrenadorCrosstrainning = 0;
+    Integer idEntrenadorCrosstraining = 0;
 
-    //compruebo si el cliente ya tiene asignado un entrenador de fuerza para más tarde desasignarrlo
-    for (TrabajadorDTO entrenadorCrosstrainning : entrenadoresCrosstrainning) {
+    for (TrabajadorDTO entrenadorCrosstraining : entrenadoresCrosstraining) {
         for(Integer idTrabajador : trabajadoresCliente) {
-            if (idTrabajador.equals(entrenadorCrosstrainning.getIdtrabajador())) {
-                idEntrenadorCrosstrainning = idTrabajador;
+            if (idTrabajador.equals(entrenadorCrosstraining.getIdtrabajador())) {
+                idEntrenadorCrosstraining = idTrabajador;
                 break;
             }
         }
@@ -35,7 +34,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Asignar Cliente un Entrenador Fuerza</title>
+    <title>Asignar Cliente un Entrenador Crosstraining</title>
     <link rel="stylesheet" href="/Styles/Administrador/asignarEntrenadorFuerza.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -47,25 +46,25 @@
             <input type="hidden" value="<%=idCliente%>" name="idCliente"/>
             <p>Cliente: <%=nombre%></p>
             <div class="form-group mb-3">
-                <label for="entrenador" class="form-label">Entrenador de crosstrainning que desees asiganar: </label>
+                <label for="entrenador" class="form-label">Entrenador de crosstraining que desees asiganar: </label>
                 <select id="entrenador" name="idTrabajador" class="form-control mb-3">
                     <option value="0">Selecciona un entrenador</option>
                     <%
-                        for (TrabajadorDTO entrenadorCrosstrainning : entrenadoresCrosstrainning) {
+                        for (TrabajadorDTO entrenadorCrosstraining : entrenadoresCrosstraining) {
                     %>
-                    <option value="<%=entrenadorCrosstrainning.getIdtrabajador()%>" label="<%=entrenadorCrosstrainning.getNombre()%>"></option>
+                    <option value="<%=entrenadorCrosstraining.getIdtrabajador()%>" label="<%=entrenadorCrosstraining.getNombre()%>"></option>
                     <%
                         }
                     %>
                 </select>
             </div>
 
-            <input type="submit" class="btn btn-primary mb-3 boton-asignarEntrenadorFuerza" value="Asignar nuevo entrenador de crosstrainning" />
+            <input type="submit" class="btn btn-primary mb-3 boton-asignarEntrenadorFuerza" value="Asignar nuevo entrenador de crosstraining" />
         </form>
         <form action="/administrador/desasignarTrabajador" method="post" class="d-flex justify-content-center align-items-center">
-            <input type="hidden" value="<%=idEntrenadorCrosstrainning%>" name="idTrabajadorDes"/>
+            <input type="hidden" value="<%=idEntrenadorCrosstraining%>" name="idTrabajadorDes"/>
             <input type="hidden" value="<%=idCliente%>" name="idClienteDes">
-            <input type="submit" class="btn btn-outline-danger boton-desasignarEntrenadorFuerza" value="Desasignar entrenador de crosstrainning actual" />
+            <input type="submit" class="btn btn-outline-danger boton-desasignarEntrenadorFuerza" value="Desasignar entrenador de crosstraining actual" />
         </form>
     </div>
 </div>

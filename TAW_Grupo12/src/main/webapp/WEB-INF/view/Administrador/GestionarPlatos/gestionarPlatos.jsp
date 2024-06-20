@@ -43,8 +43,6 @@
             margin-bottom: 20px;
             border: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            height: 200px;
-            overflow-y: auto;
         }
 
         .card-title {
@@ -69,6 +67,17 @@
 
         .form-group {
             margin-top: 1.5rem;
+        }
+
+        .imagen-gestionarPlatos{
+            display: block;
+            margin-top: 1.5vh;
+            margin-left: auto;
+            margin-right: auto;
+            width: 20vh;
+            height: 20vh;
+            border-radius: 50%;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -113,7 +122,7 @@
                     <div class="form-check">
                         <label class="form-check-label">Alérgenos: </label><br>
 
-                        <form:checkboxes path="alergenos" items="<%=alergenos%>" id="tipoUsuarios"
+                        <form:checkboxes path="sinAlergenos" items="<%=alergenos%>" id="checkAlergenos"
                                          delimiter="<br>" class="form-check-input"/>
                     </div>
                 </div>
@@ -129,17 +138,17 @@
         <% if (platosDTO != null && !platosDTO.isEmpty()) {
             for (PlatoDTO platoDTO : platosDTO) { %>
         <div class="col-md-4 col-sm-6">
-            <div class="card d-flex flex-column" style="height: 25rem;">
-                <img src="<%=platoDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + platoDTO.getImagenBase64() : "../Images/Administrador/platoDefault.jpg" %>"
-                     alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
+            <div class="card d-flex flex-column">
+                <img src="<%=platoDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + platoDTO.getImagenBase64() : "/Images/Administrador/platoDefault.jpg" %>"
+                     alt="Imagen de plato" class="imagen-gestionarPlatos">
                 <div class="card-body text-center flex-grow-1">
                     <h5 class="card-title mt-3 mb-3"><%=platoDTO.getNombre()%>
                     </h5>
                     <p class="card-text"><span class="bold">Descripción: </span> <%=platoDTO.getDescripcion()%>
                     </p>
-                    <p class="card-text"><span class="bold">Alérgenos: </span> <%=platoDTO.getAlergenos()%>
+                    <p class="card-text"><span class="bold">Alérgenos: </span> <%=platoDTO.getAlergenos() != null ? platoDTO.getAlergenos() : "Ninguno"%>
                     </p>
-                    <a href="#" class="btn btn-outline-primary mt-5" data-bs-toggle="modal"
+                    <a href="#" class="btn btn-outline-primary mt-1 mb-2" data-bs-toggle="modal"
                        data-bs-target="#editarPlatoModal<%=platoDTO.getIdplato()%>"
                        data-plato-id="<%=platoDTO.getIdplato()%>"
                        id="modalPlato<%=platoDTO.getIdplato()%>">Gestionar</a>
@@ -157,8 +166,8 @@
                                     <form:form action="/administrador/platos/guardarPlato" modelAttribute="platoModel"
                                                method="post" enctype="multipart/form-data">
                                         <form:hidden path="idplato" value="<%= platoDTO.getIdplato() %>"/>
-                                        <img src="<%=platoDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + platoDTO.getImagenBase64() : "../Images/Administrador/platoDefault.jpg" %>"
-                                             alt="Imagen del plato" class="imagenperfil-gestionarUsuarios">
+                                        <img src="<%= platoDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + platoDTO.getImagenBase64() : "/Images/Administrador/platoDefault.jpg"%>"
+                                             alt="Imagen del plato" class="imagenplato">
                                         <div class="form-group">
                                             <label for="video" class="form-label">Imagen del plato: </label>
                                             <form:input type="file" path="video" id="video"/>
@@ -200,10 +209,10 @@
                     </div>
                 </div>
             </div>
-            <% }
-            } %>
-        </div>
 
+        </div>
+        <% }
+        } %>
     </div>
     <script>
         document.getElementById('filtros').addEventListener('click', function () {

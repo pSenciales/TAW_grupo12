@@ -126,8 +126,6 @@ public class AdministradorController extends BaseController{
         this.administradorService.desasignarTrabajador(idCliente, idTrabajador);
         return "redirect:/administrador/asignarClientes";
     }
-<<<<<<< HEAD
-=======
 
     @GetMapping("/gestionarUsuarios")
     public String doGestionarUsuarios(HttpSession session, Model model){
@@ -220,5 +218,4 @@ public class AdministradorController extends BaseController{
         this.trabajadorService.guardarTrabajador(trabajador);
         return "redirect:/administrador/gestionarUsuarios";
     }
->>>>>>> admin2
 }

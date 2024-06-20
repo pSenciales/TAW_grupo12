@@ -77,6 +77,8 @@ public class AdministradorController extends BaseController{
         return "/Administrador/AsignarClientes/asignarClientes";
     }
 
+
+
     @PostMapping("/filtrarAsignarClientes")
     public String doFiltrarAsignarClientes(Model model, HttpSession session, @ModelAttribute("filtroClientes") FiltroClientes filtroClientes) {
         if (filtroClientes.estaVacio()) {

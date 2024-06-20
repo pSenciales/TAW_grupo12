@@ -78,9 +78,15 @@ public class ClienteService {
             if(!cliente.getAlergias().isEmpty()){
                 miCliente.setAlergias(cliente.getAlergias());
             }
+    public List<ClienteDTO> findByTrabajador(Integer idtrabajador) {
+        List<ClienteDTO> clientesDTO = new ArrayList<>();
+        List<Cliente> cliente = clienteRepository.findByTrabajador(idtrabajador);
 
             this.clienteRepository.save(miCliente);
+        for(Cliente c : cliente){
+            clientesDTO.add(c.toDTO());
         }
+        return clientesDTO;
     }
 
     public List<Cliente>  buscarClienteNombreoEmail(ClienteDTO cliente) {

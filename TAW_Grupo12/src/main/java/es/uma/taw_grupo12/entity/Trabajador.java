@@ -132,6 +132,10 @@ public class Trabajador implements Serializable, DTO<TrabajadorDTO> {
         this.clienteList = clienteList;
     }
 
+    public List<Rutina> getRutinaList() {return rutinaList;}
+
+    public void setRutinaList(List<Rutina> rutinaList) {this.rutinaList = rutinaList;}
+
     @Override
     public int hashCode() {
         int hash = 0;

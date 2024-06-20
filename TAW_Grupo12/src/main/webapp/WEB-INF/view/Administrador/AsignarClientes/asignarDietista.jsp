@@ -33,15 +33,20 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <title>Asignar a un cliente un dietista</title>
     <link rel="stylesheet" href="/Styles/Administrador/asignarEntrenadorFuerza.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
+
 <body>
 <div class="parent-container-asignarEntrenadorFuerza">
     <div class="form-container container-asignarEntrenadorFuerza">
+
+<!--------------------------- FORMULARIO PARA SELECCIONAR EL DIETISTA QUE SE QUIERE ASIGNAR --------------------------->
+
         <form action="/administrador/guardarAsignacionClienteTrabajador" method="post" class="form-asignarEntrenadorFuerza">
             <input type="hidden" value="<%=idCliente%>" name="idCliente"/>
             <p>Cliente: <%=nombre%></p>
@@ -61,11 +66,15 @@
 
             <input type="submit" class="btn btn-primary mb-3 boton-asignarEntrenadorFuerza" value="Asignar nuevo dietista" />
         </form>
+
+<!--------------------------------- BOTÓN PARA DESASIGNAR EL DIETISTA ACTUAL------------------------------------------->
+
         <form action="/administrador/desasignarTrabajador" method="post" class="d-flex justify-content-center align-items-center">
             <input type="hidden" value="<%=idDietista%>" name="idTrabajadorDes"/>
             <input type="hidden" value="<%=idCliente%>" name="idClienteDes">
             <input type="submit" class="btn btn-outline-danger boton-desasignarEntrenadorFuerza" value="Desasignar dietista actual" />
         </form>
+
     </div>
 </div>
 </body>

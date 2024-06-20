@@ -46,9 +46,13 @@
         }
     </style>
 </head>
+
 <body>
 <div class="form-container">
     <h1>Registro Trabajador</h1>
+
+<!------------------------------ FORMULARIO DE REGISTRO DE UN NUEVO TRABAJADOR ---------------------------------------->
+
     <form:form modelAttribute="trabajador" action="/guardarTrabajador" method="post" enctype="multipart/form-data">
         <% if (request.getAttribute("errorRegistro") != null && !request.getAttribute("errorRegistro").equals("")) { %>
         <div class="alert alert-danger" role="alert"><%= request.getAttribute("errorRegistro") %>

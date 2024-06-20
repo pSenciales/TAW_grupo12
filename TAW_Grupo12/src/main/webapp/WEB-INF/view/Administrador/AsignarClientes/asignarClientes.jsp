@@ -20,7 +20,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Insertar cabeceraAdministrador.jsp -->
     <title>Asignar Clientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -89,10 +88,15 @@
         });
     </script>
 </head>
+
 <body>
+
 <header>
     <jsp:include page="../cabeceraAdministrador.jsp"/>
 </header>
+
+<!--------------------------- MODAL PARA ELEGIR QUE TIPO TRABAJADOR ASIGNAR ------------------------------------------->
+
 <div class="modal fade" id="asignarModal" tabindex="-1" aria-labelledby="asignarModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -112,7 +116,7 @@
                             <option value="DIETISTA">Dietista</option>
                         </select>
                     </div>
-                    <!-- Aquí puedes agregar más campos si los necesitas -->
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -123,6 +127,9 @@
     </div>
 </div>
 <div class="container-asignarClientes">
+
+<!--------------------------- FILTRO DE BÚSQUEDA DE CLIENTES POR NOMBRE O CORREO -------------------------------------->
+
     <form:form modelAttribute="filtroClientes" method="post" action="/administrador/filtrarAsignarClientes">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">
@@ -132,10 +139,14 @@
             </span>
             <form:input type="text" class="form-control" placeholder="Introduzca el nombre o correo de cliente que deseas asignar"  path="busqueda"/>
         </div>
-
     </form:form>
+
+<!------------------------------------------ LISTADO DE CLIENTES ------------------------------------------------------>
+
     <div class="row">
         <% for(ClienteDTO cliente : clientes) {
+
+/*************************************** OBTENER CADA TRABAJADOR ASIGNADO PARA MOSTRARLO ******************************/
             String dietista = "";
             String entrenadorCrosstraining = "";
             String entrenadorFuerza = "";

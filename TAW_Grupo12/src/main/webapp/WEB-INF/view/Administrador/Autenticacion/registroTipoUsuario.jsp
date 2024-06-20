@@ -21,6 +21,8 @@
         <div class="form-container container-registroTipoUsuario">
             <p>Seleccione el tipo de usuario que desea crear: </p>
 
+<!------------------------ FORMULARIO PARA SELECCIONAR EL TIPO DE USUARIO QUE SE QUIERE REGISTRAR --------------------->
+
             <form action="/registro" method="get">
                 <div class="miForm-group-registroTipoUsuario">
                    <div class="form-group-registroTipoUsuario">
@@ -48,5 +50,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>

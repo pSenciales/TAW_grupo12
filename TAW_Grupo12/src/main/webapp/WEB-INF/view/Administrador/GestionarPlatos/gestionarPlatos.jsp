@@ -69,7 +69,7 @@
             margin-top: 1.5rem;
         }
 
-        .imagen-gestionarPlatos{
+        .imagen-gestionarPlatos {
             display: block;
             margin-top: 1.5vh;
             margin-left: auto;
@@ -82,70 +82,91 @@
 
     </style>
 </head>
+
 <body>
+
 <header>
     <jsp:include page="../cabeceraAdministrador.jsp"/>
 </header>
+
 <div class="container-gestionarPlatos">
+
         <% if (request.getAttribute("errorGestionarPlato") != null) { %>
     <div class="alert alert-danger">
         <%= request.getAttribute("errorGestionarPlato") %>
     </div>
         <% } %>
+
+<!------------------------------ FILTRO DE BÚSQUEDA DE PLATO POR NOMBRE ------------------------------------------->
+
     <form:form modelAttribute="filtroPlatos" method="post" action="/administrador/platos/filtrarGestionarPlatos">
-    <div class="input-group mb-3">
+        <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
                      viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                 </svg>
             </span>
-        <form:input type="text" class="form-control"
+            <form:input type="text" class="form-control"
                     placeholder="Introduzca el nombre del plato que deseas gestionar" path="busqueda"/>
-        <button type="button" class="btn btn-secondary" id="filtros">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter"
+
+<!------------------------------ BOTÓN QUE MUESTRA LOS FILTRO DE ALÉRGENOS ------------------------------------------->
+
+            <button type="button" class="btn btn-secondary" id="filtros">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter"
                  viewBox="0 0 16 16">
-                <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"></path>
-            </svg>
-        </button>
+                    <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"></path>
+                </svg>
+            </button>
+        </div>
 
+<!------------ MODAL QUE MUESTRA EL FORMULARIO PARA SELECCIONAR LOS ALERGENOS A FILTRAR ------------------------------->
 
-    </div>
-
-    <div class="modal fade" id="filtrosModal" tabindex="-1" aria-labelledby="filtrosModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="filtrosModalLabel">Filtros</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-check">
-                        <label class="form-check-label">Alérgenos: </label><br>
-
-                        <form:checkboxes path="sinAlergenos" items="<%=alergenos%>" id="checkAlergenos"
-                                         delimiter="<br>" class="form-check-input"/>
+        <div class="modal fade" id="filtrosModal" tabindex="-1" aria-labelledby="filtrosModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="filtrosModalLabel">Filtros</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <div class="modal-body">
+                        <div class="form-check">
+                            <label class="form-check-label">Alérgenos: </label><br>
+                            <form:checkboxes path="sinAlergenos" items="<%=alergenos%>" id="checkAlergenos"
+                                         delimiter="<br>" class="form-check-input"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <form:button class="btn btn-primary">Aplicar filtros</form:button>
                 </div>
             </div>
         </div>
     </div>
+
     </form:form>
+
     <div class="row">
         <div class="col-md-4 col-sm-6 text-center">
-            <button type="button" id="addPlatoButton" class="btn btn-light mt-5" data-bs-toggle="modal" data-bs-target="#addPlatoModal" >
-                <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+
+<!--------------------------------------- BOTÓN PARA AÑADIR UN NUEVO PLATO -------------------------------------------->
+
+            <button type="button" id="addPlatoButton" class="btn btn-light mt-5" data-bs-toggle="modal"
+                    data-bs-target="#addPlatoModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" fill="currentColor"
+                     class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
                     <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5"></path>
                     <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"></path>
                 </svg>
                 <div class="mt-3">Añadir plato</div>
             </button>
+
         </div>
-        <div class="modal fade" id="addPlatoModal" tabindex="-1" aria-labelledby="addPlatoModalLabel" aria-hidden="true">
+
+<!----------------------------- MODAL QUE MUESTRA EL FORMULARIO PARA CREAR UN NUEVO PLATO ------------------------------>
+
+        <div class="modal fade" id="addPlatoModal" tabindex="-1" aria-labelledby="addPlatoModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -153,10 +174,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form:form modelAttribute="platoNuevo" action="/administrador/platos/crearPlato" method="post" enctype="multipart/form-data">
+                        <form:form modelAttribute="platoNuevo" action="/administrador/platos/crearPlato" method="post"
+                                   enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="nombreNuevo">Nombre:</label>
-                                <form:input path="nombre" type="text" id="nombreNuevo" class="form-control" required="true"/>
+                                <form:input path="nombre" type="text" id="nombreNuevo" class="form-control"
+                                            required="true"/>
                             </div>
                             <div class="form-group">
                                 <label for="descripcionNueva">Descripcion:</label>
@@ -178,6 +201,9 @@
                 </div>
             </div>
         </div>
+
+ <!-------------------------------------------- LISTADO DE PLATOS ----------------------------------------------------->
+
         <% if (platosDTO != null && !platosDTO.isEmpty()) {
             for (PlatoDTO platoDTO : platosDTO) { %>
         <div class="col-md-4 col-sm-6">
@@ -189,12 +215,18 @@
                     </h5>
                     <p class="card-text"><span class="bold">Descripción: </span> <%=platoDTO.getDescripcion()%>
                     </p>
-                    <p class="card-text"><span class="bold">Alérgenos: </span> <%=platoDTO.getAlergenos() != null ? platoDTO.getAlergenos() : "Ninguno"%>
+                    <p class="card-text"><span
+                            class="bold">Alérgenos: </span> <%=platoDTO.getAlergenos() != null ? platoDTO.getAlergenos() : "Ninguno"%>
                     </p>
+
+<!------------------------------------- BOTÓN PARA EDITAR DATOS PLATO ------------------------------------------------->
+
                     <a href="#" class="btn btn-outline-primary mt-1 mb-2" data-bs-toggle="modal"
                        data-bs-target="#editarPlatoModal<%=platoDTO.getIdplato()%>"
                        data-plato-id="<%=platoDTO.getIdplato()%>"
                        id="modalPlato<%=platoDTO.getIdplato()%>">Gestionar</a>
+
+<!---------------------------- MODAL QUE MUESTRA EL FORMULARIO PARA EDITAR UN PLATO ----------------------------------->
 
                     <div class="modal fade" id="editarPlatoModal<%=platoDTO.getIdplato()%>" tabindex="-1"
                          aria-labelledby="editarPlatoeModalLabel" aria-hidden="true">
@@ -238,6 +270,9 @@
                                         </div>
                                     </form:form>
                                 </div>
+
+<!-------------------------------------------- BOTÓN PARA ELIMINAR UN PLATO ------------------------------------------->
+
                                 <div class="modal-footer d-flex justify-content-center">
                                     <form action="/administrador/platos/eliminarPlato" method="post">
                                         <input type="hidden" value="<%= platoDTO.getIdplato() %>" name="idPlato"/>
@@ -247,16 +282,17 @@
                                         </button>
                                     </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <% }
         } %>
     </div>
+
     <script>
         document.getElementById('filtros').addEventListener('click', function () {
             var myModal = new bootstrap.Modal(document.getElementById('filtrosModal'), {});
@@ -269,5 +305,6 @@
             });
         });
     </script>
+
 </body>
 </html>

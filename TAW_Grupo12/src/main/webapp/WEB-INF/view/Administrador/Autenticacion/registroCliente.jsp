@@ -49,6 +49,9 @@
 <body>
 <div class="form-container">
     <h1>Registro Cliente</h1>
+
+<!------------------------------ FORMULARIO DE REGISTRO DE UN NUEVO CLIENTE ------------------------------------------->
+
     <form:form modelAttribute="cliente" action="/guardarCliente" method="post" enctype="multipart/form-data">
         <% if (request.getAttribute("errorRegistro") != null && !request.getAttribute("errorRegistro").equals("")) { %>
         <div class="alert alert-danger" role="alert"><%= request.getAttribute("errorRegistro") %>
@@ -94,5 +97,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>

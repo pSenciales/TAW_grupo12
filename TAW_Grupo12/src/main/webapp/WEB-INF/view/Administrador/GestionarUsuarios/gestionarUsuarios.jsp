@@ -153,7 +153,8 @@
             for (ClienteDTO clienteDTO : clientesDTO) { %>
         <div class="col-md-4 col-sm-6">
             <div class="card d-flex flex-column" style="height: 25rem;">
-                <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"  alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
+                <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
+                     alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
                 <div class="card-body text-center flex-grow-1">
                     <h5 class="card-title mt-3 mb-3"><%=clienteDTO.getNombre()%>
                     </h5>

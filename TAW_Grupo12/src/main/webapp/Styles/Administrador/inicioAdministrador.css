@@ -9,7 +9,7 @@ body{
     width: 100%;
     align-content: center;
     justify-content: center;
-    background-image: url('../../Images/Administrador/fondoInicioAdministrador.jpg');
+    background-image: url('/Images/Administrador/fondoInicioAdministrador.jpg');
     background-size: cover;
     background-position: center;
 }

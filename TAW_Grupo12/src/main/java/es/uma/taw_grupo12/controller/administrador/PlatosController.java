@@ -4,6 +4,8 @@ import es.uma.taw_grupo12.controller.BaseController;
 import es.uma.taw_grupo12.dto.ClienteDTO;
 import es.uma.taw_grupo12.dto.PlatoDTO;
 import es.uma.taw_grupo12.dto.TrabajadorDTO;
+import es.uma.taw_grupo12.entity.Cliente;
+import es.uma.taw_grupo12.entity.Plato;
 import es.uma.taw_grupo12.service.PlatoService;
 import es.uma.taw_grupo12.ui.Administrador.FiltroPlatos;
 import es.uma.taw_grupo12.ui.Administrador.FiltroUsuarios;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -62,6 +67,17 @@ public class PlatosController extends BaseController {
         model.addAttribute("filtroPlatos", filtroPlatos);
 
         return "/Administrador/GestionarPlatos/gestionarPlatos";
+    }
+
+    @PostMapping("/guardarPlato")
+    public String doGuardarPlato(Model model, @ModelAttribute("platoModel") PlatoDTO platoDTO, RedirectAttributes redirectAttributes) throws IOException {
+        List<Plato> existe = this.platoService.buscarPlatoNombre(platoDTO.getNombre());
+        if(existe != null && !existe.isEmpty()){
+            redirectAttributes.addFlashAttribute("errorGestionarPlato", "Se ha intentado guardar un plato con un nombre ya existente, los cambios no se han guardado");
+            return "redirect:/administrador/gestionarPlatos";
+        }
+        this.platoService.guardarPlato(platoDTO);
+        return "redirect:/administrador/platos/gestionarPlatos";
     }
 
 }

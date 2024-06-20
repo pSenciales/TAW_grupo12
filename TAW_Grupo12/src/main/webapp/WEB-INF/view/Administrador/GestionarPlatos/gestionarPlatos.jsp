@@ -167,10 +167,10 @@
                                                method="post" enctype="multipart/form-data">
                                         <form:hidden path="idplato" value="<%= platoDTO.getIdplato() %>"/>
                                         <img src="<%= platoDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + platoDTO.getImagenBase64() : "/Images/Administrador/platoDefault.jpg"%>"
-                                             alt="Imagen del plato" class="imagenplato">
+                                             alt="Imagen del plato" class="imagen-gestionarPlatos">
                                         <div class="form-group">
                                             <label for="video" class="form-label">Imagen del plato: </label>
-                                            <form:input type="file" path="video" id="video"/>
+                                            <form:input type="file" path="videoFile" id="video"/>
                                         </div>
                                         <div class="form-group">
                                             <label for="nombre" class="form-label">Nombre: </label>

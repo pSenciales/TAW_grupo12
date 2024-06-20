@@ -8,7 +8,9 @@ import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import es.uma.taw_grupo12.entity.Plato;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,5 +69,28 @@ public class PlatoService {
             platosDTO.add(p.toDTO());
         }
         return platosDTO;
+    }
+
+    public void guardarPlato(PlatoDTO platoDTO) throws IOException {
+        Plato miPlato = this.platoRepository.findById(platoDTO.getIdplato()).orElse(null);
+        if(miPlato != null){
+            miPlato.setNombre(platoDTO.getNombre());
+            if(!platoDTO.getDescripcion().isEmpty()){
+                miPlato.setDescripcion(platoDTO.getDescripcion());
+            }
+            if (platoDTO.getVideoFile() != null && !platoDTO.getVideoFile().isEmpty()) {
+                MultipartFile myFile = platoDTO.getVideoFile();
+                byte[] imagenBytes = myFile.getBytes();
+                miPlato.setVideo(imagenBytes);
+            }
+            if(!platoDTO.getAlergenos().isEmpty()){
+                miPlato.setAlergenos(platoDTO.getAlergenos());
+            }
+            this.platoRepository.save(miPlato);
+        }
+    }
+
+    public List<Plato> buscarPlatoNombre(String nombre) {
+        return this.platoRepository.findByNombre(nombre);
     }
 }

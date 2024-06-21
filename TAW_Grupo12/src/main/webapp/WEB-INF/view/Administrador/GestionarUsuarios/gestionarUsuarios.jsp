@@ -49,8 +49,8 @@
             margin-top: 1.5vh;
             margin-left: auto;
             margin-right: auto;
-            width: 20vh;
-            height: 20vh;
+            width: 50%; /* adjust as needed */
+            height: auto; /* maintain aspect ratio */
             border-radius: 50%;
             object-fit: cover;
         }
@@ -59,7 +59,7 @@
             margin-bottom: 20px;
             border: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            height: 200px;
+            height: auto;
             overflow-y: auto;
         }
 
@@ -159,7 +159,7 @@
         <% if (clientesDTO != null && !clientesDTO.isEmpty()) {
             for (ClienteDTO clienteDTO : clientesDTO) { %>
         <div class="col-md-4 col-sm-6">
-            <div class="card d-flex flex-column" style="height: 25rem;">
+            <div class="card d-flex flex-column">
                 <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
                      alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
                 <div class="card-body text-center flex-grow-1">
@@ -272,7 +272,7 @@
             for (TrabajadorDTO trabajadorDTO : trabajadoresDTO) { %>
 
         <div class="col-md-4 col-sm-6">
-            <div class="card d-flex flex-column" style="height: 25rem;">
+            <div class="card d-flex flex-column">
 
                 <img src="<%=trabajadorDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + trabajadorDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
                      alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">

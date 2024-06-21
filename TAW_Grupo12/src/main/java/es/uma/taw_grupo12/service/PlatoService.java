@@ -26,13 +26,9 @@ public class PlatoService {
     @Autowired
     protected PlatodietaRepository platodietaRepository;
 
+    //@Victoria
     public List<PlatoDTO> listarPlatosDTO() {
-        List<Plato> platos =  this.platoRepository.findAll();
-        List<PlatoDTO> platosDTO = new ArrayList<>();
-        for(Plato p : platos){
-            platosDTO.add(p.toDTO());
-        }
-        return platosDTO;
+        return this.listarplatosDTO("");
     }
 
     public List<PlatoDTO> listarplatosDTO(String busqueda) {
@@ -139,4 +135,5 @@ public class PlatoService {
 
         this.platoRepository.save(plato);
     }
+    //@Victoria
 }

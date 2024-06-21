@@ -40,8 +40,8 @@
             margin-top: 1.5vh;
             margin-left: auto;
             margin-right: auto;
-            width: 20vh;
-            height: 20vh;
+            width: 50%; /* adjust as needed */
+            height: auto; /* maintain aspect ratio */
             border-radius: 50%;
             object-fit: cover;
         }

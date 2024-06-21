@@ -113,7 +113,7 @@ public class AdministradorService {
             nuevoTrabajador.setNombre(trabajadorDTO.getNombre());
             nuevoTrabajador.setEmail(trabajadorDTO.getEmail());
             nuevoTrabajador.setContrasenya(trabajadorDTO.getContrasenya());
-            nuevoTrabajador.setTipo(trabajadorDTO.getTipo());
+            nuevoTrabajador.setTipo(trabajadorDTO.getTipoRaw());
 
             if (trabajadorDTO.getImagenperfilFile() != null && !trabajadorDTO.getImagenperfilFile().isEmpty()) {
                 MultipartFile myFile = trabajadorDTO.getImagenperfilFile();

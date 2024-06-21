@@ -1,3 +1,5 @@
+<%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.List" %>
 <%
     /**
      * @author María Victoria Huesca
@@ -9,6 +11,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%
+    List<String> tipos = Arrays.asList("ENTRENADOR FUERZA", "ENTRENADOR CROSSTRAINING", "DIETISTA");
+%>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -58,6 +63,7 @@
         <div class="alert alert-danger" role="alert"><%= request.getAttribute("errorRegistro") %>
         </div>
         <% } %>
+
         <div class="form-group">
             <label for="nombre" class="form-label">Nombre</label>
             <form:input id="nombre" type="text" path="nombre" size="60" maxlength="45" required="true"
@@ -75,9 +81,7 @@
         </div>
         <div class="form-group">
             <label for="tipo" class="form-label">Selecciona un tipo de trabajador</label> <br>
-            <form:select id="tipo" path="tipo" required="true">
-                <form:options items="${tipos}"/>
-            </form:select>
+            <form:select id="tipo" path="tipo" required="true" items="<%=tipos%>"/>
         </div>
         <div class="form-group">
             <label for="imagenPerfil" class="form-label">Selecciona imagen de perfil</label> <br>

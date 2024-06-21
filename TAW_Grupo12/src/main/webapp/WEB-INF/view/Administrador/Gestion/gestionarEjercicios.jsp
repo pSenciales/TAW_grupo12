@@ -75,12 +75,12 @@
 
         .imagen-gestionarEjercicios {
             display: block;
-            margin-top: 1.5vh;
+            margin-top: 2.5vh;
             margin-left: auto;
             margin-right: auto;
             width: 50%; /* adjust as needed */
-            height: auto; /* maintain aspect ratio */
-            border-radius: 50%;
+            height: 50%; /* maintain aspect ratio */
+            border-radius: 10%;
             object-fit: cover;
         }
 
@@ -95,7 +95,7 @@
 
 <div class="container-gestionarEjercicios">
 
-        <% if (request.getAttribute("errorGestionarEjercico") != null) { %>
+        <% if (request.getAttribute("errorGestionarEjercicio") != null) { %>
     <div class="alert alert-danger">
         <%= request.getAttribute("errorGestionarEjercicio") %>
     </div>
@@ -124,15 +124,17 @@
         </button>
     </div>
 
-<!------------ MODAL QUE MUESTRA EL FORMULARIO PARA SELECCIONAR LOS ALERGENOS A FILTRAR ------------------------------->
+<!------------ MODAL QUE MUESTRA EL FORMULARIO PARA SELECCIONAR LOS TIPOS A FILTRAR ------------------------------->
 
     <div class="modal fade" id="filtrosModal" tabindex="-1" aria-labelledby="filtrosModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+
                 <div class="modal-header">
                     <h5 class="modal-title" id="filtrosModalLabel">Filtros</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <div class="modal-body">
                     <div class="form-check">
                         <label class="form-check-label">Tipos: </label><br>
@@ -140,10 +142,12 @@
                                          delimiter="<br>" class="form-check-input"/>
                     </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <form:button class="btn btn-primary">Aplicar filtros</form:button>
                 </div>
+
             </div>
         </div>
     </div>

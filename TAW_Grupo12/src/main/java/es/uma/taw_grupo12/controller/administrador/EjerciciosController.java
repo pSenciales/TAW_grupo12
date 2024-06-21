@@ -2,17 +2,18 @@ package es.uma.taw_grupo12.controller.administrador;
 
 import es.uma.taw_grupo12.controller.BaseController;
 import es.uma.taw_grupo12.dto.EjercicioDTO;
+import es.uma.taw_grupo12.entity.Ejercicio;
+import es.uma.taw_grupo12.entity.Plato;
 import es.uma.taw_grupo12.service.EjercicioService;
 import es.uma.taw_grupo12.ui.Administrador.FiltroEjercicios;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -64,5 +65,34 @@ public class EjerciciosController extends BaseController {
 
         return "/Administrador/Gestion/gestionarEjercicios";
     }
+
+    @PostMapping("/guardarEjercicio")
+    public String doGuardarEjercicio(@ModelAttribute("ejercicioModel") EjercicioDTO ejercicioModel, RedirectAttributes redirectAttributes) throws IOException {
+        Ejercicio existe = this.ejercicioService.buscarEjercicioNombre(ejercicioModel);       //compruebo si existe un ejercicio con el mismo nombre o si el nombre introducido no se ha modificado
+        if(existe != null){
+            redirectAttributes.addFlashAttribute("errorGestionarEjercicio", "Se ha intentado guardar un ejercicio con un nombre ya existente, los cambios no se han guardado.");
+        } else {
+            this.ejercicioService.guardarEjercicio(ejercicioModel);
+        }
+        return "redirect:/administrador/ejercicios/gestionarEjercicios";
+    }
+
+    @PostMapping("/crearEjercicio")
+    public String doCrearEjercicio(@ModelAttribute("ejercicioNuevo") EjercicioDTO ejercicioNuevo, RedirectAttributes redirectAttributes) throws IOException {
+        Ejercicio existe = this.ejercicioService.buscarEjercicioNombre(ejercicioNuevo.getNombre());       //compruebo que no exista ya un ejercicio con el mismo nombre
+        if(existe != null){
+            redirectAttributes.addFlashAttribute("errorGestionarEjercicio", "Se ha intentado crear un ejercicio con un nombre ya existente, los cambios no se han guardado.");
+        } else {
+            this.ejercicioService.crearEjercicio(ejercicioNuevo);
+        }
+        return "redirect:/administrador/ejercicios/gestionarEjercicios";
+    }
+
+    @PostMapping("/eliminarEjercicio")
+    public String doEliminarPlato(@RequestParam("idEjercicio") Integer idEjercicio){
+        this.ejercicioService.eliminarEjercicio(idEjercicio);
+        return "redirect:/administrador/ejercicios/gestionarEjercicios";
+    }
+
 
 }

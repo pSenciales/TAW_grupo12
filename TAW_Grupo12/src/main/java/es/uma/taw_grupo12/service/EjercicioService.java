@@ -1,17 +1,21 @@
 package es.uma.taw_grupo12.service;
 
 
+import es.uma.taw_grupo12.dao.EjercicioRutinaRepository;
 import es.uma.taw_grupo12.dto.EjercicioDTO;
 import es.uma.taw_grupo12.dto.PlatoDTO;
 import es.uma.taw_grupo12.entity.Ejercicio;
 import es.uma.taw_grupo12.dao.EjercicioRepository;
+import es.uma.taw_grupo12.entity.EjercicioRutina;
 import es.uma.taw_grupo12.entity.Plato;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +25,9 @@ public class EjercicioService {
 
     @Autowired
     private EjercicioRepository ejercicioRepository;
+
+    @Autowired
+    protected EjercicioRutinaRepository ejercicioRutinaRepository;
 
 
     //@Pablo
@@ -67,11 +74,11 @@ public class EjercicioService {
                 EjercicioDTO aux = ej.toDTO();
                 ejerciciosDTO.add(aux);
             }
-
         }
 
         return ejerciciosDTO;
     }
+    //@Gillermo
 
     //@Victoria
     public List<EjercicioDTO> listarEjerciciosDTO(String busqueda) {
@@ -111,6 +118,64 @@ public class EjercicioService {
             ejerciciosDTO.add(e.toDTO());
         }
         return ejerciciosDTO;
+    }
+
+    public Ejercicio buscarEjercicioNombre(String nombre) {
+        return this.ejercicioRepository.findByNombre(nombre).orElse(null);
+    }
+
+
+
+    public void crearEjercicio(EjercicioDTO ejercicioDTO) throws IOException {
+        Ejercicio ejercicioNuevo = new Ejercicio();
+
+        ejercicioNuevo.setNombre(ejercicioDTO.getNombre());
+        ejercicioNuevo.setDescripcion(ejercicioDTO.getDescripcion());
+        ejercicioNuevo.setTipo(ejercicioDTO.getTipo());
+
+        if (ejercicioDTO.getVideoFile() != null && !ejercicioDTO.getVideoFile().isEmpty()) {
+            MultipartFile myFile = ejercicioDTO.getVideoFile();
+            byte[] imagenBytes = myFile.getBytes();
+            ejercicioNuevo.setVideo(imagenBytes);
+        } else {
+            ejercicioDTO.setVideo(null);
+        }
+
+        this.ejercicioRepository.save(ejercicioNuevo);
+    }
+
+    public void eliminarEjercicio(Integer idEjercicio) {
+        Ejercicio ejercicio = this.ejercicioRepository.findById(idEjercicio).orElse(null);
+        List<EjercicioRutina> ejerciciosRutina = this.ejercicioRutinaRepository.findEjerciciosRutina(idEjercicio);
+
+        this.ejercicioRutinaRepository.deleteAll(ejerciciosRutina);
+
+        this.ejercicioRepository.deleteById(idEjercicio);
+    }
+
+    public void guardarEjercicio(EjercicioDTO ejercicioDTO) throws IOException {
+        Ejercicio miEjercicio = this.ejercicioRepository.findById(ejercicioDTO.getIdejercicio()).orElse(null);
+        if(miEjercicio != null){
+            miEjercicio.setNombre(miEjercicio.getNombre());
+            if(!ejercicioDTO.getDescripcion().isEmpty()){
+                miEjercicio.setDescripcion(ejercicioDTO.getDescripcion());
+            }
+            if (ejercicioDTO.getVideoFile() != null && !ejercicioDTO.getVideoFile().isEmpty()) {
+                MultipartFile myFile = ejercicioDTO.getVideoFile();
+                byte[] imagenBytes = myFile.getBytes();
+                miEjercicio.setVideo(imagenBytes);
+            }
+            miEjercicio.setTipo(ejercicioDTO.getTipo());
+            this.ejercicioRepository.save(miEjercicio);
+        }
+    }
+
+    public Ejercicio buscarEjercicioNombre(EjercicioDTO ejercicioDTO) {
+        Ejercicio original = this.ejercicioRepository.findById(ejercicioDTO.getIdejercicio()).orElse(null);
+        if(original.getNombre().equals(ejercicioDTO.getNombre())){
+            return null;
+        }
+        return  this.ejercicioRepository.findByNombre(ejercicioDTO.getNombre()).orElse(null);
     }
     //@Victoria
 }

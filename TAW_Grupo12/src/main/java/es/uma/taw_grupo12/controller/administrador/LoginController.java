@@ -107,7 +107,6 @@ public class LoginController extends BaseController {
 
         //tipo = trabajador
         model.addAttribute("trabajador", new TrabajadorDTO());
-        model.addAttribute("tipos", this.administradorService.getTiposTrabajador() );
         return "/Administrador/Autenticacion/registroTrabajador";
     }
 
@@ -159,7 +158,7 @@ public class LoginController extends BaseController {
             session.setAttribute("usuario", trabajadorDTO);
             session.setAttribute("tipo", trabajadorDTO.getTipo());
             //return "redirect:/" + session.getTipo() + "/inicio";       DESCOMENTAR CUANDO ESTE IMPLEMENTADO EL INICIO DE TRABAJADORES
-            return "/Cliente/inicioCliente";
+            return "/Entrenador/perfilEntrenador";
         }
 
         //OPCIÓN: AÑADIR QUE SE MUESTREN DISTINTOS MENSAJES DE ERROR

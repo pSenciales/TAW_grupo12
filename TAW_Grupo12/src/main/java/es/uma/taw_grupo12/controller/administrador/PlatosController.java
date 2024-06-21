@@ -26,6 +26,7 @@ public class PlatosController extends BaseController {
     @Autowired
     private PlatoService platoService;
 
+    //@Victoria
     @GetMapping("/gestionarPlatos")
     public String doGestionarPlatos(Model model, HttpSession session) {
         if (!estaAutenticado(session) || session.getAttribute("tipo") != "administrador"){
@@ -70,7 +71,8 @@ public class PlatosController extends BaseController {
 
     @PostMapping("/guardarPlato")
     public String doGuardarPlato(Model model, @ModelAttribute("platoModel") PlatoDTO platoDTO, RedirectAttributes redirectAttributes) throws IOException {
-        List<Plato> existe = this.platoService.buscarPlatoNombre(platoDTO);
+
+        List<Plato> existe = this.platoService.buscarPlatoNombre(platoDTO); //compruebo si existe un plato con el mismo nombre o si el nombre introducido no se ha modificado
         if(existe != null && !existe.isEmpty()){
             redirectAttributes.addFlashAttribute("errorGestionarPlato", "Se ha intentado guardar un plato con un nombre ya existente, los cambios no se han guardado");
         } else {
@@ -95,5 +97,5 @@ public class PlatosController extends BaseController {
         }
         return "redirect:/administrador/platos/gestionarPlatos";
     }
-
+    //@Victoria
 }

@@ -19,7 +19,7 @@
                 <ul class="dropdown-menu dropdown-menu-dark">
                     <li><a class="dropdown-item" href="/administrador/asignarClientes">Asignar Clientes</a></li>
                     <li><a class="dropdown-item" href="/administrador/gestionarUsuarios">Gestionar Usuarios</a></li>
-                    <li><a class="dropdown-item" href="/administrador/gestionarEjercicios">Gestionar Ejercicios</a></li>
+                    <li><a class="dropdown-item" href="/administrador/ejercicios/gestionarEjercicios">Gestionar Ejercicios</a></li>
                     <li><a class="dropdown-item" href="/administrador/platos/gestionarPlatos">Gestionar Platos</a></li>
                 </ul>
             </li>

@@ -49,9 +49,7 @@ public class EjercicioService {
             if (!tipos.contains(ej.getTipo())) {
                 tipos.add(ej.getTipo());
             }
-
         }
-
         return tipos;
     }
 

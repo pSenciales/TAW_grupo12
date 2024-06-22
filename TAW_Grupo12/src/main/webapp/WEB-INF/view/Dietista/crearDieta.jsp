@@ -53,7 +53,7 @@
                                         <form:hidden path="platoDietaList[${status.index * 7 + dayStatus.index}].diasSemana" value="${dias}"></form:hidden>
                                         <form:select path="platoDietaList[${status.index * 7 + dayStatus.index}].idPlato" cssClass="form-select">
                                             <form:option value="">Seleccione un plato</form:option>
-                                            <form:options items="${platos}" itemValue="idPlato" itemLabel="nombre"/>
+                                            <form:options items="${platos}" itemValue="idplato" itemLabel="nombre"/>
                                         </form:select>
                                     </td>
                                 </c:forEach>

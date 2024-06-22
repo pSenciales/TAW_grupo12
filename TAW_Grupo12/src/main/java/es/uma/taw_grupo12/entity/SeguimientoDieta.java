@@ -7,6 +7,8 @@ package es.uma.taw_grupo12.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import es.uma.taw_grupo12.dto.DTO;
+import es.uma.taw_grupo12.dto.SeguimientoDietaDTO;
 import jakarta.persistence.*;
 
 /**
@@ -21,7 +23,7 @@ import jakarta.persistence.*;
     @NamedQuery(name = "SeguimientoDieta.findByComido", query = "SELECT s FROM SeguimientoDieta s WHERE s.comido = :comido"),
     @NamedQuery(name = "SeguimientoDieta.findByCantidad", query = "SELECT s FROM SeguimientoDieta s WHERE s.cantidad = :cantidad"),
     @NamedQuery(name = "SeguimientoDieta.findByObservaciones", query = "SELECT s FROM SeguimientoDieta s WHERE s.observaciones = :observaciones")})
-public class SeguimientoDieta implements Serializable {
+public class SeguimientoDieta implements Serializable , DTO<SeguimientoDietaDTO> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -141,6 +143,23 @@ public class SeguimientoDieta implements Serializable {
     @Override
     public String toString() {
         return "es.taw12.app.entity.SeguimientoDieta[ seguimientoDietaPK=" + seguimientoDietaPK + " ]";
+    }
+
+    @Override
+    public SeguimientoDietaDTO toDTO(){
+        SeguimientoDietaDTO seguimientoDieta = new SeguimientoDietaDTO();
+
+        seguimientoDieta.setIdSeguimientoDieta(this.seguimientoDietaPK);
+        seguimientoDieta.setIdDieta(this.dieta.getIddieta());
+        seguimientoDieta.setIdCliente(this.cliente.getIdcliente());
+        seguimientoDieta.setComido(this.comido);
+        seguimientoDieta.setCantidad(this.cantidad);
+        seguimientoDieta.setFecha(this.fecha);
+        seguimientoDieta.setObservaciones(this.observaciones);
+        seguimientoDieta.setCantidadObjeto(this.cantidadobjetivo);
+        seguimientoDieta.setNombrePlato(this.nombreplato);
+
+        return seguimientoDieta;
     }
     
 }

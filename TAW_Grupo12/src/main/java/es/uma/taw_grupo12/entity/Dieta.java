@@ -5,8 +5,12 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import es.uma.taw_grupo12.dto.DTO;
+import es.uma.taw_grupo12.dto.DietaDTO;
+import es.uma.taw_grupo12.dto.PlatoDietaDTO;
 import jakarta.persistence.*;
 
 /**
@@ -19,7 +23,7 @@ import jakarta.persistence.*;
     @NamedQuery(name = "Dieta.findAll", query = "SELECT d FROM Dieta d"),
     @NamedQuery(name = "Dieta.findByIddieta", query = "SELECT d FROM Dieta d WHERE d.iddieta = :iddieta"),
     @NamedQuery(name = "Dieta.findByNombre", query = "SELECT d FROM Dieta d WHERE d.nombre = :nombre")})
-public class Dieta implements Serializable {
+public class Dieta implements Serializable , DTO<DietaDTO> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -105,9 +109,35 @@ public class Dieta implements Serializable {
         return true;
     }
 
+
+
     @Override
     public String toString() {
         return "es.taw12.app.entity.Dieta[ iddieta=" + iddieta + " ]";
     }
-    
+
+    @Override
+    public DietaDTO toDTO(){
+        DietaDTO dieta = new DietaDTO();
+
+        dieta.setIdDieta(this.iddieta);
+        dieta.setNombre(this.nombre);
+        dieta.setIdCliente(this.idcliente.getIdcliente());
+
+        List<PlatoDietaDTO> platoDietaList = new ArrayList<>();
+        if(!this.platoDietaList.isEmpty()){
+            for(PlatoDieta p : this.platoDietaList){
+                platoDietaList.add(p.toDTO());
+            }
+        }
+        dieta.setPlatoDietaList(platoDietaList);
+
+        List<Integer> seguimientoDieta = new ArrayList<>();
+        for(SeguimientoDieta s : this.seguimientoDieta){
+            seguimientoDieta.add(s.seguimientoDietaPK);
+        }
+        dieta.setSeguimientoDieta(seguimientoDieta);
+
+        return dieta;
+    }
 }

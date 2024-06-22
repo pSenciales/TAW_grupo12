@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/TAW_Grupo12/TAW_Grupo12.iml" filepath="$PROJECT_DIR$/TAW_Grupo12/TAW_Grupo12.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/TAW_grupo12.iml" filepath="$PROJECT_DIR$/.idea/TAW_grupo12.iml" />
     </modules>
   </component>

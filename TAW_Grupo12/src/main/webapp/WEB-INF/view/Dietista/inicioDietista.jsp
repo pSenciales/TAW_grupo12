@@ -60,4 +60,9 @@
         }
     %>
     </body>
+<br/>
+    <button>
+        <a href="/cerrarSesion">Logout</a>
+    </button>
+
 </html>

@@ -22,13 +22,22 @@ public class TrabajadorDTO {
     public String getImagenBase64() {
         return (this.imagenperfil != null) ? Base64.getEncoder().encodeToString(this.imagenperfil) : null;
     }
+    //@Victoria
+
     public String getTipo(){
+        if (this.tipo == null) {
+            return "";
+        }
         return switch (this.tipo){
             case "ENTRENADOR FUERZA" -> "entrenador";
             case "ENTRENADOR CROSSTRAINING" -> "entrenadorcross";
             case "DIETISTA" -> "dietista";
-            default -> null;
+            default -> "";
         };
     }
-    //@Victoria
+
+    public String getTipoRaw(){
+        return this.tipo;
+    }
+
 }

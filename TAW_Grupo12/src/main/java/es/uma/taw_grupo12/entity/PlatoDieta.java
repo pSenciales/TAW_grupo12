@@ -5,6 +5,9 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+
+import es.uma.taw_grupo12.dto.DTO;
+import es.uma.taw_grupo12.dto.PlatoDietaDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -21,7 +24,7 @@ import jakarta.persistence.Table;
  * @author guzman
  */
 @Entity
-@Table(name = "PlatoDieta")
+@Table(name = "platodieta")
 @NamedQueries({
     @NamedQuery(name = "PlatoDieta.findAll", query = "SELECT p FROM PlatoDieta p"),
     @NamedQuery(name = "PlatoDieta.findByIdplatodieta", query = "SELECT p FROM PlatoDieta p WHERE p.platoDietaPK.idplatodieta = :idplatodieta"),
@@ -32,7 +35,7 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "PlatoDieta.findByOrden", query = "SELECT p FROM PlatoDieta p WHERE p.orden = :orden"),
     @NamedQuery(name = "PlatoDieta.findByDiassemana", query = "SELECT p FROM PlatoDieta p WHERE p.diassemana = :diassemana"),
     @NamedQuery(name = "PlatoDieta.findByFranjahoraria", query = "SELECT p FROM PlatoDieta p WHERE p.franjahoraria = :franjahoraria")})
-public class PlatoDieta implements Serializable {
+public class PlatoDieta implements Serializable , DTO<PlatoDietaDTO> {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -153,5 +156,20 @@ public class PlatoDieta implements Serializable {
     public String toString() {
         return "es.taw12.app.entity.PlatoDieta[ platoDietaPK=" + platoDietaPK + " ]";
     }
-    
+
+    @Override
+    public PlatoDietaDTO toDTO(){
+        PlatoDietaDTO platoDieta = new PlatoDietaDTO();
+
+        platoDieta.setIdPlatoDieta(this.platoDietaPK.getIdplatodieta());
+        platoDieta.setIdDieta(this.dieta.getIddieta());
+        platoDieta.setIdPlato(this.plato.getIdplato());
+        platoDieta.setCantidad(this.cantidad);
+        platoDieta.setCalorias(this.calorias);
+        platoDieta.setOrden(this.orden);
+        platoDieta.setDiasSemana(this.diassemana);
+        platoDieta.setFranjaHoraria(this.franjahoraria);
+
+        return platoDieta;
+    }
 }

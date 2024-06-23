@@ -18,6 +18,11 @@
                     <a class="nav-link active" aria-current="page" href="http://localhost:8080/entrenadorcross/clientes">Clientes</a>
                 </li>
             </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="btn btn-danger" aria-current="page" href="http://localhost:8080/cerrarSesion">Cerrar Sesión</a>
+                </li>
+            </ul>
         </div>
     </nav>
 </header>

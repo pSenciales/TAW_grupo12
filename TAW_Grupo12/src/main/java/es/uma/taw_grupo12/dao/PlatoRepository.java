@@ -1,3 +1,7 @@
+/**
+ * @author María Victoria Huesca Peláez
+ */
+
 package es.uma.taw_grupo12.dao;
 
 import es.uma.taw_grupo12.entity.Plato;
@@ -12,6 +16,7 @@ public interface PlatoRepository extends JpaRepository<Plato, Integer> {
     @Query("SELECT p FROM Plato p WHERE p.nombre LIKE %:busqueda%")
     public List<Plato> findAllByNombre(@Param("busqueda" )String busqueda);
 
-    @Query("SELECT p FROM Plato p WHERE p.nombre LIKE %:busqueda% AND p.alergenos NOT LIKE %:alergeno%")
-    List<Plato> findAllByAlergeno(@Param("alergeno") List<String> alergenos, @Param("busqueda") String busqueda);
+    @Query("SELECT p FROM Plato p WHERE p.nombre = :nombre")
+    List<Plato> findByNombre(@Param("nombre") String nombre);
+
 }

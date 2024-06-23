@@ -316,85 +316,97 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 
 -- Platos
-INSERT INTO `taw12`.`plato` (`nombre`, `alergenos`, `video`, `descripcion`) 
-VALUES	('Salmón al Horno', 'Pescado', NULL, 'Filete de salmón fresco horneado con una mezcla de hierbas aromáticas. Acompañado de verduras al vapor.'),
-		('Ensalada César', 'Lácteos, Gluten', NULL, 'Mezcla de lechugas frescas, pollo a la parrilla, crutones de pan y aderezo César. Contiene queso parmesano rallado.'),
-		('Risotto de Champiñones', 'Lácteos', NULL, 'Arroz cremoso cocido a fuego lento con champiñones frescos, caldo de vegetales y un toque de queso parmesano.'),
-        ('Tacos de Camarones', 'Crustáceos', NULL, 'Tortillas de maíz rellenas de camarones salteados con cebolla, pimientos y especias. Acompañados de guacamole y salsa.'),
-        ('Pizza Margarita', 'Lácteos, Gluten', NULL, 'Pizza con salsa de tomate, mozzarella fresca y albahaca.'),
-        ('Sopa de Tomate', 'Apio', NULL, 'Sopa caliente de tomate, cocida con cebolla, ajo, zanahorias y apio, sazonada con hierbas mediterráneas.'),
-        ('Pollo a la Parrilla', NULL, NULL, 'Pechuga de pollo marinada y grillada a la perfección. Servida con una guarnición de vegetales asados.'),
-        ('Paella de Mariscos', 'Crustáceos', NULL, 'Plato tradicional español con arroz, mejillones, camarones, calamares y langostinos cocidos en un caldo de pescado.'),
-        ('Filete Mignon', NULL, NULL, 'Jugoso filete de ternera asado a la parrilla y acompañado de una salsa de champiñones.'),
-        ('Pasta Carbonara', 'Lácteos, Gluten, Huevos', NULL, 'Pasta italiana con salsa de huevo, queso parmesano, panceta y pimienta negra.'),
-        ('Ensalada de Frutas', NULL, NULL, 'Mezcla de frutas frescas de temporada con un toque de miel y menta fresca.'),
-        ('Curry de Verduras', NULL, NULL, 'Verduras mixtas cocidas en una sabrosa salsa de curry con leche de coco, servidas con arroz basmati.'),
-        ('Hamburguesa Vegana', 'Gluten', NULL, 'Hamburguesa de lentejas y vegetales, servida en un pan integral con lechuga, tomate y salsa de aguacate.'),
-        ('Sushi Variado', 'Pescado, Gluten', NULL, 'Variedad de rollos de sushi con ingredientes como salmón, atún, aguacate y pepino.'),
-		('Lasaña de Carne', 'Lácteos, Gluten', NULL, 'Capas de pasta intercaladas con una mezcla de carne molida, salsa de tomate y queso ricotta, cubiertas con mozzarella.'),
-        ('Sopa de Lentejas', NULL, NULL, 'Sopa reconfortante preparada con lentejas, zanahorias, apio, cebolla y tomate, sazonada con hierbas aromáticas.'),
-        ('Tarta de Manzana', 'Gluten', NULL, 'Deliciosa tarta de manzana casera con una base crujiente de masa quebrada y un relleno de manzanas caramelizadas.'),
-        ('Tacos de Pollo', NULL, NULL, 'Tortillas de maíz rellenas de pollo desmenuzado, cilantro, cebolla, tomate y salsa de pico de gallo.'),
-        ('Ensalada Griega', 'Lácteos', NULL, 'Ensalada fresca con pepino, tomate, cebolla roja, aceitunas kalamata, queso feta y aderezo de limón y aceite de oliva.'),
-        ('Pad Thai', 'Cacahuetes, Gluten', NULL, 'Plato tailandés de fideos de arroz salteados con camarones, tofu, brotes de soja, cacahuetes y salsa de tamarindo.'),
-        ('Pollo al Curry', NULL, NULL, 'Trozos de pollo tierno cocidos en una salsa de curry con leche de coco, servidos con arroz jazmín y naan.'),
-        ('Estofado de Ternera', NULL, NULL, 'Guiso de ternera cocido a fuego lento con verduras de temporada como zanahorias, papas y guisantes.'),
-        ('Ensalada de Quinoa', NULL, NULL, 'Ensalada fresca con quinoa cocida, pepino, tomate cherry, aguacate, y aderezo de limón y cilantro.'),
-        ('Tiramisú', 'Lácteos, Huevos', NULL, 'Postre italiano compuesto por capas de bizcochos empapados en café, crema de mascarpone y cacao en polvo.'),
-        ('Rollitos de Primavera', 'Gluten', NULL, 'Rollitos crujientes rellenos de vegetales frescos como zanahorias, repollo, champiñones y fideos de arroz, servidos con salsa agridulce.'),
-        ('Filete de Salmón a la Parrilla', 'Pescado', NULL, 'Filete de salmón marinado y grillado a la perfección, acompañado de espárragos a la parrilla y puré de papas.'),
-		('Sopa de Fideos', 'Gluten', NULL, 'Sopa reconfortante con fideos finos en un caldo de pollo casero, con zanahorias, apio y cebolla.'),
-        ('Bistec a la Parrilla', NULL, NULL, 'Jugoso bistec de res asado a la parrilla, sazonado con sal marina y pimienta negra, acompañado de papas al horno y vegetales asados.'),
-        ('Espaguetis a la Boloñesa', 'Lácteos, Gluten', NULL, 'Pasta italiana servida con una salsa de carne de res cocinada a fuego lento con tomate, cebolla, zanahoria y apio.'),
-        ('Ensalada de Atún', 'Pescado', NULL, 'Ensalada fresca con hojas verdes, tomate, huevo duro, aceitunas, atún en lata y aderezo de limón y aceite de oliva.'),
-        ('Sushi de Salmón', 'Pescado, Gluten', NULL, 'Variedad de rollos de sushi con salmón fresco, aguacate, pepino y queso crema, servidos con salsa de soja y wasabi.'),
-        ('Chili con Carne', NULL, NULL, 'Guiso picante de carne de res molida cocida con frijoles, tomates, cebolla, pimientos y especias, servido con arroz.'),
-        ('Tarta de Chocolate', 'Lácteos, Gluten, Huevos', NULL, 'Deliciosa tarta de chocolate con una base de galleta triturada, relleno de crema de chocolate y decorada con virutas de chocolate.'),
-        ('Pollo al Limón', NULL, NULL, 'Trozos de pollo marinados en una mezcla de limón, ajo y hierbas, luego cocidos a la parrilla y servidos con arroz al limón.'),
-        ('Enchiladas de Pollo', 'Lácteos', NULL, 'Tortillas de maíz rellenas de pollo desmenuzado y salsa roja picante, gratinadas con queso cheddar y crema agria.'),
-        ('Paella Vegetariana', NULL, NULL, 'Paella española sin carne, preparada con arroz, verduras mixtas como pimientos, guisantes, alcachofas y espárragos.'),
-        ('Tarta de Limón', 'Lácteos, Gluten', NULL, 'Postre refrescante con una base de galleta de limón, relleno de crema de limón y cobertura de merengue tostado.'),
-        ('Wraps de Pollo', NULL, NULL, 'Tortillas de trigo rellenas de pollo a la parrilla, lechuga, tomate, aguacate, y aderezo de mayonesa y mostaza.'),
-		('Ceviche de Camarón', 'Crustáceos, Pescado', NULL, 'Plato peruano de camarones crudos marinados en jugo de limón con cebolla morada, ají limo, cilantro y maíz choclo.'),
-        ('Tacos de Carne Asada', NULL, NULL, 'Tortillas de maíz rellenas de carne de res asada a la parrilla, cebolla caramelizada, cilantro y salsa de tomate picante.');
+INSERT INTO `taw12`.`Plato` (`nombre`, `descripcion`, `alergenos`) VALUES
+('Paella Valenciana', 'Tradicional paella valenciana con arroz, pollo, conejo y verduras frescas de la huerta.', 'Crustáceos'),
+('Tortilla Española', 'Tortilla de patatas jugosa, hecha con huevos frescos y patatas seleccionadas.', 'Huevo'),
+('Gazpacho Andaluz', 'Sopa fría de tomate, pimiento, pepino y ajo, refrescante y nutritiva.', NULL),
+('Pulpo a la Gallega', 'Pulpo tierno cocido, servido con pimentón, aceite de oliva y sal gruesa.', 'Moluscos'),
+('Croquetas de Jamón', 'Deliciosas croquetas caseras de jamón serrano, crujientes por fuera y cremosas por dentro.', 'Gluten, Huevo'),
+('Salmorejo Cordobés', 'Crema espesa de tomate y pan, acompañada de jamón serrano y huevo duro.', 'Gluten, Huevo'),
+('Fabada Asturiana', 'Guiso tradicional de judías blancas con chorizo, morcilla y panceta.', 'Sulfitos'),
+('Pimientos de Padrón', 'Pimientos de Padrón fritos, unos pican y otros no.', NULL),
+('Cochinillo Asado', 'Cochinillo asado a baja temperatura, con piel crujiente y carne jugosa.', NULL),
+('Churros con Chocolate', 'Churros crujientes servidos con una taza de chocolate caliente para mojar.', 'Gluten'),
+('Calamares a la Romana', 'Calamares rebozados y fritos, servidos con limón y alioli.', 'Moluscos, Gluten'),
+('Patatas Bravas', 'Patatas fritas acompañadas de una salsa brava picante y alioli.', NULL),
+('Jamón Ibérico', 'Jamón ibérico de bellota, cortado en finas lonchas, servido con pan con tomate.', 'Gluten'),
+('Huevos Rotos', 'Huevos fritos con yema líquida, servidos sobre una cama de patatas fritas y jamón.', 'Huevo'),
+('Albóndigas en Salsa', 'Albóndigas de carne caseras, cocinadas en una rica salsa de tomate y vino.', 'Sulfitos'),
+('Ensalada Mixta', 'Ensalada fresca con lechuga, tomate, cebolla, atún y huevo duro.', 'Huevo, Pescado'),
+('Pulpo a la Brasa', 'Pulpo a la brasa, acompañado de patatas y pimentón.', 'Moluscos'),
+('Arroz Negro', 'Arroz negro cocido con tinta de calamar, servido con alioli.', 'Pescado, Moluscos'),
+('Cordero Asado', 'Cordero asado lentamente, acompañado de patatas y hierbas aromáticas.', NULL),
+('Tarta de Santiago', 'Tarta de almendra tradicional gallega, sin gluten, espolvoreada con azúcar glas.', 'Frutos de cáscara'),
+('Bacalao a la Vizcaína', 'Bacalao en salsa vizcaína, hecha con pimientos choriceros y cebolla.', 'Pescado'),
+('Fideuá', 'Fideuá de mariscos, un plato similar a la paella pero hecho con fideos.', 'Crustáceos, Moluscos'),
+('Cocido Madrileño', 'Guiso de garbanzos con chorizo, morcilla, carne de cerdo y verduras.', 'Sulfitos'),
+('Gambas al Ajillo', 'Gambas salteadas con ajo y guindilla, servidas con pan.', 'Crustáceos, Gluten'),
+('Empanada Gallega', 'Empanada rellena de atún, cebolla y pimiento, cocida al horno.', 'Gluten, Pescado'),
+('Tortillitas de Camarones', 'Tortillitas crujientes hechas con camarones y harina de garbanzo.', 'Crustáceos'),
+('Pisto Manchego', 'Guiso de verduras de temporada, como calabacín, berenjena, tomate y pimiento.', NULL),
+('Callos a la Madrileña', 'Callos de ternera guisados con chorizo y morcilla en una salsa espesa.', 'Sulfitos'),
+('Arroz con Leche', 'Postre cremoso de arroz cocido en leche, con canela y limón.', 'Leche'),
+('Caracoles a la Llauna', 'Caracoles cocidos a la plancha con ajo y perejil.', 'Moluscos'),
+('Leche Frita', 'Postre típico de leche frita, rebozado y espolvoreado con azúcar y canela.', 'Leche, Gluten, Huevo'),
+('Torrijas', 'Pan empapado en leche y huevo, frito y espolvoreado con azúcar y canela.', 'Gluten, Huevo, Leche'),
+('Migas', 'Pan frito con chorizo, pimientos y uvas, típico de Castilla-La Mancha.', 'Gluten'),
+('Ensaimada', 'Dulce espiral mallorquín, hecho con masa hojaldrada y espolvoreado con azúcar glas.', 'Gluten'),
+('Flan de Huevo', 'Postre de flan de huevo, cubierto con caramelo.', 'Huevo, Leche'),
+('Queso Manchego', 'Queso curado de oveja, originario de La Mancha, con sabor intenso.', 'Leche'),
+('Pan con Tomate', 'Rebanadas de pan con tomate rallado, aceite de oliva y sal.', 'Gluten'),
+('Boquerones en Vinagre', 'Boquerones marinados en vinagre, ajo y perejil.', 'Pescado'),
+('Caldereta de Cordero', 'Guiso de cordero con patatas, pimientos y tomate, cocido lentamente.', NULL),
+('Gazpachuelo', 'Sopa caliente de pescado con mayonesa, típica de Málaga.', 'Pescado, Huevo'),
+('Canelones', 'Canelones rellenos de carne, cubiertos con bechamel y gratinados.', 'Gluten, Leche, Huevo'),
+('Pastel de Cabracho', 'Pastel de pescado de cabracho, servido frío con mayonesa.', 'Pescado, Huevo'),
+('Fritura Malagueña', 'Surtido de pescados y mariscos fritos, típico de Málaga.', 'Pescado, Crustáceos, Moluscos'),
+('Menestra de Verduras', 'Guiso de verduras variadas, como alcachofas, espárragos y zanahorias.', NULL),
+('Sepia a la Plancha', 'Sepia a la plancha con ajo y perejil, servida con alioli.', 'Moluscos'),
+('Lentejas con Chorizo', 'Guiso de lentejas con chorizo y verduras.', 'Sulfitos'),
+('Arroz al Horno', 'Arroz al horno con costillas, morcilla, garbanzos y tomate.', 'Sulfitos'),
+('Calamares en su Tinta', 'Calamares cocidos en su tinta, con cebolla y vino blanco.', 'Moluscos'),
+('Sopa de Ajo', 'Sopa caliente de ajo con pan, pimentón y huevo escalfado.', 'Gluten, Huevo');
+
         
         USE taw12;
 
-INSERT INTO ejercicio (nombre, descripcion, tipo) VALUES 
-('Sentadilla', 'Ejercicio básico de fuerza para las piernas', 'FUERZA'),
-('Press de banca', 'Ejercicio de fuerza para el pecho', 'FUERZA'),
-('Carrera continua', 'Ejercicio de resistencia cardiovascular', 'RESISTENCIA'),
-('Natación', 'Ejercicio de resistencia en el agua', 'RESISTENCIA'),
+INSERT INTO `taw12`.`Ejercicio` (`nombre`, `descripcion`, `tipo`) VALUES
+('Sentadilla', 'Ejercicio básico de fuerza para las piernas y glúteos', 'FUERZA'),
+('Press de banca', 'Ejercicio de fuerza enfocado en el desarrollo del pecho', 'FUERZA'),
+('Carrera continua', 'Ejercicio cardiovascular para mejorar la resistencia', 'RESISTENCIA'),
+('Natación', 'Ejercicio de resistencia en el agua que involucra todo el cuerpo', 'RESISTENCIA'),
 ('Ciclismo', 'Actividad aeróbica que mejora la capacidad cardiovascular', 'CAPACIDAD AEROBICA'),
-('Salto de cuerda', 'Ejercicio aeróbico para mejorar la coordinación y resistencia', 'CAPACIDAD AEROBICA'),
-('Sprints', 'Carreras cortas a máxima velocidad', 'VELOCIDAD'),
-('Correr 100m', 'Carrera de velocidad pura en distancia corta', 'VELOCIDAD'),
-('Levantamiento de pesas', 'Ejercicio de alta intensidad para aumentar la potencia muscular', 'POTENCIA'),
-('Clean and Jerk', 'Levantamiento de pesas olímpico para potencia explosiva', 'POTENCIA'),
-('Planchas', 'Ejercicio de estabilidad para el núcleo abdominal', 'ESTABILIDAD'),
-('Superman', 'Ejercicio para mejorar la estabilidad y la fuerza de la espalda baja', 'ESTABILIDAD'),
-('Estiramientos dinámicos', 'Ejercicios para mejorar la movilidad articular', 'MOVILIDAD'),
-('Yoga', 'Práctica de posturas para aumentar la movilidad y flexibilidad', 'MOVILIDAD'),
+('Salto de cuerda', 'Ejercicio aeróbico para mejorar coordinación y resistencia', 'CAPACIDAD AEROBICA'),
+('Sprints', 'Carreras cortas a máxima velocidad para desarrollar rapidez', 'VELOCIDAD'),
+('Correr 100m', 'Carrera de velocidad pura en distancia corta de 100 metros', 'VELOCIDAD'),
+('Levantamiento de pesas', 'Ejercicio de alta intensidad para aumentar potencia muscular', 'POTENCIA'),
+('Clean and Jerk', 'Levantamiento olímpico para desarrollar potencia explosiva', 'POTENCIA'),
+('Planchas', 'Ejercicio de estabilidad que fortalece el núcleo abdominal', 'ESTABILIDAD'),
+('Superman', 'Ejercicio que mejora la estabilidad y fuerza de la espalda baja', 'ESTABILIDAD'),
+('Estiramientos dinámicos', 'Ejercicios para mejorar la movilidad articular y flexibilidad', 'MOVILIDAD'),
+('Yoga', 'Práctica de posturas para aumentar movilidad y flexibilidad', 'MOVILIDAD'),
 ('Remo', 'Ejercicio de fuerza y resistencia para la parte superior del cuerpo', 'FUERZA'),
-('Dominadas', 'Ejercicio de fuerza para la espalda y los brazos', 'FUERZA'),
-('Flexiones', 'Ejercicio de fuerza para el pecho y los tríceps', 'FUERZA'),
-('Abdominales', 'Ejercicio para fortalecer los músculos abdominales', 'FUERZA'),
-('Bicicleta estática', 'Ejercicio aeróbico para mejorar la capacidad cardiovascular', 'CAPACIDAD AEROBICA'),
-('Burpees', 'Ejercicio de cuerpo completo para resistencia y potencia', 'POTENCIA'),
+('Dominadas', 'Ejercicio de fuerza enfocado en la espalda y brazos', 'FUERZA'),
+('Flexiones', 'Ejercicio de fuerza para pecho y tríceps, sencillo y efectivo', 'FUERZA'),
+('Abdominales', 'Ejercicio clásico para fortalecer los músculos abdominales', 'FUERZA'),
+('Bicicleta estática', 'Ejercicio aeróbico que mejora la capacidad cardiovascular', 'CAPACIDAD AEROBICA'),
+('Burpees', 'Ejercicio completo que desarrolla resistencia y potencia', 'POTENCIA'),
 ('Remo en máquina', 'Ejercicio de resistencia y fuerza para la parte superior del cuerpo', 'RESISTENCIA'),
-('Trote suave', 'Ejercicio de resistencia cardiovascular a un ritmo moderado', 'RESISTENCIA'),
-('Saltos al cajón', 'Ejercicio de potencia y velocidad para las piernas', 'POTENCIA'),
-('Skipping', 'Ejercicio de velocidad y coordinación', 'VELOCIDAD'),
-('Zancadas', 'Ejercicio de fuerza para las piernas y glúteos', 'FUERZA'),
-('Peso muerto', 'Ejercicio de fuerza para la espalda y piernas', 'FUERZA'),
-('Circuito de alta intensidad', 'Entrenamiento para mejorar la resistencia y fuerza', 'RESISTENCIA'),
-('Flexibilidad de piernas', 'Ejercicio para mejorar la flexibilidad de las piernas', 'MOVILIDAD'),
-('Tai Chi', 'Práctica de movimientos lentos para mejorar la movilidad y equilibrio', 'MOVILIDAD'),
-('Estocadas', 'Ejercicio para fortalecer las piernas y glúteos', 'FUERZA'),
-('Nado mariposa', 'Estilo de natación para mejorar la fuerza y resistencia', 'RESISTENCIA'),
-('Carrera de 5km', 'Carrera de distancia moderada para resistencia', 'RESISTENCIA'),
-('Sprint en bicicleta', 'Ejercicio de velocidad y potencia en bicicleta', 'VELOCIDAD'),
-('Carrera de obstáculos', 'Ejercicio de resistencia y agilidad', 'RESISTENCIA');
+('Trote suave', 'Ejercicio de resistencia cardiovascular a ritmo moderado', 'RESISTENCIA'),
+('Saltos al cajón', 'Ejercicio de potencia y velocidad para piernas y glúteos', 'POTENCIA'),
+('Skipping', 'Ejercicio que mejora velocidad y coordinación al trotar en el lugar', 'VELOCIDAD'),
+('Zancadas', 'Ejercicio de fuerza enfocado en piernas y glúteos', 'FUERZA'),
+('Peso muerto', 'Ejercicio de fuerza para la espalda, glúteos y piernas', 'FUERZA'),
+('Circuito de alta intensidad', 'Entrenamiento que mejora resistencia y fuerza', 'RESISTENCIA'),
+('Flexibilidad de piernas', 'Ejercicio que mejora la flexibilidad en piernas', 'MOVILIDAD'),
+('Tai Chi', 'Práctica de movimientos lentos para mejorar movilidad y equilibrio', 'MOVILIDAD'),
+('Estocadas', 'Ejercicio enfocado en fortalecer piernas y glúteos', 'FUERZA'),
+('Nado mariposa', 'Estilo de natación que mejora fuerza y resistencia', 'RESISTENCIA'),
+('Carrera de 5km', 'Carrera de distancia moderada para mejorar la resistencia', 'RESISTENCIA'),
+('Sprint en bicicleta', 'Ejercicio de velocidad y potencia realizado en bicicleta', 'VELOCIDAD'),
+('Carrera de obstáculos', 'Ejercicio que combina resistencia y agilidad', 'RESISTENCIA');
+
+
 
 -- Para resetear los datos de clientes y trabajadores manteniendo sus ID
 SET FOREIGN_KEY_CHECKS = 0;
@@ -409,7 +421,27 @@ VALUES	('Juan Pérez', 'juan.perez@example.com', 'contraseña1', NULL, 70.5, 170
 		('María García', 'maria.garcia@example.com', 'contraseña2', NULL, 65.0, 165.0, 'Pollen'),
 		('Pedro Martínez', 'pedro.martinez@example.com', 'contraseña3', NULL, 75.8, 180.0, 'Gluten'),
 		('Laura Rodríguez', 'laura.rodriguez@example.com', 'contraseña4', NULL, 80.0, 175.0, 'Lactosa'),
-		('Ana López', 'ana.lopez@example.com', 'contraseña5', NULL, 62.3, 160.0, 'Ninguna');
+		('Ana López', 'ana.lopez@example.com', 'contraseña5', NULL, 62.3, 160.0, 'Ninguna'),
+		('Carlos Fernández', 'carlos.fernandez@example.com', 'pass123', NULL, 70.5, 1.75, 'Ninguna'),
+		('Ana Gómez', 'ana.gomez@example.com', 'pass123', NULL, 65.0, 1.68, 'Gluten'),
+		('Luis Martínez', 'luis.martinez@example.com', 'pass123', NULL, 80.3, 1.82, 'Frutos de cáscara'),
+		('María López', 'maria.lopez@example.com', 'pass123', NULL, 90.7, 1.90, 'Crustáceos'),
+		('Elena Sánchez', 'elena.sanchez@example.com', 'pass123', NULL, 68.2, 1.72, 'Huevo'),
+		('Diego Torres', 'diego.torres@example.com', 'pass123', NULL, 72.5, 1.80, 'Mostaza'),
+		('Laura Díaz', 'laura.diaz@example.com', 'pass123', NULL, 85.0, 1.85, 'Pescado'),
+		('Pablo Jiménez', 'pablo.jimenez@example.com', 'pass123', NULL, 60.0, 1.60, 'Sésamo'),
+		('Marta Ramírez', 'marta.ramirez@example.com', 'pass123', NULL, 78.9, 1.78, 'Cacahuetes'),
+		('Jorge Morales', 'jorge.morales@example.com', 'pass123', NULL, 82.0, 1.75, 'Ninguna'),
+		('Sara Ruiz', 'sara.ruiz@example.com', 'pass123', NULL, 68.4, 1.65, 'Gluten'),
+		('Alberto Navarro', 'alberto.navarro@example.com', 'pass123', NULL, 77.3, 1.79, 'Frutos de cáscara'),
+		('Sofía Molina', 'sofia.molina@example.com', 'pass123', NULL, 72.1, 1.68, 'Crustáceos'),
+		('Daniel Ortega', 'daniel.ortega@example.com', 'pass123', NULL, 65.8, 1.70, 'Apio'),
+		('Paula Romero', 'paula.romero@example.com', 'pass123', NULL, 90.2, 1.85, 'Huevo'),
+		('Hugo García', 'hugo.garcia@example.com', 'pass123', NULL, 62.4, 1.60, 'Mostaza'),
+		('Irene Castro', 'irene.castro@example.com', 'pass123', NULL, 68.9, 1.78, 'Pescado'),
+		('Manuel Rubio', 'manuel.rubio@example.com', 'pass123', NULL, 80.0, 1.82, 'Sésamo'),
+		('Clara Serrano', 'clara.serrano@example.com', 'pass123', NULL, 75.5, 1.77, 'Cacahuetes');
+
 
 -- Añadir trabajadores
 -- Dietistas
@@ -429,6 +461,39 @@ INSERT INTO taw12.Trabajador (nombre, email, contrasenya, tipo, imagenPerfil)
 VALUES 	('Elena Martínez', 'elena.martinez@example.com', 'contraseña7', 'ENTRENADOR CROSSTRAINING', NULL),
 		('Mario Gómez', 'mario.gomez@example.com', 'contraseña8', 'ENTRENADOR CROSSTRAINING', NULL),
 		('Sara Fernández', 'sara.fernandez@example.com', 'contraseña9', 'ENTRENADOR CROSSTRAINING', NULL);
+--Más trabjadores
+INSERT INTO `taw12`.`Trabajador` (`nombre`, `email`, `contrasenya`, `tipo`) VALUES
+('Pedro Álvarez', 'pedro.alvarez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Lucía Torres', 'lucia.torres@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Roberto García', 'roberto.garcia@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Carmen Martín', 'carmen.martin@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Andrés Jiménez', 'andres.jimenez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Patricia González', 'patricia.gonzalez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Francisco López', 'francisco.lopez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Laura Fernández', 'laura.fernandez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('David Rodríguez', 'david.rodriguez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Marta Sánchez', 'marta.sanchez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Raúl Pérez', 'raul.perez@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Carolina Morales', 'carolina.morales@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Fernando Díaz', 'fernando.diaz@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Sara Ruiz', 'sara.ruiz@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Luis Gómez', 'luis.gomez@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Natalia Romero', 'natalia.romero@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('José Navarro', 'jose.navarro@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Elena Castro', 'elena.castro@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Víctor Serrano', 'victor.serrano@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Cristina Rubio', 'cristina.rubio@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Álvaro Fernández', 'alvaro.fernandez@example.com', 'pass123', 'DIETISTA'),
+('Beatriz Torres', 'beatriz.torres@example.com', 'pass123', 'DIETISTA'),
+('Gonzalo Jiménez', 'gonzalo.jimenez@example.com', 'pass123', 'DIETISTA'),
+('Mónica García', 'monica.garcia@example.com', 'pass123', 'DIETISTA'),
+('Diego Martín', 'diego.martin@example.com', 'pass123', 'DIETISTA'),
+('Claudia Sánchez', 'claudia.sanchez@example.com', 'pass123', 'DIETISTA'),
+('Adrián López', 'adrian.lopez@example.com', 'pass123', 'DIETISTA'),
+('María Rodríguez', 'maria.rodriguez@example.com', 'pass123', 'DIETISTA'),
+('Jorge Pérez', 'jorge.perez@example.com', 'pass123', 'DIETISTA'),
+('Alicia Morales', 'alicia.morales@example.com', 'pass123', 'DIETISTA');
+
         
 -- Relaciones Cliente-Entrenador
 INSERT INTO taw12.cliente_trabajador (idcliente, idtrabajador)
@@ -451,6 +516,22 @@ VALUES
     -- Cliente Ana López (idCliente = 5) con trabajadores
     (5, 6), -- Ana López con Carlos Pérez (Entrenador de Fuerza)
     (5, 7); -- Ana López con Elena Martínez (Entrenador Crosstraining)
+    
+    -- Cliente Carlos Fernández (idCliente = 6) con más entrenadores
+    (6, 7),   -- Carlos Fernández con Elena Martínez (Entrenador Crosstraining)
+    (6, 10),  -- Carlos Fernández con Marta Sánchez (Entrenador de Fuerza)
+    
+    -- Cliente Ana Gómez (idCliente = 7) con más entrenadores
+    (7, 9),   -- Ana Gómez con Sara Fernández (Entrenador Crosstraining)
+    (7, 10),  -- Ana Gómez con Marta Sánchez (Entrenador de Fuerza)
+    
+    -- Cliente Luis Martínez (idCliente = 8) con más entrenadores
+    (8, 6),   -- Luis Martínez con Carlos Pérez (Entrenador de Fuerza)
+    (8, 7),   -- Luis Martínez con Elena Martínez (Entrenador Crosstraining)
+    
+    -- Cliente María López (idCliente = 9) con más entrenadores
+    (9, 8),   -- María López con Mario Gómez (Entrenador de Fuerza)
+    (9, 9);   -- María López con Sara Fernández (Entrenador Crosstraining)
 
 INSERT INTO taw12.rutina (idrutina, nombre, idcliente, idtrabajador) VALUES (1, 'nueva', 3, 7);
 INSERT INTO taw12.rutina (idrutina, nombre, idcliente, idtrabajador) VALUES (5, 'AnaRutina', 5, 7);
@@ -470,3 +551,51 @@ INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, pes
 INSERT INTO taw12.seguimientoobjetivos (idseguimiento, idrutina, idcliente, fecha, realizado, pesorealizado, repeticionesrealizadas, seriesrealizadas, observaciones, pesoobjetivo, seriesobjetivo, repeticionesobjetivo, nombreejercicio) VALUES (1, 1, 3, '2024-06-19', 1, '30 metros', 2, 1, 'Me sentia muy cansado del dia anterior', '30 m', 2, 5, 'Sprints');
 INSERT INTO taw12.seguimientoobjetivos (idseguimiento, idrutina, idcliente, fecha, realizado, pesorealizado, repeticionesrealizadas, seriesrealizadas, observaciones, pesoobjetivo, seriesobjetivo, repeticionesobjetivo, nombreejercicio) VALUES (2, 1, 3, '2024-06-18', 1, null, 1, 2, null, null, 2, 2, 'Correr 100m');
 
+INSERT INTO taw12.administrador (email, contrasenya) VALUES ('admin@gmail.com', 'admin');
+
+INSERT INTO taw12.dieta (iddieta,nombre,idcliente) VALUES (59,'Dieta para Juan',1);
+INSERT INTO taw12.dieta (iddieta,nombre,idcliente) VALUES (60,'Dieta 2 para Juan',1);
+
+
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (1,1,59,0,0,0,'Lunes','Desayuno');
+INSERT INTO taw12.platodieta (`idplatdietadietaodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (1,4,60,0,0,0,'Lunes','Desayuno');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (2,2,59,0,0,0,'Miercoles','Desayuno');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (2,5,60,0,0,0,'Miercoles','Desayuno');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (3,5,60,0,0,0,'Viernes','Desayuno');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (3,8,59,0,0,0,'Jueves','Desayuno');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (4,1,59,0,0,0,'Viernes','Desayuno');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (4,9,60,0,0,0,'Sabado','Desayuno');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (5,5,60,0,0,0,'Martes','Mediodia');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (5,11,59,0,0,0,'Sabado','Desayuno');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (6,5,60,0,0,0,'Miercoles','Mediodia');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (6,7,59,0,0,0,'Martes','Mediodia');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (7,6,59,0,0,0,'Viernes','Mediodia');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (7,8,60,0,0,0,'Viernes','Mediodia');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (8,6,60,0,0,0,'Domingo','Mediodia');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (8,7,59,0,0,0,'Lunes','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (9,5,60,0,0,0,'Lunes','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (9,9,59,0,0,0,'Martes','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (10,7,60,0,0,0,'Martes','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (10,10,59,0,0,0,'Miercoles','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (11,5,59,0,0,0,'Jueves','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (11,7,60,0,0,0,'Miercoles','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (12,5,60,0,0,0,'Jueves','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (12,6,59,0,0,0,'Viernes','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (13,8,60,0,0,0,'Viernes','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (13,9,59,0,0,0,'Sabado','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (14,7,59,0,0,0,'Domingo','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (14,8,60,0,0,0,'Domingo','Almuerzo');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (15,5,60,0,0,0,'Martes','Merienda');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (15,6,59,0,0,0,'Miercoles','Merienda');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (16,6,60,0,0,0,'Jueves','Merienda');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (16,8,59,0,0,0,'Domingo','Merienda');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (17,6,59,0,0,0,'Lunes','Cena');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (17,6,60,0,0,0,'Sabado','Merienda');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (18,7,60,0,0,0,'Lunes','Cena');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (18,10,59,0,0,0,'Martes','Cena');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (19,8,60,0,0,0,'Jueves','Cena');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (19,12,59,0,0,0,'Jueves','Cena');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (20,6,59,0,0,0,'Sabado','Cena');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (20,6,60,0,0,0,'Sabado','Cena');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (21,7,60,0,0,0,'Domingo','Cena');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (21,13,59,0,0,0,'Domingo','Cena');

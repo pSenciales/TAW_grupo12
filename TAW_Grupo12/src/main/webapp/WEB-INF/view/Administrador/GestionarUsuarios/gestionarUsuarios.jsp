@@ -1,6 +1,6 @@
 <%
     /**
-     * @author María Victoria Huesca
+     * @author María Victoria Huesca Peláez
      */
 %>
 
@@ -28,7 +28,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Insertar cabeceraAdministrador.jsp -->
     <title>Asignar Clientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -50,8 +49,8 @@
             margin-top: 1.5vh;
             margin-left: auto;
             margin-right: auto;
-            width: 20vh;
-            height: 20vh;
+            width: 50%; /* adjust as needed */
+            height: auto; /* maintain aspect ratio */
             border-radius: 50%;
             object-fit: cover;
         }
@@ -60,7 +59,7 @@
             margin-bottom: 20px;
             border: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            height: 200px;
+            height: auto;
             overflow-y: auto;
         }
 
@@ -90,17 +89,22 @@
 
     </style>
 </head>
+
 <body>
 <header>
     <jsp:include page="../cabeceraAdministrador.jsp"/>
 </header>
 
 <div class="container-gestionarUsuarios">
+
     <% if (request.getAttribute("errorGestionarUsuario") != null) { %>
     <div class="alert alert-danger">
         <%= request.getAttribute("errorGestionarUsuario") %>
     </div>
     <% } %>
+
+<!----------------------------- FILTRO DE USUARIOS POR NOMBRE, CORREO O TIPO DE USUARIO ------------------------------->
+
     <form:form modelAttribute="filtroUsuarios" method="post" action="/administrador/filtrarGestionarUsuarios">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">
@@ -118,6 +122,8 @@
                 </svg>
             </button>
         </div>
+
+<!----------------------------MODAL QUE MUESTRA LOS FILTROS PARA TIPO USUARIO------------------------------------------>
 
         <div class="modal fade" id="filtrosModal" tabindex="-1" aria-labelledby="filtrosModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -146,14 +152,16 @@
                 </div>
             </div>
         </div>
-
     </form:form>
+
+<!-------------------------------------------- LISTADO DE USUARIOS ---------------------------------------------------->
     <div class="row">
         <% if (clientesDTO != null && !clientesDTO.isEmpty()) {
             for (ClienteDTO clienteDTO : clientesDTO) { %>
         <div class="col-md-4 col-sm-6">
-            <div class="card d-flex flex-column" style="height: 25rem;">
-                <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"  alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
+            <div class="card d-flex flex-column">
+                <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
+                     alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
                 <div class="card-body text-center flex-grow-1">
                     <h5 class="card-title mt-3 mb-3"><%=clienteDTO.getNombre()%>
                     </h5>
@@ -164,7 +172,8 @@
                        data-bs-target="#editarClienteModal<%=clienteDTO.getIdcliente()%>"
                        data-cliente-id="<%=clienteDTO.getIdcliente()%>" id="modalCliente<%=clienteDTO.getIdcliente()%>">Gestionar</a>
 
-                    <!-- Modal para editar los datos del cliente -->
+<!---------------------------- MODAL QUE MUESTRA FORMULARIO PARA EDITAR UN CLIENTE ------------------------------------>
+
                     <div class="modal fade" id="editarClienteModal<%=clienteDTO.getIdcliente()%>" tabindex="-1"
                          aria-labelledby="editarClienteModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -175,16 +184,18 @@
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body ps-4 pt-3" style="text-align: start">
-                                    <!-- Aquí iría tu formulario para editar los datos del cliente -->
                                     <form:form action="/administrador/guardarCliente" modelAttribute="clienteModel"
                                                method="post" enctype="multipart/form-data">
                                         <form:hidden path="idcliente" value="<%= clienteDTO.getIdcliente() %>"/>
+
                                         <img src="<%=clienteDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + clienteDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
                                              alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
+
                                         <div class="form-group">
                                             <label for="imagenperfil" class="form-label">Imagen de perfil: </label>
                                             <form:input type="file" path="imagenperfilFile" id="imagenperfil"/>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="nombre" class="form-label">Nombre: </label>
                                             <form:input class="form-control" type="text"
@@ -192,6 +203,7 @@
                                                         required="true"
                                                         id="nombre" maxlength="45"/>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="email" class="form-label">Email: </label>
                                             <form:input class="form-control" type="email"
@@ -199,33 +211,42 @@
                                                         required="true"
                                                         id="email" maxlength="45"/>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="contrasenya" class="form-label">Contraseña: </label>
                                             <form:input class="form-control" type="password"
                                                         value="<%= clienteDTO.getContrasenya() %>" path="contrasenya"
                                                         required="true" id="contrasenya" maxlength="45"/>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="altura" class="form-label">Altura: </label>
                                             <form:input class="form-control" type="number"
                                                         value="<%= clienteDTO.getAltura()%>" path="altura" id="altura"/>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="peso" class="form-label">Peso: </label>
                                             <form:input class="form-control" type="number"
                                                         value="<%= clienteDTO.getPeso()%>" path="peso" id="peso"/>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="alergias" class="form-label">Alergias: </label>
                                             <form:textarea path="alergias" class="form-control" id="alergias"
                                                            placeholder="<%= clienteDTO.getAlergias()%>"
                                                            maxlength="150"/>
                                         </div>
+
                                         <div class="d-flex justify-content-center mt-3">
                                             <form:button class="btn btn-primary">Guardar cambios</form:button>
                                         </div>
+
                                     </form:form>
                                 </div>
+
+<!------------------------------------------BOTÓN PARA ELIMINAR CLIENTE------------------------------------------------>
+
                                 <div class="modal-footer d-flex justify-content-center">
                                     <form action="/administrador/eliminarCliente" method="post">
                                         <input type="hidden" value="<%= clienteDTO.getIdcliente() %>" name="idCliente"/>
@@ -235,6 +256,7 @@
                                         </button>
                                     </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -243,12 +265,18 @@
         </div>
         <% }
         } %>
+
+<!-------------------------------------------- LISTADO DE TRABAJADORES------------------------------------------------->
+
         <% if (trabajadoresDTO != null && !trabajadoresDTO.isEmpty()) {
             for (TrabajadorDTO trabajadorDTO : trabajadoresDTO) { %>
+
         <div class="col-md-4 col-sm-6">
-            <div class="card d-flex flex-column" style="height: 25rem;">
+            <div class="card d-flex flex-column">
+
                 <img src="<%=trabajadorDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + trabajadorDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
-                     alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios"">
+                     alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
+
                 <div class="card-body text-center flex-grow-1">
                     <h5 class="card-title mt-3 mb-3"><%=trabajadorDTO.getNombre()%>
                     </h5>
@@ -262,7 +290,8 @@
                        data-bs-target="#editarTrabajadorModal<%=trabajadorDTO.getIdtrabajador()%>"
                        id="modalTrabajador<%=trabajadorDTO.getIdtrabajador()%>">Gestionar</a>
 
-                    <!-- Modal para editar los datos del trabajador -->
+<!------------------------------MODAL QUE MUESTRA FORMULARIO PARA EDITAR TRABAJADOR------------------------------------>
+
                     <div class="modal fade" id="editarTrabajadorModal<%=trabajadorDTO.getIdtrabajador()%>" tabindex="-1"
                          aria-labelledby="editarTrabajadorModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -273,25 +302,31 @@
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body ps-4 pt-3" style="text-align: start">
+
                                     <form:form action="/administrador/guardarTrabajador"
                                                modelAttribute="trabajadorModel"
                                                method="post" enctype="multipart/form-data">
+
                                         <form:hidden path="idtrabajador"
                                                      value="<%= trabajadorDTO.getIdtrabajador() %>"/>
+
                                         <img src="<%=trabajadorDTO.getImagenBase64() != null ? "data:image/jpeg;base64," + trabajadorDTO.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
                                              alt="Imagen de perfil" class="imagenperfil-gestionarUsuarios">
+
                                         <div class="form-group">
                                             <label for="imagenperfilTrabajador" class="form-label">Imagen de
                                                 perfil: </label>
                                             <form:input type="file" path="imagenperfilFile"
                                                         id="imagenperfilTrabajador"/>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="nombre" class="form-label">Nombre: </label>
                                             <form:input class="form-control" type="text"
                                                         value="<%= trabajadorDTO.getNombre() %>" path="nombre"
                                                         required="true" id="nombre" maxlength="45"/>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="email" class="form-label">Email: </label>
                                             <form:input class="form-control" type="email"
@@ -299,17 +334,23 @@
                                                         required="true"
                                                         id="email" maxlength="45"/>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="contrasenya" class="form-label">Contraseña: </label>
                                             <form:input class="form-control" type="password"
                                                         value="<%= trabajadorDTO.getContrasenya() %>" path="contrasenya"
                                                         required="true" id="contrasenya" maxlength="45"/>
                                         </div>
+
                                         <div class="d-flex justify-content-center mt-3">
                                             <form:button class="btn btn-primary">Guardar cambios</form:button>
                                         </div>
+
                                     </form:form>
                                 </div>
+
+<!-------------------------------------BOTON PARA ELIMINAR TRABAJADOR-------------------------------------------------->
+
                                 <div class="modal-footer d-flex justify-content-center">
                                     <form action="/administrador/eliminarTrabajador" method="post">
                                         <input type="hidden" value="<%= trabajadorDTO.getIdtrabajador() %>"
@@ -320,6 +361,7 @@
                                         </button>
                                     </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -330,6 +372,7 @@
         } %>
     </div>
 </div>
+
 <script>
     document.getElementById('filtros').addEventListener('click', function () {
         var myModal = new bootstrap.Modal(document.getElementById('filtrosModal'), {});
@@ -351,6 +394,7 @@
         });
     });
 </script>
+
 </body>
 </html>
 

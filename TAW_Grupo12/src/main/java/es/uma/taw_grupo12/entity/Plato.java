@@ -5,6 +5,7 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import es.uma.taw_grupo12.dto.DTO;
@@ -149,6 +150,13 @@ public class Plato implements Serializable, DTO<PlatoDTO> {
         dto.setAlergenos(this.alergenos);
         dto.setVideo(this.video);
         dto.setDescripcion(this.descripcion);
+        List<Integer> platoDietaList = new ArrayList<>();
+        if (this.platoDietaList != null) {
+            for (PlatoDieta platoDieta : this.platoDietaList) {
+                platoDietaList.add(platoDieta.getPlatoDietaPK().getIdplatodieta());
+            }
+        }
+        dto.setPlatoDietaList(platoDietaList);
         return dto;
     }
 }

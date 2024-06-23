@@ -1,13 +1,21 @@
+/**
+ * @author María Victoria Huesca Peláez
+ * @author Pablo Senciales
+ */
+
 package es.uma.taw_grupo12.dao;
 
 import es.uma.taw_grupo12.entity.EjercicioRutina;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface EjercicioRutinaRepository extends JpaRepository<EjercicioRutina, Integer> {
+
+    //@Pablo
     @Query("select er.ejercicioRutinaPK from EjercicioRutina er order by er.ejercicioRutinaPK")
     public int findOrderedById();
 
@@ -23,4 +31,10 @@ public interface EjercicioRutinaRepository extends JpaRepository<EjercicioRutina
 
     @Query("select er from EjercicioRutina er where er.rutina.idrutina = ?1 and er.diassemana = ?2 and er.orden > ?3")
     List<EjercicioRutina> findMayoresOrden(int rutina, String diassemana, int orden);
+    //@Pablo
+
+    //@Victoria
+    @Query("SELECT er FROM EjercicioRutina er WHERE er.ejercicio.idejercicio = :idEjercicio")
+    List<EjercicioRutina> findEjerciciosRutina(@Param("idEjercicio")Integer idEjercicio);
+    //@Victoria
 }

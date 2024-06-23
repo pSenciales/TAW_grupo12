@@ -9,6 +9,10 @@
     ClienteDTO cliente = (ClienteDTO) request.getAttribute("cliente");
     List<SeguimientoDietaDTO> seguimientos = (List<SeguimientoDietaDTO>) request.getAttribute("seguimientos");
 %>
+
+<%--Created by IntelliJ IDEA.
+User: Chen Chen Longxiang
+--%>
 <!DOCTYPE html>
 <html lang="es">
 <head>

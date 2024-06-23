@@ -1,3 +1,7 @@
+/**
+ * @author Chen Chen Longxiang
+ */
+
 package es.uma.taw_grupo12.ui.Dietista;
 
 public class FiltroDietas {

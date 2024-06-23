@@ -1,3 +1,8 @@
+/**
+ * @author Ignacio Morillas Rossell (1/3)
+ * @author 	PABLO SENCIALES DE LA HIGUERA (2/3)
+ */
+
 package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dao.ClienteRepository;

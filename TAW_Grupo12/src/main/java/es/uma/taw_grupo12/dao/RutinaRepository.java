@@ -1,5 +1,6 @@
-// @Author Pablo
-
+/**
+ * @author 	PABLO SENCIALES DE LA HIGUERA (1/12
+ */
 package es.uma.taw_grupo12.dao;
 
 import es.uma.taw_grupo12.entity.Rutina;

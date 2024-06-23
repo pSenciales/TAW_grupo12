@@ -107,6 +107,7 @@ public class ClienteService {
     }
     //@Victoria
 
+    //@Pablo
     public List<ClienteDTO> findByTrabajador(Integer idtrabajador) {
         List<ClienteDTO> clientesDTO = new ArrayList<>();
         List<Cliente> cliente = clienteRepository.findByTrabajador(idtrabajador);

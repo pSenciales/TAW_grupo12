@@ -1,5 +1,6 @@
-// @Author Pablo Senciales de la Higuera
-
+/**
+ * @author 	PABLO SENCIALES DE LA HIGUERA (1/12
+ */
 package es.uma.taw_grupo12.controller;
 
 import es.uma.taw_grupo12.dto.*;

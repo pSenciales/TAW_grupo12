@@ -2,7 +2,8 @@
  * @author María Victoria Huesca Peláez (7/12)
  * @author Ignacio Morillas Rossell (1/12)
  * @author Guillermo Pichaco Panal (3/12)
- * @author 	PABLO SENCIALES DE LA HIGUERA (1/12)
+ * @author 	PABLO SENCIALES DE LA HIGUERA (1/12
+ * @author Chen Chen Longxiang
  */
 
 package es.uma.taw_grupo12.service;

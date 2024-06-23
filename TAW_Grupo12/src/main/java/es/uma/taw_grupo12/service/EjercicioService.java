@@ -86,6 +86,7 @@ public class EjercicioService {
         return ejerciciosDTO;
     }
 
+    //Nacho
     public EjercicioDTO findById(Integer id) {
         Ejercicio ejercicio = ejercicioRepository.findById(id).orElse(null);
         assert (ejercicio != null);

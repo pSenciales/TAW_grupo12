@@ -1,3 +1,8 @@
+/**
+ * @author Chen Chen Longxiang (1/3)
+ * @author Ignacio morillas rosell (2/3)
+ */
+
 package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dao.ClienteRepository;

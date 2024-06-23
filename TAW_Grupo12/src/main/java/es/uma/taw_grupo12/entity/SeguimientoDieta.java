@@ -49,8 +49,7 @@ public class SeguimientoDieta implements Serializable , DTO<SeguimientoDietaDTO>
     @JoinColumn(name = "iddieta", referencedColumnName = "iddieta")
     @ManyToOne(optional = false)
     private Dieta dieta;
-    @Getter
-    @JoinColumn(name = "idcliente", referencedColumnName = "idcliente", insertable = false, updatable = false)
+    @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")
     @ManyToOne(optional = false)
     private Cliente cliente;
 

@@ -1,5 +1,6 @@
-
-
+/**
+ * @author Ignacio Morillas Rosell
+ */
 
 package es.uma.taw_grupo12.controller.cliente;
 
@@ -9,10 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +30,7 @@ public class DietaController {
     PlatoService platoService;
 
     @GetMapping("/")
-    public String doSeleccionarRutina(HttpSession session, Model model) {
+    public String doSeleccionarDieta(HttpSession session, Model model) {
         ClienteDTO c = (ClienteDTO) session.getAttribute("usuario");
         if(c == null)
             return "redirect:/cliente/error";
@@ -46,7 +44,7 @@ public class DietaController {
     }
 
     @PostMapping("/")
-    public String doMostrarRutina(HttpSession session, @RequestParam("rutinaId") Integer id,
+    public String doMostrarDieta(HttpSession session, @RequestParam("rutinaId") Integer id,
                                   @RequestParam("dia") String dia, Model model) {
         ClienteDTO c = (ClienteDTO) session.getAttribute("usuario");
         if(c == null)
@@ -55,7 +53,7 @@ public class DietaController {
         List<PlatoDTO> platoDTOList = new ArrayList<>();
         List<PlatoDietaDTO> platoDietaDTOList = new ArrayList<>();
 
-        for(PlatoDietaDTO platoDietaDTO : platoDietaService.findAllByRutinaId(id)) {
+        for(PlatoDietaDTO platoDietaDTO : platoDietaService.findAllByDietaId(id)) {
             if(platoDietaDTO.getDiasSemana() != null && platoDietaDTO.getDiasSemana().equalsIgnoreCase(dia)) {
                 platoDietaDTOList.add(platoDietaDTO);
                 platoDTOList.add(platoService.findById(platoDietaDTO.getIdPlato()));
@@ -103,7 +101,7 @@ public class DietaController {
         List<PlatoDTO> platoDTOList = new ArrayList<>();
         List<PlatoDietaDTO> platoDietaDTOList = new ArrayList<>();
 
-        for(PlatoDietaDTO platoDietaDTO : platoDietaService.findAllByRutinaId(idDieta)) {
+        for(PlatoDietaDTO platoDietaDTO : platoDietaService.findAllByDietaId(idDieta)) {
             if(platoDietaDTO.getDiasSemana() != null && platoDietaDTO.getDiasSemana().equalsIgnoreCase(dia)) {
                 platoDietaDTOList.add(platoDietaDTO);
                 platoDTOList.add(platoService.findById(platoDietaDTO.getIdPlato()));
@@ -118,5 +116,51 @@ public class DietaController {
         model.addAttribute("listaSeguimientos",
                 seguimientoDietaService.findByIdClienteAndIdDieta(c.getIdcliente(), idDieta));
         return "Cliente/detallesDieta";
+    }
+
+    @GetMapping("/buscar")
+    public String doBuscar(HttpSession session, Model model) {
+        ClienteDTO c = (ClienteDTO) session.getAttribute("usuario");
+        if(c == null)
+            return "redirect:/cliente/error";
+
+        model.addAttribute("dietas", c.getDietaList());
+        model.addAttribute("busqueda", null);
+        model.addAttribute("dietasEncontradas", null);
+
+        return "Cliente/buscarDieta";
+    }
+    @PostMapping("/buscar")
+    public String doBuscar(@RequestParam("nombre") String nombre, Model model, HttpSession session) {
+        ClienteDTO c = (ClienteDTO) session.getAttribute("usuario");
+        if(c == null)
+            return "redirect:/cliente/error";
+
+        model.addAttribute("dietas", c.getDietaList());
+        model.addAttribute("dietasEncontradas", dietaService.findByNameAndClienteID(nombre, c.getIdcliente()));
+        model.addAttribute("busqueda", nombre);
+
+        return "Cliente/buscarDieta";
+    }
+
+    @GetMapping("/dietaSeleccionada/{id}")
+    public String doMostrarPlatos(@PathVariable("id") Integer id, Model model, HttpSession session) {
+        ClienteDTO c = (ClienteDTO) session.getAttribute("usuario");
+        if(c == null)
+            return "redirect:/cliente/error";
+
+        List<PlatoDTO> platoDTOList = new ArrayList<>();
+        List<PlatoDietaDTO> platoDietaDTOList = platoDietaService.findAllByDietaId(id);
+
+        for(PlatoDietaDTO platoDietaDTO : platoDietaDTOList) {
+            platoDTOList.add(platoService.findById(platoDietaDTO.getIdPlato()));
+        }
+
+        model.addAttribute("dietaSel", dietaService.findDietaById(id).getNombre());
+        model.addAttribute("listaPlatosDieta", platoDietaDTOList);
+        model.addAttribute("listaPlatos", platoDTOList);
+        model.addAttribute("listaSeguimientos",
+                seguimientoDietaService.findByIdClienteAndIdDieta(c.getIdcliente(), id));
+        return "Cliente/mostrarResultadosDieta";
     }
 }

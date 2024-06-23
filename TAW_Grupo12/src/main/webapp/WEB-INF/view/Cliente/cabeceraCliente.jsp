@@ -1,3 +1,9 @@
+<%
+    /**
+     * @author Ignacio Morillas Rosell
+     */
+%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -14,9 +20,9 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/cliente/perfil">Mi perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Buscar rutinas</a></li>
+                        <li><a class="dropdown-item" href="/cliente/rutinas/buscar">Buscar rutinas</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Buscar dietas</a></li>
+                        <li><a class="dropdown-item" href="/cliente/dietas/buscar">Buscar dietas</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

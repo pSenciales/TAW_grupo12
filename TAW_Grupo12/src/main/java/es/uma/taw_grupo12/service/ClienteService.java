@@ -1,6 +1,6 @@
 /**
  * @author María Victoria Huesca Peláez (6/8)
- * @author Ignacio Morillas Rossell (1/8)
+ * @author Ignacio Morillas Rosell (1/8)
  * @author 	PABLO SENCIALES DE LA HIGUERA (1/8)
  */
 
@@ -118,6 +118,7 @@ public class ClienteService {
         return clientesDTO;
     }
 
+    //Nacho
     public void actualizarCliente(ClienteDTO clienteDTO) {
         Cliente cliente = clienteRepository.findById(clienteDTO.getIdcliente()).orElse(null);
 

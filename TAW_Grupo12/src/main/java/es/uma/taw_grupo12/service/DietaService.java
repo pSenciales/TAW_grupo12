@@ -1,5 +1,5 @@
 /**
- * @author Ignacio Morillas Rossell (1/4)
+ * @author Ignacio Morillas Rosell (1/4)
  * @author Chen Chen Longxiang (3/4)
  */
 
@@ -11,6 +11,7 @@ import es.uma.taw_grupo12.dao.PlatodietaRepository;
 import es.uma.taw_grupo12.dao.PlatoRepository;
 import es.uma.taw_grupo12.dto.DietaDTO;
 import es.uma.taw_grupo12.dto.PlatoDietaDTO;
+import es.uma.taw_grupo12.dto.RutinaDTO;
 import es.uma.taw_grupo12.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -126,5 +127,16 @@ public class DietaService {
             lista.add(dietaDTO);
         }
         return lista;
+    }
+
+    //Nacho
+    public List<DietaDTO> findByNameAndClienteID(String nombre, Integer idCliente) {
+        List<Dieta> d = dietaRepository.findByNombreAndClienteID(nombre, idCliente);
+        List<DietaDTO> listaDTO = new ArrayList<>();
+        for(Dieta dieta : d){
+            listaDTO.add(dieta.toDTO());
+        }
+
+        return listaDTO;
     }
 }

@@ -1,5 +1,5 @@
 /**
- * @author 	PABLO SENCIALES DE LA HIGUERA (1/12)
+ * @author 	PABLO SENCIALES DE LA HIGUERA
  */
 package es.uma.taw_grupo12.service;
 

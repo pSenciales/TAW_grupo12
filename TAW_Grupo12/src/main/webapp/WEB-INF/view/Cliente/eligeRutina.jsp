@@ -1,3 +1,9 @@
+<%
+    /**
+     * @author Ignacio Morillas Rosell
+     */
+%>
+
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw_grupo12.entity.Rutina" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>

@@ -1,5 +1,6 @@
 /**
- * @author 	PABLO SENCIALES DE LA HIGUERA (1/12)
+ * @author 	PABLO SENCIALES DE LA HIGUERA (1/7)
+ * @author Ignacio morillas rosell (1/7)
  */
 
 package es.uma.taw_grupo12.service;
@@ -93,6 +94,17 @@ public class RutinaService {
         for(Rutina rutina : rutinas){
             listaDTO.add(rutina.toDTO());
         }
+        return listaDTO;
+    }
+
+    //Nacho
+    public List<RutinaDTO> findByName(String nombre, Integer idCliente) {
+        List<Rutina> r = rutinaRepository.findByNombreAndClienteID(nombre, idCliente);
+        List<RutinaDTO> listaDTO = new ArrayList<>();
+        for(Rutina rutina : r){
+            listaDTO.add(rutina.toDTO());
+        }
+
         return listaDTO;
     }
 }

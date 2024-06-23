@@ -1,5 +1,6 @@
 /**
- * @author 	PABLO SENCIALES DE LA HIGUERA (1/12
+ * @author 	PABLO SENCIALES DE LA HIGUERA (4/5)
+ * @author  Ignacio morillas rosell (1/5)
  */
 package es.uma.taw_grupo12.dao;
 
@@ -15,6 +16,10 @@ public interface RutinaRepository extends JpaRepository<Rutina, Integer> {
     List<Rutina> findAllByTrabajador(Integer idtrabajador);
     @Query("select r from Rutina r where r.nombre like concat('%',?1,'%') and r.idtrabajador.idtrabajador = ?2")
     List<Rutina> findByFiltroNombre(String nombre,  Integer idTrabajador);
+
+    //Nacho
+    @Query("select r from Rutina r where r.nombre like concat('%',?1,'%') and r.idcliente.idcliente = ?2")
+    List<Rutina> findByNombreAndClienteID(String nombre, Integer idCliente);
     @Query("select r from Rutina r where r.nombre like concat('%',?1,'%')  and r.idcliente.idcliente = ?2 and r.idtrabajador.idtrabajador = ?3")
     List<Rutina> findByFiltroNombreAndId(String nombre, String idcliente, Integer idTrabajador);
 

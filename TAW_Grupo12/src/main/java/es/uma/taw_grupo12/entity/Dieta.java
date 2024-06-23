@@ -5,8 +5,10 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import es.uma.taw_grupo12.dto.DietaDTO;
 import jakarta.persistence.*;
 
 /**
@@ -108,6 +110,23 @@ public class Dieta implements Serializable {
     @Override
     public String toString() {
         return "es.taw12.app.entity.Dieta[ iddieta=" + iddieta + " ]";
+    }
+
+    //Nacho
+    public DietaDTO toDTO() {
+        DietaDTO dieta = new DietaDTO();
+        List<Integer> list = new ArrayList<>();
+
+        if(this.get() != null) {
+            for (EjercicioRutina re : this.ejercicioRutinaList)
+                list.add(re.getEjercicioRutinaPK());
+        }
+        rutina.setEjercicioRutinaList(list);
+        rutina.setIdcliente(this.idcliente.getIdcliente());
+        rutina.setNombre(this.nombre);
+        rutina.setIdrutina(this.idrutina);
+        rutina.setIdtrabajador(this.idtrabajador.getIdtrabajador());
+        return rutina;
     }
     
 }

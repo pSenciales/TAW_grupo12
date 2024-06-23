@@ -146,6 +146,14 @@ public class SeguimientoObjetivos implements Serializable, DTO<SeguimientoObjeti
         this.rutina = ejercicioRutina;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public String getNombreejercicio() {return nombreejercicio;}
 
     public void setNombreejercicio(String nombreejercicio) {this.nombreejercicio = nombreejercicio;}

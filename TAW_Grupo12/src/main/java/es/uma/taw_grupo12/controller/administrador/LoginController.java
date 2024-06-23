@@ -136,8 +136,7 @@ public class LoginController extends BaseController {
         if(clienteDTO != null) {
             session.setAttribute("usuario", clienteDTO);
             session.setAttribute("tipo", "cliente");
-            //strTo = "redirect:/Cliente/inicio";
-            return "/Cliente/inicioCliente";
+            return "redirect:/cliente/";
         }
 
         //OPCIÓN: AÑADIR QUE SE MUESTREN DISTINTOS MENSAJES DE ERROR

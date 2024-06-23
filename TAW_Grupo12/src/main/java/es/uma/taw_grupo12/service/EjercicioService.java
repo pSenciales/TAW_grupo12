@@ -2,8 +2,10 @@ package es.uma.taw_grupo12.service;
 
 
 import es.uma.taw_grupo12.dto.EjercicioDTO;
+import es.uma.taw_grupo12.dto.EjercicioRutinaDTO;
 import es.uma.taw_grupo12.entity.Ejercicio;
 import es.uma.taw_grupo12.dao.EjercicioRepository;
+import es.uma.taw_grupo12.entity.EjercicioRutina;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,4 +72,9 @@ public class EjercicioService {
         return ejerciciosDTO;
     }
 
+    public EjercicioDTO findById(Integer id) {
+        Ejercicio ejercicio = ejercicioRepository.findById(id).orElse(null);
+        assert (ejercicio != null);
+        return ejercicio.toDTO();
+    }
 }

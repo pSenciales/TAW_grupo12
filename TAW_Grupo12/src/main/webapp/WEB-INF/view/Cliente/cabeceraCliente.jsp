@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<link rel="stylesheet" href="../../../css/cliente.css">
+<link rel="stylesheet" href="../../../Styles/Cliente/cliente.css">
 
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -23,10 +23,10 @@
                     <a class="nav-link active" aria-current="page" href="/cliente/">Página personal</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Mi Rutina</a>
+                    <a class="nav-link active" aria-current="page" href="/cliente/rutinas/">Mi Rutina</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Mi Dieta</a>
+                    <a class="nav-link active" aria-current="page" href="/cliente/dietas/">Mi Dieta</a>
                 </li>
             </ul>
         </div>

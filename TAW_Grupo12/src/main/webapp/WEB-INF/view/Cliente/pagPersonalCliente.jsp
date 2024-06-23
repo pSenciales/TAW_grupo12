@@ -6,5 +6,9 @@
 <body>
 <jsp:include page="cabeceraCliente.jsp"/>
 <h1>Pág personal cliente</h1>
+<form method="post" action="/cliente/salir">
+    <input type="submit" value="Cerrar sesion">
+</form>
+
 </body>
 </html>

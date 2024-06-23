@@ -7,6 +7,7 @@ import es.uma.taw_grupo12.entity.Cliente;
 import es.uma.taw_grupo12.entity.Trabajador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -61,7 +62,6 @@ public class ClienteService {
     }
 
     public void guardarCliente(ClienteDTO cliente) throws IOException {
-
 
         Cliente miCliente = this.clienteRepository.findById(cliente.getIdcliente()).orElse(null);
         if(cliente != null){

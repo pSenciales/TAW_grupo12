@@ -51,6 +51,7 @@ public class EjercicioService {
         return ejerciciosDTO;
     }
 
+    //@Guillermo
     public List<String> getTipos() {
         List<String> tipos = new ArrayList<>();
         List<Ejercicio> ejerciciosList = ejercicioRepository.findAll();
@@ -63,6 +64,7 @@ public class EjercicioService {
         return tipos;
     }
 
+    //@Guillermo
     public List<EjercicioDTO> getByTipos(List<String> filtrotipos) {
         List<Ejercicio> ejerciciosList = ejercicioRepository.findAll();
         List<EjercicioDTO> ejerciciosDTO = new ArrayList<>();
@@ -76,7 +78,6 @@ public class EjercicioService {
 
         return ejerciciosDTO;
     }
-    //@Gillermo
 
     public EjercicioDTO findById(Integer id) {
         Ejercicio ejercicio = ejercicioRepository.findById(id).orElse(null);

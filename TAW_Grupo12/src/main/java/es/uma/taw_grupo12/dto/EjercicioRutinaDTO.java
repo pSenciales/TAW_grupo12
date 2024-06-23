@@ -21,7 +21,7 @@ public class EjercicioRutinaDTO {
             case "Miércoles" -> 3;
             case "Jueves" -> 4;
             case "Viernes" -> 5;
-            case "Sabado" -> 6;
+            case "Sábado" -> 6;
             case "Domingo" -> 7;
             default -> -1;
         };
@@ -34,6 +34,7 @@ public class EjercicioRutinaDTO {
 
     }
 
+    //Guillermo
     public String toStringCross() {
         String seriesText = (this.series == 1) ? " serie" : " series";
         String repeticionesText = (this.repeticiones == 1) ? " repetición" : " repeticiones";
@@ -41,6 +42,6 @@ public class EjercicioRutinaDTO {
 
         return "(" + this.series + seriesText + " de " + this.repeticiones + repeticionesText + pesoText;
     }
-
+    //Guillermo
 
 }

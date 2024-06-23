@@ -65,11 +65,11 @@ public class RutinaService {
         rutinaRepository.deleteById(id);
     }
 
-    public List<RutinaDTO> findByFiltro(FiltroRutinas filtro) {
+    public List<RutinaDTO> findByFiltro(FiltroRutinas filtro, Integer idTrabajador) {
         String nombre = filtro.getNombre() == null ? "" : filtro.getNombre();
 
-        List<Rutina> lista = filtro.getIdcliente() == null || filtro.getIdcliente().equals("-1") ?  rutinaRepository.findByFiltroNombre(nombre) :
-                rutinaRepository.findByFiltroNombreAndId(nombre, filtro.getIdcliente());
+        List<Rutina> lista = filtro.getIdcliente() == null || filtro.getIdcliente().equals("-1") ?  rutinaRepository.findByFiltroNombre(nombre, idTrabajador) :
+                rutinaRepository.findByFiltroNombreAndId(nombre, filtro.getIdcliente(), idTrabajador);
 
         List<RutinaDTO> listaDTO = new ArrayList<>();
 

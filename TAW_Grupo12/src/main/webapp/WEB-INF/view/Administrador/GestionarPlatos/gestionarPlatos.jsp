@@ -1,14 +1,14 @@
-<%@ page import="java.util.ArrayList" %>
+<%
+    /**
+     * @author María Victoria Huesca Peláez
+     */
+%>
+
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="es.uma.taw_grupo12.dto.PlatoDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%
-    /**
-     * @author María Victoria Huesca
-     */
-%>
 
 <%
     List<String> alergenos = Arrays.asList("Gluten", "Frutos de cáscara", "Crustáceos", "Apio", "Huevo", "Mostaza", "Pescado", "Sésamo", "Cacahuetes", "Sulfitos", "Soja", "Altramuces", "Leche", "Moluscos");
@@ -18,7 +18,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Insertar cabceraAdministrador.jsp -->
     <title>Gestionar Platos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">

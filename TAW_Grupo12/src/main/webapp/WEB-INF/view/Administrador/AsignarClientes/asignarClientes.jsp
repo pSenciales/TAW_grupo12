@@ -1,6 +1,6 @@
 <%
     /**
-     * @author María Victoria Huesca
+     * @author María Victoria Huesca Peláez
      */
 %>
 
@@ -10,6 +10,7 @@
 <%@ page import="es.uma.taw_grupo12.entity.Trabajador" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%
     List<ClienteDTO> clientes = (List<ClienteDTO>) request.getAttribute("clientes");
     List<TrabajadorDTO> trabajadoresDTO = (List<TrabajadorDTO>) request.getAttribute("trabajadores");

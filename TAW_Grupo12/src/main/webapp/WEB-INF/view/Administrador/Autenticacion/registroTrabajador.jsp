@@ -1,13 +1,11 @@
-<%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.List" %>
 <%
     /**
-     * @author María Victoria Huesca
+     * @author María Victoria Huesca Peláez
      */
 %>
 
-<!--OPCIÓN: AÑADIR UN BOTÓN DE VOLVER ATRÁS-->
-
+<%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 

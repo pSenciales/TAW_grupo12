@@ -1,6 +1,6 @@
 <%
     /**
-     * @author María Victoria Huesca
+     * @author María Victoria Huesca Peláez
      */
 %>
 
@@ -46,6 +46,7 @@
 
     </style>
 </head>
+
 <body>
 <div class="form-container">
     <h1>Registro Cliente</h1>

@@ -1,6 +1,6 @@
 <%
     /**
-     * @author María Victoria Huesca
+     * @author María Victoria Huesca Peláez
      */
 %>
 
@@ -8,11 +8,11 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page import="es.uma.taw_grupo12.dto.EjercicioDTO" %>
 
 <!DOCTYPE html>
 
-<html lang="es"><%@ page import="java.util.ArrayList" %>
-<%@ page import="es.uma.taw_grupo12.dto.EjercicioDTO" %>
+<html lang="es">
 
 <%
     List<String> tipos = Arrays.asList("FUERZA", "RESISTENCIA", "CAPACIDAD AERÓBICA", "VELOCIDAD", "POTENCIA", "ESTABILIDAD", "MOVILIDAD");
@@ -22,7 +22,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Insertar cabceraAdministrador.jsp -->
     <title>Gestionar ejercicios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">

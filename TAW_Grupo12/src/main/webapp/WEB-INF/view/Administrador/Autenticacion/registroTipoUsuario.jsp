@@ -1,10 +1,8 @@
 <%
     /**
-     * @author María Victoria Huesca
+     * @author María Victoria Huesca Peláez
      */
 %>
-
-<!--OPCIÓN: AÑADIR UN BOTÓN DE VOLVER ATRÁS-->
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

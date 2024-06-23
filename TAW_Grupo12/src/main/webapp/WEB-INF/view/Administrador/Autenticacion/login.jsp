@@ -1,11 +1,12 @@
 <%
     /**
-     * @author María Victoria Huesca
+     * @author María Victoria Huesca Peláez
      */
 %>
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="/Styles/Administrador/login.css">
     <title>Login</title>
 </head>
+
 <body>
 <div class="parent-container-login">
     <div class="form-container container-login">

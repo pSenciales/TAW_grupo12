@@ -15,4 +15,10 @@ public class SeguimientoDietaDTO {
     private String observaciones;
     private String cantidadObjeto;
     private String nombrePlato;
+
+    //Nacho
+    public static boolean equalsOrNull(Object a, Object b) {
+        return (a == b) || (a != null && a.equals(b));
+    }
+
 }

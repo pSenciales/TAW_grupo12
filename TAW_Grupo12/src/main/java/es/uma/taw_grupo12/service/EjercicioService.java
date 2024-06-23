@@ -3,11 +3,9 @@ package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dao.EjercicioRutinaRepository;
 import es.uma.taw_grupo12.dto.EjercicioDTO;
-import es.uma.taw_grupo12.dto.PlatoDTO;
 import es.uma.taw_grupo12.entity.Ejercicio;
 import es.uma.taw_grupo12.dao.EjercicioRepository;
 import es.uma.taw_grupo12.entity.EjercicioRutina;
-import es.uma.taw_grupo12.entity.Plato;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -81,6 +79,11 @@ public class EjercicioService {
         return ejerciciosDTO;
     }
 
+    public EjercicioDTO findById(Integer id) {
+        Ejercicio ejercicio = ejercicioRepository.findById(id).orElse(null);
+        assert (ejercicio != null);
+        return ejercicio.toDTO();
+    }
     //@Victoria
     public List<EjercicioDTO> listarEjerciciosDTO(String busqueda) {
         List<Ejercicio> ejercicios = this.ejercicioRepository.findAllByNombre(busqueda);

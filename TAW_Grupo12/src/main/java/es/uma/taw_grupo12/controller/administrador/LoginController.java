@@ -34,8 +34,7 @@ public class LoginController extends BaseController {
 
         if (estaAutenticado(session)) {
             String tipoUsuario = (String) session.getAttribute("tipo");
-            String strTo = "redirect:/" + tipoUsuario;
-            return "redirect:/administrador/inicio";
+            return "redirect:/" + tipoUsuario + "/";
         }
 
         model.addAttribute("usuario", new UsuarioDTO());
@@ -67,8 +66,7 @@ public class LoginController extends BaseController {
         if(cliente != null) {
             session.setAttribute("usuario", cliente);
             session.setAttribute("tipo", "cliente");
-            //strTo = "redirect:/cliente/inicio";          DESCOMENTAR CUANDO ESTE IMPLEMENTADO EL INICIO DE CLIENTE
-            return "redirect:/administrador/inicio";
+            return "redirect:/cliente/";
         }
 
         if(trabajador != null) {
@@ -137,8 +135,7 @@ public class LoginController extends BaseController {
         if(clienteDTO != null) {
             session.setAttribute("usuario", clienteDTO);
             session.setAttribute("tipo", "cliente");
-            //strTo = "redirect:/Cliente/inicio";
-            return "/Cliente/inicioCliente";
+            return "redirect:/cliente/";
         }
 
         //OPCIÓN: AÑADIR QUE SE MUESTREN DISTINTOS MENSAJES DE ERROR

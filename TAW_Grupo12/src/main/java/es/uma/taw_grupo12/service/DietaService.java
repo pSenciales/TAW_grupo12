@@ -111,4 +111,15 @@ public class DietaService {
     public void deleteById(Integer id){
         dietaRepository.deleteById(id);
     }
+
+    //Nacho
+    public List<DietaDTO> findAllByCliente(Integer id) {
+        List<DietaDTO> lista = new ArrayList<>();
+        List<Dieta> dietas = dietaRepository.findAllByClienteId(id);
+        for(Dieta dieta : dietas){
+            DietaDTO dietaDTO = dieta.toDTO();
+            lista.add(dietaDTO);
+        }
+        return lista;
+    }
 }

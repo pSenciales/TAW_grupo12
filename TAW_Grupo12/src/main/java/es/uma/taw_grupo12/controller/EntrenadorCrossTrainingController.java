@@ -138,7 +138,7 @@ public class EntrenadorCrossTrainingController {
                 !sesion.getAttribute("tipo").equals("entrenadorcross")) {
             return "redirect:/";
         } else {
-            List<RutinaDTO> rutinas = rutinaService.findByFiltro(filtro);
+            List<RutinaDTO> rutinas = rutinaService.findByFiltro(filtro, trabajador.getIdtrabajador());
             model.addAttribute("rutinas", rutinas);
             model.addAttribute("filtro", filtro);
             List<ClienteDTO> clientes = clienteService.findByTrabajador(trabajador.getIdtrabajador());

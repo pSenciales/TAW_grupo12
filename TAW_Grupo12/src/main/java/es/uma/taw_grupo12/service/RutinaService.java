@@ -1,5 +1,5 @@
 /**
- * @author 	PABLO SENCIALES DE LA HIGUERA (1/7)
+ * @author 	PABLO SENCIALES DE LA HIGUERA (6/7)
  * @author Ignacio morillas rosell (1/7)
  */
 

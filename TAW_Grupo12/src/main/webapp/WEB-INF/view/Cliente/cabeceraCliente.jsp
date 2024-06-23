@@ -14,9 +14,9 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/cliente/perfil">Mi perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Buscar rutinas</a></li>
+                        <li><a class="dropdown-item" href="/cliente/rutinas/buscar">Buscar rutinas</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Buscar dietas</a></li>
+                        <li><a class="dropdown-item" href="/cliente/dietas/buscar">Buscar dietas</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

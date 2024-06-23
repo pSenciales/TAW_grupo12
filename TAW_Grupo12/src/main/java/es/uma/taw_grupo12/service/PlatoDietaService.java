@@ -16,7 +16,7 @@ public class PlatoDietaService {
     PlatodietaRepository platodietaRepository;
 
     //Nacho
-    public List<PlatoDietaDTO> findAllByRutinaId(Integer id) {
+    public List<PlatoDietaDTO> findAllByDietaId(Integer id) {
         List<PlatoDieta> platosDieta = platodietaRepository.findByDietaId(id);
         List<PlatoDietaDTO> platoDietaDTOS = new ArrayList<>();
 

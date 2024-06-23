@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+//Nacho
 @RequestMapping("/cliente")
 @Controller
 public class ClienteController {
@@ -21,22 +22,22 @@ public class ClienteController {
     private ClienteService clienteService;
     @Autowired
     private TrabajadorService trabajadorService;
-    @Autowired
-    private RutinaService rutinaService;
-    @Autowired
-    private EjercicioService ejercicioService;
-    @Autowired
-    private EjercicioRutinaService ejercicioRutinaService;
-    @Autowired
-    private SeguimientoObjetivosService seguimientoObjetivosService;
 
     @GetMapping("/")
-    public String toInicio(HttpSession session) {
+    public String toInicio(HttpSession session, Model model) {
         ClienteDTO c = (ClienteDTO) session.getAttribute("usuario");
 
         if(c == null) {
             return "redirect:/cliente/error";
         }
+
+        List<TrabajadorDTO> trabajadorList = new ArrayList<>();
+        for(Integer id : c.getTrabajadorList()) {
+            trabajadorList.add(trabajadorService.findById(id));
+        }
+
+        model.addAttribute("cliente", c);
+        model.addAttribute("trabajadores", trabajadorList);
 
         return "Cliente/pagPersonalCliente";
     }
@@ -60,7 +61,6 @@ public class ClienteController {
         }
 
         model.addAttribute("cliente", c);
-        model.addAttribute("trabajadores", trabajadorList);
 
         return "Cliente/perfil";
     }
@@ -69,7 +69,7 @@ public class ClienteController {
     public String doEditarCliente(@ModelAttribute("cliente") ClienteDTO cliente, HttpSession session) {
         clienteService.actualizarCliente(cliente);
         // Actualizo el cliente del session
-        session.setAttribute("usuario", cliente);
+        session.setAttribute("usuario", clienteService.buscarClienteId(cliente.getIdcliente()));
 
         return "redirect:/cliente/perfil";
     }

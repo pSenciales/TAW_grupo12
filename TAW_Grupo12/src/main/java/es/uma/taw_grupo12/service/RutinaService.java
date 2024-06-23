@@ -88,4 +88,15 @@ public class RutinaService {
         }
         return listaDTO;
     }
+
+    //Nacho
+    public List<RutinaDTO> findByName(String nombre, Integer idCliente) {
+        List<Rutina> r = rutinaRepository.findByNombreAndClienteID(nombre, idCliente);
+        List<RutinaDTO> listaDTO = new ArrayList<>();
+        for(Rutina rutina : r){
+            listaDTO.add(rutina.toDTO());
+        }
+
+        return listaDTO;
+    }
 }

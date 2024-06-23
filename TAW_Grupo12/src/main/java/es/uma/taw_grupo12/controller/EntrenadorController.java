@@ -48,7 +48,7 @@ public class EntrenadorController {
 
     }
 
-    //Listar las rutinas
+    //Listar las dietas
     @GetMapping("/rutinas")
     public String doListarRutinas(HttpSession sesion, Model model) {
         TrabajadorDTO trabajador = (TrabajadorDTO) sesion.getAttribute("usuario");

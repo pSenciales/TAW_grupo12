@@ -88,8 +88,7 @@
                 SeguimientoDietaDTO seguimiento = null;
                 if (seguimientoDietaDTOList != null && !seguimientoDietaDTOList.isEmpty()) {
                     seguimiento = seguimientoDietaDTOList.stream()
-                            .filter(s -> equalsOrNull(s.getNombrePlato(), plato.getNombre()) &&
-                                    equalsOrNull(s.getCantidadObjeto(), platoD.getCantidad()))
+                            .filter(s -> equalsOrNull(s.getNombrePlato(), plato.getNombre()))
                             .reduce((first, second) -> second)
                             .orElse(null);
                 }
@@ -100,7 +99,7 @@
                 <h5><%=plato.getNombre()%></h5>
                 <input type="hidden" name="idDieta" value="<%=platoD.getIdDieta()%>">
                 <input type="hidden" name="dia" value="<%=platoD.getDiasSemana()%>">
-                <input type="hidden" name="nombrePl" value="<%=plato.getNombre()%>">
+                <input type="hidden" name="nombrePlato" value="<%=plato.getNombre()%>">
                 <input type="hidden" name="cantOb" value="<%=platoD.getCantidad()%>">
                 <p><strong>Calorías:</strong> <%=platoD.getCalorias()%></p>
                 <p><strong>Cantidad:</strong> <%=platoD.getCantidad()%></p>
@@ -112,7 +111,7 @@
                         <%= (seguimiento != null && seguimiento.getComido() == 1) ? "checked" : "" %>>
                 </label>
                 <p><strong>Cantidad comida:</strong></p>
-                <input type="number" name="cant"
+                <input type="number" name="cantidadComida"
                        value="<%= (seguimiento != null && seguimiento.getCantidad() != null)
                        ? seguimiento.getCantidad() : platoD.getCantidad() %>"><br />
                 <p><strong>Observaciones:</strong></p>

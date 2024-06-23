@@ -9,10 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +35,7 @@ public class RutinaController {
         if(c == null)
             return "redirect:/cliente/error";
 
-        model.addAttribute("dietas", c.getRutinaList());
+        model.addAttribute("rutinas", c.getRutinaList());
         model.addAttribute("dia", null);
         model.addAttribute("listaEjerciciosRutina", null);
         model.addAttribute("listaEjercicios", null);
@@ -126,5 +123,50 @@ public class RutinaController {
         model.addAttribute("listaSeguimientos",
                 seguimientoObjetivosService.findByClienteAndRutina(c.getIdcliente(), idRutina));
         return "Cliente/detallesRutina";
+    }
+
+    @GetMapping("/buscar")
+    public String doBuscar(HttpSession session, Model model) {
+        ClienteDTO c = (ClienteDTO) session.getAttribute("usuario");
+        if(c == null)
+            return "redirect:/cliente/error";
+
+        model.addAttribute("rutinas", c.getRutinaList());
+        model.addAttribute("busqueda", null);
+        model.addAttribute("rutinasEncontradas", null);
+
+        return "Cliente/buscarRutina";
+    }
+    @PostMapping("/buscar")
+    public String doBuscar(@RequestParam("nombre") String nombre, Model model, HttpSession session) {
+        ClienteDTO c = (ClienteDTO) session.getAttribute("usuario");
+        if(c == null)
+            return "redirect:/cliente/error";
+
+        model.addAttribute("rutinas", c.getRutinaList());
+        model.addAttribute("rutinasEncontradas", rutinaService.findByName(nombre, c.getIdcliente()));
+        model.addAttribute("busqueda", nombre);
+
+        return "Cliente/buscarRutina";
+    }
+
+    @GetMapping("/rutinaSeleccionada/{id}")
+    public String doMostrarEjercicios(@PathVariable("id") Integer id, Model model, HttpSession session) {
+        ClienteDTO c = (ClienteDTO) session.getAttribute("usuario");
+        if(c == null)
+            return "redirect:/cliente/error";
+
+        List<EjercicioDTO> ejercicioDTOList = new ArrayList<>();
+        List<EjercicioRutinaDTO> ejercicioRutinaDTOList = ejercicioRutinaService.findAllByRutinaId(id);
+
+        for(EjercicioRutinaDTO ejercicioRutinaDTO : ejercicioRutinaDTOList) {
+            ejercicioDTOList.add(ejercicioService.findById(ejercicioRutinaDTO.getEjercicio()));
+        }
+
+        model.addAttribute("listaEjerciciosRutina", ejercicioRutinaDTOList);
+        model.addAttribute("listaEjercicios", ejercicioDTOList);
+        model.addAttribute("listaSeguimientos",
+                seguimientoObjetivosService.findByClienteAndRutina(c.getIdcliente(), id));
+        return "Cliente/mostrarResultadosRutina";
     }
 }

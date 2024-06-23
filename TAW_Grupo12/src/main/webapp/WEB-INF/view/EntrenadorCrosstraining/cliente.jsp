@@ -5,7 +5,7 @@
 <%@ page import="es.uma.taw_grupo12.dto.EjercicioDTO" %>
 <%@ page import="java.util.Objects" %><%--
   Created by IntelliJ IDEA.
-  User: lacas
+  User: Guillermo
   Date: 19/06/2024
   Time: 19:31
   To change this template use File | Settings | File Templates.

@@ -421,7 +421,27 @@ VALUES	('Juan Pérez', 'juan.perez@example.com', 'contraseña1', NULL, 70.5, 170
 		('María García', 'maria.garcia@example.com', 'contraseña2', NULL, 65.0, 165.0, 'Pollen'),
 		('Pedro Martínez', 'pedro.martinez@example.com', 'contraseña3', NULL, 75.8, 180.0, 'Gluten'),
 		('Laura Rodríguez', 'laura.rodriguez@example.com', 'contraseña4', NULL, 80.0, 175.0, 'Lactosa'),
-		('Ana López', 'ana.lopez@example.com', 'contraseña5', NULL, 62.3, 160.0, 'Ninguna');
+		('Ana López', 'ana.lopez@example.com', 'contraseña5', NULL, 62.3, 160.0, 'Ninguna'),
+		('Carlos Fernández', 'carlos.fernandez@example.com', 'pass123', NULL, 70.5, 1.75, 'Ninguna'),
+		('Ana Gómez', 'ana.gomez@example.com', 'pass123', NULL, 65.0, 1.68, 'Gluten'),
+		('Luis Martínez', 'luis.martinez@example.com', 'pass123', NULL, 80.3, 1.82, 'Frutos de cáscara'),
+		('María López', 'maria.lopez@example.com', 'pass123', NULL, 90.7, 1.90, 'Crustáceos'),
+		('Elena Sánchez', 'elena.sanchez@example.com', 'pass123', NULL, 68.2, 1.72, 'Huevo'),
+		('Diego Torres', 'diego.torres@example.com', 'pass123', NULL, 72.5, 1.80, 'Mostaza'),
+		('Laura Díaz', 'laura.diaz@example.com', 'pass123', NULL, 85.0, 1.85, 'Pescado'),
+		('Pablo Jiménez', 'pablo.jimenez@example.com', 'pass123', NULL, 60.0, 1.60, 'Sésamo'),
+		('Marta Ramírez', 'marta.ramirez@example.com', 'pass123', NULL, 78.9, 1.78, 'Cacahuetes'),
+		('Jorge Morales', 'jorge.morales@example.com', 'pass123', NULL, 82.0, 1.75, 'Ninguna'),
+		('Sara Ruiz', 'sara.ruiz@example.com', 'pass123', NULL, 68.4, 1.65, 'Gluten'),
+		('Alberto Navarro', 'alberto.navarro@example.com', 'pass123', NULL, 77.3, 1.79, 'Frutos de cáscara'),
+		('Sofía Molina', 'sofia.molina@example.com', 'pass123', NULL, 72.1, 1.68, 'Crustáceos'),
+		('Daniel Ortega', 'daniel.ortega@example.com', 'pass123', NULL, 65.8, 1.70, 'Apio'),
+		('Paula Romero', 'paula.romero@example.com', 'pass123', NULL, 90.2, 1.85, 'Huevo'),
+		('Hugo García', 'hugo.garcia@example.com', 'pass123', NULL, 62.4, 1.60, 'Mostaza'),
+		('Irene Castro', 'irene.castro@example.com', 'pass123', NULL, 68.9, 1.78, 'Pescado'),
+		('Manuel Rubio', 'manuel.rubio@example.com', 'pass123', NULL, 80.0, 1.82, 'Sésamo'),
+		('Clara Serrano', 'clara.serrano@example.com', 'pass123', NULL, 75.5, 1.77, 'Cacahuetes');
+
 
 -- Añadir trabajadores
 -- Dietistas
@@ -441,6 +461,39 @@ INSERT INTO taw12.Trabajador (nombre, email, contrasenya, tipo, imagenPerfil)
 VALUES 	('Elena Martínez', 'elena.martinez@example.com', 'contraseña7', 'ENTRENADOR CROSSTRAINING', NULL),
 		('Mario Gómez', 'mario.gomez@example.com', 'contraseña8', 'ENTRENADOR CROSSTRAINING', NULL),
 		('Sara Fernández', 'sara.fernandez@example.com', 'contraseña9', 'ENTRENADOR CROSSTRAINING', NULL);
+--Más trabjadores
+INSERT INTO `taw12`.`Trabajador` (`nombre`, `email`, `contrasenya`, `tipo`) VALUES
+('Pedro Álvarez', 'pedro.alvarez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Lucía Torres', 'lucia.torres@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Roberto García', 'roberto.garcia@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Carmen Martín', 'carmen.martin@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Andrés Jiménez', 'andres.jimenez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Patricia González', 'patricia.gonzalez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Francisco López', 'francisco.lopez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Laura Fernández', 'laura.fernandez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('David Rodríguez', 'david.rodriguez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Marta Sánchez', 'marta.sanchez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
+('Raúl Pérez', 'raul.perez@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Carolina Morales', 'carolina.morales@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Fernando Díaz', 'fernando.diaz@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Sara Ruiz', 'sara.ruiz@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Luis Gómez', 'luis.gomez@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Natalia Romero', 'natalia.romero@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('José Navarro', 'jose.navarro@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Elena Castro', 'elena.castro@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Víctor Serrano', 'victor.serrano@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Cristina Rubio', 'cristina.rubio@example.com', 'pass123', 'ENTRENADOR CROSSTRAINING'),
+('Álvaro Fernández', 'alvaro.fernandez@example.com', 'pass123', 'DIETISTA'),
+('Beatriz Torres', 'beatriz.torres@example.com', 'pass123', 'DIETISTA'),
+('Gonzalo Jiménez', 'gonzalo.jimenez@example.com', 'pass123', 'DIETISTA'),
+('Mónica García', 'monica.garcia@example.com', 'pass123', 'DIETISTA'),
+('Diego Martín', 'diego.martin@example.com', 'pass123', 'DIETISTA'),
+('Claudia Sánchez', 'claudia.sanchez@example.com', 'pass123', 'DIETISTA'),
+('Adrián López', 'adrian.lopez@example.com', 'pass123', 'DIETISTA'),
+('María Rodríguez', 'maria.rodriguez@example.com', 'pass123', 'DIETISTA'),
+('Jorge Pérez', 'jorge.perez@example.com', 'pass123', 'DIETISTA'),
+('Alicia Morales', 'alicia.morales@example.com', 'pass123', 'DIETISTA');
+
         
 -- Relaciones Cliente-Entrenador
 INSERT INTO taw12.cliente_trabajador (idcliente, idtrabajador)
@@ -463,6 +516,22 @@ VALUES
     -- Cliente Ana López (idCliente = 5) con trabajadores
     (5, 6), -- Ana López con Carlos Pérez (Entrenador de Fuerza)
     (5, 7); -- Ana López con Elena Martínez (Entrenador Crosstraining)
+    
+    -- Cliente Carlos Fernández (idCliente = 6) con más entrenadores
+    (6, 7),   -- Carlos Fernández con Elena Martínez (Entrenador Crosstraining)
+    (6, 10),  -- Carlos Fernández con Marta Sánchez (Entrenador de Fuerza)
+    
+    -- Cliente Ana Gómez (idCliente = 7) con más entrenadores
+    (7, 9),   -- Ana Gómez con Sara Fernández (Entrenador Crosstraining)
+    (7, 10),  -- Ana Gómez con Marta Sánchez (Entrenador de Fuerza)
+    
+    -- Cliente Luis Martínez (idCliente = 8) con más entrenadores
+    (8, 6),   -- Luis Martínez con Carlos Pérez (Entrenador de Fuerza)
+    (8, 7),   -- Luis Martínez con Elena Martínez (Entrenador Crosstraining)
+    
+    -- Cliente María López (idCliente = 9) con más entrenadores
+    (9, 8),   -- María López con Mario Gómez (Entrenador de Fuerza)
+    (9, 9);   -- María López con Sara Fernández (Entrenador Crosstraining)
 
 INSERT INTO taw12.rutina (idrutina, nombre, idcliente, idtrabajador) VALUES (1, 'nueva', 3, 7);
 INSERT INTO taw12.rutina (idrutina, nombre, idcliente, idtrabajador) VALUES (5, 'AnaRutina', 5, 7);

@@ -1,3 +1,9 @@
+<%
+    /**
+     * @author Ignacio Morillas Rosell
+     */
+%>
+
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw_grupo12.dto.*" %>
 <%@ page import="static es.uma.taw_grupo12.dto.SeguimientoDietaDTO.equalsOrNull" %>

@@ -1,3 +1,9 @@
+<%
+    /**
+     * @author Ignacio Morillas Rosell
+     */
+%>
+
 <%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %>
 <%@ page import="es.uma.taw_grupo12.entity.Rutina" %>
 <%@ page import="es.uma.taw_grupo12.entity.Dieta" %>

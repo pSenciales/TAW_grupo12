@@ -1,3 +1,7 @@
+/**
+ * @author Ignacio Morillas Rosell
+ */
+
 package es.uma.taw_grupo12.controller.cliente;
 
 import es.uma.taw_grupo12.dto.*;
@@ -13,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//Nacho
 @RequestMapping("/cliente")
 @Controller
 public class ClienteController {
@@ -43,9 +46,8 @@ public class ClienteController {
     }
 
     @GetMapping("/error")
-    public String toAutenticar(Model model) {
-        model.addAttribute("usuario", new UsuarioDTO());
-        return ("Administrador/Autenticacion/login");
+    public String toAutenticar() {
+        return "redirect:/cerrarSesion";
     }
 
     @GetMapping("/perfil")

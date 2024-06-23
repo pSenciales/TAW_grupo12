@@ -81,10 +81,11 @@
             %>
         </div>
     </div>
+    <form method="post" action="/cliente/salir" class="mt-5">
+        <input type="submit" value="Cerrar sesion">
+    </form>
 </div>
-<form method="post" action="/cliente/salir">
-    <input type="submit" value="Cerrar sesion">
-</form>
+
 
 </body>
 </html>

@@ -51,7 +51,7 @@ public class SeguimientoObjetivosService {
         return seguimientoObjetivosDTOS;
     }
 
-    //NAcho
+    //Nacho
     public void guardarSeguimiento(SeguimientoObjetivosDTO seguimiento) {
         SeguimientoObjetivos s;
         List<SeguimientoObjetivos> ls = seguimientoObjetivosRepository.findByNombreEjercicioAndFecha(

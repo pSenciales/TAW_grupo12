@@ -1,3 +1,7 @@
+/**
+ * @author Ignacio Morillas Rosell
+ */
+
 package es.uma.taw_grupo12.controller.cliente;
 
 import es.uma.taw_grupo12.dto.*;
@@ -15,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//Nacho
 @Controller
 @RequestMapping("/cliente/rutinas")
 public class RutinaController {

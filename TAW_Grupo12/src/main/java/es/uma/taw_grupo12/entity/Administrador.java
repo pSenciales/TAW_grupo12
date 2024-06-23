@@ -28,7 +28,7 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 
 /**
- * @author María Victoria Huesca
+ * @author guzman
  */
 @Entity
 @Table(name = "Administrador")

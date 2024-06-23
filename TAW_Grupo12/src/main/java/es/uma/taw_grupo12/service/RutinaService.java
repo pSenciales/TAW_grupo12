@@ -1,5 +1,6 @@
 /**
- * @author 	PABLO SENCIALES DE LA HIGUERA (1/12)
+ * @author 	PABLO SENCIALES DE LA HIGUERA (1/7)
+ * @author Ignacio morillas rosell (1/7)
  */
 
 package es.uma.taw_grupo12.service;

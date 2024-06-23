@@ -1,5 +1,5 @@
 /**
- * @author Ignacio Morillas Rossell (1/12)
+ * @author Ignacio Morillas Rossell
  */
 package es.uma.taw_grupo12.service;
 

@@ -1,6 +1,6 @@
 /**
- * @author María Victoria Huesca Peláez
- * @author Pablo Senciales
+ * @author María Victoria Huesca Peláez (1/6)
+ * @author Pablo Senciales de la Higuera (5/6)
  */
 
 package es.uma.taw_grupo12.dao;

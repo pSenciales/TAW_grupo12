@@ -1,3 +1,7 @@
+/**
+ * @author María Victoria Huesca Peláez
+ */
+
 package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dao.ClienteRepository;
@@ -28,6 +32,7 @@ public class TrabajadorService {
 
         return trabajador.toDTO();
     }
+
     //@Victoria
     public List<TrabajadorDTO> listarTrabajadoresDTO () {
         List<Trabajador> trabajadores = this.trabajadorRepository.findAll();

@@ -5,7 +5,6 @@
 package es.uma.taw_grupo12.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import es.uma.taw_grupo12.dto.DTO;
 import es.uma.taw_grupo12.dto.EjercicioRutinaDTO;

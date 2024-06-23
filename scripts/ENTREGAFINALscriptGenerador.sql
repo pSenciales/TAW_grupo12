@@ -461,7 +461,7 @@ INSERT INTO taw12.Trabajador (nombre, email, contrasenya, tipo, imagenPerfil)
 VALUES 	('Elena Martínez', 'elena.martinez@example.com', 'contraseña7', 'ENTRENADOR CROSSTRAINING', NULL),
 		('Mario Gómez', 'mario.gomez@example.com', 'contraseña8', 'ENTRENADOR CROSSTRAINING', NULL),
 		('Sara Fernández', 'sara.fernandez@example.com', 'contraseña9', 'ENTRENADOR CROSSTRAINING', NULL);
---Más trabjadores
+-- Más trabjadores
 INSERT INTO `taw12`.`Trabajador` (`nombre`, `email`, `contrasenya`, `tipo`) VALUES
 ('Pedro Álvarez', 'pedro.alvarez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
 ('Lucía Torres', 'lucia.torres@example.com', 'pass123', 'ENTRENADOR FUERZA'),
@@ -515,7 +515,7 @@ VALUES
     
     -- Cliente Ana López (idCliente = 5) con trabajadores
     (5, 6), -- Ana López con Carlos Pérez (Entrenador de Fuerza)
-    (5, 7); -- Ana López con Elena Martínez (Entrenador Crosstraining)
+    (5, 7), -- Ana López con Elena Martínez (Entrenador Crosstraining)
     
     -- Cliente Carlos Fernández (idCliente = 6) con más entrenadores
     (6, 7),   -- Carlos Fernández con Elena Martínez (Entrenador Crosstraining)
@@ -558,7 +558,7 @@ INSERT INTO taw12.dieta (iddieta,nombre,idcliente) VALUES (60,'Dieta 2 para Juan
 
 
 INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (1,1,59,0,0,0,'Lunes','Desayuno');
-INSERT INTO taw12.platodieta (`idplatdietadietaodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (1,4,60,0,0,0,'Lunes','Desayuno');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (1,4,60,0,0,0,'Lunes','Desayuno');
 INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (2,2,59,0,0,0,'Miercoles','Desayuno');
 INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (2,5,60,0,0,0,'Miercoles','Desayuno');
 INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (3,5,60,0,0,0,'Viernes','Desayuno');

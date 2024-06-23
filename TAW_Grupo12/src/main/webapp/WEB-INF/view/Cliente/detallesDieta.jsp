@@ -1,5 +1,9 @@
 <%@ page import="es.uma.taw_grupo12.entity.Dieta" %>
 <%@ page import="java.util.List" %>
+<%@ page import="es.uma.taw_grupo12.dto.PlatoDietaDTO" %>
+<%@ page import="es.uma.taw_grupo12.dto.PlatoDTO" %>
+<%@ page import="es.uma.taw_grupo12.dto.SeguimientoDietaDTO" %>
+<%@ page import="static es.uma.taw_grupo12.dto.SeguimientoDietaDTO.equalsOrNull" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,40 +13,40 @@
     <%
         List<Dieta> dieta = (List<Dieta>) request.getAttribute("dietas");
         String dia = (String) request.getAttribute("dia");
-        List<EjercicioRutinaDTO> ejercicioRutinaDTOList = (List<EjercicioRutinaDTO>) request.getAttribute("listaEjerciciosRutina");
-        List<EjercicioDTO> ejercicioDTOList = (List<EjercicioDTO>) request.getAttribute("listaEjercicios");
-        List<SeguimientoObjetivosDTO> seguimientoObjetivosDTOS = (List<SeguimientoObjetivosDTO>) request.getAttribute("listaSeguimientos");
+        List<PlatoDietaDTO> platoDietaDTOList = (List<PlatoDietaDTO>) request.getAttribute("listaPlatosDieta");
+        List<PlatoDTO> platoDTOList = (List<PlatoDTO>) request.getAttribute("listaPlatos");
+        List<SeguimientoDietaDTO> seguimientoDietaDTOList = (List<SeguimientoDietaDTO>) request.getAttribute("listaSeguimientos");
     %>
 </head>
 <body>
 <div class="container">
     <h1>Selecciona una Dieta</h1>
     <%
-        if(rutinaDTOS == null || rutinaDTOS.isEmpty())
+        if(dieta == null || dieta.isEmpty())
         {
     %>
     <p>No tienes dietas asignadas</p>
     <a href="/cliente/" class="btn btn-primary">Volver</a>
     <%
     } else {
-        EjercicioRutinaDTO ejercicioDTO = null;
-        if(ejercicioRutinaDTOList != null && !ejercicioRutinaDTOList.isEmpty()) {
-            ejercicioDTO = ejercicioRutinaDTOList.getFirst();
+        PlatoDietaDTO platoDietaDTO = null;
+        if(platoDietaDTOList != null && !platoDietaDTOList.isEmpty()) {
+            platoDietaDTO = platoDietaDTOList.getFirst();
         }
     %>
-    <form action="/cliente/rutinas/" method="post">
+    <form action="/cliente/dietas/" method="post">
         <div class="form-group">
-            <label for="rutina">Dieta:</label>
-            <select id="rutina" name="rutinaId" class="form-control">
+            <label for="dieta">Dieta:</label>
+            <select id="dieta" name="rutinaId" class="form-control">
                 <%
-                    for(Rutina r : rutinaDTOS) {
-                        if(ejercicioDTO != null && ejercicioDTO.getRutina() == r.getIdrutina()) {
+                    for(Dieta d : dieta) {
+                        if(platoDietaDTO != null && platoDietaDTO.getIdDieta() == d.getIddieta()) {
                 %>
-                <option value="<%=r.getIdrutina()%>" selected><%=r.getNombre()%></option>
+                <option value="<%=d.getIddieta()%>" selected><%=d.getNombre()%></option>
                 <%
                 } else {
                 %>
-                <option value="<%=r.getIdrutina()%>" ><%=r.getNombre()%></option>
+                <option value="<%=d.getIddieta()%>" ><%=d.getNombre()%></option>
                 <%
                         }
                     }
@@ -65,64 +69,52 @@
     %>
 
     <%
-        if (ejercicioDTOList != null ) {
+        if (platoDTOList != null ) {
     %>
-    <h2>Ejercicios</h2>
+    <h2>Platos</h2>
     <%
-        if(ejercicioRutinaDTOList.isEmpty()) {
+        if(platoDietaDTOList.isEmpty()) {
     %>
-    <p>No tienes ejercicios los <%=dia%>, ¡descansa!</p>
+    <p>No tienes platos planificados los <%=dia%>, ¡improvisa!</p>
     <%
     } else {
     %>
     <ul class="list-group">
         <%
-            for(int i = 0; i < ejercicioRutinaDTOList.size(); i++) {
-                EjercicioRutinaDTO ejR = ejercicioRutinaDTOList.get(i);
-                EjercicioDTO ej = ejercicioDTOList.get(i);
-                /* Obtengo el Seguimiento más reciente de ese ejercicio, si existe*/
-                SeguimientoObjetivosDTO seguimiento = null;
-                if (seguimientoObjetivosDTOS != null && !seguimientoObjetivosDTOS.isEmpty()) {
-                    seguimiento = seguimientoObjetivosDTOS.stream()
-                            .filter(s -> equalsOrNull(s.getNombreejercicio(), ej.getNombre()) &&
-                                    equalsOrNull(s.getPesoobjetivo(), ejR.getPeso()) &&
-                                    equalsOrNull(s.getSeriesobjetivo(), ejR.getSeries()) &&
-                                    equalsOrNull(s.getRepeticionesobjetivo(), ejR.getRepeticiones()))
+            for(int i = 0; i < platoDietaDTOList.size(); i++) {
+                PlatoDietaDTO platoD = platoDietaDTOList.get(i);
+                PlatoDTO plato = platoDTOList.get(i);
+                /* Obtengo el Seguimiento más reciente de ese plato, si existe*/
+                SeguimientoDietaDTO seguimiento = null;
+                if (seguimientoDietaDTOList != null && !seguimientoDietaDTOList.isEmpty()) {
+                    seguimiento = seguimientoDietaDTOList.stream()
+                            .filter(s -> equalsOrNull(s.getNombrePlato(), plato.getNombre()) &&
+                                    equalsOrNull(s.getCantidadObjeto(), platoD.getCantidad()))
                             .reduce((first, second) -> second)
                             .orElse(null);
                 }
         %>
         <li class="list-group-item">
-            <form action="/cliente/rutinas/guardarSeguimiento" method="post">
-                <h5><%=ej.getNombre()%></h5>
-                <input type="hidden" name="idRutina" value="<%=ejR.getRutina()%>">
-                <input type="hidden" name="dia" value="<%=ejR.getDiassemana()%>">
-                <input type="hidden" name="nombreEj" value="<%=ej.getNombre()%>">
-                <input type="hidden" name="pesoOb" value="<%=ejR.getPeso()%>">
-                <input type="hidden" name="repOb" value="<%=ejR.getRepeticiones()%>">
-                <input type="hidden" name="seriesOb" value="<%=ejR.getSeries()%>">
-                <p><strong>Series:</strong> <%=ejR.getSeries()%></p>
-                <p><strong>Repeticiones:</strong> <%=ejR.getRepeticiones()%></p>
-                <p><strong>Cantidad:</strong> <%=ejR.getPeso()%></p>
+            <form action="/cliente/dietas/guardarSeguimiento" method="post">
+                <h3><%=platoD.getFranjaHoraria()%></h3>
+                <h5><%=plato.getNombre()%></h5>
+                <input type="hidden" name="idDieta" value="<%=platoD.getIdDieta()%>">
+                <input type="hidden" name="dia" value="<%=platoD.getDiasSemana()%>">
+                <input type="hidden" name="nombrePl" value="<%=plato.getNombre()%>">
+                <input type="hidden" name="cantOb" value="<%=platoD.getCantidad()%>">
+                <p><strong>Calorías:</strong> <%=platoD.getCalorias()%></p>
+                <p><strong>Cantidad:</strong> <%=platoD.getCantidad()%></p>
                 <%-- <%= seguimiento.getVideo() %> --%>
-                <p>Mi rendimiento:</p>
+                <p>Mi progreso:</p>
                 <label>
-                    Ejercicio realizado
-                    <input type="checkbox" name="hecho" value="1"
-                        <%= (seguimiento != null && seguimiento.getRealizado() == 1) ? "checked" : "" %>>
+                    Plato comido
+                    <input type="checkbox" name="comido" value="1"
+                        <%= (seguimiento != null && seguimiento.getComido() == 1) ? "checked" : "" %>>
                 </label>
-                <p><strong>Series realizadas:</strong></p>
-                <input type="number" name="ser"
-                       value="<%= (seguimiento != null && seguimiento.getSeriesrealizadas() != null)
-                       ? seguimiento.getSeriesrealizadas() : ejR.getSeries() %>"><br />
-                <p><strong>Repeticiones realizadas:</strong></p>
-                <input type="number" name="rep"
-                       value="<%= (seguimiento != null && seguimiento.getRepeticionesrealizadas() != null)
-                       ? seguimiento.getRepeticionesrealizadas() : ejR.getRepeticiones() %>"><br /><br />
-                <p><strong>Cantidad realizada:</strong></p>
-                <input type="text" name="cant"
-                       value="<%= (seguimiento != null && seguimiento.getPesorealizado()  != null)
-                       ? seguimiento.getPesorealizado() : ejR.getPeso() %>"><br /><br />
+                <p><strong>Cantidad comida:</strong></p>
+                <input type="number" name="cant"
+                       value="<%= (seguimiento != null && seguimiento.getCantidad() != null)
+                       ? seguimiento.getCantidad() : platoD.getCantidad() %>"><br />
                 <p><strong>Observaciones:</strong></p>
                 <input type="text" name="obs"
                        value="<%= (seguimiento != null && seguimiento.getObservaciones() != null)

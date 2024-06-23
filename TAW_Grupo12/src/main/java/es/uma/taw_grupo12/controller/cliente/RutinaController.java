@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+//Nacho
 @Controller
 @RequestMapping("/cliente/rutinas")
 public class RutinaController {
@@ -30,8 +31,6 @@ public class RutinaController {
     EjercicioService ejercicioService;
     @Autowired
     SeguimientoObjetivosService seguimientoObjetivosService;
-    @Autowired
-
 
     @GetMapping("/")
     public String doSeleccionarRutina(HttpSession session, Model model) {

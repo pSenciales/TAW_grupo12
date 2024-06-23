@@ -12,6 +12,10 @@ public interface DietaRepository extends JpaRepository<Dieta, Integer> {
     @Query("select d from Dieta d where d.idcliente = ?1")
     Optional<Dieta> findByClienteId(Integer id);
 
+    //Nacho
+    @Query("select d from Dieta d where d.idcliente.idcliente = ?1")
+    List<Dieta> findAllByClienteId(Integer id);
+
     @Query("select d from Dieta d where d.nombre = ?1")
     Optional<Dieta> findByNombre(String nombre);
 

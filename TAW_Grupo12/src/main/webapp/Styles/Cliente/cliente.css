@@ -116,7 +116,7 @@ body {
 }
 
 .vertical-separator {
-    border-left: 2px solid #ddd; /* Establece el estilo de la línea vertical */
+    border-left: 2px solid #ddd;
     margin: 5% 0;
 }
 

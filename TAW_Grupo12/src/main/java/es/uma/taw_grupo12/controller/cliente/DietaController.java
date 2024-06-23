@@ -20,15 +20,13 @@ import java.util.List;
 public class DietaController {
 
     @Autowired
-    RutinaService rutinaService;
-    @Autowired
-    EjercicioRutinaService ejercicioRutinaService;
-    @Autowired
-    EjercicioService ejercicioService;
-    @Autowired
-    SeguimientoObjetivosService seguimientoObjetivosService;
+    SeguimientoDietaService seguimientoDietaService;
     @Autowired
     DietaService dietaService;
+    @Autowired
+    PlatoDietaService platoDietaService;
+    @Autowired
+    PlatoService platoService;
 
     @GetMapping("/")
     public String doSeleccionarRutina(HttpSession session, Model model) {
@@ -36,7 +34,7 @@ public class DietaController {
         if(c == null)
             return "redirect:/cliente/error";
 
-        model.addAttribute("dietas");
+        model.addAttribute("dietas", c.getDietaList());
         model.addAttribute("dia", null);
         model.addAttribute("listaEjerciciosRutina", null);
         model.addAttribute("listaEjercicios", null);
@@ -51,78 +49,71 @@ public class DietaController {
         if(c == null)
             return "redirect:/cliente/error";
 
-        List<EjercicioDTO> ejercicioDTOList = new ArrayList<>();
-        List<EjercicioRutinaDTO> ejercicioRutinaDTOList = new ArrayList<>();
+        List<PlatoDTO> platoDTOList = new ArrayList<>();
+        List<PlatoDietaDTO> platoDietaDTOList = new ArrayList<>();
 
-        for(EjercicioRutinaDTO ejercicioRutinaDTO : ejercicioRutinaService.findAllByRutinaId(id)) {
-            if(ejercicioRutinaDTO.getDiassemana() != null && ejercicioRutinaDTO.getDiassemana().equalsIgnoreCase(dia)) {
-                ejercicioRutinaDTOList.add(ejercicioRutinaDTO);
-                ejercicioDTOList.add(ejercicioService.findById(ejercicioRutinaDTO.getEjercicio()));
+        for(PlatoDietaDTO platoDietaDTO : platoDietaService.findAllByRutinaId(id)) {
+            if(platoDietaDTO.getDiasSemana() != null && platoDietaDTO.getDiasSemana().equalsIgnoreCase(dia)) {
+                platoDietaDTOList.add(platoDietaDTO);
+                platoDTOList.add(platoService.findById(platoDietaDTO.getIdPlato()));
             }
         }
 
-        /* Devuelve los ejercicios de la rutina y sus ejercicios base asociados en el mismo orden */
-        model.addAttribute("rutinas", c.getRutinaList());
+        /* Devuelve los platos de la dieta y sus platos base asociados en el mismo orden */
+        model.addAttribute("dietas", c.getDietaList());
         model.addAttribute("dia", dia);
-        model.addAttribute("listaEjerciciosRutina", ejercicioRutinaDTOList);
-        model.addAttribute("listaEjercicios", ejercicioDTOList);
+        model.addAttribute("listaPlatosDieta", platoDietaDTOList);
+        model.addAttribute("listaPlatos", platoDTOList);
         model.addAttribute("listaSeguimientos",
-                seguimientoObjetivosService.findByClienteAndRutina(c.getIdcliente(), id));
+                seguimientoDietaService.findByIdClienteAndIdDieta(c.getIdcliente(), id));
         return "Cliente/detallesDieta";
     }
 
     @PostMapping("/guardarSeguimiento")
     public String guardarSeguimiento(
-            @RequestParam("idRutina") Integer idRutina,
+            @RequestParam("idDieta") Integer idDieta,
             @RequestParam("dia") String dia,
-            @RequestParam("nombreEj") String nombreEj,
-            @RequestParam("pesoOb") String pesoOb,
-            @RequestParam("repOb") Integer repOb,
-            @RequestParam("seriesOb") Integer seriesOb,
-            @RequestParam(value = "hecho", required = false, defaultValue = "0") short hecho,
-            @RequestParam(value = "ser", required = false, defaultValue = "0") Integer seriesRealizadas,
-            @RequestParam(value = "rep",required = false, defaultValue = "0") Integer repeticionesRealizadas,
-            @RequestParam("cant") String cantidadRealizada,
+            @RequestParam("nombrePlato") String nombrePlato,
+            @RequestParam("cantOb") String cantOb,
+            @RequestParam(value = "comido", required = false, defaultValue = "0") short comido,
+            @RequestParam(value = "cantidadComida", required = false, defaultValue = "0") Integer cantidadComida,
             @RequestParam("obs") String observaciones,
             HttpSession session,
             Model model)
     {
-        SeguimientoObjetivosDTO seguimiento = new SeguimientoObjetivosDTO();
+        SeguimientoDietaDTO seguimiento = new SeguimientoDietaDTO();
         ClienteDTO c = (ClienteDTO) session.getAttribute("usuario");
         if(c == null)
             return "redirect:/cliente/error";
 
-        seguimiento.setRutina(idRutina);
-        seguimiento.setCliente(c.getIdcliente());
+        seguimiento.setIdDieta(idDieta);
+        seguimiento.setIdCliente(c.getIdcliente());
         seguimiento.setFecha(new Date());
-        seguimiento.setNombreejercicio(nombreEj);
-        seguimiento.setPesoobjetivo(pesoOb);
-        seguimiento.setRepeticionesobjetivo(repOb);
-        seguimiento.setSeriesobjetivo(seriesOb);
-        seguimiento.setRealizado(hecho);
-        seguimiento.setSeriesrealizadas(seriesRealizadas);
-        seguimiento.setRepeticionesrealizadas(repeticionesRealizadas);
-        seguimiento.setPesorealizado(String.valueOf(cantidadRealizada));
+        seguimiento.setNombrePlato(nombrePlato);
+        seguimiento.setCantidadObjeto(cantOb);
+        seguimiento.setComido(comido);
+        seguimiento.setCantidad(cantidadComida);
         seguimiento.setObservaciones(observaciones);
 
-        seguimientoObjetivosService.guardarSeguimiento(seguimiento);
+        seguimientoDietaService.guardarSeguimiento(seguimiento);
 
-        List<EjercicioDTO> ejercicioDTOList = new ArrayList<>();
-        List<EjercicioRutinaDTO> ejercicioRutinaDTOList = new ArrayList<>();
+        List<PlatoDTO> platoDTOList = new ArrayList<>();
+        List<PlatoDietaDTO> platoDietaDTOList = new ArrayList<>();
 
-        for(EjercicioRutinaDTO ejercicioRutinaDTO : ejercicioRutinaService.findAllByRutinaId(idRutina)) {
-            if(ejercicioRutinaDTO.getDiassemana() != null && ejercicioRutinaDTO.getDiassemana().equalsIgnoreCase(dia)) {
-                ejercicioRutinaDTOList.add(ejercicioRutinaDTO);
-                ejercicioDTOList.add(ejercicioService.findById(ejercicioRutinaDTO.getEjercicio()));
+        for(PlatoDietaDTO platoDietaDTO : platoDietaService.findAllByRutinaId(idDieta)) {
+            if(platoDietaDTO.getDiasSemana() != null && platoDietaDTO.getDiasSemana().equalsIgnoreCase(dia)) {
+                platoDietaDTOList.add(platoDietaDTO);
+                platoDTOList.add(platoService.findById(platoDietaDTO.getIdPlato()));
             }
         }
 
-        model.addAttribute("rutinas", c.getRutinaList());
+        /* Devuelve los platos de la dieta y sus platos base asociados en el mismo orden */
+        model.addAttribute("dietas", c.getDietaList());
         model.addAttribute("dia", dia);
-        model.addAttribute("listaEjerciciosRutina", ejercicioRutinaDTOList);
-        model.addAttribute("listaEjercicios", ejercicioDTOList);
+        model.addAttribute("listaPlatosDieta", platoDietaDTOList);
+        model.addAttribute("listaPlatos", platoDTOList);
         model.addAttribute("listaSeguimientos",
-                seguimientoObjetivosService.findByClienteAndRutina(c.getIdcliente(), idRutina));
+                seguimientoDietaService.findByIdClienteAndIdDieta(c.getIdcliente(), idDieta));
         return "Cliente/detallesDieta";
     }
 }

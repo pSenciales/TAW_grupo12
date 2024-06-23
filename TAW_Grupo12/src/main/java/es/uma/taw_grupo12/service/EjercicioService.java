@@ -3,15 +3,9 @@ package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dao.EjercicioRutinaRepository;
 import es.uma.taw_grupo12.dto.EjercicioDTO;
-import es.uma.taw_grupo12.dto.EjercicioRutinaDTO;
 import es.uma.taw_grupo12.entity.Ejercicio;
 import es.uma.taw_grupo12.dao.EjercicioRepository;
 import es.uma.taw_grupo12.entity.EjercicioRutina;
-import es.uma.taw_grupo12.dto.PlatoDTO;
-import es.uma.taw_grupo12.entity.Ejercicio;
-import es.uma.taw_grupo12.dao.EjercicioRepository;
-import es.uma.taw_grupo12.entity.EjercicioRutina;
-import es.uma.taw_grupo12.entity.Plato;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;

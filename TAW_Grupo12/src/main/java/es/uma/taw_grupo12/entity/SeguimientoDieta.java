@@ -10,6 +10,7 @@ import java.util.Date;
 import es.uma.taw_grupo12.dto.DTO;
 import es.uma.taw_grupo12.dto.SeguimientoDietaDTO;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 /**
  *
@@ -48,6 +49,7 @@ public class SeguimientoDieta implements Serializable , DTO<SeguimientoDietaDTO>
     @JoinColumn(name = "iddieta", referencedColumnName = "iddieta")
     @ManyToOne(optional = false)
     private Dieta dieta;
+    @Getter
     @JoinColumn(name = "idcliente", referencedColumnName = "idcliente", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Cliente cliente;
@@ -161,5 +163,9 @@ public class SeguimientoDieta implements Serializable , DTO<SeguimientoDietaDTO>
 
         return seguimientoDieta;
     }
-    
+
+    //Nacho
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 }

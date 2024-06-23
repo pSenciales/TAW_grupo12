@@ -23,6 +23,7 @@ public class SeguimientoObjetivosDTO {
     private Integer rutina;
     private Integer cliente;
 
+    //Nacho
     public static boolean equalsOrNull(Object a, Object b) {
         return (a == b) || (a != null && a.equals(b));
     }

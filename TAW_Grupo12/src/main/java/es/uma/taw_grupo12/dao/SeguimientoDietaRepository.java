@@ -4,6 +4,7 @@ import es.uma.taw_grupo12.entity.SeguimientoDieta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +17,12 @@ public interface SeguimientoDietaRepository extends JpaRepository<SeguimientoDie
 
     @Query("select d from SeguimientoDieta d where d.cliente.idcliente = ?1 and d.dieta.iddieta = ?2")
     List<SeguimientoDieta> findByClienteIdAndDietaId(Integer idCliente, Integer idDieta);
+
+    //Nacho
+    @Query("select s from SeguimientoDieta s where s.nombreplato like concat('%',?1,'%') and s.cliente.idcliente = ?2 and s.dieta.iddieta = ?3 order by s.fecha")
+    List<SeguimientoDieta> findByNombrePlato(String nombre, Integer idcliente, Integer idDieta);
+
+    //Nacho
+    @Query("select s from SeguimientoDieta s where s.nombreplato like concat('%',?1,'%') and s.cliente.idcliente = ?2 and s.dieta.iddieta = ?3 and s.fecha = ?4 order by s.fecha")
+    List<SeguimientoDieta> findByNombrePlatoAndFecha(String nombre, Integer idcliente, Integer idDieta, Date fecha);
 }

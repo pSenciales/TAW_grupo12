@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="vertical-separator"></div>
-    <div class="left-panel">
+    <div class="right-panel">
         <div class="plans">
             <p class="text-center text-decoration-underline fw-bold">Mis planes:</p>
             <div class="container">
@@ -47,14 +47,16 @@
                     if(!cliente.getRutinaList().isEmpty()) {
                         for (Rutina r : cliente.getRutinaList()) {
                 %>
-                            <div class="row">
-                                <div class="col"><a href="#"><%=r.getNombre()%></a><br/></div>
-                            </div>
+                <div class="row">
+                    <div class="col-12">
+                        <%=r.getNombre()%>
+                    </div>
+                </div>
                 <%
-                        }
-                    } else {
+                    }
+                } else {
                 %>
-                    <p> No tienes rutinas asignadas</p>
+                <p>No tienes rutinas asignadas</p>
                 <%
                     }
                 %>
@@ -64,37 +66,41 @@
                     if(!cliente.getDietaList().isEmpty()) {
                         for (Dieta d : cliente.getDietaList()) {
                 %>
-                            <div class="row">
-                                <div class="col"><a href="#"><%=d.getNombre()%></a><br/></div>
-                            </div>
+                <div class="row">
+                    <div class="col-12">
+                        <%=d.getNombre()%>
+                    </div>
+                </div>
                 <%
-                        }
-                    } else {
+                    }
+                } else {
                 %>
-                    <p> No tienes dietas asignadas</p>
+                <p>No tienes dietas asignadas</p>
                 <%
                     }
                 %>
             </div>
         </div>
-        <div class = "workers">
+        <div class="workers">
             <p class="text-center text-decoration-underline fw-bold">Personal asignado:</p>
             <div class="container">
-            <%
-                if(!trabajadorList.isEmpty()) {
-                    for (TrabajadorDTO t : trabajadorList) {
-            %>
-                        <div class="row">
-                            <div class="col"><%=t.getTipo() + ": "%><a href="#"><%=t.getNombre()%></a><br/></div>
-                        </div>
-            <%
+                <%
+                    if(!trabajadorList.isEmpty()) {
+                        for (TrabajadorDTO t : trabajadorList) {
+                %>
+                <div class="row">
+                    <div class="col-12">
+                        <%=t.getTipo() + ": " + t.getNombre()%>
+                    </div>
+                </div>
+                <%
                     }
                 } else {
-            %>
-                <p> No tienes trabajadores asignados</p>
-            <%
-                }
-            %>
+                %>
+                <p>No tienes trabajadores asignados</p>
+                <%
+                    }
+                %>
             </div>
         </div>
     </div>

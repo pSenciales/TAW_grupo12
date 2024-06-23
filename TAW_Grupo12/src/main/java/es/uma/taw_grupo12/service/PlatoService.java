@@ -137,5 +137,12 @@ public class PlatoService {
 
         this.platoRepository.save(plato);
     }
+
+    //Nacho
+    public PlatoDTO findById(Integer idPlato) {
+        Plato p = platoRepository.findById(idPlato).orElse(null);
+
+        return p.toDTO();
+    }
     //@Victoria
 }

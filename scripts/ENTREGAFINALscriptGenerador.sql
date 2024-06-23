@@ -553,3 +553,6 @@ INSERT INTO taw12.seguimientoobjetivos (idseguimiento, idrutina, idcliente, fech
 
 INSERT INTO taw12.administrador (email, contrasenya) VALUES ('admin@gmail.com', 'admin');
 
+INSERT INTO taw12.dieta (iddieta,nombre,idcliente) VALUES (59,'Dieta para Juan',1);
+INSERT INTO taw12.dieta (iddieta,nombre,idcliente) VALUES (60,'Dieta 2 para Juan',1);
+

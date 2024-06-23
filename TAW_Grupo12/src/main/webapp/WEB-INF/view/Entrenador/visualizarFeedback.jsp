@@ -1,3 +1,5 @@
+
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="option" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
@@ -8,7 +10,12 @@
 <%@ page import="es.uma.taw_grupo12.dto.*" %>
 <%@ page import="es.uma.taw_grupo12.entity.SeguimientoObjetivos" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%--Created by IntelliJ IDEA.
+User: pablo
+Date: 16/05/2024
+Time: 16:00
+To change this template use File | Settings | File Templates.
+--%>
 <%
     ClienteDTO cliente = (ClienteDTO) request.getAttribute("cliente");
     RutinaDTO rutina = (RutinaDTO) request.getAttribute("rutina");

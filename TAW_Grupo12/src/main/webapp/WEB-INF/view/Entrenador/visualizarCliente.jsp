@@ -10,7 +10,7 @@
 <%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %>
 <%@ page import="java.util.StringJoiner" %><%--
   Created by IntelliJ IDEA.
-  User: Usuario
+  User: pablo
   Date: 16/05/2024
   Time: 16:00
   To change this template use File | Settings | File Templates.
@@ -55,6 +55,9 @@
                     <h4>Perfil del Cliente</h4>
                 </div>
                 <div class="card-body">
+                    <img src="<%=cliente.getImagenBase64() != null ? "data:image/jpeg;base64," + cliente.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
+                         alt="Imagen de perfil" class="imagen">
+
                     <div class="mb-3">
                         <label class="form-label"><strong>Nombre:</strong></label>
                         <p class="form-control-plaintext"><%=cliente.getNombre()%></p>

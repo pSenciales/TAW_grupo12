@@ -143,7 +143,7 @@ public class AdministradorController extends BaseController{
         model.addAttribute("trabajadores", trabajadoresDTO);
         model.addAttribute("tituloCabeceraAdmin", "Gestionar Usuarios");
 
-        return "/Administrador/GestionarUsuarios/gestionarUsuarios";
+        return "/Administrador/Gestion/gestionarUsuarios";
     }
 
     @PostMapping("/filtrarGestionarUsuarios")
@@ -184,7 +184,7 @@ public class AdministradorController extends BaseController{
         model.addAttribute("trabajadores", trabajadoresDTO);
         model.addAttribute("clientes", clientesDTO);
         model.addAttribute("tituloCabeceraAdmin", "Gestionar Clientes");
-        return "/Administrador/GestionarUsuarios/gestionarUsuarios";
+        return "/Administrador/Gestion/gestionarUsuarios";
     }
 
     @PostMapping("/eliminarCliente")

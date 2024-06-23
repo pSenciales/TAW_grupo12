@@ -1,3 +1,8 @@
+/**
+ * @author Ignacio Morillas Rossell (1/3)
+ * @author 	PABLO SENCIALES DE LA HIGUERA (2/3)
+ */
+
 package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dao.ClienteRepository;
@@ -22,6 +27,7 @@ public class SeguimientoObjetivosService {
     @Autowired
     ClienteRepository clienteRepository;
 
+    //@Pablo
     public List<SeguimientoObjetivosDTO> findByClienteAndRutina(Integer idcliente, Integer idrutina) {
         List<SeguimientoObjetivos> seguimientoObjetivos = seguimientoObjetivosRepository.findByClienteAndRutina(idcliente, idrutina);
         List<SeguimientoObjetivosDTO> seguimientoObjetivosDTOS = new ArrayList<>();
@@ -32,6 +38,7 @@ public class SeguimientoObjetivosService {
     }
 
 
+    //@Pablo
     public List<SeguimientoObjetivosDTO> findByNombreEjercicioAndFecha(String nombre, Integer idcliente, Integer idrutina, Date fecha) {
 
         List<SeguimientoObjetivos> seguimientoObjetivos = fecha == null ?

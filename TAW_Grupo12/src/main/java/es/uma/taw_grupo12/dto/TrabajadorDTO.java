@@ -24,6 +24,7 @@ public class TrabajadorDTO {
     }
     //@Victoria
 
+    //@Pablo
     public String getTipo(){
         if (this.tipo == null) {
             return "";
@@ -35,6 +36,7 @@ public class TrabajadorDTO {
             default -> "";
         };
     }
+    //@Pablo
 
     public String getTipoRaw(){
         return this.tipo;

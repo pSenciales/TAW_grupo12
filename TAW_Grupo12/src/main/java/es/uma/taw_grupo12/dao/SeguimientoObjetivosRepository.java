@@ -1,3 +1,6 @@
+/**
+ * @author Pablo Senciales de la Higuera
+ */
 package es.uma.taw_grupo12.dao;
 
 import es.uma.taw_grupo12.entity.SeguimientoObjetivos;

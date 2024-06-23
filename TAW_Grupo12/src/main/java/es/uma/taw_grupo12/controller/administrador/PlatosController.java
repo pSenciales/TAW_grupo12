@@ -40,7 +40,7 @@ public class PlatosController extends BaseController {
         model.addAttribute("platoModel", new PlatoDTO());
         model.addAttribute("platoNuevo", new PlatoDTO());
         model.addAttribute("tituloCabeceraAdmin", "Gestionar Platos");
-        return "/Administrador/GestionarPlatos/gestionarPlatos";
+        return "/Administrador/Gestion/gestionarPlatos";
     }
 
     @PostMapping("/filtrarGestionarPlatos")
@@ -66,7 +66,7 @@ public class PlatosController extends BaseController {
         model.addAttribute("tituloCabeceraAdmin", "Gestionar Platos");
         model.addAttribute("filtroPlatos", filtroPlatos);
 
-        return "/Administrador/GestionarPlatos/gestionarPlatos";
+        return "/Administrador/Gestion/gestionarPlatos";
     }
 
     @PostMapping("/guardarPlato")

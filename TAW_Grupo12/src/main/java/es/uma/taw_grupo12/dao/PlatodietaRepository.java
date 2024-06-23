@@ -1,3 +1,8 @@
+/**
+ * @author María Victoria Huesca Peláez (1/2)
+ * @author LONGXIANG CHEN CHEN	 (1/2)
+ */
+
 package es.uma.taw_grupo12.dao;
 
 import es.uma.taw_grupo12.entity.PlatoDieta;

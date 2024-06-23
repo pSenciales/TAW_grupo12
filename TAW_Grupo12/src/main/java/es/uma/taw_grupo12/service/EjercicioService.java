@@ -1,3 +1,11 @@
+/**
+ * @author María Victoria Huesca Peláez (7/12)
+ * @author Ignacio Morillas Rossell (1/12)
+ * @author Guillermo Pichaco Panal (3/12)
+ * @author 	PABLO SENCIALES DE LA HIGUERA (1/12
+ * @author Chen Chen Longxiang
+ */
+
 package es.uma.taw_grupo12.service;
 
 
@@ -38,7 +46,6 @@ public class EjercicioService {
         }
         return ejerciciosDTO;
     }
-    //@Pablo
 
     //@Guillermo
     public List<EjercicioDTO> getAll() {
@@ -84,6 +91,7 @@ public class EjercicioService {
         assert (ejercicio != null);
         return ejercicio.toDTO();
     }
+
     //@Victoria
     public List<EjercicioDTO> listarEjerciciosDTO(String busqueda) {
         List<Ejercicio> ejercicios = this.ejercicioRepository.findAllByNombre(busqueda);
@@ -127,8 +135,6 @@ public class EjercicioService {
     public Ejercicio buscarEjercicioNombre(String nombre) {
         return this.ejercicioRepository.findByNombre(nombre).orElse(null);
     }
-
-
 
     public void crearEjercicio(EjercicioDTO ejercicioDTO) throws IOException {
         Ejercicio ejercicioNuevo = new Ejercicio();

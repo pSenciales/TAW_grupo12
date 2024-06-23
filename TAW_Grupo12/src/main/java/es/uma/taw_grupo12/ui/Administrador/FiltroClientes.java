@@ -1,3 +1,7 @@
+/**
+ * @author María Victoria Huesca Peláez
+ */
+
 package es.uma.taw_grupo12.ui.Administrador;
 
 public class FiltroClientes {

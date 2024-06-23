@@ -1,4 +1,7 @@
-
+/**
+ * @author María Victoria Huesca Peláez (8/9)
+ * @author Ignacio Morillas Rossell (1/9)
+ */
 
 package es.uma.taw_grupo12.service;
 
@@ -137,6 +140,7 @@ public class PlatoService {
 
         this.platoRepository.save(plato);
     }
+    //@Victoria
 
     //Nacho
     public PlatoDTO findById(Integer idPlato) {
@@ -144,5 +148,5 @@ public class PlatoService {
 
         return p.toDTO();
     }
-    //@Victoria
+
 }

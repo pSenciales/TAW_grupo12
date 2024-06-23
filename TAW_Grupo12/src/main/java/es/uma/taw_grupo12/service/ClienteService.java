@@ -1,3 +1,9 @@
+/**
+ * @author María Victoria Huesca Peláez (6/8)
+ * @author Ignacio Morillas Rossell (1/8)
+ * @author 	PABLO SENCIALES DE LA HIGUERA (1/8)
+ */
+
 package es.uma.taw_grupo12.service;
 
 import es.uma.taw_grupo12.dao.ClienteRepository;
@@ -101,6 +107,7 @@ public class ClienteService {
     }
     //@Victoria
 
+    //@Pablo
     public List<ClienteDTO> findByTrabajador(Integer idtrabajador) {
         List<ClienteDTO> clientesDTO = new ArrayList<>();
         List<Cliente> cliente = clienteRepository.findByTrabajador(idtrabajador);

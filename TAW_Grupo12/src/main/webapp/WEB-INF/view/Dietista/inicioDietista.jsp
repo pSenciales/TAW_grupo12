@@ -8,6 +8,10 @@
     TrabajadorDTO trabajador = (TrabajadorDTO) request.getAttribute("trabajador");
     List<DietaDTO> dietas = (List<DietaDTO>) request.getAttribute("dietas");
 %>
+
+<%--Created by IntelliJ IDEA.
+User: Chen Chen Longxiang
+--%>
 <!DOCTYPE html>
 <html lang="es">
     <head>

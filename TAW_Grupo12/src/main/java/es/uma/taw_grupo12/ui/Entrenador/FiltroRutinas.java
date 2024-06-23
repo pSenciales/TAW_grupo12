@@ -1,3 +1,7 @@
+/**
+ * @author Pablo Senciales de la Higuera
+ */
+
 package es.uma.taw_grupo12.ui.Entrenador;
 
 import lombok.Data;

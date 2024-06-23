@@ -1,3 +1,7 @@
+/**
+ * @author María Victoria Huesca Peláez
+ */
+
 package es.uma.taw_grupo12.ui.Administrador;
 
 import java.util.List;

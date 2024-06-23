@@ -1,3 +1,7 @@
+/**
+ * @author Ignacio Morillas Rossell (2/5)
+ * @author Chen Chen Longxiang (3/5)
+ */
 package es.uma.taw_grupo12.dao;
 
 import es.uma.taw_grupo12.entity.SeguimientoDieta;

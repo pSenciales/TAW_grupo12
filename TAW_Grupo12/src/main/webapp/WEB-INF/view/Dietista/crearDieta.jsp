@@ -9,6 +9,9 @@
     List<PlatoDTO> platos = (List<PlatoDTO>) request.getAttribute("platos");
     List<ClienteDTO> clientes = (List<ClienteDTO>) request.getAttribute("clientes");
 %>
+<%--Created by IntelliJ IDEA.
+User: Chen Chen Longxiang
+--%>
 <!DOCTYPE html>
 <html lang="es">
     <head>

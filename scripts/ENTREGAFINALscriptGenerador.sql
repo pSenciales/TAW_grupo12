@@ -366,6 +366,7 @@ INSERT INTO `taw12`.`Plato` (`nombre`, `descripcion`, `alergenos`) VALUES
 ('Arroz al Horno', 'Arroz al horno con costillas, morcilla, garbanzos y tomate.', 'Sulfitos'),
 ('Calamares en su Tinta', 'Calamares cocidos en su tinta, con cebolla y vino blanco.', 'Moluscos'),
 ('Sopa de Ajo', 'Sopa caliente de ajo con pan, pimentón y huevo escalfado.', 'Gluten, Huevo');
+
         
         USE taw12;
 

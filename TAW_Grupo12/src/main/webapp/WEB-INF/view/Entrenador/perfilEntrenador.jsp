@@ -19,6 +19,7 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="/Styles/Entrenador/perfilEntrenador.css">
+
 </head>
 <body>
 <jsp:include page="cabeceraEntrenador.jsp"></jsp:include>
@@ -35,6 +36,8 @@
                     <div class="card-header bg-primary text-white">
                         <h4>Perfil de entrenador de fuerza</h4>
                     </div>
+                    <img  src="<%=trabajador.getImagenBase64() != null ? "data:image/jpeg;base64," + trabajador.getImagenBase64() : "/Images/Administrador/perfilDefault.jpg" %>"
+                         alt="Imagen de perfil" class="imagen">
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label"><strong>Nombre:</strong></label>

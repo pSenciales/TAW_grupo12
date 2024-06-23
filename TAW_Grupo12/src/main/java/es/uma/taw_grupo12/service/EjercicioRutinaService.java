@@ -25,6 +25,7 @@ public class EjercicioRutinaService {
     @Autowired
     private EjercicioRepository ejercicioRepository;
 
+    //@Pablo
     public void save(EjercicioRutinaDTO ejercicioRutinaDTO) {
         EjercicioRutina ejercicioRutina = new EjercicioRutina();
         Rutina rutina = rutinaRepository.findById(ejercicioRutinaDTO.getRutina()).orElse(null);
@@ -63,6 +64,7 @@ public class EjercicioRutinaService {
 
     }
 
+    //@Pablo
     public List<EjercicioRutinaDTO> findAllByRutinaId(Integer id) {
         List<EjercicioRutina> ejercicioRutinas = ejercicioRutinaRepository.findAllByRutinaId(id);
         List<EjercicioRutinaDTO> ejercicioRutinaDTOs = new ArrayList<>();
@@ -73,6 +75,7 @@ public class EjercicioRutinaService {
         return ejercicioRutinaDTOs;
     }
 
+    //@Pablo
     public void cambiarOrden(Integer id, boolean b) {
         EjercicioRutina curr = ejercicioRutinaRepository.findById(id).orElse(null);
         assert (curr != null);
@@ -91,12 +94,14 @@ public class EjercicioRutinaService {
 
     }
 
+    //@Pablo
     public EjercicioRutinaDTO findById(Integer id) {
         EjercicioRutina ejercicioRutina = ejercicioRutinaRepository.findById(id).orElse(null);
         assert (ejercicioRutina != null);
         return ejercicioRutina.toDTO();
     }
 
+    //@Pablo
     public void deleteById(Integer id) {
         EjercicioRutina ejercicioRutina = ejercicioRutinaRepository.findById(id).orElse(null);
         assert ejercicioRutina != null;
@@ -110,6 +115,7 @@ public class EjercicioRutinaService {
 
     }
 
+    //@Pablo
     private void desfragmentar(List<EjercicioRutina> rutinas) {
         for (EjercicioRutina ejercicioRutina : rutinas) {
             ejercicioRutina.setOrden(ejercicioRutina.getOrden() - 1);

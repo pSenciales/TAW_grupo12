@@ -10,7 +10,7 @@
 <%@ page import="es.uma.taw_grupo12.dto.ClienteDTO" %>
 <%@ page import="java.util.StringJoiner" %><%--
   Created by IntelliJ IDEA.
-  User: Usuario
+  User: pablo
   Date: 16/05/2024
   Time: 16:00
   To change this template use File | Settings | File Templates.

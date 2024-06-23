@@ -38,7 +38,6 @@ public class EjercicioService {
         }
         return ejerciciosDTO;
     }
-    //@Pablo
 
     //@Guillermo
     public List<EjercicioDTO> getAll() {

@@ -50,7 +50,7 @@ public class RutinaService {
             rutinaRepository.saveAndFlush(rutina);
     }
 
-
+    //@Pablo
     public List<RutinaDTO> findAllByTrabajador(Integer id) {
         List<RutinaDTO> lista = new ArrayList<>();
         List<Rutina> rutinas = rutinaRepository.findAllByTrabajador(id);
@@ -61,10 +61,12 @@ public class RutinaService {
         return lista;
     }
 
+    //@Pablo
     public void deleteById(int id) {
         rutinaRepository.deleteById(id);
     }
 
+    //@Pablo
     public List<RutinaDTO> findByFiltro(FiltroRutinas filtro, Integer idTrabajador) {
         String nombre = filtro.getNombre() == null ? "" : filtro.getNombre();
 
@@ -80,6 +82,7 @@ public class RutinaService {
         return listaDTO;
     }
 
+    //@Pablo
     public List<RutinaDTO> findAllByTrabajadorAndCliente(Integer idtrabajador, Integer idcliente) {
         List<Rutina> rutinas = rutinaRepository.findAllByTrabajadorAndCliente(idtrabajador, idcliente);
         List<RutinaDTO> listaDTO = new ArrayList<>();

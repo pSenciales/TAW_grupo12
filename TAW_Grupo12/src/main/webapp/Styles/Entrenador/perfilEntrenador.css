@@ -12,3 +12,15 @@
     justify-content: center;
     gap: 20px;
 }
+
+.imagen {
+    width: 30%;
+    border-radius: 50%;
+    margin-top: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.card-body {
+    text-align: center;
+}

@@ -444,7 +444,7 @@ VALUES	('Juan Pérez', 'juan.perez@example.com', 'contraseña1', NULL, 70.5, 170
 
 
 -- Añadir trabajadores
--- Dietistas
+-- Dietistas
 INSERT INTO taw12.Trabajador (nombre, email, contrasenya, tipo, imagenPerfil) 
 VALUES	('María González', 'maria.gonzalez@example.com', 'contraseña1', 'DIETISTA', NULL),
 		('Pedro Sánchez', 'pedro.sanchez@example.com', 'contraseña2', 'DIETISTA', NULL),
@@ -461,7 +461,7 @@ INSERT INTO taw12.Trabajador (nombre, email, contrasenya, tipo, imagenPerfil)
 VALUES 	('Elena Martínez', 'elena.martinez@example.com', 'contraseña7', 'ENTRENADOR CROSSTRAINING', NULL),
 		('Mario Gómez', 'mario.gomez@example.com', 'contraseña8', 'ENTRENADOR CROSSTRAINING', NULL),
 		('Sara Fernández', 'sara.fernandez@example.com', 'contraseña9', 'ENTRENADOR CROSSTRAINING', NULL);
---Más trabjadores
+-- Más trabjadores
 INSERT INTO `taw12`.`Trabajador` (`nombre`, `email`, `contrasenya`, `tipo`) VALUES
 ('Pedro Álvarez', 'pedro.alvarez@example.com', 'pass123', 'ENTRENADOR FUERZA'),
 ('Lucía Torres', 'lucia.torres@example.com', 'pass123', 'ENTRENADOR FUERZA'),
@@ -515,7 +515,7 @@ VALUES
     
     -- Cliente Ana López (idCliente = 5) con trabajadores
     (5, 6), -- Ana López con Carlos Pérez (Entrenador de Fuerza)
-    (5, 7); -- Ana López con Elena Martínez (Entrenador Crosstraining)
+    (5, 7), -- Ana López con Elena Martínez (Entrenador Crosstraining)
     
     -- Cliente Carlos Fernández (idCliente = 6) con más entrenadores
     (6, 7),   -- Carlos Fernández con Elena Martínez (Entrenador Crosstraining)
@@ -533,23 +533,62 @@ VALUES
     (9, 8),   -- María López con Mario Gómez (Entrenador de Fuerza)
     (9, 9);   -- María López con Sara Fernández (Entrenador Crosstraining)
 
+-- Rutinas
+-- Cross
 INSERT INTO taw12.rutina (idrutina, nombre, idcliente, idtrabajador) VALUES (1, 'nueva', 3, 7);
+INSERT INTO taw12.rutina (idrutina, nombre, idcliente, idtrabajador) VALUES (2, 'Mes julio', 1, 4);
+INSERT INTO taw12.rutina (idrutina, nombre, idcliente, idtrabajador) VALUES (3, 'Iniciamiento', 1, 4);
+INSERT INTO taw12.rutina (idrutina, nombre, idcliente, idtrabajador) VALUES (4, 'Rutina ganancia muscular', 2, 4);
 INSERT INTO taw12.rutina (idrutina, nombre, idcliente, idtrabajador) VALUES (5, 'AnaRutina', 5, 7);
 INSERT INTO taw12.rutina (idrutina, nombre, idcliente, idtrabajador) VALUES (6, 'Nueva Rutina Ana', 5, 7);
 
-INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (2, 1, 18, '', 20, 2, 0, 'Lunes');
-INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (6, 5, 7, '100 m', 1, 4, 0, 'Lunes');
-INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (7, 5, 4, '10 largos', 2, 3, 1, 'Lunes');
-INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (8, 1, 8, '', 2, 2, 0, 'Martes');
-INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (9, 1, 32, '', 1, 2, 1, 'Miércoles');
-INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (11, 1, 4, '40 largos', 1, 2, 1, 'Lunes');
-INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (13, 6, 5, '50 km', 1, 1, 0, 'Lunes');
-INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (14, 1, 7, '30 m', 5, 2, 0, 'Miércoles');
-INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (15, 1, 17, '', 10, 4, 0, 'Jueves');
-INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (16, 1, 29, '30 min', 1, 1, 0, 'Viernes');
 
+
+-- EjercicioRutina
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (36, 1, 18, '', 20, 2, 0, 'Lunes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (37, 5, 7, '100 m', 1, 4, 0, 'Lunes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (38, 5, 4, '10 largos', 2, 3, 1, 'Lunes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (39, 1, 8, '', 2, 2, 0, 'Martes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (40, 1, 32, '', 1, 2, 1, 'Miércoles');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (41, 1, 4, '40 largos', 1, 2, 1, 'Lunes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (42, 6, 5, '50 km', 1, 1, 0, 'Lunes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (43, 1, 7, '30 m', 5, 2, 0, 'Miércoles');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (44, 1, 17, '', 10, 4, 0, 'Jueves');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (45, 1, 29, '30 min', 1, 1, 0, 'Viernes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (46, 2, 1, '30', 12, 4, 0, 'Lunes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (47, 2, 26, '15', 10, 4, 1, 'Lunes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (48, 2, 25, '10', 15, 2, 2, 'Lunes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (49, 2, 2, '20', 10, 4, 0, 'Miércoles');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (50, 2, 17, '10', 12, 4, 1, 'Miércoles');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (51, 2, 15, '30', 10, 4, 2, 'Miércoles');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (52, 2, 18, '10', 15, 4, 0, 'Domingo');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (53, 2, 30, '10', 10, 3, 1, 'Domingo');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (54, 3, 2, '5', 10, 4, 0, 'Lunes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (55, 3, 17, '5', 10, 4, 1, 'Lunes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (56, 3, 1, '10', 10, 4, 0, 'Jueves');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (57, 3, 26, '5', 10, 4, 0, 'Martes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (58, 3, 25, '10', 10, 4, 1, 'Jueves');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (59, 3, 18, '10', 10, 4, 0, 'Sábado');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (60, 4, 2, '30', 15, 5, 0, 'Martes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (61, 4, 15, '35', 12, 4, 1, 'Martes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (62, 4, 26, '25', 12, 4, 0, 'Jueves');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (63, 4, 25, '20', 12, 4, 1, 'Jueves');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (64, 4, 26, '20', 12, 4, 2, 'Jueves');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (65, 4, 2, '30', 12, 4, 0, 'Viernes');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (66, 4, 18, '15', 12, 4, 0, 'Sábado');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (67, 4, 17, '30', 12, 4, 0, 'Domingo');
+INSERT INTO taw12.ejerciciorutina (idejerciciorutina, idrutina, idejercicio, peso, repeticiones, series, orden, diassemana) VALUES (68, 4, 15, '25', 15, 4, 1, 'Domingo');
+
+
+-- SeguimientoObjetivos
 INSERT INTO taw12.seguimientoobjetivos (idseguimiento, idrutina, idcliente, fecha, realizado, pesorealizado, repeticionesrealizadas, seriesrealizadas, observaciones, pesoobjetivo, seriesobjetivo, repeticionesobjetivo, nombreejercicio) VALUES (1, 1, 3, '2024-06-19', 1, '30 metros', 2, 1, 'Me sentia muy cansado del dia anterior', '30 m', 2, 5, 'Sprints');
 INSERT INTO taw12.seguimientoobjetivos (idseguimiento, idrutina, idcliente, fecha, realizado, pesorealizado, repeticionesrealizadas, seriesrealizadas, observaciones, pesoobjetivo, seriesobjetivo, repeticionesobjetivo, nombreejercicio) VALUES (2, 1, 3, '2024-06-18', 1, null, 1, 2, null, null, 2, 2, 'Correr 100m');
+INSERT INTO taw12.seguimientoobjetivos (idseguimiento, idrutina, idcliente, fecha, realizado, pesorealizado, repeticionesrealizadas, seriesrealizadas, observaciones, pesoobjetivo, seriesobjetivo, repeticionesobjetivo, nombreejercicio) VALUES (3, 2, 1, '2024-06-21', 1, '12', 10, 4, 'Me duelen los pectorales al poner más peso ', '20', 4, 10, 'Press de banca');
+INSERT INTO taw12.seguimientoobjetivos (idseguimiento, idrutina, idcliente, fecha, realizado, pesorealizado, repeticionesrealizadas, seriesrealizadas, observaciones, pesoobjetivo, seriesobjetivo, repeticionesobjetivo, nombreejercicio) VALUES (4, 2, 1, '2024-06-28', 1, '15', 10, 4, 'He mejorado algo la técnica y puedo subir algo el peso', '20', 4, 10, 'Perss de banca');
+INSERT INTO taw12.seguimientoobjetivos (idseguimiento, idrutina, idcliente, fecha, realizado, pesorealizado, repeticionesrealizadas, seriesrealizadas, observaciones, pesoobjetivo, seriesobjetivo, repeticionesobjetivo, nombreejercicio) VALUES (5, 4, 2, '2024-06-22', 0, '0', 0, 0, 'Este día estaba muy fatigada y no pude', '25', 4, 12, 'Peso muerto');
+
+
+
 
 INSERT INTO taw12.administrador (email, contrasenya) VALUES ('admin@gmail.com', 'admin');
 
@@ -558,7 +597,7 @@ INSERT INTO taw12.dieta (iddieta,nombre,idcliente) VALUES (60,'Dieta 2 para Juan
 
 
 INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (1,1,59,0,0,0,'Lunes','Desayuno');
-INSERT INTO taw12.platodieta (`idplatdietadietaodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (1,4,60,0,0,0,'Lunes','Desayuno');
+INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (1,4,60,0,0,0,'Lunes','Desayuno');
 INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (2,2,59,0,0,0,'Miercoles','Desayuno');
 INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (2,5,60,0,0,0,'Miercoles','Desayuno');
 INSERT INTO taw12.platodieta (`idplatodieta`,`idplato`,`iddieta`,`calorias`,`cantidad`,`orden`,`diassemana`,`franjahoraria`) VALUES (3,5,60,0,0,0,'Viernes','Desayuno');

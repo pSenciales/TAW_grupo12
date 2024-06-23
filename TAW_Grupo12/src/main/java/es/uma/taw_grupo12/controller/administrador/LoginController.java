@@ -152,10 +152,11 @@ public class LoginController extends BaseController {
         TrabajadorDTO trabajadorDTO = this.administradorService.registrarTrabajador(trabajador);
 
         if(trabajadorDTO != null) {
-            session.setAttribute("usuario", trabajadorDTO);
-            session.setAttribute("tipo", trabajadorDTO.getTipo());
-            //return "redirect:/" + session.getTipo() + "/inicio";       DESCOMENTAR CUANDO ESTE IMPLEMENTADO EL INICIO DE TRABAJADORES
-            return "/Entrenador/perfilEntrenador";
+            session.setAttribute("usuario", trabajador);
+            session.setAttribute("tipo", trabajador.getTipo());
+            String strTo = "redirect:/" + trabajador.getTipo()+"/";
+
+            return strTo;
         }
 
         //OPCIÓN: AÑADIR QUE SE MUESTREN DISTINTOS MENSAJES DE ERROR

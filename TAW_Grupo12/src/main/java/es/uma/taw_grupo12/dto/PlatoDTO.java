@@ -13,10 +13,12 @@ public class PlatoDTO{
     private String alergenos;
     private byte[] video;
     private String descripcion;
-    private MultipartFile videoFile;
     private List<Integer> platoDietaList;
 
+    //@Victoria
+    private MultipartFile videoFile;
     public String getImagenBase64() {
         return (this.video != null) ? Base64.getEncoder().encodeToString(this.video) : null;
     }
+    //@Victoria
 }

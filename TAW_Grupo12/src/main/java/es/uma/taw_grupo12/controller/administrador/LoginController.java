@@ -1,5 +1,5 @@
 /**
- * @author María Victoria Huesca
+ * @author María Victoria Huesca Peláez
  */
 
 package es.uma.taw_grupo12.controller.administrador;

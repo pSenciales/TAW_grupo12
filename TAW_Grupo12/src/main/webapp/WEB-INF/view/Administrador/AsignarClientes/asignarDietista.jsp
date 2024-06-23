@@ -1,6 +1,6 @@
 <%
     /**
-     * @author María Victoria Huesca
+     * @author María Victoria Huesca Peláez
      */
 %>
 
@@ -10,7 +10,6 @@
 <%@ page import="java.util.List" %>
 
 <%
-    //OPCION: AÑADIR BOTON DE VOLVER ATRÁS
 
     List<TrabajadorDTO> dietistasDTO = (List<TrabajadorDTO>) request.getAttribute("trabajadores");
     ClienteDTO cliente = (ClienteDTO) request.getAttribute("cliente");

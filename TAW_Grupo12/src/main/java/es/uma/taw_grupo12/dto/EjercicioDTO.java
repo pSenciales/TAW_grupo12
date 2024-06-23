@@ -14,11 +14,13 @@ public class EjercicioDTO {
     private String nombre;
     private String tipo;
     private byte[] video;
-    private MultipartFile videoFile;
     private String descripcion;
     private List<Integer> ejercicioRutinaList;
 
+    //@Victoria
+    private MultipartFile videoFile;
     public String getImagenBase64() {
         return (this.video != null) ? Base64.getEncoder().encodeToString(this.video) : null;
     }
+    //@Victoria
 }

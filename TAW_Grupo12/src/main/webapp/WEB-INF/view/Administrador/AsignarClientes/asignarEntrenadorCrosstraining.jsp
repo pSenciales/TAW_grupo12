@@ -1,6 +1,6 @@
 <%
     /**
-     * @author María Victoria Huesca
+     * @author María Victoria Huesca Peláez
      */
 %>
 
@@ -11,7 +11,6 @@
 <%@ page import="es.uma.taw_grupo12.entity.Trabajador" %>
 
 <%
-    //OPCION: AÑADIR BOTON DE VOLVER ATRÁS
 
     List<TrabajadorDTO> entrenadoresCrosstraining = (List<TrabajadorDTO>) request.getAttribute("trabajadores");
     ClienteDTO cliente = (ClienteDTO) request.getAttribute("cliente");

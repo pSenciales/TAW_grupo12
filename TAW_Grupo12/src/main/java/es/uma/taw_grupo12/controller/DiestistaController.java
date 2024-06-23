@@ -1,15 +1,12 @@
 package es.uma.taw_grupo12.controller;
 
 import es.uma.taw_grupo12.dto.*;
-import es.uma.taw_grupo12.entity.Cliente;
 import es.uma.taw_grupo12.service.ClienteService;
 import es.uma.taw_grupo12.service.DietaService;
 import es.uma.taw_grupo12.service.PlatoService;
 import es.uma.taw_grupo12.service.SeguimientoDietaService;
 import es.uma.taw_grupo12.ui.Dietista.FiltroDietas;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

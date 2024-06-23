@@ -1,14 +1,14 @@
+/**
+ * @author María Victoria Huesca Peláez
+ */
+
 package es.uma.taw_grupo12.controller.administrador;
 
 import es.uma.taw_grupo12.controller.BaseController;
-import es.uma.taw_grupo12.dto.ClienteDTO;
 import es.uma.taw_grupo12.dto.PlatoDTO;
-import es.uma.taw_grupo12.dto.TrabajadorDTO;
-import es.uma.taw_grupo12.entity.Cliente;
 import es.uma.taw_grupo12.entity.Plato;
 import es.uma.taw_grupo12.service.PlatoService;
 import es.uma.taw_grupo12.ui.Administrador.FiltroPlatos;
-import es.uma.taw_grupo12.ui.Administrador.FiltroUsuarios;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
